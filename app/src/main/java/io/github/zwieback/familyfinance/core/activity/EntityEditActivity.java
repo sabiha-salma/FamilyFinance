@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
@@ -209,11 +208,6 @@ public abstract class EntityEditActivity<E extends IBaseEntity, B extends ViewDa
     protected final void disableLayout(TextInputLayout layout, @StringRes int hintId) {
         layout.setEnabled(false);
         layout.setHint(getResources().getString(hintId));
-    }
-
-    protected final void disableTextView(TextView view, @StringRes int hintId) {
-        view.setEnabled(false);
-        view.setText(getResources().getString(hintId));
     }
 
     protected static int extractOutputId(Intent resultIntent, String name) {

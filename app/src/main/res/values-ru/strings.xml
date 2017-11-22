@@ -109,7 +109,6 @@
     <string name="hint_start_value">Начальное значение</string>
     <string name="hint_end_value">Конечное значение</string>
     <string name="hint_active">Активный</string>
-    <string name="hint_active_disabled">Активный &disabled;</string>
     <string name="hint_parent">Родитель</string>
     <string name="hint_parent_disabled">Родитель &disabled;</string>
     <string name="hint_balance">Баланс:</string>

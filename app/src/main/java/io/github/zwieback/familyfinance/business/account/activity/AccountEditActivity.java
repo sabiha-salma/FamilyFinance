@@ -177,7 +177,6 @@ public class AccountEditActivity extends
             binding.currency.setOnClearTextListener(() -> entity.setCurrency(null));
             binding.owner.setOnClearTextListener(() -> entity.setOwner(null));
         } else {
-            disableTextView(binding.active, R.string.hint_active_disabled);
             disableLayout(binding.ownerLayout, R.string.hint_owner_disabled);
             disableLayout(binding.currencyLayout, R.string.hint_currency_disabled);
             disableLayout(binding.initialBalanceLayout, R.string.hint_initial_balance_disabled);

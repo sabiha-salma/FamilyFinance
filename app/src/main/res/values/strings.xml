@@ -109,7 +109,6 @@
     <string name="hint_start_value">Start Value</string>
     <string name="hint_end_value">End Value</string>
     <string name="hint_active">Active</string>
-    <string name="hint_active_disabled">Active &disabled;</string>
     <string name="hint_parent">Parent</string>
     <string name="hint_parent_disabled">Parent &disabled;</string>
     <string name="hint_balance">Balance:</string>
