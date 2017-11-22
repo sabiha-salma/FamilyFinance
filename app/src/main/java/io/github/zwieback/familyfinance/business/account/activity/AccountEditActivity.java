@@ -155,11 +155,11 @@ public class AccountEditActivity extends
         account.setFolder(folder);
         if (!folder) {
             account.setInitialBalance(BigDecimal.ZERO);
+            loadOwner(databasePrefs.getPersonId());
+            loadCurrency(databasePrefs.getCurrencyId());
         }
         bind(account);
         loadParent(parentId);
-        loadOwner(databasePrefs.getPersonId());
-        loadCurrency(databasePrefs.getCurrencyId());
         disableLayout(binding.parentLayout, R.string.hint_parent_disabled);
     }
 
