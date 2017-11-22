@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Email -->
+    <string name="send_email">Send mail&#8230;</string>
+
+    <!-- Errors -->
+    <string name="no_email_clients_installed">There are no email clients installed.\nPlease install at least one</string>
+</resources>

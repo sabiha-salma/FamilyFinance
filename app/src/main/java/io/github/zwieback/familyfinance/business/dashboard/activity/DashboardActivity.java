@@ -1,0 +1,252 @@
+package io.github.zwieback.familyfinance.business.dashboard.activity;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.View;
+
+import io.github.zwieback.familyfinance.R;
+import io.github.zwieback.familyfinance.business.account.activity.AccountActivity;
+import io.github.zwieback.familyfinance.business.dashboard.activity.drawer.DrawerCreator;
+import io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRateFilter;
+import io.github.zwieback.familyfinance.business.operation.activity.ExpenseOperationActivity;
+import io.github.zwieback.familyfinance.business.operation.activity.ExpenseOperationEditActivity;
+import io.github.zwieback.familyfinance.business.operation.activity.FlowOfFundsOperationActivity;
+import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperationActivity;
+import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperationEditActivity;
+import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationActivity;
+import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationEditActivity;
+import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter;
+import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
+import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter;
+import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter;
+import io.github.zwieback.familyfinance.core.activity.ActivityWrapper;
+import io.github.zwieback.familyfinance.core.filter.EntityFilter;
+
+import static io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRateFilter.EXCHANGE_RATE_FILTER;
+import static io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter.EXPENSE_OPERATION_FILTER;
+import static io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter.FLOW_OF_FUNDS_OPERATION_FILTER;
+import static io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter.INCOME_OPERATION_FILTER;
+import static io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter.TRANSFER_OPERATION_FILTER;
+import static io.github.zwieback.familyfinance.core.activity.EntityActivity.INPUT_READ_ONLY;
+
+public class DashboardActivity extends ActivityWrapper {
+
+    public static final String RESULT_CURRENCY_ID = "resultCurrencyId";
+    public static final String RESULT_EXCHANGE_RATE_ID = "resultExchangeRateId";
+    public static final String RESULT_PERSON_ID = "resultPersonId";
+    public static final String RESULT_ACCOUNT_ID = "resultAccountId";
+    public static final String RESULT_ARTICLE_ID = "resultArticleId";
+    public static final String RESULT_OPERATION_ID = "resultOperationId";
+
+    public static final int CURRENCY_CODE = 101;
+    public static final int CURRENCY_EDIT_CODE = 102;
+    public static final int EXCHANGE_RATE_CODE = 201;
+    public static final int EXCHANGE_RATE_EDIT_CODE = 202;
+    public static final int PERSON_CODE = 301;
+    public static final int PERSON_EDIT_CODE = 302;
+    public static final int ACCOUNT_CODE = 401;
+    public static final int INCOME_ACCOUNT_CODE = 402;
+    public static final int EXPENSE_ACCOUNT_CODE = 403;
+    public static final int ACCOUNT_EDIT_CODE = 404;
+    public static final int ARTICLE_CODE = 501;
+    public static final int INCOME_ARTICLE_CODE = 502;
+    public static final int EXPENSE_ARTICLE_CODE = 503;
+    public static final int ARTICLE_EDIT_CODE = 505;
+    public static final int INCOME_OPERATION_CODE = 601;
+    public static final int EXPENSE_OPERATION_CODE = 602;
+    public static final int TRANSFER_OPERATION_CODE = 603;
+    public static final int FLOW_OF_FUNDS_OPERATION_CODE = 604;
+    public static final int INCOME_OPERATION_EDIT_CODE = 605;
+    public static final int EXPENSE_OPERATION_EDIT_CODE = 606;
+    public static final int TRANSFER_OPERATION_EDIT_CODE = 607;
+    public static final int ICONICS_CODE = 701;
+    public static final int FILE_CODE = 801;
+
+    private ExchangeRateFilter exchangeRateFilter;
+    private ExpenseOperationFilter expenseOperationFilter;
+    private IncomeOperationFilter incomeOperationFilter;
+    private TransferOperationFilter transferOperationFilter;
+    private FlowOfFundsOperationFilter flowOfFundsOperationFilter;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        new DrawerCreator(this).createDrawer(findToolbar());
+        init(savedInstanceState);
+        bindOnClickListeners();
+    }
+
+    @Override
+    protected void setupContentView() {
+        setContentView(R.layout.activity_dashboard);
+    }
+
+    @Override
+    protected int getTitleStringId() {
+        return R.string.app_name;
+    }
+
+    @Override
+    protected boolean isDisplayHomeAsUpEnabled() {
+        return false;
+    }
+
+    private void init(@Nullable Bundle savedInstanceState) {
+        exchangeRateFilter = loadFilter(savedInstanceState, EXCHANGE_RATE_FILTER);
+        expenseOperationFilter = loadFilter(savedInstanceState, EXPENSE_OPERATION_FILTER);
+        incomeOperationFilter = loadFilter(savedInstanceState, INCOME_OPERATION_FILTER);
+        transferOperationFilter = loadFilter(savedInstanceState, TRANSFER_OPERATION_FILTER);
+        flowOfFundsOperationFilter = loadFilter(savedInstanceState, FLOW_OF_FUNDS_OPERATION_FILTER);
+    }
+
+    private <F extends EntityFilter> F loadFilter(@Nullable Bundle savedInstanceState,
+                                                  String filterName) {
+        if (savedInstanceState == null) {
+            return null;
+        }
+        return savedInstanceState.getParcelable(filterName);
+    }
+
+    private void bindOnClickListeners() {
+        findViewById(R.id.select_account).setOnClickListener(this::onSelectAccountClick);
+        findViewById(R.id.select_expenses).setOnClickListener(this::onSelectExpensesClick);
+        findViewById(R.id.add_expense).setOnClickListener(this::onAddExpenseClick);
+        findViewById(R.id.select_income).setOnClickListener(this::onSelectIncomesClick);
+        findViewById(R.id.add_income).setOnClickListener(this::onAddIncomeClick);
+        findViewById(R.id.select_transfers).setOnClickListener(this::onSelectTransfersClick);
+        findViewById(R.id.add_transfer).setOnClickListener(this::onAddTransferClick);
+        findViewById(R.id.select_flow_of_funds).setOnClickListener(this::onSelectFlowOfFundsClick);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(EXCHANGE_RATE_FILTER, exchangeRateFilter);
+        outState.putParcelable(EXPENSE_OPERATION_FILTER, expenseOperationFilter);
+        outState.putParcelable(INCOME_OPERATION_FILTER, incomeOperationFilter);
+        outState.putParcelable(TRANSFER_OPERATION_FILTER, transferOperationFilter);
+        outState.putParcelable(FLOW_OF_FUNDS_OPERATION_FILTER, flowOfFundsOperationFilter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
+        super.onActivityResult(requestCode, resultCode, resultIntent);
+        switch (requestCode) {
+            case EXCHANGE_RATE_CODE:
+                if (resultCode != Activity.RESULT_OK) {
+                    break;
+                }
+                if (resultIntent.hasExtra(EXCHANGE_RATE_FILTER)) {
+                    exchangeRateFilter = resultIntent.getParcelableExtra(EXCHANGE_RATE_FILTER);
+                }
+                break;
+            case PERSON_CODE:
+                if (resultCode != Activity.RESULT_OK) {
+                    break;
+                }
+                break;
+            case ACCOUNT_CODE:
+                if (resultCode != Activity.RESULT_OK) {
+                    break;
+                }
+                break;
+            case INCOME_ARTICLE_CODE:
+                if (resultCode != Activity.RESULT_OK) {
+                    break;
+                }
+                break;
+            case EXPENSE_ARTICLE_CODE:
+                if (resultCode != Activity.RESULT_OK) {
+                    break;
+                }
+                break;
+            case INCOME_OPERATION_CODE:
+                if (resultCode != Activity.RESULT_OK) {
+                    break;
+                }
+                if (resultIntent.hasExtra(INCOME_OPERATION_FILTER)) {
+                    incomeOperationFilter = resultIntent.getParcelableExtra(INCOME_OPERATION_FILTER);
+                }
+                break;
+            case EXPENSE_OPERATION_CODE:
+                if (resultCode != Activity.RESULT_OK) {
+                    break;
+                }
+                if (resultIntent.hasExtra(EXPENSE_OPERATION_FILTER)) {
+                    expenseOperationFilter = resultIntent.getParcelableExtra(EXPENSE_OPERATION_FILTER);
+                }
+                break;
+            case TRANSFER_OPERATION_CODE:
+                if (resultCode != Activity.RESULT_OK) {
+                    break;
+                }
+                if (resultIntent.hasExtra(TRANSFER_OPERATION_FILTER)) {
+                    transferOperationFilter = resultIntent.getParcelableExtra(TRANSFER_OPERATION_FILTER);
+                }
+                break;
+            case FLOW_OF_FUNDS_OPERATION_CODE:
+                if (resultCode != Activity.RESULT_OK) {
+                    break;
+                }
+                if (resultIntent.hasExtra(FLOW_OF_FUNDS_OPERATION_FILTER)) {
+                    flowOfFundsOperationFilter = resultIntent.getParcelableExtra(FLOW_OF_FUNDS_OPERATION_FILTER);
+                }
+                break;
+        }
+    }
+
+    public void onSelectAccountClick(View view) {
+        Intent intent = new Intent(this, AccountActivity.class);
+        intent.putExtra(INPUT_READ_ONLY, false);
+        startActivityForResult(intent, ACCOUNT_CODE);
+    }
+
+    public void onSelectExpensesClick(View view) {
+        Intent intent = new Intent(this, ExpenseOperationActivity.class);
+        intent.putExtra(EXPENSE_OPERATION_FILTER, expenseOperationFilter);
+        intent.putExtra(INPUT_READ_ONLY, false);
+        startActivityForResult(intent, EXPENSE_OPERATION_CODE);
+    }
+
+    public void onSelectIncomesClick(View view) {
+        Intent intent = new Intent(this, IncomeOperationActivity.class);
+        intent.putExtra(INCOME_OPERATION_FILTER, incomeOperationFilter);
+        intent.putExtra(INPUT_READ_ONLY, false);
+        startActivityForResult(intent, INCOME_OPERATION_CODE);
+    }
+
+    public void onSelectTransfersClick(View view) {
+        Intent intent = new Intent(this, TransferOperationActivity.class);
+        intent.putExtra(TRANSFER_OPERATION_FILTER, transferOperationFilter);
+        intent.putExtra(INPUT_READ_ONLY, false);
+        startActivityForResult(intent, TRANSFER_OPERATION_CODE);
+    }
+
+    public void onSelectFlowOfFundsClick(View view) {
+        Intent intent = new Intent(this, FlowOfFundsOperationActivity.class);
+        intent.putExtra(FLOW_OF_FUNDS_OPERATION_FILTER, flowOfFundsOperationFilter);
+        intent.putExtra(INPUT_READ_ONLY, false);
+        startActivityForResult(intent, FLOW_OF_FUNDS_OPERATION_CODE);
+    }
+
+    public void onAddExpenseClick(View view) {
+        Intent intent = new Intent(this, ExpenseOperationEditActivity.class);
+        startActivityForResult(intent, EXPENSE_OPERATION_EDIT_CODE);
+    }
+
+    public void onAddIncomeClick(View view) {
+        Intent intent = new Intent(this, IncomeOperationEditActivity.class);
+        startActivityForResult(intent, INCOME_OPERATION_EDIT_CODE);
+    }
+
+    public void onAddTransferClick(View view) {
+        Intent intent = new Intent(this, TransferOperationEditActivity.class);
+        startActivityForResult(intent, TRANSFER_OPERATION_EDIT_CODE);
+    }
+
+    public ExchangeRateFilter getExchangeRateFilter() {
+        return exchangeRateFilter;
+    }
+}
