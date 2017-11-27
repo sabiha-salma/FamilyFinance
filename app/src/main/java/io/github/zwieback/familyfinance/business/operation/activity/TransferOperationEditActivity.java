@@ -35,7 +35,7 @@ public class TransferOperationEditActivity
     public static final String OUTPUT_TRANSFER_OPERATION_ID = "resultTransferExpenseOperationId";
 
     /**
-     * internal entity is alias for expense operation
+     * internal {@link #entity} is alias for expense operation
      */
     private Operation incomeOperation;
 
