@@ -247,20 +247,21 @@ public abstract class EntityActivity<
 
     final void showPopup(View view, ENTITY entity) {
         PopupMenu popup = new PopupMenu(this, view);
-        popup.inflate(getPopupMenuId(entity));
+        IconicsMenuInflaterUtil.inflate(popup.getMenuInflater(), this, getPopupMenuId(entity),
+                popup.getMenu());
         popup.setOnMenuItemClickListener(getPopupItemClickListener(entity));
         popup.show();
     }
 
     @MenuRes
-    int getPopupMenuId(ENTITY entity) {
+    protected int getPopupMenuId(ENTITY entity) {
         if (readOnly) {
             return R.menu.popup_entity_read_only;
         }
         return R.menu.popup_entity;
     }
 
-    PopupMenu.OnMenuItemClickListener getPopupItemClickListener(ENTITY entity) {
+    protected PopupMenu.OnMenuItemClickListener getPopupItemClickListener(ENTITY entity) {
         return item -> {
             switch (item.getItemId()) {
                 case R.id.action_edit:
@@ -285,7 +286,12 @@ public abstract class EntityActivity<
         checkReadOnly();
     }
 
-    final void deleteEntity(ENTITY entity) {
+    @CallSuper
+    protected void duplicateEntity(ENTITY entity) {
+        checkReadOnly();
+    }
+
+    protected final void deleteEntity(ENTITY entity) {
         checkReadOnly();
         REGULAR_ENTITY regularEntity = findRegularEntity(entity);
         EntityDestroyer<REGULAR_ENTITY> destroyer = createDestroyer(entity);

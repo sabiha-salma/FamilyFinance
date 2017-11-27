@@ -2,6 +2,8 @@ package io.github.zwieback.familyfinance.business.operation.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
 
@@ -9,7 +11,9 @@ import com.johnpetitto.validator.ValidatingTextInputLayout;
 import com.mikepenz.iconics.view.IconicsImageView;
 
 import org.droidparts.widget.ClearableEditText;
+import org.threeten.bp.LocalDate;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +34,7 @@ import static io.github.zwieback.familyfinance.business.dashboard.activity.Dashb
 import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.RESULT_ACCOUNT_ID;
 import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.RESULT_ARTICLE_ID;
 import static io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString;
+import static io.github.zwieback.familyfinance.util.NumberUtils.isNullId;
 import static io.github.zwieback.familyfinance.util.StringUtils.isTextEmpty;
 
 public class ExpenseOperationEditActivity
@@ -37,6 +42,12 @@ public class ExpenseOperationEditActivity
 
     public static final String INPUT_EXPENSE_OPERATION_ID = "expenseOperationId";
     public static final String INPUT_EXPENSE_ACCOUNT_ID = "expenseAccountId";
+    public static final String INPUT_EXPENSE_ARTICLE_ID = "expenseArticleId";
+    public static final String INPUT_EXPENSE_OWNER_ID = "expenseOwnerId";
+    public static final String INPUT_EXPENSE_EXCHANGE_RATE_ID = "expenseExchangeRateId";
+    public static final String INPUT_EXPENSE_VALUE = "expenseValue";
+    public static final String INPUT_EXPENSE_DATE = "expenseDate";
+    public static final String INPUT_EXPENSE_DESCRIPTION = "expenseDescription";
     public static final String OUTPUT_EXPENSE_OPERATION_ID = "resultExpenseOperationId";
 
     @Override
@@ -134,10 +145,54 @@ public class ExpenseOperationEditActivity
         return extractInputId(INPUT_EXPENSE_ACCOUNT_ID, databasePrefs.getAccountId());
     }
 
+    private int extractExpenseArticleId() {
+        return extractInputId(INPUT_EXPENSE_ARTICLE_ID);
+    }
+
+    private int extractExpenseOwnerId() {
+        return extractInputId(INPUT_EXPENSE_OWNER_ID);
+    }
+
+    private int extractExpenseExchangeRateId() {
+        return extractInputId(INPUT_EXPENSE_EXCHANGE_RATE_ID);
+    }
+
+    @NonNull
+    private LocalDate extractExpenseDate() {
+        return extractInputDate(INPUT_EXPENSE_DATE);
+    }
+
+    @Nullable
+    private BigDecimal extractExpenseValue() {
+        return extractInputBigDecimal(INPUT_EXPENSE_VALUE);
+    }
+
+    @Nullable
+    private String extractExpenseDescription() {
+        return extractInputString(INPUT_EXPENSE_DESCRIPTION);
+    }
+
     @Override
     protected void createEntity() {
         super.createEntity();
         loadAccount(extractExpenseAccountId());
+        loadArticle(extractExpenseArticleId());
+        loadOwner(extractExpenseOwnerId());
+        int exchangeRateId = extractExpenseExchangeRateId();
+        if (isNullId(exchangeRateId)) {
+            loadDefaultCurrency();
+        } else {
+            loadExchangeRate(exchangeRateId);
+        }
+    }
+
+    @Override
+    Operation createOperation() {
+        Operation operation = super.createOperation();
+        operation.setDate(extractExpenseDate());
+        operation.setValue(extractExpenseValue());
+        operation.setDescription(extractExpenseDescription());
+        return operation;
     }
 
     @Override

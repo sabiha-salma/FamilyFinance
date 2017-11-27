@@ -1,5 +1,6 @@
 package io.github.zwieback.familyfinance.util;
 
+import android.content.Intent;
 import android.os.Parcel;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -130,6 +131,18 @@ public final class NumberUtils {
     @Nullable
     public static BigDecimal readBigDecimalFromParcel(Parcel in) {
         return stringToBigDecimal(in.readString());
+    }
+
+    public static void writeBigDecimalToIntent(@NonNull Intent out,
+                                               @NonNull String name,
+                                               @Nullable BigDecimal value) {
+        out.putExtra(name, bigDecimalToString(value));
+    }
+
+    @Nullable
+    public static BigDecimal readBigDecimalFromIntent(@NonNull Intent in, @NonNull String name) {
+        String value = in.getStringExtra(name);
+        return stringToBigDecimal(value);
     }
 
     public static char getDecimalSeparator() {

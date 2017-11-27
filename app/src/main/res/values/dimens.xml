@@ -54,6 +54,7 @@
 
     <!-- Menu -->
     <dimen name="toolbar_icon_size">16dp</dimen>
+    <dimen name="operation_popup_icon_size">16dp</dimen>
 
     <!-- Iconics Row -->
     <dimen name="iconics_card_margin">5dp</dimen>

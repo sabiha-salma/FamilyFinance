@@ -1,5 +1,6 @@
 package io.github.zwieback.familyfinance.util;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.support.annotation.NonNull;
@@ -94,6 +95,23 @@ public final class DateUtils {
         int year = in.getInt(KEY_YEAR);
         int month = in.getInt(KEY_MONTH);
         int dayOfMonth = in.getInt(KEY_DAY_OF_MONTH);
+        return LocalDate.of(year, month, dayOfMonth);
+    }
+
+    public static void writeLocalDateToIntent(@NonNull Intent out,
+                                              @NonNull String name,
+                                              @NonNull LocalDate date) {
+        out.putExtra(name + KEY_YEAR, date.getYear());
+        out.putExtra(name + KEY_MONTH, date.getMonthValue());
+        out.putExtra(name + KEY_DAY_OF_MONTH, date.getDayOfMonth());
+    }
+
+    @NonNull
+    public static LocalDate readLocalDateFromIntent(@NonNull Intent in, @NonNull String name) {
+        LocalDate today = now();
+        int year = in.getIntExtra(name + KEY_YEAR, today.getYear());
+        int month = in.getIntExtra(name + KEY_MONTH, today.getMonthValue());
+        int dayOfMonth = in.getIntExtra(name + KEY_DAY_OF_MONTH, today.getDayOfMonth());
         return LocalDate.of(year, month, dayOfMonth);
     }
 

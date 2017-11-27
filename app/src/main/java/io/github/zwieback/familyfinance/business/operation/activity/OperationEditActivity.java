@@ -171,10 +171,11 @@ abstract class OperationEditActivity<B extends ViewDataBinding>
         return foundExchangeRate -> {
             entity.setExchangeRate(foundExchangeRate);
             getExchangeRateEdit().setText(bigDecimalToString(foundExchangeRate.getValue()));
+            getCurrencyEdit().setText(foundExchangeRate.getCurrency().getName());
         };
     }
 
-    void loadOwner(int ownerId) {
+    final void loadOwner(int ownerId) {
         loadEntity(Person.class, ownerId, onSuccessfulOwnerFound());
     }
 
@@ -182,21 +183,25 @@ abstract class OperationEditActivity<B extends ViewDataBinding>
         loadEntity(Currency.class, currencyId, onSuccessfulCurrencyFound());
     }
 
-    private void loadExchangeRate(int exchangeRateId) {
+    final void loadExchangeRate(int exchangeRateId) {
         loadEntity(ExchangeRate.class, exchangeRateId, onSuccessfulExchangeRateFound());
     }
 
-    private void loadDefaultCurrency() {
+    final void loadDefaultCurrency() {
         loadCurrency(databasePrefs.getCurrencyId());
     }
 
     @Override
     protected void createEntity() {
+        Operation operation = createOperation();
+        bind(operation);
+    }
+
+    Operation createOperation() {
         Operation operation = new Operation();
         operation.setType(getOperationType());
         operation.setDate(now());
-        bind(operation);
-        loadDefaultCurrency();
+        return operation;
     }
 
     @CallSuper

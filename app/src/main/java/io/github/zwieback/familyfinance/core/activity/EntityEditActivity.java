@@ -7,6 +7,8 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.TextInputLayout;
 import android.util.Log;
@@ -19,12 +21,17 @@ import com.johnpetitto.validator.ValidatingTextInputLayout;
 import com.johnpetitto.validator.Validators;
 import com.mikepenz.iconics.view.IconicsImageView;
 
+import org.threeten.bp.LocalDate;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.iconics.activity.IconicsActivity;
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider;
 import io.github.zwieback.familyfinance.core.model.IBaseEntity;
+import io.github.zwieback.familyfinance.util.DateUtils;
+import io.github.zwieback.familyfinance.util.NumberUtils;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -203,6 +210,20 @@ public abstract class EntityEditActivity<E extends IBaseEntity, B extends ViewDa
 
     protected final int extractInputId(String name, int defaultValue) {
         return getIntent().getIntExtra(name, defaultValue);
+    }
+
+    @NonNull
+    protected final LocalDate extractInputDate(@NonNull String name) {
+        return DateUtils.readLocalDateFromIntent(getIntent(), name);
+    }
+
+    protected final BigDecimal extractInputBigDecimal(@NonNull String name) {
+        return NumberUtils.readBigDecimalFromIntent(getIntent(), name);
+    }
+
+    @Nullable
+    protected final String extractInputString(@NonNull String name) {
+        return getIntent().getStringExtra(name);
     }
 
     protected final void disableLayout(TextInputLayout layout, @StringRes int hintId) {

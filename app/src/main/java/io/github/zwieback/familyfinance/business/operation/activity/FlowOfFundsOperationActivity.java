@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.business.operation.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.MenuItem;
@@ -10,22 +11,25 @@ import java.util.List;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.operation.activity.exception.IllegalOperationTypeException;
+import io.github.zwieback.familyfinance.business.operation.activity.helper.ExpenseOperationHelper;
+import io.github.zwieback.familyfinance.business.operation.activity.helper.IncomeOperationHelper;
+import io.github.zwieback.familyfinance.business.operation.activity.helper.OperationHelper;
+import io.github.zwieback.familyfinance.business.operation.activity.helper.TransferOperationHelper;
 import io.github.zwieback.familyfinance.business.operation.dialog.FlowOfFundsOperationFilterDialog;
 import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.fragment.FlowOfFundsOperationFragment;
-import io.github.zwieback.familyfinance.business.operation.lifecycle.destroyer.OperationForceDestroyer;
-import io.github.zwieback.familyfinance.business.operation.lifecycle.destroyer.TransferOperationForceDestroyer;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer;
 import io.github.zwieback.familyfinance.core.model.Operation;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 
-import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.EXPENSE_OPERATION_EDIT_CODE;
-import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.INCOME_OPERATION_EDIT_CODE;
-import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.TRANSFER_OPERATION_EDIT_CODE;
 import static io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter.FLOW_OF_FUNDS_OPERATION_FILTER;
 
 public class FlowOfFundsOperationActivity
         extends OperationActivity<FlowOfFundsOperationFragment, FlowOfFundsOperationFilter> {
+
+    private OperationHelper incomeOperationHelper;
+    private OperationHelper expenseOperationHelper;
+    private OperationHelper transferOperationHelper;
 
     @Override
     protected List<Integer> collectMenuIds() {
@@ -57,6 +61,14 @@ public class FlowOfFundsOperationActivity
         return R.string.flow_of_funds_activity_title;
     }
 
+    @Override
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
+        incomeOperationHelper = new IncomeOperationHelper(this, data);
+        expenseOperationHelper = new ExpenseOperationHelper(this, data);
+        transferOperationHelper = new TransferOperationHelper(this, data);
+    }
+
     @NonNull
     @Override
     protected String getFilterName() {
@@ -76,75 +88,58 @@ public class FlowOfFundsOperationActivity
 
     private void addExpenseOperation() {
         super.addEntity();
-        Intent intent = new Intent(this, ExpenseOperationEditActivity.class);
-        startActivityForResult(intent, EXPENSE_OPERATION_EDIT_CODE);
+        Intent intent = expenseOperationHelper.getIntentToAdd(null);
+        startActivity(intent);
     }
 
     private void addIncomeOperation() {
         super.addEntity();
-        Intent intent = new Intent(this, IncomeOperationEditActivity.class);
-        startActivityForResult(intent, INCOME_OPERATION_EDIT_CODE);
+        Intent intent = incomeOperationHelper.getIntentToAdd(null);
+        startActivity(intent);
     }
 
     private void addTransferOperation() {
         super.addEntity();
-        Intent intent = new Intent(this, TransferOperationEditActivity.class);
-        startActivityForResult(intent, TRANSFER_OPERATION_EDIT_CODE);
+        Intent intent = transferOperationHelper.getIntentToAdd(null);
+        startActivity(intent);
     }
 
     @Override
     protected void editEntity(OperationView operation) {
         super.editEntity(operation);
-        switch (operation.getType()) {
-            case EXPENSE_OPERATION:
-                editExpenseOperation(operation);
-                break;
-            case INCOME_OPERATION:
-                editIncomeOperation(operation);
-                break;
-            case TRANSFER_EXPENSE_OPERATION:
-            case TRANSFER_INCOME_OPERATION:
-                editTransferOperation(operation);
-                break;
-        }
+        Intent intent = determineHelper(operation).getIntentToEdit(operation);
+        startActivity(intent);
     }
 
-    private void editExpenseOperation(OperationView operation) {
-        Intent intent = new Intent(this, ExpenseOperationEditActivity.class);
-        intent.putExtra(ExpenseOperationEditActivity.INPUT_EXPENSE_OPERATION_ID, operation.getId());
-        startActivityForResult(intent, EXPENSE_OPERATION_EDIT_CODE);
-    }
-
-    private void editIncomeOperation(OperationView operation) {
-        Intent intent = new Intent(this, IncomeOperationEditActivity.class);
-        intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_OPERATION_ID, operation.getId());
-        startActivityForResult(intent, INCOME_OPERATION_EDIT_CODE);
-    }
-
-    private void editTransferOperation(OperationView operation) {
-        Intent intent = new Intent(this, TransferOperationEditActivity.class);
-        intent.putExtra(TransferOperationEditActivity.INPUT_TRANSFER_OPERATION_ID,
-                TransferOperationQualifier.determineTransferExpenseOperationId(operation));
-        startActivityForResult(intent, TRANSFER_OPERATION_EDIT_CODE);
+    @Override
+    protected void duplicateEntity(OperationView operation) {
+        super.duplicateEntity(operation);
+        Intent intent = determineHelper(operation).getIntentToDuplicate(operation);
+        startActivity(intent);
     }
 
     @Override
     protected EntityDestroyer<Operation> createDestroyer(OperationView operation) {
-        switch (operation.getType()) {
-            case EXPENSE_OPERATION:
-            case INCOME_OPERATION:
-                return new OperationForceDestroyer(this, data);
-            case TRANSFER_EXPENSE_OPERATION:
-            case TRANSFER_INCOME_OPERATION:
-                return new TransferOperationForceDestroyer(this, data);
-            default:
-                throw IllegalOperationTypeException.unsupportedOperationType(operation);
-        }
+        return determineHelper(operation).createDestroyer(operation);
     }
 
     @Override
     protected void showFilterDialog() {
         DialogFragment dialog = FlowOfFundsOperationFilterDialog.newInstance(filter);
         dialog.show(getSupportFragmentManager(), "FlowOfFundsOperationFilterDialog");
+    }
+
+    private OperationHelper determineHelper(OperationView operation) {
+        switch (operation.getType()) {
+            case EXPENSE_OPERATION:
+                return expenseOperationHelper;
+            case INCOME_OPERATION:
+                return incomeOperationHelper;
+            case TRANSFER_EXPENSE_OPERATION:
+            case TRANSFER_INCOME_OPERATION:
+                return transferOperationHelper;
+            default:
+                throw IllegalOperationTypeException.unsupportedOperationType(operation);
+        }
     }
 }

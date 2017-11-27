@@ -124,6 +124,7 @@
     <string name="action_add_expense">Добавить расход</string>
     <string name="action_add_income">Добавить доход</string>
     <string name="action_add_transfer">Добавить перевод</string>
+    <string name="action_duplicate">Дублировать</string>
     <string name="action_edit">Редактировать</string>
     <string name="action_delete">Удалить</string>
     <string name="action_filter">Фильтр</string>

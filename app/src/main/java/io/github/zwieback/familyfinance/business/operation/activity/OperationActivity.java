@@ -1,15 +1,15 @@
 package io.github.zwieback.familyfinance.business.operation.activity;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.PopupMenu;
 import android.view.View;
 
+import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter;
 import io.github.zwieback.familyfinance.business.operation.fragment.OperationFragment;
-import io.github.zwieback.familyfinance.business.operation.lifecycle.destroyer.OperationForceDestroyer;
 import io.github.zwieback.familyfinance.business.operation.listener.OnOperationClickListener;
 import io.github.zwieback.familyfinance.business.operation.listener.OperationFilterListener;
 import io.github.zwieback.familyfinance.core.activity.EntityActivity;
-import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer;
 import io.github.zwieback.familyfinance.core.model.Operation;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 
@@ -43,12 +43,34 @@ abstract class OperationActivity<
     }
 
     @Override
-    protected Class<Operation> getClassOfRegularEntity() {
-        return Operation.class;
+    protected int getPopupMenuId(OperationView entity) {
+        if (readOnly) {
+            return super.getPopupMenuId(entity);
+        }
+        return R.menu.popup_entity_operation;
     }
 
     @Override
-    protected EntityDestroyer<Operation> createDestroyer(OperationView operation) {
-        return new OperationForceDestroyer(this, data);
+    protected PopupMenu.OnMenuItemClickListener getPopupItemClickListener(OperationView operation) {
+        return item -> {
+            switch (item.getItemId()) {
+                case R.id.action_duplicate:
+                    duplicateEntity(operation);
+                    return true;
+                case R.id.action_edit:
+                    editEntity(operation);
+                    return true;
+                case R.id.action_delete:
+                    deleteEntity(operation);
+                    return true;
+                default:
+                    return false;
+            }
+        };
+    }
+
+    @Override
+    protected Class<Operation> getClassOfRegularEntity() {
+        return Operation.class;
     }
 }

@@ -2,6 +2,8 @@ package io.github.zwieback.familyfinance.business.operation.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
 
@@ -9,7 +11,9 @@ import com.johnpetitto.validator.ValidatingTextInputLayout;
 import com.mikepenz.iconics.view.IconicsImageView;
 
 import org.droidparts.widget.ClearableEditText;
+import org.threeten.bp.LocalDate;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +34,7 @@ import static io.github.zwieback.familyfinance.business.dashboard.activity.Dashb
 import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.RESULT_ACCOUNT_ID;
 import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.RESULT_ARTICLE_ID;
 import static io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString;
+import static io.github.zwieback.familyfinance.util.NumberUtils.isNullId;
 import static io.github.zwieback.familyfinance.util.StringUtils.isTextEmpty;
 
 public class IncomeOperationEditActivity
@@ -37,6 +42,12 @@ public class IncomeOperationEditActivity
 
     public static final String INPUT_INCOME_OPERATION_ID = "incomeOperationId";
     public static final String INPUT_INCOME_ACCOUNT_ID = "incomeAccountId";
+    public static final String INPUT_INCOME_ARTICLE_ID = "incomeArticleId";
+    public static final String INPUT_INCOME_OWNER_ID = "incomeOwnerId";
+    public static final String INPUT_INCOME_EXCHANGE_RATE_ID = "incomeExchangeRateId";
+    public static final String INPUT_INCOME_VALUE = "incomeValue";
+    public static final String INPUT_INCOME_DATE = "incomeDate";
+    public static final String INPUT_INCOME_DESCRIPTION = "incomeDescription";
     public static final String OUTPUT_INCOME_OPERATION_ID = "resultIncomeOperationId";
 
     @Override
@@ -134,10 +145,55 @@ public class IncomeOperationEditActivity
         return extractInputId(INPUT_INCOME_ACCOUNT_ID, databasePrefs.getAccountId());
     }
 
+    private int extractIncomeArticleId() {
+        return extractInputId(INPUT_INCOME_ARTICLE_ID);
+    }
+
+    private int extractIncomeOwnerId() {
+        return extractInputId(INPUT_INCOME_OWNER_ID);
+    }
+
+    private int extractIncomeExchangeRateId() {
+        return extractInputId(INPUT_INCOME_EXCHANGE_RATE_ID);
+    }
+
+    @NonNull
+    private LocalDate extractIncomeDate() {
+        return extractInputDate(INPUT_INCOME_DATE);
+    }
+
+    @Nullable
+    private BigDecimal extractIncomeValue() {
+        return extractInputBigDecimal(INPUT_INCOME_VALUE);
+    }
+
+    @Nullable
+    private String extractIncomeDescription() {
+        return extractInputString(INPUT_INCOME_DESCRIPTION);
+    }
+
     @Override
     protected void createEntity() {
         super.createEntity();
         loadAccount(extractIncomeAccountId());
+        loadAccount(extractIncomeAccountId());
+        loadArticle(extractIncomeArticleId());
+        loadOwner(extractIncomeOwnerId());
+        int exchangeRateId = extractIncomeExchangeRateId();
+        if (isNullId(exchangeRateId)) {
+            loadDefaultCurrency();
+        } else {
+            loadExchangeRate(exchangeRateId);
+        }
+    }
+
+    @Override
+    Operation createOperation() {
+        Operation operation = super.createOperation();
+        operation.setDate(extractIncomeDate());
+        operation.setValue(extractIncomeValue());
+        operation.setDescription(extractIncomeDescription());
+        return operation;
     }
 
     @Override

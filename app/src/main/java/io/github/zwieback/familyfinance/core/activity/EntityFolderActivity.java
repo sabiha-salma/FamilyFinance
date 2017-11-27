@@ -110,7 +110,7 @@ public abstract class EntityFolderActivity<
     }
 
     @Override
-    int getPopupMenuId(ENTITY entity) {
+    protected int getPopupMenuId(ENTITY entity) {
         if (readOnly) {
             if (folderSelectable) {
                 return R.menu.popup_entity_folder_select;
@@ -124,7 +124,7 @@ public abstract class EntityFolderActivity<
     }
 
     @Override
-    PopupMenu.OnMenuItemClickListener getPopupItemClickListener(ENTITY entity) {
+    protected PopupMenu.OnMenuItemClickListener getPopupItemClickListener(ENTITY entity) {
         return item -> {
             switch (item.getItemId()) {
                 case R.id.action_select:

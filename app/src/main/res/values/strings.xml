@@ -124,6 +124,7 @@
     <string name="action_add_expense">Add Expense</string>
     <string name="action_add_income">Add Income</string>
     <string name="action_add_transfer">Add Transfer</string>
+    <string name="action_duplicate">Duplicate</string>
     <string name="action_edit">Edit</string>
     <string name="action_delete">Delete</string>
     <string name="action_filter">Filter</string>
