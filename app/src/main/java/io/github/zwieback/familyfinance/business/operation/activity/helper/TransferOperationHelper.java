@@ -2,9 +2,10 @@ package io.github.zwieback.familyfinance.business.operation.activity.helper;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationEditActivity;
+import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.lifecycle.destroyer.TransferOperationForceDestroyer;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer;
 import io.github.zwieback.familyfinance.core.model.Operation;
@@ -14,16 +15,32 @@ import io.github.zwieback.familyfinance.util.NumberUtils;
 import io.requery.Persistable;
 import io.requery.reactivex.ReactiveEntityStore;
 
-public class TransferOperationHelper extends OperationHelper {
+public class TransferOperationHelper extends OperationHelper<TransferOperationFilter> {
 
     public TransferOperationHelper(Context context, ReactiveEntityStore<Persistable> data) {
         super(context, data);
     }
 
     @Override
-    public Intent getIntentToAdd(@Nullable Integer accountId) {
+    public Intent getIntentToAdd() {
+        return new Intent(context, TransferOperationEditActivity.class);
+    }
+
+    @Override
+    public Intent getIntentToAdd(@NonNull TransferOperationFilter filter) {
         Intent intent = new Intent(context, TransferOperationEditActivity.class);
-        intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_ACCOUNT_ID, accountId);
+        if (filter.getAccountId() != null) {
+            intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_ACCOUNT_ID,
+                    filter.getAccountId());
+        }
+        if (filter.getOwnerId() != null) {
+            intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_OWNER_ID,
+                    filter.getOwnerId());
+        }
+        if (filter.getCurrencyId() != null) {
+            intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_CURRENCY_ID,
+                    filter.getCurrencyId());
+        }
         return intent;
     }
 

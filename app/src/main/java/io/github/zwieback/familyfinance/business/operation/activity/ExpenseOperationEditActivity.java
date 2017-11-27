@@ -44,6 +44,7 @@ public class ExpenseOperationEditActivity
     public static final String INPUT_EXPENSE_ACCOUNT_ID = "expenseAccountId";
     public static final String INPUT_EXPENSE_ARTICLE_ID = "expenseArticleId";
     public static final String INPUT_EXPENSE_OWNER_ID = "expenseOwnerId";
+    public static final String INPUT_EXPENSE_CURRENCY_ID = "expenseCurrencyId";
     public static final String INPUT_EXPENSE_EXCHANGE_RATE_ID = "expenseExchangeRateId";
     public static final String INPUT_EXPENSE_VALUE = "expenseValue";
     public static final String INPUT_EXPENSE_DATE = "expenseDate";
@@ -150,7 +151,11 @@ public class ExpenseOperationEditActivity
     }
 
     private int extractExpenseOwnerId() {
-        return extractInputId(INPUT_EXPENSE_OWNER_ID);
+        return extractInputId(INPUT_EXPENSE_OWNER_ID, databasePrefs.getPersonId());
+    }
+
+    private int extractExpenseCurrencyId() {
+        return extractInputId(INPUT_EXPENSE_CURRENCY_ID, databasePrefs.getCurrencyId());
     }
 
     private int extractExpenseExchangeRateId() {
@@ -180,7 +185,7 @@ public class ExpenseOperationEditActivity
         loadOwner(extractExpenseOwnerId());
         int exchangeRateId = extractExpenseExchangeRateId();
         if (isNullId(exchangeRateId)) {
-            loadDefaultCurrency();
+            loadCurrency(extractExpenseCurrencyId());
         } else {
             loadExchangeRate(exchangeRateId);
         }

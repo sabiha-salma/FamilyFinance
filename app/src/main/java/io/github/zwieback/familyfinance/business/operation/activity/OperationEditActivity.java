@@ -179,16 +179,12 @@ abstract class OperationEditActivity<B extends ViewDataBinding>
         loadEntity(Person.class, ownerId, onSuccessfulOwnerFound());
     }
 
-    private void loadCurrency(int currencyId) {
+    final void loadCurrency(int currencyId) {
         loadEntity(Currency.class, currencyId, onSuccessfulCurrencyFound());
     }
 
     final void loadExchangeRate(int exchangeRateId) {
         loadEntity(ExchangeRate.class, exchangeRateId, onSuccessfulExchangeRateFound());
-    }
-
-    final void loadDefaultCurrency() {
-        loadCurrency(databasePrefs.getCurrencyId());
     }
 
     @Override

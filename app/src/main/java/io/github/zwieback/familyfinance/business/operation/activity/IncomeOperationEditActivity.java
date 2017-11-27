@@ -44,6 +44,7 @@ public class IncomeOperationEditActivity
     public static final String INPUT_INCOME_ACCOUNT_ID = "incomeAccountId";
     public static final String INPUT_INCOME_ARTICLE_ID = "incomeArticleId";
     public static final String INPUT_INCOME_OWNER_ID = "incomeOwnerId";
+    public static final String INPUT_INCOME_CURRENCY_ID = "incomeCurrencyId";
     public static final String INPUT_INCOME_EXCHANGE_RATE_ID = "incomeExchangeRateId";
     public static final String INPUT_INCOME_VALUE = "incomeValue";
     public static final String INPUT_INCOME_DATE = "incomeDate";
@@ -150,7 +151,11 @@ public class IncomeOperationEditActivity
     }
 
     private int extractIncomeOwnerId() {
-        return extractInputId(INPUT_INCOME_OWNER_ID);
+        return extractInputId(INPUT_INCOME_OWNER_ID, databasePrefs.getPersonId());
+    }
+
+    private int extractIncomeCurrencyId() {
+        return extractInputId(INPUT_INCOME_CURRENCY_ID, databasePrefs.getCurrencyId());
     }
 
     private int extractIncomeExchangeRateId() {
@@ -181,7 +186,7 @@ public class IncomeOperationEditActivity
         loadOwner(extractIncomeOwnerId());
         int exchangeRateId = extractIncomeExchangeRateId();
         if (isNullId(exchangeRateId)) {
-            loadDefaultCurrency();
+            loadCurrency(extractIncomeCurrencyId());
         } else {
             loadExchangeRate(exchangeRateId);
         }

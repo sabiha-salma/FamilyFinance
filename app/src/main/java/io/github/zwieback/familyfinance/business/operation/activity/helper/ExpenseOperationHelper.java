@@ -2,25 +2,47 @@ package io.github.zwieback.familyfinance.business.operation.activity.helper;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 import io.github.zwieback.familyfinance.business.operation.activity.ExpenseOperationEditActivity;
+import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.github.zwieback.familyfinance.util.DateUtils;
 import io.github.zwieback.familyfinance.util.NumberUtils;
 import io.requery.Persistable;
 import io.requery.reactivex.ReactiveEntityStore;
 
-public class ExpenseOperationHelper extends OperationHelper {
+public class ExpenseOperationHelper extends OperationHelper<ExpenseOperationFilter> {
 
     public ExpenseOperationHelper(Context context, ReactiveEntityStore<Persistable> data) {
         super(context, data);
     }
 
     @Override
-    public Intent getIntentToAdd(@Nullable Integer accountId) {
+    public Intent getIntentToAdd() {
+        return new Intent(context, ExpenseOperationEditActivity.class);
+    }
+
+    @Override
+    public Intent getIntentToAdd(@NonNull ExpenseOperationFilter filter) {
         Intent intent = new Intent(context, ExpenseOperationEditActivity.class);
-        intent.putExtra(ExpenseOperationEditActivity.INPUT_EXPENSE_ACCOUNT_ID, accountId);
+        if (filter.getAccountId() != null) {
+            intent.putExtra(ExpenseOperationEditActivity.INPUT_EXPENSE_ACCOUNT_ID,
+                    filter.getAccountId());
+        }
+        if (filter.getArticleId() != null
+                && filter.getArticleId() != databasePrefs.getExpensesArticleId()) {
+            intent.putExtra(ExpenseOperationEditActivity.INPUT_EXPENSE_ARTICLE_ID,
+                    filter.getArticleId());
+        }
+        if (filter.getOwnerId() != null) {
+            intent.putExtra(ExpenseOperationEditActivity.INPUT_EXPENSE_OWNER_ID,
+                    filter.getOwnerId());
+        }
+        if (filter.getCurrencyId() != null) {
+            intent.putExtra(ExpenseOperationEditActivity.INPUT_EXPENSE_CURRENCY_ID,
+                    filter.getCurrencyId());
+        }
         return intent;
     }
 

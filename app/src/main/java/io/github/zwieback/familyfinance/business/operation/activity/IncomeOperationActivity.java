@@ -20,7 +20,7 @@ import static io.github.zwieback.familyfinance.business.operation.filter.IncomeO
 public class IncomeOperationActivity
         extends OperationActivity<IncomeOperationFragment, IncomeOperationFilter> {
 
-    private OperationHelper operationHelper;
+    private OperationHelper<IncomeOperationFilter> operationHelper;
 
     @Override
     protected int getTitleStringId() {
@@ -58,7 +58,7 @@ public class IncomeOperationActivity
     @Override
     protected void addEntity() {
         super.addEntity();
-        Intent intent = operationHelper.getIntentToAdd(filter.getAccountId());
+        Intent intent = operationHelper.getIntentToAdd(filter);
         startActivity(intent);
     }
 

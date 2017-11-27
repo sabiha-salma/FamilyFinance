@@ -21,7 +21,7 @@ import static io.github.zwieback.familyfinance.business.operation.filter.Transfe
 public class TransferOperationActivity
         extends OperationActivity<TransferOperationFragment, TransferOperationFilter> {
 
-    private OperationHelper operationHelper;
+    private OperationHelper<TransferOperationFilter> operationHelper;
 
     @Override
     protected int getTitleStringId() {
@@ -59,7 +59,7 @@ public class TransferOperationActivity
     @Override
     protected void addEntity() {
         super.addEntity();
-        Intent intent = operationHelper.getIntentToAdd(filter.getAccountId());
+        Intent intent = operationHelper.getIntentToAdd(filter);
         startActivity(intent);
     }
 

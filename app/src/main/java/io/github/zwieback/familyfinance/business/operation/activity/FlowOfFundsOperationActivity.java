@@ -16,7 +16,10 @@ import io.github.zwieback.familyfinance.business.operation.activity.helper.Incom
 import io.github.zwieback.familyfinance.business.operation.activity.helper.OperationHelper;
 import io.github.zwieback.familyfinance.business.operation.activity.helper.TransferOperationHelper;
 import io.github.zwieback.familyfinance.business.operation.dialog.FlowOfFundsOperationFilterDialog;
+import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
+import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter;
+import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.fragment.FlowOfFundsOperationFragment;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer;
 import io.github.zwieback.familyfinance.core.model.Operation;
@@ -27,9 +30,9 @@ import static io.github.zwieback.familyfinance.business.operation.filter.FlowOfF
 public class FlowOfFundsOperationActivity
         extends OperationActivity<FlowOfFundsOperationFragment, FlowOfFundsOperationFilter> {
 
-    private OperationHelper incomeOperationHelper;
-    private OperationHelper expenseOperationHelper;
-    private OperationHelper transferOperationHelper;
+    private OperationHelper<IncomeOperationFilter> incomeOperationHelper;
+    private OperationHelper<ExpenseOperationFilter> expenseOperationHelper;
+    private OperationHelper<TransferOperationFilter> transferOperationHelper;
 
     @Override
     protected List<Integer> collectMenuIds() {
@@ -88,19 +91,19 @@ public class FlowOfFundsOperationActivity
 
     private void addExpenseOperation() {
         super.addEntity();
-        Intent intent = expenseOperationHelper.getIntentToAdd(null);
+        Intent intent = expenseOperationHelper.getIntentToAdd();
         startActivity(intent);
     }
 
     private void addIncomeOperation() {
         super.addEntity();
-        Intent intent = incomeOperationHelper.getIntentToAdd(null);
+        Intent intent = incomeOperationHelper.getIntentToAdd();
         startActivity(intent);
     }
 
     private void addTransferOperation() {
         super.addEntity();
-        Intent intent = transferOperationHelper.getIntentToAdd(null);
+        Intent intent = transferOperationHelper.getIntentToAdd();
         startActivity(intent);
     }
 
@@ -129,7 +132,7 @@ public class FlowOfFundsOperationActivity
         dialog.show(getSupportFragmentManager(), "FlowOfFundsOperationFilterDialog");
     }
 
-    private OperationHelper determineHelper(OperationView operation) {
+    private OperationHelper<?> determineHelper(OperationView operation) {
         switch (operation.getType()) {
             case EXPENSE_OPERATION:
                 return expenseOperationHelper;
