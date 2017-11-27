@@ -11,17 +11,17 @@ import io.github.zwieback.familyfinance.business.account.activity.AccountActivit
 import io.github.zwieback.familyfinance.business.dashboard.activity.drawer.DrawerCreator;
 import io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRateFilter;
 import io.github.zwieback.familyfinance.business.operation.activity.ExpenseOperationActivity;
-import io.github.zwieback.familyfinance.business.operation.activity.ExpenseOperationEditActivity;
 import io.github.zwieback.familyfinance.business.operation.activity.FlowOfFundsOperationActivity;
 import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperationActivity;
-import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperationEditActivity;
 import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationActivity;
-import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationEditActivity;
+import io.github.zwieback.familyfinance.business.operation.activity.helper.ExpenseOperationHelper;
+import io.github.zwieback.familyfinance.business.operation.activity.helper.IncomeOperationHelper;
+import io.github.zwieback.familyfinance.business.operation.activity.helper.TransferOperationHelper;
 import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter;
-import io.github.zwieback.familyfinance.core.activity.ActivityWrapper;
+import io.github.zwieback.familyfinance.core.activity.DataActivityWrapper;
 import io.github.zwieback.familyfinance.core.filter.EntityFilter;
 
 import static io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRateFilter.EXCHANGE_RATE_FILTER;
@@ -31,7 +31,7 @@ import static io.github.zwieback.familyfinance.business.operation.filter.IncomeO
 import static io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter.TRANSFER_OPERATION_FILTER;
 import static io.github.zwieback.familyfinance.core.activity.EntityActivity.INPUT_READ_ONLY;
 
-public class DashboardActivity extends ActivityWrapper {
+public class DashboardActivity extends DataActivityWrapper {
 
     public static final String RESULT_CURRENCY_ID = "resultCurrencyId";
     public static final String RESULT_EXCHANGE_RATE_ID = "resultExchangeRateId";
@@ -69,6 +69,9 @@ public class DashboardActivity extends ActivityWrapper {
     private IncomeOperationFilter incomeOperationFilter;
     private TransferOperationFilter transferOperationFilter;
     private FlowOfFundsOperationFilter flowOfFundsOperationFilter;
+    private IncomeOperationHelper incomeOperationHelper;
+    private ExpenseOperationHelper expenseOperationHelper;
+    private TransferOperationHelper transferOperationHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,6 +102,9 @@ public class DashboardActivity extends ActivityWrapper {
         incomeOperationFilter = loadFilter(savedInstanceState, INCOME_OPERATION_FILTER);
         transferOperationFilter = loadFilter(savedInstanceState, TRANSFER_OPERATION_FILTER);
         flowOfFundsOperationFilter = loadFilter(savedInstanceState, FLOW_OF_FUNDS_OPERATION_FILTER);
+        incomeOperationHelper = new IncomeOperationHelper(this, data);
+        expenseOperationHelper = new ExpenseOperationHelper(this, data);
+        transferOperationHelper = new TransferOperationHelper(this, data);
     }
 
     private <F extends EntityFilter> F loadFilter(@Nullable Bundle savedInstanceState,
@@ -232,17 +238,17 @@ public class DashboardActivity extends ActivityWrapper {
     }
 
     public void onAddExpenseClick(View view) {
-        Intent intent = new Intent(this, ExpenseOperationEditActivity.class);
+        Intent intent = expenseOperationHelper.getIntentToAdd(expenseOperationFilter);
         startActivityForResult(intent, EXPENSE_OPERATION_EDIT_CODE);
     }
 
     public void onAddIncomeClick(View view) {
-        Intent intent = new Intent(this, IncomeOperationEditActivity.class);
+        Intent intent = incomeOperationHelper.getIntentToAdd(incomeOperationFilter);
         startActivityForResult(intent, INCOME_OPERATION_EDIT_CODE);
     }
 
     public void onAddTransferClick(View view) {
-        Intent intent = new Intent(this, TransferOperationEditActivity.class);
+        Intent intent = transferOperationHelper.getIntentToAdd(transferOperationFilter);
         startActivityForResult(intent, TRANSFER_OPERATION_EDIT_CODE);
     }
 
