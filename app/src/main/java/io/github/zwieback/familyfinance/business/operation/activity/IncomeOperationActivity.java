@@ -7,7 +7,6 @@ import android.support.v4.app.DialogFragment;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.operation.activity.helper.IncomeOperationHelper;
-import io.github.zwieback.familyfinance.business.operation.activity.helper.OperationHelper;
 import io.github.zwieback.familyfinance.business.operation.dialog.IncomeOperationFilterDialog;
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.fragment.IncomeOperationFragment;
@@ -20,7 +19,7 @@ import static io.github.zwieback.familyfinance.business.operation.filter.IncomeO
 public class IncomeOperationActivity
         extends OperationActivity<IncomeOperationFragment, IncomeOperationFilter> {
 
-    private OperationHelper<IncomeOperationFilter> operationHelper;
+    private IncomeOperationHelper operationHelper;
 
     @Override
     protected int getTitleStringId() {
@@ -43,10 +42,7 @@ public class IncomeOperationActivity
     @Override
     protected IncomeOperationFilter createDefaultFilter() {
         IncomeOperationFilter filter = new IncomeOperationFilter();
-        filter.setAccountId(databasePrefs.getAccountId());
         filter.setArticleId(databasePrefs.getIncomesArticleId());
-        filter.setCurrencyId(databasePrefs.getCurrencyId());
-        filter.setOwnerId(databasePrefs.getPersonId());
         return filter;
     }
 

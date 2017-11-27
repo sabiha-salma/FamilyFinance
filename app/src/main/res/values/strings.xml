@@ -59,11 +59,11 @@
     <string name="database_preferences_title">Database</string>
     <string name="database_preferences_summary">Initial and default values</string>
     <string name="currency_id_preference_title">Default currency: %s</string>
-    <string name="currency_id_preference_summary">Is used as default currency in the dialog for adding account, in the dialog for adding any operation and in the operation filter dialog.\nIt is not recommended to change</string>
+    <string name="currency_id_preference_summary">Is used as default currency in the dialog for adding account and in the dialog for adding any operation.\nIt is not recommended to change</string>
     <string name="account_id_preference_title">Default account: %s</string>
-    <string name="account_id_preference_summary">Is used as default account in the dialog for adding any operation and the operation filter dialog</string>
+    <string name="account_id_preference_summary">Is used as default account in the dialog for adding any operation</string>
     <string name="person_id_preference_title">Default person: %s</string>
-    <string name="person_id_preference_summary">Is used as default person in the dialog for adding account and in the operation filter dialog</string>
+    <string name="person_id_preference_summary">Is used as default person in the dialog for adding account</string>
     <string name="incomes_article_id_preference_title">Article of incomes: %s</string>
     <string name="incomes_article_id_preference_summary">Is used as root folder of incomes.\nIt is not recommended to change</string>
     <string name="expenses_article_id_preference_title">Article of expenses: %s</string>

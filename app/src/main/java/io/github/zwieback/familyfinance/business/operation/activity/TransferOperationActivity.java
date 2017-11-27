@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import io.github.zwieback.familyfinance.R;
-import io.github.zwieback.familyfinance.business.operation.activity.helper.OperationHelper;
 import io.github.zwieback.familyfinance.business.operation.activity.helper.TransferOperationHelper;
 import io.github.zwieback.familyfinance.business.operation.dialog.TransferOperationFilterDialog;
 import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter;
@@ -21,7 +20,7 @@ import static io.github.zwieback.familyfinance.business.operation.filter.Transfe
 public class TransferOperationActivity
         extends OperationActivity<TransferOperationFragment, TransferOperationFilter> {
 
-    private OperationHelper<TransferOperationFilter> operationHelper;
+    private TransferOperationHelper operationHelper;
 
     @Override
     protected int getTitleStringId() {
@@ -44,10 +43,7 @@ public class TransferOperationActivity
     @Override
     protected TransferOperationFilter createDefaultFilter() {
         TransferOperationFilter filter = new TransferOperationFilter();
-        filter.setAccountId(databasePrefs.getAccountId());
         filter.setArticleId(databasePrefs.getTransferArticleId());
-        filter.setCurrencyId(databasePrefs.getCurrencyId());
-        filter.setOwnerId(databasePrefs.getPersonId());
         return filter;
     }
 

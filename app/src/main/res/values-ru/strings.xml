@@ -59,11 +59,11 @@
     <string name="database_preferences_title">База данных</string>
     <string name="database_preferences_summary">Первоначальные и значения по умолчанию</string>
     <string name="currency_id_preference_title">Валюта по умолчанию: %s</string>
-    <string name="currency_id_preference_summary">Валюта по умолчанию в диалоге добавления счета, диалоге добавления любой операции и диалоге фильтра операций.\nНе рекомендуется изменять</string>
+    <string name="currency_id_preference_summary">Валюта по умолчанию в диалоге добавления счета и диалоге добавления любой операции.\nНе рекомендуется изменять</string>
     <string name="account_id_preference_title">Счет по умолчанию: %s</string>
-    <string name="account_id_preference_summary">Счет по умолчанию используется в диалоге добавления любой операции и диалоге фильтра операций</string>
+    <string name="account_id_preference_summary">Счет по умолчанию используется в диалоге добавления любой операции</string>
     <string name="person_id_preference_title">Пользователь по умолчанию: %s</string>
-    <string name="person_id_preference_summary">Пользователь по умолчанию используется в диалоге добавления счета и в диалоге фильтра операций</string>
+    <string name="person_id_preference_summary">Пользователь по умолчанию используется в диалоге добавления счета</string>
     <string name="incomes_article_id_preference_title">Статья доходов: %s</string>
     <string name="incomes_article_id_preference_summary">Используется в качестве корневого каталога доходов.\nНе рекомендуется изменять</string>
     <string name="expenses_article_id_preference_title">Статья расходов: %s</string>
