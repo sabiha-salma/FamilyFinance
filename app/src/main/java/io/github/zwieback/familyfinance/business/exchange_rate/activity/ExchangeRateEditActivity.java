@@ -120,10 +120,7 @@ public class ExchangeRateEditActivity
     }
 
     private void loadCurrency(int currencyId) {
-        loadEntity(Currency.class, currencyId, foundCurrency -> {
-            entity.setCurrency(foundCurrency);
-            binding.currency.setText(foundCurrency.getName());
-        });
+        loadEntity(Currency.class, currencyId, foundCurrency -> entity.setCurrency(foundCurrency));
     }
 
     @Override

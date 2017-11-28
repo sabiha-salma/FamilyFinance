@@ -80,8 +80,8 @@ public class AccountEditActivity extends
                 if (resultCode != Activity.RESULT_OK) {
                     break;
                 }
-                int account = extractOutputId(resultIntent, RESULT_ACCOUNT_ID);
-                loadParent(account);
+                int parentId = extractOutputId(resultIntent, RESULT_ACCOUNT_ID);
+                loadParent(parentId);
                 break;
             case CURRENCY_CODE:
                 if (resultCode != Activity.RESULT_OK) {
@@ -123,17 +123,11 @@ public class AccountEditActivity extends
     }
 
     private void loadCurrency(int currencyId) {
-        loadEntity(Currency.class, currencyId, foundCurrency -> {
-            entity.setCurrency(foundCurrency);
-            binding.currency.setText(foundCurrency.getName());
-        });
+        loadEntity(Currency.class, currencyId, foundCurrency -> entity.setCurrency(foundCurrency));
     }
 
     private void loadOwner(int ownerId) {
-        loadEntity(Person.class, ownerId, foundOwner -> {
-            entity.setOwner(foundOwner);
-            binding.owner.setText(foundOwner.getName());
-        });
+        loadEntity(Person.class, ownerId, foundOwner -> entity.setOwner(foundOwner));
     }
 
     private void loadParent(int parentId) {

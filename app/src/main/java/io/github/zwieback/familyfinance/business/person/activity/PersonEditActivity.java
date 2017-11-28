@@ -68,8 +68,8 @@ public class PersonEditActivity
                 if (resultCode != Activity.RESULT_OK) {
                     break;
                 }
-                int personId = extractOutputId(resultIntent, RESULT_PERSON_ID);
-                loadParent(personId);
+                int parentId = extractOutputId(resultIntent, RESULT_PERSON_ID);
+                loadParent(parentId);
                 break;
         }
     }

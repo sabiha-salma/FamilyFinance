@@ -70,8 +70,8 @@ public abstract class ArticleEditActivity
                 if (resultCode != Activity.RESULT_OK) {
                     break;
                 }
-                int personId = extractOutputId(resultIntent, RESULT_ARTICLE_ID);
-                loadParent(personId);
+                int parentId = extractOutputId(resultIntent, RESULT_ARTICLE_ID);
+                loadParent(parentId);
                 break;
         }
     }

@@ -40,7 +40,6 @@ import static io.github.zwieback.familyfinance.util.DateUtils.now;
 import static io.github.zwieback.familyfinance.util.DateUtils.stringToLocalDate;
 import static io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog;
 import static io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL;
-import static io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString;
 import static io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal;
 
 abstract class OperationEditActivity<B extends ViewDataBinding>
@@ -148,31 +147,18 @@ abstract class OperationEditActivity<B extends ViewDataBinding>
     }
 
     private Consumer<Person> onSuccessfulOwnerFound() {
-        return foundOwner -> {
-            entity.setOwner(foundOwner);
-            getOwnerEdit().setText(foundOwner.getName());
-        };
+        return foundOwner -> entity.setOwner(foundOwner);
     }
 
     private Consumer<Currency> onSuccessfulCurrencyFound() {
         return foundCurrency -> {
             ExchangeRate exchangeRate = findLastExchangeRate(foundCurrency.getId());
             entity.setExchangeRate(exchangeRate);
-            getCurrencyEdit().setText(foundCurrency.getName());
-            if (exchangeRate != null) {
-                getExchangeRateEdit().setText(bigDecimalToString(exchangeRate.getValue()));
-            } else {
-                getExchangeRateEdit().setText(null);
-            }
         };
     }
 
     private Consumer<ExchangeRate> onSuccessfulExchangeRateFound() {
-        return foundExchangeRate -> {
-            entity.setExchangeRate(foundExchangeRate);
-            getExchangeRateEdit().setText(bigDecimalToString(foundExchangeRate.getValue()));
-            getCurrencyEdit().setText(foundExchangeRate.getCurrency().getName());
-        };
+        return foundExchangeRate -> entity.setExchangeRate(foundExchangeRate);
     }
 
     final void loadOwner(int ownerId) {

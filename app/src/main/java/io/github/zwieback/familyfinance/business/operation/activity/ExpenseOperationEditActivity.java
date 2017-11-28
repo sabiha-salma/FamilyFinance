@@ -115,8 +115,6 @@ public class ExpenseOperationEditActivity
     private Consumer<Article> onSuccessfulArticleFound() {
         return foundArticle -> {
             entity.setArticle(foundArticle);
-            binding.articleName.setText(foundArticle.getName());
-            binding.articleCategory.setText(foundArticle.getParent().getName());
             if (isTextEmpty(binding.value.getText().toString())
                     && foundArticle.getDefaultValue() != null) {
                 binding.value.setText(bigDecimalToString(foundArticle.getDefaultValue()));
@@ -127,7 +125,6 @@ public class ExpenseOperationEditActivity
     private Consumer<Account> onSuccessfulAccountFound() {
         return foundAccount -> {
             entity.setAccount(foundAccount);
-            binding.account.setText(foundAccount.getName());
             if (foundAccount.getOwner() != null) {
                 loadOwner(foundAccount.getOwner().getId());
             }

@@ -113,7 +113,6 @@ public class TransferOperationEditActivity
     private Consumer<Account> onSuccessfulExpenseAccountFound() {
         return foundAccount -> {
             entity.setAccount(foundAccount);
-            binding.expenseAccount.setText(foundAccount.getName());
             if (foundAccount.getOwner() != null) {
                 loadOwner(foundAccount.getOwner().getId());
             }
@@ -121,10 +120,7 @@ public class TransferOperationEditActivity
     }
 
     private Consumer<Account> onSuccessfulIncomeAccountFound() {
-        return foundAccount -> {
-            incomeOperation.setAccount(foundAccount);
-            binding.incomeAccount.setText(foundAccount.getName());
-        };
+        return foundAccount -> incomeOperation.setAccount(foundAccount);
     }
 
     private Consumer<Article> onSuccessfulArticleFound() {
