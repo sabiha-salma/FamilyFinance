@@ -92,7 +92,6 @@ public abstract class ArticleEditActivity
         if (nonNullId(parentId)) {
             loadEntity(Article.class, parentId, foundArticle -> {
                 entity.setParent(foundArticle);
-                binding.parent.setText(foundArticle.getName());
                 binding.parentLayout.setError(null);
             });
         }

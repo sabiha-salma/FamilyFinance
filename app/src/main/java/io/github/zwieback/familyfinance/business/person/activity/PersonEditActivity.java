@@ -90,7 +90,6 @@ public class PersonEditActivity
         if (nonNullId(parentId)) {
             loadEntity(Person.class, parentId, foundPerson -> {
                 entity.setParent(foundPerson);
-                binding.parent.setText(foundPerson.getName());
                 binding.parentLayout.setError(null);
             });
         }

@@ -134,7 +134,6 @@ public class AccountEditActivity extends
         if (nonNullId(parentId)) {
             loadEntity(Account.class, parentId, foundAccount -> {
                 entity.setParent(foundAccount);
-                binding.parent.setText(foundAccount.getName());
                 binding.parentLayout.setError(null);
             });
         }
