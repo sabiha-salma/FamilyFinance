@@ -64,11 +64,17 @@ public class DashboardActivity extends DataActivityWrapper {
     public static final int ICONICS_CODE = 701;
     public static final int FILE_CODE = 801;
 
+    @Nullable
     private ExchangeRateFilter exchangeRateFilter;
+    @Nullable
     private ExpenseOperationFilter expenseOperationFilter;
+    @Nullable
     private IncomeOperationFilter incomeOperationFilter;
+    @Nullable
     private TransferOperationFilter transferOperationFilter;
+    @Nullable
     private FlowOfFundsOperationFilter flowOfFundsOperationFilter;
+
     private IncomeOperationHelper incomeOperationHelper;
     private ExpenseOperationHelper expenseOperationHelper;
     private TransferOperationHelper transferOperationHelper;
@@ -252,6 +258,7 @@ public class DashboardActivity extends DataActivityWrapper {
         startActivityForResult(intent, TRANSFER_OPERATION_EDIT_CODE);
     }
 
+    @Nullable
     public ExchangeRateFilter getExchangeRateFilter() {
         return exchangeRateFilter;
     }

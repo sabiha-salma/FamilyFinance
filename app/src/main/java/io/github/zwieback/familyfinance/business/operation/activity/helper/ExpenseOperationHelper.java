@@ -2,7 +2,7 @@ package io.github.zwieback.familyfinance.business.operation.activity.helper;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import io.github.zwieback.familyfinance.business.operation.activity.ExpenseOperationEditActivity;
 import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter;
@@ -24,8 +24,11 @@ public class ExpenseOperationHelper extends OperationHelper<ExpenseOperationFilt
     }
 
     @Override
-    public Intent getIntentToAdd(@NonNull ExpenseOperationFilter filter) {
+    public Intent getIntentToAdd(@Nullable ExpenseOperationFilter filter) {
         Intent intent = new Intent(context, ExpenseOperationEditActivity.class);
+        if (filter == null) {
+            return intent;
+        }
         if (filter.getAccountId() != null) {
             intent.putExtra(ExpenseOperationEditActivity.INPUT_EXPENSE_ACCOUNT_ID,
                     filter.getAccountId());
