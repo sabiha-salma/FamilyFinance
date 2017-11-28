@@ -23,6 +23,7 @@ public interface IAccount extends IBaseEntityFolder {
     @Column(nullable = false, value = "true")
     boolean isActive();
 
+    @Bindable
     @ForeignKey
     @OneToOne(mappedBy = "id", cascade = CascadeAction.NONE)
     @Column(name = "parent_id")

@@ -20,6 +20,7 @@ import io.requery.Table;
 @Table(name = "article")
 public interface IArticle extends IBaseEntityFolder {
 
+    @Bindable
     @ForeignKey
     @OneToOne(mappedBy = "id", cascade = CascadeAction.NONE)
     @Column(name = "parent_id")
