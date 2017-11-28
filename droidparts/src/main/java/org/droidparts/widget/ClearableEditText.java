@@ -80,6 +80,9 @@ public class ClearableEditText extends TextInputEditText
             clearIcon = ContextCompat.getDrawable(getContext(),
                     android.R.drawable.presence_offline);
         }
+        if (clearIcon == null) {
+            return;
+        }
         clearIcon.setBounds(0, 0, clearIcon.getIntrinsicWidth(), clearIcon.getIntrinsicHeight());
         int min = getPaddingTop() + clearIcon.getIntrinsicHeight() + getPaddingBottom();
         if (getSuggestedMinimumHeight() < min) {
