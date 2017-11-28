@@ -111,13 +111,13 @@ public abstract class EntityFolderActivity<
 
     @Override
     protected int getPopupMenuId(ENTITY entity) {
-        if (readOnly) {
-            if (folderSelectable) {
-                return R.menu.popup_entity_folder_select;
-            }
-            return R.menu.popup_entity_folder_read_only;
-        }
         if (entity.isFolder()) {
+            if (readOnly) {
+                if (folderSelectable) {
+                    return R.menu.popup_entity_folder_select;
+                }
+                return R.menu.popup_entity_folder_read_only;
+            }
             return R.menu.popup_entity_folder;
         }
         return super.getPopupMenuId(entity);
