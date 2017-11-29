@@ -21,6 +21,28 @@ Checklist for creating issues:
 
 [Create new issue](https://github.com/zwieback/FamilyFinance/issues/new)
 
+# Credits
+
+*Family Finance* relies on several of open source libraries:
+
+- [requery](https://github.com/requery/requery)
+- [RxJava](https://github.com/ReactiveX/RxJava)
+- [RxAndroid](https://github.com/ReactiveX/RxAndroid)
+- [RxBinding](https://github.com/JakeWharton/RxBinding)
+- [Android-Iconics](https://github.com/mikepenz/Android-Iconics)
+- [Materialize](https://github.com/mikepenz/Materialize)
+- [FastAdapter](https://github.com/mikepenz/FastAdapter)
+- [MaterialDrawer](https://github.com/mikepenz/MaterialDrawer)
+- [ThreeTenABP](https://github.com/JakeWharton/ThreeTenABP)
+- [Lightweight-Stream-API](https://github.com/aNNiMON/Lightweight-Stream-API)
+- [ACRA](https://github.com/ACRA/acra)
+- [Android-Support-Preference-V7-Fix](https://github.com/Gericop/Android-Support-Preference-V7-Fix/)
+- [Gendalf](https://github.com/deviant-studio/Gendalf)
+- [NoNonsense-FilePicker](https://github.com/spacecowboy/NoNonsense-FilePicker/)
+- [PermissionsDispatcher](https://github.com/permissions-dispatcher/PermissionsDispatcher)
+- [Validator](https://github.com/jpetitto/validator)
+- [DroidParts](https://github.com/droidparts/droidparts) (ClearableEditText)
+
 # Developed By
 
 * Anton Avdeev - <anton.avdeev.developer@gmail.com>
