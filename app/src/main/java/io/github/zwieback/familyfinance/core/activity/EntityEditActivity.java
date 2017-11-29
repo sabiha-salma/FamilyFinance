@@ -89,11 +89,11 @@ public abstract class EntityEditActivity<E extends IBaseEntity, B extends ViewDa
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
         super.onActivityResult(requestCode, resultCode, resultIntent);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
         switch (requestCode) {
             case ICONICS_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 String iconName = resultIntent.getStringExtra(IconicsActivity.OUTPUT_ICON_NAME);
                 setupIcon(iconName);
                 break;

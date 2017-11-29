@@ -20,11 +20,11 @@ abstract class OperationWithArticleFilterDialog<
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
         super.onActivityResult(requestCode, resultCode, resultIntent);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
         switch (requestCode) {
             case ARTICLE_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int articleId = extractId(resultIntent, RESULT_ARTICLE_ID);
                 loadArticle(articleId);
                 break;

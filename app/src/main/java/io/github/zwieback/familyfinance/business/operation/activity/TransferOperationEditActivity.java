@@ -84,18 +84,15 @@ public class TransferOperationEditActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
         super.onActivityResult(requestCode, resultCode, resultIntent);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
         switch (requestCode) {
             case EXPENSE_ACCOUNT_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int expenseAccountId = extractOutputId(resultIntent, RESULT_ACCOUNT_ID);
                 loadExpenseAccount(expenseAccountId);
                 break;
             case INCOME_ACCOUNT_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int incomeAccountId = extractOutputId(resultIntent, RESULT_ACCOUNT_ID);
                 loadIncomeAccount(incomeAccountId);
                 break;

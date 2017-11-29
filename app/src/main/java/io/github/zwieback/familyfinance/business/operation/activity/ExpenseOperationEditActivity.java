@@ -84,18 +84,15 @@ public class ExpenseOperationEditActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
         super.onActivityResult(requestCode, resultCode, resultIntent);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
         switch (requestCode) {
             case ACCOUNT_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int accountId = extractOutputId(resultIntent, RESULT_ACCOUNT_ID);
                 loadAccount(accountId);
                 break;
             case ARTICLE_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int articleId = extractOutputId(resultIntent, RESULT_ARTICLE_ID);
                 loadArticle(articleId);
                 break;

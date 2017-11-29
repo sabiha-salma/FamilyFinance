@@ -46,11 +46,11 @@ public class ExchangeRateFilterDialog
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
         super.onActivityResult(requestCode, resultCode, resultIntent);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
         switch (requestCode) {
             case CURRENCY_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int currencyId = extractId(resultIntent, RESULT_CURRENCY_ID);
                 loadCurrency(currencyId);
                 break;

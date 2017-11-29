@@ -63,11 +63,11 @@ public class PersonEditActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
         super.onActivityResult(requestCode, resultCode, resultIntent);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
         switch (requestCode) {
             case PERSON_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int parentId = extractOutputId(resultIntent, RESULT_PERSON_ID);
                 loadParent(parentId);
                 break;

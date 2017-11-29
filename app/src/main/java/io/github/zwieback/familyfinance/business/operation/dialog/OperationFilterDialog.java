@@ -48,25 +48,19 @@ abstract class OperationFilterDialog<F extends OperationFilter, B extends ViewDa
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
         super.onActivityResult(requestCode, resultCode, resultIntent);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
         switch (requestCode) {
             case ACCOUNT_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int accountId = extractId(resultIntent, RESULT_ACCOUNT_ID);
                 loadAccount(accountId);
                 break;
             case PERSON_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int ownerId = extractId(resultIntent, RESULT_PERSON_ID);
                 loadOwner(ownerId);
                 break;
             case CURRENCY_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int currencyId = extractId(resultIntent, RESULT_CURRENCY_ID);
                 loadCurrency(currencyId);
                 break;

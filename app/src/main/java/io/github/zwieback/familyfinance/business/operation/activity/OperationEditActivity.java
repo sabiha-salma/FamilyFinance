@@ -55,25 +55,19 @@ abstract class OperationEditActivity<B extends ViewDataBinding>
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
         super.onActivityResult(requestCode, resultCode, resultIntent);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
         switch (requestCode) {
             case PERSON_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int ownerId = extractOutputId(resultIntent, RESULT_PERSON_ID);
                 loadOwner(ownerId);
                 break;
             case CURRENCY_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int currencyId = extractOutputId(resultIntent, RESULT_CURRENCY_ID);
                 loadCurrency(currencyId);
                 break;
             case EXCHANGE_RATE_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 int exchangeRateId = extractOutputId(resultIntent, RESULT_EXCHANGE_RATE_ID);
                 loadExchangeRate(exchangeRateId);
                 break;

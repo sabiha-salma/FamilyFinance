@@ -150,71 +150,44 @@ public class DashboardActivity extends DataActivityWrapper {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent resultIntent) {
         super.onActivityResult(requestCode, resultCode, resultIntent);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
         switch (requestCode) {
             case EXCHANGE_RATE_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 if (resultIntent.hasExtra(EXCHANGE_RATE_FILTER)) {
                     exchangeRateFilter = resultIntent.getParcelableExtra(EXCHANGE_RATE_FILTER);
                 }
                 break;
             case PERSON_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 break;
             case ACCOUNT_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 break;
             case INCOME_ARTICLE_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 break;
             case EXPENSE_ARTICLE_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 break;
             case INCOME_OPERATION_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 if (resultIntent.hasExtra(INCOME_OPERATION_FILTER)) {
                     incomeOperationFilter = resultIntent.getParcelableExtra(INCOME_OPERATION_FILTER);
                 }
                 break;
             case EXPENSE_OPERATION_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 if (resultIntent.hasExtra(EXPENSE_OPERATION_FILTER)) {
                     expenseOperationFilter = resultIntent.getParcelableExtra(EXPENSE_OPERATION_FILTER);
                 }
                 break;
             case TRANSFER_OPERATION_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 if (resultIntent.hasExtra(TRANSFER_OPERATION_FILTER)) {
                     transferOperationFilter = resultIntent.getParcelableExtra(TRANSFER_OPERATION_FILTER);
                 }
                 break;
             case FLOW_OF_FUNDS_OPERATION_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 if (resultIntent.hasExtra(FLOW_OF_FUNDS_OPERATION_FILTER)) {
                     flowOfFundsOperationFilter = resultIntent.getParcelableExtra(FLOW_OF_FUNDS_OPERATION_FILTER);
                 }
                 break;
             case TEMPLATE_CODE:
-                if (resultCode != Activity.RESULT_OK) {
-                    break;
-                }
                 break;
         }
     }
