@@ -98,6 +98,7 @@ dependencies {
     implementation("com.github.hotchemi:permissionsdispatcher:${versions.permissionsDispatcherLib}") {
         exclude module: "support-v13"
     }
+    // RxBinding
     implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${versions.rxBinding2Lib}"
     // project libs
     implementation project(':shared')
