@@ -43,5 +43,7 @@ dependencies {
     implementation "com.android.support:design:${versions.supportLib}"
     // java.time
     implementation "com.jakewharton.threetenabp:threetenabp:${versions.timeLib}"
+    // icons
+    implementation "com.mikepenz:iconics-core:${versions.iconicsLib}"
     testImplementation 'junit:junit:4.12'
 }
