@@ -13,8 +13,8 @@ android {
         applicationId "io.github.zwieback.familyfinance"
         minSdkVersion setup.minSdk
         targetSdkVersion setup.targetSdk
-        versionCode 10102
-        versionName "1.1.2"
+        versionCode 10200
+        versionName "1.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
