@@ -21,6 +21,7 @@ import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperati
 import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter;
+import io.github.zwieback.familyfinance.business.template.activity.TemplateActivity;
 import io.github.zwieback.familyfinance.core.activity.DataActivityWrapper;
 import io.github.zwieback.familyfinance.core.filter.EntityFilter;
 
@@ -39,6 +40,7 @@ public class DashboardActivity extends DataActivityWrapper {
     public static final String RESULT_ACCOUNT_ID = "resultAccountId";
     public static final String RESULT_ARTICLE_ID = "resultArticleId";
     public static final String RESULT_OPERATION_ID = "resultOperationId";
+    public static final String RESULT_TEMPLATE_ID = "resultTemplateId";
 
     public static final int CURRENCY_CODE = 101;
     public static final int CURRENCY_EDIT_CODE = 102;
@@ -63,6 +65,8 @@ public class DashboardActivity extends DataActivityWrapper {
     public static final int TRANSFER_OPERATION_EDIT_CODE = 607;
     public static final int ICONICS_CODE = 701;
     public static final int FILE_CODE = 801;
+    public static final int TEMPLATE_CODE = 901;
+    public static final int TEMPLATE_EDIT_CODE = 902;
 
     @Nullable
     private ExchangeRateFilter exchangeRateFilter;
@@ -130,6 +134,7 @@ public class DashboardActivity extends DataActivityWrapper {
         findViewById(R.id.select_transfers).setOnClickListener(this::onSelectTransfersClick);
         findViewById(R.id.add_transfer).setOnClickListener(this::onAddTransferClick);
         findViewById(R.id.select_flow_of_funds).setOnClickListener(this::onSelectFlowOfFundsClick);
+        findViewById(R.id.select_templates).setOnClickListener(this::onSelectTemplatesClick);
     }
 
     @Override
@@ -206,6 +211,11 @@ public class DashboardActivity extends DataActivityWrapper {
                     flowOfFundsOperationFilter = resultIntent.getParcelableExtra(FLOW_OF_FUNDS_OPERATION_FILTER);
                 }
                 break;
+            case TEMPLATE_CODE:
+                if (resultCode != Activity.RESULT_OK) {
+                    break;
+                }
+                break;
         }
     }
 
@@ -241,6 +251,12 @@ public class DashboardActivity extends DataActivityWrapper {
         intent.putExtra(FLOW_OF_FUNDS_OPERATION_FILTER, flowOfFundsOperationFilter);
         intent.putExtra(INPUT_READ_ONLY, false);
         startActivityForResult(intent, FLOW_OF_FUNDS_OPERATION_CODE);
+    }
+
+    public void onSelectTemplatesClick(View view) {
+        Intent intent = new Intent(this, TemplateActivity.class);
+        intent.putExtra(INPUT_READ_ONLY, false);
+        startActivityForResult(intent, TEMPLATE_CODE);
     }
 
     public void onAddExpenseClick(View view) {

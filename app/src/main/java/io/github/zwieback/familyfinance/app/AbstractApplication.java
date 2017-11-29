@@ -16,7 +16,7 @@ import io.requery.sql.EntityDataStore;
 
 public abstract class AbstractApplication extends Application {
 
-    protected static final int DB_VERSION = 1;
+    protected static final int DB_VERSION = 2;
 
     private ReactiveEntityStore<Persistable> dataStore;
 

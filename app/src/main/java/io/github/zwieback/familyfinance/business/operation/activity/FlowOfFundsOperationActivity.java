@@ -16,10 +16,7 @@ import io.github.zwieback.familyfinance.business.operation.activity.helper.Incom
 import io.github.zwieback.familyfinance.business.operation.activity.helper.OperationHelper;
 import io.github.zwieback.familyfinance.business.operation.activity.helper.TransferOperationHelper;
 import io.github.zwieback.familyfinance.business.operation.dialog.FlowOfFundsOperationFilterDialog;
-import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
-import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter;
-import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.fragment.FlowOfFundsOperationFragment;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer;
 import io.github.zwieback.familyfinance.core.model.Operation;
@@ -30,9 +27,9 @@ import static io.github.zwieback.familyfinance.business.operation.filter.FlowOfF
 public class FlowOfFundsOperationActivity
         extends OperationActivity<FlowOfFundsOperationFragment, FlowOfFundsOperationFilter> {
 
-    private OperationHelper<IncomeOperationFilter> incomeOperationHelper;
-    private OperationHelper<ExpenseOperationFilter> expenseOperationHelper;
-    private OperationHelper<TransferOperationFilter> transferOperationHelper;
+    private IncomeOperationHelper incomeOperationHelper;
+    private ExpenseOperationHelper expenseOperationHelper;
+    private TransferOperationHelper transferOperationHelper;
 
     @Override
     protected List<Integer> collectMenuIds() {

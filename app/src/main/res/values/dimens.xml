@@ -32,6 +32,9 @@
     <dimen name="currency_name_width">80dp</dimen>
     <dimen name="currency_text_size">16sp</dimen>
 
+    <dimen name="template_icon_size">16dp</dimen>
+    <dimen name="template_text_size">16sp</dimen>
+
     <dimen name="exchange_rate_icon_size">16dp</dimen>
     <dimen name="exchange_rate_name_width">80dp</dimen>
     <dimen name="exchange_rate_date_width">86dp</dimen>

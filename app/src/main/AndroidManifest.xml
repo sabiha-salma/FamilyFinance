@@ -38,6 +38,8 @@
         <activity android:name=".business.operation.activity.TransferOperationActivity"/>
         <activity android:name=".business.operation.activity.TransferOperationEditActivity"/>
         <activity android:name=".business.operation.activity.FlowOfFundsOperationActivity"/>
+        <activity android:name=".business.template.activity.TemplateActivity"/>
+        <activity android:name=".business.template.activity.TemplateEditActivity"/>
         <activity
             android:name=".business.preference.activity.SettingsActivity"
             android:theme="@style/AppTheme.Preference"/>

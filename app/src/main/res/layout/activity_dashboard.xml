@@ -121,6 +121,14 @@
                 app:iiv_start_icon="cmd_weather_windy"
                 app:iiv_start_size="@dimen/button_icon_size"/>
 
+            <com.mikepenz.iconics.view.IconicsButton
+                android:id="@+id/select_templates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_templates"
+                app:iiv_start_icon="faw_file_text"
+                app:iiv_start_size="@dimen/button_icon_size"/>
+
         </LinearLayout>
 
     </ScrollView>

@@ -17,6 +17,7 @@ import org.threeten.bp.LocalDate;
 import io.github.zwieback.familyfinance.business.account.activity.AccountActivity;
 import io.github.zwieback.familyfinance.business.currency.activity.CurrencyActivity;
 import io.github.zwieback.familyfinance.business.exchange_rate.activity.ExchangeRateActivity;
+import io.github.zwieback.familyfinance.business.exchange_rate.helper.ExchangeRateFinder;
 import io.github.zwieback.familyfinance.business.person.activity.PersonActivity;
 import io.github.zwieback.familyfinance.core.activity.EntityEditActivity;
 import io.github.zwieback.familyfinance.core.model.Currency;
@@ -138,12 +139,8 @@ abstract class OperationEditActivity<B extends ViewDataBinding>
     }
 
     @Nullable
-    ExchangeRate findLastExchangeRate(int currencyId) {
-        return data
-                .select(ExchangeRate.class)
-                .where(ExchangeRate.CURRENCY_ID.eq(currencyId))
-                .orderBy(ExchangeRate.DATE.desc())
-                .get().firstOrNull();
+    private ExchangeRate findLastExchangeRate(int currencyId) {
+        return new ExchangeRateFinder(data).findLastExchangeRate(currencyId);
     }
 
     private Consumer<Person> onSuccessfulOwnerFound() {

@@ -10,6 +10,7 @@ import io.github.zwieback.familyfinance.business.currency.lifecycle.creator.Curr
 import io.github.zwieback.familyfinance.business.exchange_rate.lifecycle.creator.ExchangeRateViewCreator;
 import io.github.zwieback.familyfinance.business.operation.lifecycle.creator.OperationViewCreator;
 import io.github.zwieback.familyfinance.business.person.lifecycle.creator.PersonViewCreator;
+import io.github.zwieback.familyfinance.business.template.lifecycle.creator.TemplateViewCreator;
 import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
@@ -32,6 +33,7 @@ public class DatabaseViewCreator {
         createView(new AccountViewCreator(connection), onAccountViewCreated());
         createView(new ArticleViewCreator(connection), onArticleViewCreated());
         createView(new OperationViewCreator(connection), onOperationViewCreated());
+        createView(new TemplateViewCreator(connection), onTemplateViewCreated());
     }
 
     private void createView(EntityViewCreator creator, Consumer<Boolean> onViewCreated) {
@@ -64,6 +66,10 @@ public class DatabaseViewCreator {
 
     private Consumer<Boolean> onOperationViewCreated() {
         return ignoredResult -> logFinishOfCreator(OperationViewCreator.class);
+    }
+
+    private Consumer<Boolean> onTemplateViewCreated() {
+        return ignoredResult -> logFinishOfCreator(TemplateViewCreator.class);
     }
 
     private static void logFinishOfCreator(Class creatorClass) {

@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
+import org.threeten.bp.LocalDate;
+
+import java.math.BigDecimal;
+
 import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationEditActivity;
 import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.lifecycle.destroyer.TransferOperationForceDestroyer;
@@ -12,6 +16,7 @@ import io.github.zwieback.familyfinance.core.model.Operation;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.github.zwieback.familyfinance.util.DateUtils;
 import io.github.zwieback.familyfinance.util.NumberUtils;
+import io.github.zwieback.familyfinance.util.StringUtils;
 import io.requery.Persistable;
 import io.requery.reactivex.ReactiveEntityStore;
 
@@ -23,33 +28,63 @@ public class TransferOperationHelper extends OperationHelper<TransferOperationFi
 
     @Override
     public Intent getIntentToAdd() {
-        return new Intent(context, TransferOperationEditActivity.class);
+        return getEmptyIntent();
     }
 
     @Override
-    public Intent getIntentToAdd(@Nullable TransferOperationFilter filter) {
-        Intent intent = new Intent(context, TransferOperationEditActivity.class);
-        if (filter == null) {
-            return intent;
+    public Intent getIntentToAdd(@Nullable Integer ignoredArticleId,
+                                 @Nullable Integer accountId,
+                                 @Nullable Integer transferAccountId,
+                                 @Nullable Integer ownerId,
+                                 @Nullable Integer currencyId,
+                                 @Nullable Integer exchangeRateId,
+                                 @Nullable LocalDate date,
+                                 @Nullable BigDecimal value,
+                                 @Nullable String description) {
+        Intent intent = getEmptyIntent();
+        if (accountId != null) {
+            intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_ACCOUNT_ID, accountId);
         }
-        if (filter.getAccountId() != null) {
-            intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_ACCOUNT_ID,
-                    filter.getAccountId());
+        if (transferAccountId != null) {
+            intent.putExtra(TransferOperationEditActivity.INPUT_INCOME_ACCOUNT_ID,
+                    transferAccountId);
         }
-        if (filter.getOwnerId() != null) {
-            intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_OWNER_ID,
-                    filter.getOwnerId());
+        if (ownerId != null) {
+            intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_OWNER_ID, ownerId);
         }
-        if (filter.getCurrencyId() != null) {
-            intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_CURRENCY_ID,
-                    filter.getCurrencyId());
+        if (currencyId != null) {
+            intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_CURRENCY_ID, currencyId);
+        }
+        if (exchangeRateId != null) {
+            intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_EXCHANGE_RATE_ID,
+                    exchangeRateId);
+        }
+        if (date != null) {
+            DateUtils.writeLocalDateToIntent(intent,
+                    TransferOperationEditActivity.INPUT_EXPENSE_DATE, date);
+        }
+        if (value != null) {
+            NumberUtils.writeBigDecimalToIntent(intent,
+                    TransferOperationEditActivity.INPUT_EXPENSE_VALUE, value);
+        }
+        if (StringUtils.isTextNotEmpty(description)) {
+            intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_DESCRIPTION, description);
         }
         return intent;
     }
 
     @Override
+    public Intent getIntentToAdd(@Nullable TransferOperationFilter filter) {
+        if (filter == null) {
+            return getEmptyIntent();
+        }
+        return getIntentToAdd(null, filter.getAccountId(), null,
+                filter.getOwnerId(), filter.getCurrencyId(), null, null, null, null);
+    }
+
+    @Override
     public Intent getIntentToEdit(OperationView operation) {
-        Intent intent = new Intent(context, TransferOperationEditActivity.class);
+        Intent intent = getEmptyIntent();
         intent.putExtra(TransferOperationEditActivity.INPUT_TRANSFER_OPERATION_ID,
                 TransferOperationQualifier.determineTransferExpenseOperationId(operation));
         return intent;
@@ -61,22 +96,15 @@ public class TransferOperationHelper extends OperationHelper<TransferOperationFi
                 operation);
         OperationView incomeOperation = TransferOperationFinder.findIncomeOperation(data,
                 operation);
-        Intent intent = new Intent(context, TransferOperationEditActivity.class);
-        intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_ACCOUNT_ID,
-                expenseOperation.getAccountId());
-        intent.putExtra(TransferOperationEditActivity.INPUT_INCOME_ACCOUNT_ID,
-                incomeOperation.getAccountId());
-        intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_OWNER_ID,
-                expenseOperation.getOwnerId());
-        intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_EXCHANGE_RATE_ID,
-                expenseOperation.getExchangeRateId());
-        intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_DESCRIPTION,
-                expenseOperation.getDescription());
-        NumberUtils.writeBigDecimalToIntent(intent,
-                TransferOperationEditActivity.INPUT_EXPENSE_VALUE, expenseOperation.getValue());
-        DateUtils.writeLocalDateToIntent(intent,
-                TransferOperationEditActivity.INPUT_EXPENSE_DATE, expenseOperation.getDate());
-        return intent;
+        return getIntentToAdd(null, expenseOperation.getAccountId(), incomeOperation.getAccountId(),
+                expenseOperation.getOwnerId(), expenseOperation.getCurrencyId(),
+                expenseOperation.getExchangeRateId(), expenseOperation.getDate(),
+                expenseOperation.getValue(), expenseOperation.getDescription());
+    }
+
+    @Override
+    Intent getEmptyIntent() {
+        return new Intent(context, TransferOperationEditActivity.class);
     }
 
     @Override

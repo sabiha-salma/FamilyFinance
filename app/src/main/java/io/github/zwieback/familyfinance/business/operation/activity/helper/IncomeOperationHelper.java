@@ -4,11 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
+import org.threeten.bp.LocalDate;
+
+import java.math.BigDecimal;
+
 import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperationEditActivity;
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.github.zwieback.familyfinance.util.DateUtils;
 import io.github.zwieback.familyfinance.util.NumberUtils;
+import io.github.zwieback.familyfinance.util.StringUtils;
 import io.requery.Persistable;
 import io.requery.reactivex.ReactiveEntityStore;
 
@@ -20,59 +25,75 @@ public class IncomeOperationHelper extends OperationHelper<IncomeOperationFilter
 
     @Override
     public Intent getIntentToAdd() {
-        return new Intent(context, IncomeOperationEditActivity.class);
+        return getEmptyIntent();
     }
 
     @Override
-    public Intent getIntentToAdd(@Nullable IncomeOperationFilter filter) {
-        Intent intent = new Intent(context, IncomeOperationEditActivity.class);
-        if (filter == null) {
-            return intent;
+    public Intent getIntentToAdd(@Nullable Integer articleId,
+                                 @Nullable Integer accountId,
+                                 @Nullable Integer ignoredTransferAccountId,
+                                 @Nullable Integer ownerId,
+                                 @Nullable Integer currencyId,
+                                 @Nullable Integer exchangeRateId,
+                                 @Nullable LocalDate date,
+                                 @Nullable BigDecimal value,
+                                 @Nullable String description) {
+        Intent intent = getEmptyIntent();
+        if (articleId != null && articleId != databasePrefs.getIncomesArticleId()) {
+            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_ARTICLE_ID, articleId);
         }
-        if (filter.getAccountId() != null) {
-            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_ACCOUNT_ID,
-                    filter.getAccountId());
+        if (accountId != null) {
+            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_ACCOUNT_ID, accountId);
         }
-        if (filter.getArticleId() != null
-                && filter.getArticleId() != databasePrefs.getIncomesArticleId()) {
-            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_ARTICLE_ID,
-                    filter.getArticleId());
+        if (ownerId != null) {
+            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_OWNER_ID, ownerId);
         }
-        if (filter.getOwnerId() != null) {
-            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_OWNER_ID,
-                    filter.getOwnerId());
+        if (currencyId != null) {
+            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_CURRENCY_ID, currencyId);
         }
-        if (filter.getCurrencyId() != null) {
-            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_CURRENCY_ID,
-                    filter.getCurrencyId());
+        if (exchangeRateId != null) {
+            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_EXCHANGE_RATE_ID,
+                    exchangeRateId);
+        }
+        if (date != null) {
+            DateUtils.writeLocalDateToIntent(intent,
+                    IncomeOperationEditActivity.INPUT_INCOME_DATE, date);
+        }
+        if (value != null) {
+            NumberUtils.writeBigDecimalToIntent(intent,
+                    IncomeOperationEditActivity.INPUT_INCOME_VALUE, value);
+        }
+        if (StringUtils.isTextNotEmpty(description)) {
+            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_DESCRIPTION, description);
         }
         return intent;
     }
 
     @Override
+    public Intent getIntentToAdd(@Nullable IncomeOperationFilter filter) {
+        if (filter == null) {
+            return getEmptyIntent();
+        }
+        return getIntentToAdd(filter.getArticleId(), filter.getAccountId(), null,
+                filter.getOwnerId(), filter.getCurrencyId(), null, null, null, null);
+    }
+
+    @Override
     public Intent getIntentToEdit(OperationView operation) {
-        Intent intent = new Intent(context, IncomeOperationEditActivity.class);
+        Intent intent = getEmptyIntent();
         intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_OPERATION_ID, operation.getId());
         return intent;
     }
 
     @Override
     public Intent getIntentToDuplicate(OperationView operation) {
-        Intent intent = new Intent(context, IncomeOperationEditActivity.class);
-        intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_ACCOUNT_ID,
-                operation.getAccountId());
-        intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_ARTICLE_ID,
-                operation.getArticleId());
-        intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_OWNER_ID,
-                operation.getOwnerId());
-        intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_EXCHANGE_RATE_ID,
-                operation.getExchangeRateId());
-        intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_DESCRIPTION,
-                operation.getDescription());
-        NumberUtils.writeBigDecimalToIntent(intent,
-                IncomeOperationEditActivity.INPUT_INCOME_VALUE, operation.getValue());
-        DateUtils.writeLocalDateToIntent(intent,
-                IncomeOperationEditActivity.INPUT_INCOME_DATE, operation.getDate());
-        return intent;
+        return getIntentToAdd(operation.getArticleId(), operation.getAccountId(), null,
+                operation.getOwnerId(), operation.getCurrencyId(), operation.getExchangeRateId(),
+                operation.getDate(), operation.getValue(), operation.getDescription());
+    }
+
+    @Override
+    Intent getEmptyIntent() {
+        return new Intent(context, IncomeOperationEditActivity.class);
     }
 }
