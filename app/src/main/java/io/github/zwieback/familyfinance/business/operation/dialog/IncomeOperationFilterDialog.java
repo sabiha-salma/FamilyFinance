@@ -5,12 +5,11 @@ import android.widget.EditText;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
 
-import org.droidparts.widget.ClearableEditText;
-
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.article.activity.IncomeArticleActivity;
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter;
 import io.github.zwieback.familyfinance.databinding.DialogFilterIncomeOperationBinding;
+import io.github.zwieback.familyfinance.widget.ClearableEditText;
 
 import static io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter.INCOME_OPERATION_FILTER;
 

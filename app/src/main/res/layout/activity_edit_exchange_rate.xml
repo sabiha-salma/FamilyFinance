@@ -54,7 +54,7 @@
                     app:validateAfterTextChanged="true"
                     app:validator="not_empty">
 
-                    <org.droidparts.widget.ClearableEditText
+                    <io.github.zwieback.familyfinance.widget.ClearableEditText
                         android:id="@+id/currency"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -9,7 +9,6 @@ import android.widget.EditText;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
 
-import org.droidparts.widget.ClearableEditText;
 import org.threeten.bp.LocalDate;
 
 import java.util.ArrayList;
@@ -21,6 +20,7 @@ import io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRa
 import io.github.zwieback.familyfinance.core.dialog.EntityFilterDialog;
 import io.github.zwieback.familyfinance.core.model.Currency;
 import io.github.zwieback.familyfinance.databinding.DialogFilterExchangeRateBinding;
+import io.github.zwieback.familyfinance.widget.ClearableEditText;
 import io.reactivex.functions.Consumer;
 
 import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.CURRENCY_CODE;

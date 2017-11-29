@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import org.droidparts.widget.ClearableEditText;
 import org.threeten.bp.LocalDate;
 
 import io.github.zwieback.familyfinance.business.account.activity.AccountActivity;
@@ -25,6 +24,7 @@ import io.github.zwieback.familyfinance.core.model.ExchangeRate;
 import io.github.zwieback.familyfinance.core.model.Operation;
 import io.github.zwieback.familyfinance.core.model.Person;
 import io.github.zwieback.familyfinance.core.model.type.OperationType;
+import io.github.zwieback.familyfinance.widget.ClearableEditText;
 import io.reactivex.functions.Consumer;
 
 import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.CURRENCY_CODE;

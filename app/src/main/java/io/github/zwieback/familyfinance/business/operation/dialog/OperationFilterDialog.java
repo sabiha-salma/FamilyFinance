@@ -10,7 +10,6 @@ import android.widget.EditText;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
 
-import org.droidparts.widget.ClearableEditText;
 import org.threeten.bp.LocalDate;
 
 import java.math.BigDecimal;
@@ -26,6 +25,7 @@ import io.github.zwieback.familyfinance.core.model.Account;
 import io.github.zwieback.familyfinance.core.model.Article;
 import io.github.zwieback.familyfinance.core.model.Currency;
 import io.github.zwieback.familyfinance.core.model.Person;
+import io.github.zwieback.familyfinance.widget.ClearableEditText;
 import io.reactivex.functions.Consumer;
 
 import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.ACCOUNT_CODE;

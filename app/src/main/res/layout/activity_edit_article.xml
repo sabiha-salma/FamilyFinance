@@ -52,7 +52,7 @@
                     android:hint="@string/hint_parent"
                     app:errorEnabled="true">
 
-                    <org.droidparts.widget.ClearableEditText
+                    <io.github.zwieback.familyfinance.widget.ClearableEditText
                         android:id="@+id/parent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
