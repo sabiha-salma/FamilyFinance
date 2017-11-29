@@ -17,6 +17,7 @@ package org.droidparts.widget;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -27,7 +28,7 @@ import android.view.View.OnTouchListener;
 import android.widget.EditText;
 
 import org.droidparts.adapter.widget.TextWatcherAdapter;
-import org.droidparts.adapter.widget.TextWatcherAdapter.TextWatcherListener;
+import org.droidparts.adapter.widget.TextWatcherListener;
 
 import static io.github.zwieback.familyfinance.util.StringUtils.isTextEmpty;
 import static io.github.zwieback.familyfinance.util.StringUtils.isTextNotEmpty;
@@ -42,8 +43,11 @@ import static io.github.zwieback.familyfinance.util.StringUtils.isTextNotEmpty;
 public class ClearableEditText extends TextInputEditText
         implements OnTouchListener, OnFocusChangeListener, TextWatcherListener {
 
+    @Nullable
     private Location location = Location.RIGHT;
+    @Nullable
     private Drawable clearIcon;
+    @Nullable
     private OnClearTextListener onClearTextListener;
     private OnTouchListener onTouchListener;
     private OnFocusChangeListener onFocusChangeListener;
@@ -105,7 +109,10 @@ public class ClearableEditText extends TextInputEditText
         return false;
     }
 
-    boolean isClickedOnClearIcon(MotionEvent event) {
+    private boolean isClickedOnClearIcon(MotionEvent event) {
+        if (location == null || clearIcon == null) {
+            return false;
+        }
         int x = (int) event.getX();
         int y = (int) event.getY();
         int left = (location == Location.LEFT)
@@ -154,7 +161,7 @@ public class ClearableEditText extends TextInputEditText
     }
 
     protected void setClearIconVisible(boolean visible) {
-        if (!isEnabled()) {
+        if (!isEnabled() || location == null) {
             return;
         }
         Drawable[] drawables = getCompoundDrawables();
@@ -175,7 +182,7 @@ public class ClearableEditText extends TextInputEditText
         initIcon();
     }
 
-    public void setOnClearTextListener(OnClearTextListener onClearTextListener) {
+    public void setOnClearTextListener(@Nullable OnClearTextListener onClearTextListener) {
         this.onClearTextListener = onClearTextListener;
     }
 
@@ -187,20 +194,5 @@ public class ClearableEditText extends TextInputEditText
     @Override
     public void setOnFocusChangeListener(OnFocusChangeListener onFocusChangeListener) {
         this.onFocusChangeListener = onFocusChangeListener;
-    }
-
-    public enum Location {
-        LEFT(0), RIGHT(2);
-
-        final int idx;
-
-        Location(int idx) {
-            this.idx = idx;
-        }
-    }
-
-    public interface OnClearTextListener {
-
-        void onTextCleared();
     }
 }

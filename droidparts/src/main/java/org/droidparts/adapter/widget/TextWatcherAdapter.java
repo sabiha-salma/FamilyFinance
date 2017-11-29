@@ -43,9 +43,4 @@ public class TextWatcherAdapter implements TextWatcher {
     public void afterTextChanged(Editable s) {
         // pass
     }
-
-    public interface TextWatcherListener {
-
-        void onTextChanged(EditText view, String text);
-    }
 }
