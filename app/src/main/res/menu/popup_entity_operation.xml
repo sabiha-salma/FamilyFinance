@@ -8,7 +8,7 @@
         android:id="@+id/action_duplicate"
         android:title="@string/action_duplicate"
         app:ico_color="@android:color/white"
-        app:ico_icon="faw_files_o"
+        app:ico_icon="faw_clone"
         app:ico_size="@dimen/operation_popup_icon_size"
         app:showAsAction="withText"/>
 
