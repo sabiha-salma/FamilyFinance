@@ -41,7 +41,6 @@ Checklist for creating issues:
 - [NoNonsense-FilePicker](https://github.com/spacecowboy/NoNonsense-FilePicker/)
 - [PermissionsDispatcher](https://github.com/permissions-dispatcher/PermissionsDispatcher)
 - [Validator](https://github.com/jpetitto/validator)
-- [DroidParts](https://github.com/droidparts/droidparts) (ClearableEditText)
 
 # Developed By
 
