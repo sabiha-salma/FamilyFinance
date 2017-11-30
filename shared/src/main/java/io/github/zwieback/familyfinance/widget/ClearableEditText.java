@@ -11,6 +11,7 @@ import io.github.zwieback.familyfinance.widget.adapter.TextWatcherAdapter;
 import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener;
 import io.github.zwieback.familyfinance.widget.listener.TextWatcherListener;
 
+import static io.github.zwieback.familyfinance.util.StringUtils.EMPTY;
 import static io.github.zwieback.familyfinance.util.StringUtils.isTextEmpty;
 import static io.github.zwieback.familyfinance.util.StringUtils.isTextNotEmpty;
 
@@ -56,7 +57,7 @@ public class ClearableEditText extends IconicsEditText implements TextWatcherLis
 
     @Override
     public void onIconClick() {
-        setText("");
+        setText(EMPTY);
     }
 
     @Override
