@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import io.github.zwieback.familyfinance.R;
-import io.github.zwieback.familyfinance.business.operation.adapter.calculator.OperationCalculator;
+import io.github.zwieback.familyfinance.business.operation.adapter.calculator.BalanceCalculator;
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter;
 import io.github.zwieback.familyfinance.business.operation.listener.OnOperationClickListener;
 import io.github.zwieback.familyfinance.core.adapter.BindingHolder;
@@ -93,7 +93,7 @@ public abstract class OperationAdapter<FILTER extends OperationFilter>
     }
 
     private String calculateBalance(Result<OperationView> queryResult) {
-        return OperationCalculator.calculateBalance(queryResult);
+        return BalanceCalculator.calculateBalance(queryResult);
     }
 
     private void showBalance(String balance) {

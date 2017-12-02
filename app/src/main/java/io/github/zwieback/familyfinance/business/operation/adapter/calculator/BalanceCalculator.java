@@ -16,7 +16,7 @@ import io.requery.query.Result;
 
 import static io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString;
 
-public final class OperationCalculator {
+public final class BalanceCalculator {
 
     public static String calculateBalance(Result<OperationView> queryResult) {
         Map<CurrencyEntry, List<OperationView>> groupedOperations =
@@ -42,9 +42,9 @@ public final class OperationCalculator {
 
     private static BigDecimal calculateBalance(List<OperationView> operations) {
         BigDecimal incomeBalance =
-                calculateBalanceByType(operations, OperationCalculator::isIncomeOperation);
+                calculateBalanceByType(operations, BalanceCalculator::isIncomeOperation);
         BigDecimal expenseBalance =
-                calculateBalanceByType(operations, OperationCalculator::isExpenseOperation);
+                calculateBalanceByType(operations, BalanceCalculator::isExpenseOperation);
         return incomeBalance.subtract(expenseBalance);
     }
 
