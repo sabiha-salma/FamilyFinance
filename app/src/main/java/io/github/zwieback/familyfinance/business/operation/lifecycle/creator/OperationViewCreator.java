@@ -13,11 +13,13 @@ public class OperationViewCreator extends EntityViewCreator {
     }
 
     @NonNull
+    @Override
     protected String getViewName() {
         return "v_operation";
     }
 
     @NonNull
+    @Override
     protected String getViewBody() {
         return " SELECT op.id                           AS id," +
                 "       op.icon_name                    AS icon_name," +
@@ -31,6 +33,7 @@ public class OperationViewCreator extends EntityViewCreator {
                 "       pe.id                           AS owner_id," +
                 "       pe.name                         AS owner_name," +
                 "       er.id                           AS exchange_rate_id," +
+                "       er._value                       AS exchange_rate_value," +
                 "       cu.id                           AS currency_id," +
                 "       cu.name                         AS currency_name," +
                 "       op._type                        AS _type," +

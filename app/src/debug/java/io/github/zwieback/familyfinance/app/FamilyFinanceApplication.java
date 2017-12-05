@@ -30,6 +30,7 @@ public class FamilyFinanceApplication extends AbstractApplication {
         // use this in development mode to drop and recreate the tables on every upgrade
         source.setLoggingEnabled(true);
         source.setTableCreationMode(TableCreationMode.CREATE_NOT_EXISTS);
+        destroyViews(source.getConfiguration());
         createViews(source.getConfiguration());
         return source;
     }

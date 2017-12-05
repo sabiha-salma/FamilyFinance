@@ -63,6 +63,7 @@ public class FamilyFinanceApplication extends AbstractApplication {
     protected DatabaseProvider buildDatabaseProvider() {
         // override onUpgrade to handle migrating to a new version
         DatabaseProvider source = new SqlitexDatabaseSource(this, Models.DEFAULT, DB_VERSION);
+        destroyViews(source.getConfiguration());
         createViews(source.getConfiguration());
         return source;
     }

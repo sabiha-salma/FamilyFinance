@@ -39,8 +39,7 @@ public class DatabaseViewCreator {
     private void createView(EntityViewCreator creator, Consumer<Boolean> onViewCreated) {
         Observable.fromCallable(creator)
                 .flatMap(observable -> observable)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.trampoline())
                 .subscribe(onViewCreated);
     }
 

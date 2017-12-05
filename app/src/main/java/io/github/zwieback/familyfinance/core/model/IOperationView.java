@@ -6,6 +6,7 @@ import org.threeten.bp.LocalDate;
 
 import java.math.BigDecimal;
 
+import io.github.zwieback.familyfinance.core.model.converter.BigDecimalToExchangeRateConverter;
 import io.github.zwieback.familyfinance.core.model.converter.BigDecimalToWorthConverter;
 import io.github.zwieback.familyfinance.core.model.converter.LocalDateConverter;
 import io.github.zwieback.familyfinance.core.model.restriction.AccountRestriction;
@@ -66,6 +67,11 @@ public interface IOperationView extends IBaseEntity {
 
     @Column(name = "exchange_rate_id", nullable = false)
     int getExchangeRateId();
+
+    @Bindable
+    @Column(name = "exchange_rate_value", nullable = false)
+    @Convert(BigDecimalToExchangeRateConverter.class)
+    BigDecimal getExchangeRateValue();
 
     @Column(name = "currency_id", nullable = false)
     int getCurrencyId();

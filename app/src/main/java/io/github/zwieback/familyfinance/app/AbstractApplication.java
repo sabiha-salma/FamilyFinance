@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import java.sql.Connection;
 
 import io.github.zwieback.familyfinance.app.lifecycle.creator.DatabaseViewCreator;
+import io.github.zwieback.familyfinance.app.lifecycle.destroyer.DatabaseViewDestroyer;
 import io.github.zwieback.familyfinance.core.database.exception.SQLException;
 import io.requery.Persistable;
 import io.requery.android.sqlite.DatabaseProvider;
@@ -16,7 +17,7 @@ import io.requery.sql.EntityDataStore;
 
 public abstract class AbstractApplication extends Application {
 
-    protected static final int DB_VERSION = 2;
+    protected static final int DB_VERSION = 3;
 
     private ReactiveEntityStore<Persistable> dataStore;
 
@@ -52,6 +53,24 @@ public abstract class AbstractApplication extends Application {
     protected final void createViews(Configuration configuration) {
         try (Connection connection = configuration.getConnectionProvider().getConnection()) {
             new DatabaseViewCreator(connection).createViews();
+        } catch (java.sql.SQLException e) {
+            throw new SQLException(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Workaround for destroying views, while requery does not support destroying views.
+     * <p>
+     * Note: This method must be called before the creation of the {@link #dataStore},
+     * otherwise {@link java.sql.SQLException} will be thrown.
+     *
+     * @see <a href="https://github.com/requery/requery/issues/721#issuecomment-344153774">
+     * Using SQLite views
+     * </a>
+     */
+    protected final void destroyViews(Configuration configuration) {
+        try (Connection connection = configuration.getConnectionProvider().getConnection()) {
+            new DatabaseViewDestroyer(connection).destroyViews();
         } catch (java.sql.SQLException e) {
             throw new SQLException(e.getMessage(), e);
         }
