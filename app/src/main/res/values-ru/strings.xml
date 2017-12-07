@@ -44,6 +44,9 @@
     <string name="exchange_rate_filter_title">Фильтр курсов обмена</string>
     <string name="settings_activity_title">Настройки</string>
     <string name="backup_activity_title">Резервное копирование</string>
+    <string name="chart_activity_title">Диаграммы</string>
+    <string name="bar_chart_filter_title">Фильтр гистограммы</string>
+    <string name="bar_chart_display_title">Отображение гистограммы</string>
 
     <!-- Dashboard -->
     <string name="select_account">Счета</string>
@@ -52,6 +55,7 @@
     <string name="select_transfers">Переводы</string>
     <string name="select_flow_of_funds">Движение средств</string>
     <string name="select_templates">Шаблоны</string>
+    <string name="select_charts">Диаграммы</string>
     <!-- Backup -->
     <string name="backup_database">Сделать резервную копию БД</string>
     <string name="restore_database">Восстановить резервную копию БД</string>
@@ -141,6 +145,7 @@
     <string name="action_filter">Фильтр</string>
     <string name="action_select">Выбрать</string>
     <string name="action_search">Поиск</string>
+    <string name="action_display">Отображение</string>
     <!-- Drawer -->
     <string name="drawer_open">Открыть панель навигации</string>
     <string name="drawer_close">Закрыть панель навигации</string>
@@ -200,6 +205,23 @@
     <string name="backup_failed">Не удалось выполнить резервное копирование</string>
     <string name="restore_completed_successfully">Восстановление резервной копии успешно завершено</string>
     <string name="restore_failed">Не удалось восстановить резервную копию</string>
+
+    <!-- Charts -->
+    <string name="bar_no_data">Отсутствуют данные для отображения</string>
+    <string name="bar_loading">Подождите, данные загружаются</string>
+
+    <string name="bar_set_incomes">Доходы</string>
+    <string name="bar_set_expenses">Расходы</string>
+    <string name="bar_set_transfers">Переводы</string>
+    <string name="bar_set_net_profit">Прибыль</string>
+
+    <!-- Bar Chart Display -->
+    <string name="bar_chart_display_group">Группировать по:</string>
+    <string name="bar_chart_display_group_by_days">Дням</string>
+    <string name="bar_chart_display_group_by_weeks">Неделям</string>
+    <string name="bar_chart_display_group_by_months">Месяцам</string>
+    <string name="bar_chart_display_group_by_quarters">Кварталам</string>
+    <string name="bar_chart_display_group_by_years">Годам</string>
 
     <!-- Validation Errors -->
     <string name="name_error">Неправильное название</string>

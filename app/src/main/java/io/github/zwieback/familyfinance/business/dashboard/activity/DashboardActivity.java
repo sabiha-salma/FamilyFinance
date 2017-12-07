@@ -8,6 +8,7 @@ import android.view.View;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.account.activity.AccountActivity;
+import io.github.zwieback.familyfinance.business.chart.activity.ChartActivity;
 import io.github.zwieback.familyfinance.business.dashboard.activity.drawer.DrawerCreator;
 import io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRateFilter;
 import io.github.zwieback.familyfinance.business.operation.activity.ExpenseOperationActivity;
@@ -135,6 +136,7 @@ public class DashboardActivity extends DataActivityWrapper {
         findViewById(R.id.add_transfer).setOnClickListener(this::onAddTransferClick);
         findViewById(R.id.select_flow_of_funds).setOnClickListener(this::onSelectFlowOfFundsClick);
         findViewById(R.id.select_templates).setOnClickListener(this::onSelectTemplatesClick);
+        findViewById(R.id.select_charts).setOnClickListener(this::onSelectChartsClick);
     }
 
     @Override
@@ -230,6 +232,11 @@ public class DashboardActivity extends DataActivityWrapper {
         Intent intent = new Intent(this, TemplateActivity.class);
         intent.putExtra(INPUT_READ_ONLY, false);
         startActivityForResult(intent, TEMPLATE_CODE);
+    }
+
+    public void onSelectChartsClick(View view) {
+        Intent intent = new Intent(this, ChartActivity.class);
+        startActivity(intent);
     }
 
     public void onAddExpenseClick(View view) {

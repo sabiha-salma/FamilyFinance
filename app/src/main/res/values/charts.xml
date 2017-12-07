@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="max_bar_count">10</integer>
+    <integer name="y_axis_minimum">0</integer>
+    <integer name="x_axis_label_rotation_angle">270</integer>
+</resources>

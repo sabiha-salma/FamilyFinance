@@ -54,6 +54,7 @@
         </activity>
         <activity android:name=".business.backup.activity.BackupActivity"/>
         <activity android:name=".business.iconics.activity.IconicsActivity"/>
+        <activity android:name=".business.chart.activity.ChartActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

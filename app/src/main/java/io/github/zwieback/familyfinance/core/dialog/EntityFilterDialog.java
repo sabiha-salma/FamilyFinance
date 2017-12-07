@@ -47,6 +47,8 @@ import static io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL;
 public abstract class EntityFilterDialog<F extends EntityFilter, B extends ViewDataBinding>
         extends DialogFragment {
 
+    protected static final String DIALOG_TITLE = "dialogTitle";
+
     protected B binding;
     protected F filter;
     protected DatabasePrefs databasePrefs;
@@ -76,7 +78,7 @@ public abstract class EntityFilterDialog<F extends EntityFilter, B extends ViewD
         bind(filter);
         return new AlertDialog.Builder(extractContext())
                 .setView(binding.getRoot())
-                .setTitle(getDialogTitle())
+                .setTitle(extractDialogTitle())
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     // override behavior in #onResume()
                 })
@@ -101,10 +103,20 @@ public abstract class EntityFilterDialog<F extends EntityFilter, B extends ViewD
     }
 
     private F extractFilter() {
+        return extractArguments().getParcelable(getInputFilterName());
+    }
+
+    @StringRes
+    private int extractDialogTitle() {
+        return extractArguments().getInt(DIALOG_TITLE, getDialogTitle());
+    }
+
+    @NonNull
+    private Bundle extractArguments() {
         if (getArguments() == null) {
             throw new UndefinedArgumentsException();
         }
-        return getArguments().getParcelable(getInputFilterName());
+        return getArguments();
     }
 
     @NonNull

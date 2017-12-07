@@ -44,6 +44,9 @@
     <string name="exchange_rate_filter_title">Exchange Rate Filter</string>
     <string name="settings_activity_title">Settings</string>
     <string name="backup_activity_title">Backup &amp; Restore</string>
+    <string name="chart_activity_title">Charts</string>
+    <string name="bar_chart_filter_title">Bar Chart Filter</string>
+    <string name="bar_chart_display_title">Bar Chart Display</string>
 
     <!-- Dashboard -->
     <string name="select_account">Accounts</string>
@@ -52,6 +55,7 @@
     <string name="select_transfers">Transfers</string>
     <string name="select_flow_of_funds">Flow of Funds</string>
     <string name="select_templates">Templates</string>
+    <string name="select_charts">Charts</string>
     <!-- Backup -->
     <string name="backup_database">Make a backup of DB</string>
     <string name="restore_database">Restore the backup of DB</string>
@@ -141,6 +145,7 @@
     <string name="action_filter">Filter</string>
     <string name="action_select">Select</string>
     <string name="action_search">Search</string>
+    <string name="action_display">Display</string>
     <!-- Drawer -->
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -200,6 +205,23 @@
     <string name="backup_failed">Backup failed</string>
     <string name="restore_completed_successfully">Restore of backup completed successfully</string>
     <string name="restore_failed">Restore of backup failed</string>
+
+    <!-- Charts -->
+    <string name="bar_no_data">No chart data available</string>
+    <string name="bar_loading">Please wait, the data is loading</string>
+
+    <string name="bar_set_incomes">Incomes</string>
+    <string name="bar_set_expenses">Expenses</string>
+    <string name="bar_set_transfers">Transfers</string>
+    <string name="bar_set_net_profit">Net Profit</string>
+
+    <!-- Bar Chart Display -->
+    <string name="bar_chart_display_group">Group by:</string>
+    <string name="bar_chart_display_group_by_days">Days</string>
+    <string name="bar_chart_display_group_by_weeks">Weeks</string>
+    <string name="bar_chart_display_group_by_months">Months</string>
+    <string name="bar_chart_display_group_by_quarters">Quarters</string>
+    <string name="bar_chart_display_group_by_years">Years</string>
 
     <!-- Validation Errors -->
     <string name="name_error">Invalid name</string>
