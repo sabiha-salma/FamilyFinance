@@ -28,7 +28,8 @@ buildscript {
                 preferenceCompatLib: '27.0.1.0',
                 filepickerLib: '4.1.0',
                 permissionsDispatcherLib: '3.0.1',
-                rxBinding2Lib: '2.0.0'
+                rxBinding2Lib: '2.0.0',
+                mpAndroidChartLib: 'v3.0.3'
         ]
     }
     repositories {
@@ -48,6 +49,7 @@ allprojects {
         jcenter()
         mavenCentral()
         google()
+        maven { url "https://jitpack.io" }
     }
 }
 

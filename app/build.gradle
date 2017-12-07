@@ -100,6 +100,8 @@ dependencies {
     }
     // RxBinding
     implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${versions.rxBinding2Lib}"
+    // chart
+    implementation "com.github.PhilJay:MPAndroidChart:${versions.mpAndroidChartLib}"
     // project libs
     implementation project(':shared')
     implementation project(':validator')
