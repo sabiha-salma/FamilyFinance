@@ -25,9 +25,6 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.MPPointF;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.Month;
-
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +33,6 @@ import io.github.zwieback.familyfinance.business.chart.converter.OperationConver
 import io.github.zwieback.familyfinance.business.chart.dialog.BarChartDisplayDialog;
 import io.github.zwieback.familyfinance.business.chart.display.BarChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.display.ChartDisplay;
-import io.github.zwieback.familyfinance.business.chart.display.type.BarChartGroupType;
 import io.github.zwieback.familyfinance.business.chart.exception.UnsupportedBarChartGroupTypeException;
 import io.github.zwieback.familyfinance.business.chart.formatter.DayValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.formatter.LocalizedValueFormatter;
@@ -76,12 +72,7 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         filter = new FlowOfFundsOperationFilter();
-        // todo remove start and end dates
-        filter.setStartDate(LocalDate.of(2017, Month.NOVEMBER, 1));
-        filter.setEndDate(LocalDate.of(2017, Month.DECEMBER, 31));
         display = new BarChartDisplay();
-        // todo remove group type
-        display.setGroupType(BarChartGroupType.MONTHS);
         maxBarCount = getResources().getInteger(R.integer.max_bar_count);
         barValueTextSize = getResources().getDimension(R.dimen.bar_value_text_size);
         onValueSelectedRectF = new RectF();
