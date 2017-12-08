@@ -1,4 +1,4 @@
-package io.github.zwieback.familyfinance.business.chart.converter;
+package io.github.zwieback.familyfinance.business.chart.service.converter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -29,19 +29,15 @@ public class OperationConverter {
      * Note: sortBy(Entry::getX) is extremely important!
      *
      * @param groupedOperations operations that grouped by one of the OperationGrouper
-     * @param hideEmpty         if {@code true} then don't include operations with
-     *                          a zero value of the sum in the result list
      * @return list of entries to display in bar chart
      * @see <a href="https://github.com/PhilJay/MPAndroidChart/issues/983#issuecomment-152299035">
      * setVisibleXRangeMaximum not working as expected</a>
      * @see <a href="https://github.com/PhilJay/MPAndroidChart/wiki/Setting-Data#the-order-of-entries">
      * The order of entries</a>
      */
-    public List<BarEntry> convertToBarEntries(Map<Float, List<OperationView>> groupedOperations,
-                                              boolean hideEmpty) {
+    public List<BarEntry> convertToBarEntries(Map<Float, List<OperationView>> groupedOperations) {
         Map<Float, BigDecimal> valueMap = convertToValueMap(groupedOperations);
         return Stream.of(valueMap)
-                .filter(entry -> !hideEmpty || !BigDecimal.ZERO.equals(entry.getValue()))
                 .map(operationEntry -> new BarEntry(operationEntry.getKey(),
                         operationEntry.getValue().floatValue()))
                 .sortBy(Entry::getX)
