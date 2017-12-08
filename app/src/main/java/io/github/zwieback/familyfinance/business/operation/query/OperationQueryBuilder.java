@@ -94,7 +94,7 @@ abstract class OperationQueryBuilder<T extends OperationQueryBuilder>
     }
 
     @SuppressWarnings("unchecked")
-    final T setTypes(@Nullable List<OperationType> types) {
+    public final T setTypes(@Nullable List<OperationType> types) {
         this.types = types;
         return (T) this;
     }
