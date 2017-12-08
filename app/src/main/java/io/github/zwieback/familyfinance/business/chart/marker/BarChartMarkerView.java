@@ -14,15 +14,15 @@ import com.github.mikephil.charting.utils.MPPointF;
 import io.github.zwieback.familyfinance.R;
 
 @SuppressLint("ViewConstructor")
-public class BarMarkerView extends MarkerView {
+public class BarChartMarkerView extends MarkerView {
 
     private TextView markerContent;
     private IAxisValueFormatter xAxisValueFormatter;
     private IAxisValueFormatter yAxisValueFormatter;
 
-    public BarMarkerView(@NonNull Context context,
-                         @NonNull IAxisValueFormatter xAxisValueFormatter,
-                         @NonNull IAxisValueFormatter yAxisValueFormatter) {
+    public BarChartMarkerView(@NonNull Context context,
+                              @NonNull IAxisValueFormatter xAxisValueFormatter,
+                              @NonNull IAxisValueFormatter yAxisValueFormatter) {
         super(context, R.layout.chart_bar_marker_view);
         this.xAxisValueFormatter = xAxisValueFormatter;
         this.yAxisValueFormatter = yAxisValueFormatter;

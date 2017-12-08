@@ -40,7 +40,7 @@ import io.github.zwieback.familyfinance.business.chart.formatter.MonthValueForma
 import io.github.zwieback.familyfinance.business.chart.formatter.QuarterValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.formatter.WeekValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.formatter.YearValueFormatter;
-import io.github.zwieback.familyfinance.business.chart.marker.BarMarkerView;
+import io.github.zwieback.familyfinance.business.chart.marker.BarChartMarkerView;
 import io.github.zwieback.familyfinance.business.operation.dialog.FlowOfFundsOperationFilterDialog;
 import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.query.ExpenseOperationQueryBuilder;
@@ -149,7 +149,7 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
     }
 
     private void setupMarker(IAxisValueFormatter xAxisFormatter) {
-        BarMarkerView mv = new BarMarkerView(extractContext(), xAxisFormatter,
+        BarChartMarkerView mv = new BarChartMarkerView(extractContext(), xAxisFormatter,
                 new LocalizedValueFormatter());
         mv.setChartView(chart);
         chart.setMarker(mv);
