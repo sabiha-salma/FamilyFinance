@@ -42,6 +42,7 @@ public class BarChartDisplayDialog extends ChartDisplayDialog<BarChartDisplay,
     }
 
     protected void bind(BarChartDisplay display) {
+        binding.setDisplay(display);
         determineGroupByRadioButton(display.getGroupType()).setChecked(true);
     }
 
