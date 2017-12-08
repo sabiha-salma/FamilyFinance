@@ -2,6 +2,7 @@ package io.github.zwieback.familyfinance.business.chart.fragment;
 
 import android.graphics.RectF;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.annimon.stream.Stream;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -25,11 +27,11 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.MPPointF;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import io.github.zwieback.familyfinance.R;
-import io.github.zwieback.familyfinance.business.chart.converter.OperationConverter;
 import io.github.zwieback.familyfinance.business.chart.dialog.BarChartDisplayDialog;
 import io.github.zwieback.familyfinance.business.chart.display.BarChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.display.ChartDisplay;
@@ -41,16 +43,19 @@ import io.github.zwieback.familyfinance.business.chart.formatter.QuarterValueFor
 import io.github.zwieback.familyfinance.business.chart.formatter.WeekValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.formatter.YearValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.marker.BarChartMarkerView;
+import io.github.zwieback.familyfinance.business.chart.service.converter.OperationConverter;
+import io.github.zwieback.familyfinance.business.chart.service.filter.OperationFilter;
+import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouper;
+import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByDay;
+import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByMonth;
+import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByQuarter;
+import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByWeek;
+import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByYear;
 import io.github.zwieback.familyfinance.business.operation.dialog.FlowOfFundsOperationFilterDialog;
 import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
-import io.github.zwieback.familyfinance.business.operation.query.ExpenseOperationQueryBuilder;
-import io.github.zwieback.familyfinance.business.operation.service.grouper.OperationGrouper;
-import io.github.zwieback.familyfinance.business.operation.service.grouper.OperationGrouperByDay;
-import io.github.zwieback.familyfinance.business.operation.service.grouper.OperationGrouperByMonth;
-import io.github.zwieback.familyfinance.business.operation.service.grouper.OperationGrouperByQuarter;
-import io.github.zwieback.familyfinance.business.operation.service.grouper.OperationGrouperByWeek;
-import io.github.zwieback.familyfinance.business.operation.service.grouper.OperationGrouperByYear;
+import io.github.zwieback.familyfinance.business.operation.query.FlowOfFundsOperationQueryBuilder;
 import io.github.zwieback.familyfinance.core.model.OperationView;
+import io.github.zwieback.familyfinance.core.model.type.OperationType;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -59,6 +64,15 @@ import io.requery.query.Result;
 public class BarChartFragment extends ChartFragment implements OnChartValueSelectedListener {
 
     private static final float NORMAL_GRANULARITY = 1f;
+    private static final float X_AXIS_MAXIMUM_FIX = 1f;
+
+    // (barWidth + barSpace) * 2 + groupSpace = 1.00 -> interval per "group"
+    private static final float GROUP_SPACE = 0.08f;
+    private static final float BAR_SPACE = 0.06f; // x2 DataSet
+    private static final float BAR_WIDTH = 0.4f; // x2 DataSet
+
+    private static final int INCOME_BAR_SET = 0;
+    private static final int EXPENSE_BAR_SET = 1;
     private static final int Y_AXIS_ANIMATION_DURATION = 500;
 
     private FlowOfFundsOperationFilter filter;
@@ -68,6 +82,10 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
     private int maxBarCount;
     private float barValueTextSize;
 
+    private OperationConverter operationConverter;
+    private OperationGrouper operationGrouper;
+    private OperationFilter operationFilter;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +94,10 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
         maxBarCount = getResources().getInteger(R.integer.max_bar_count);
         barValueTextSize = getResources().getDimension(R.dimen.bar_value_text_size);
         onValueSelectedRectF = new RectF();
+
+        operationConverter = new OperationConverter(extractContext());
+        operationFilter = new OperationFilter();
+        operationGrouper = determineOperationGrouper();
     }
 
     @Override
@@ -126,6 +148,7 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
+        xAxis.setCenterAxisLabels(true);
         xAxis.setGranularity(NORMAL_GRANULARITY);
         xAxis.setLabelCount(maxBarCount);
         xAxis.setLabelRotationAngle(xAxisRotationAngle);
@@ -158,16 +181,17 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
     private void refreshData() {
         clearData(R.string.bar_loading);
 
-        Observable.fromCallable(this::getExpenses)
+        Observable.fromCallable(this::buildOperations)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
-                .map(this::convertExpenses)
+                .map(this::groupOperations)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::showData);
     }
 
-    private Result<OperationView> getExpenses() {
-        return ExpenseOperationQueryBuilder.create(data)
+    private Result<OperationView> buildOperations() {
+        return FlowOfFundsOperationQueryBuilder.create(data)
+                .setTypes(determineOperationTypes())
                 .setStartDate(filter.getStartDate())
                 .setEndDate(filter.getEndDate())
                 .setStartValue(filter.getStartValue())
@@ -179,32 +203,62 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
                 .build();
     }
 
-    private List<BarEntry> convertExpenses(Result<OperationView> expenses) {
-        OperationGrouper grouper = determineOperationGrouper();
-        OperationConverter converter = new OperationConverter(extractContext());
-        Map<Float, List<OperationView>> groupedExpenses = grouper.group(expenses.toList(),
+    private Map<Float, List<OperationView>> groupOperations(Result<OperationView> operations) {
+        return operationGrouper.group(operations.toList(),
                 filter.getStartDate(), filter.getEndDate());
-        return converter.convertToBarEntries(groupedExpenses, false);
     }
 
-    private void showData(List<BarEntry> expenseEntries) {
-        if (expenseEntries.isEmpty()) {
+    private Map<Float, List<OperationView>> filterOperations(
+            Map<Float, List<OperationView>> operations,
+            List<OperationType> types) {
+        return operationFilter.filterByTypes(operations, types);
+    }
+
+    private List<BarEntry> convertOperations(Map<Float, List<OperationView>> groupedOperations) {
+        return operationConverter.convertToBarEntries(groupedOperations);
+    }
+
+    private void showData(Map<Float, List<OperationView>> groupedOperations) {
+        if (groupedOperations.isEmpty()) {
             clearData(R.string.bar_no_data);
             return;
         }
-        BarDataSet expenseSet = new BarDataSet(expenseEntries,
-                getString(R.string.bar_set_expenses));
-        expenseSet.setDrawIcons(false);
-        expenseSet.setColors(ContextCompat.getColor(extractContext(), R.color.colorExpense));
 
-        BarData data = new BarData(expenseSet);
+        BarDataSet incomeSet = buildBarDataSet(groupedOperations, OperationType.getIncomeTypes(),
+                R.string.bar_set_incomes, R.color.colorIncome, display.isViewIncomeValues());
+
+        BarDataSet expenseSet = buildBarDataSet(groupedOperations, OperationType.getExpenseTypes(),
+                R.string.bar_set_expenses, R.color.colorExpense, display.isViewExpenseValues());
+
+        BarData data = new BarData(incomeSet, expenseSet);
         data.setValueTextSize(barValueTextSize);
         data.setValueFormatter(new LargeValueFormatter());
 
-        fixChartWidth(expenseEntries.size());
+        float minX = Stream.of(groupedOperations.keySet()).min(Float::compareTo).get();
+        float maxX = Stream.of(groupedOperations.keySet()).max(Float::compareTo).get();
+
         chart.setData(data);
+        chart.getBarData().setBarWidth(BAR_WIDTH);
+        chart.getXAxis().setAxisMinimum(minX);
+        chart.getXAxis().setAxisMaximum(maxX + X_AXIS_MAXIMUM_FIX);
+        chart.groupBars(minX, GROUP_SPACE, BAR_SPACE);
         chart.setVisibleXRangeMaximum(maxBarCount);
+        fixChartWidth(groupedOperations.size());
         chart.animateY(Y_AXIS_ANIMATION_DURATION);
+    }
+
+    private BarDataSet buildBarDataSet(Map<Float, List<OperationView>> groupedOperations,
+                                       List<OperationType> types,
+                                       @StringRes int dataSetLabel,
+                                       @ColorRes int dataSetColor,
+                                       boolean drawValuesEnabled) {
+        Map<Float, List<OperationView>> operations = filterOperations(groupedOperations, types);
+        List<BarEntry> barEntries = convertOperations(operations);
+        BarDataSet dataSet = new BarDataSet(barEntries, getString(dataSetLabel));
+        dataSet.setDrawIcons(false);
+        dataSet.setColors(ContextCompat.getColor(extractContext(), dataSetColor));
+        dataSet.setDrawValues(drawValuesEnabled);
+        return dataSet;
     }
 
     private void clearData(@StringRes int noDataTextRes) {
@@ -215,7 +269,23 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
     private void fixChartWidth(int numberOfEntries) {
         if (numberOfEntries < maxBarCount) {
             chart.fitScreen();
+        } else {
+            scaleToAcceptableSize(numberOfEntries);
         }
+    }
+
+    private void scaleToAcceptableSize(int numberOfEntries) {
+        chart.getViewPortHandler().setMaximumScaleX(numberOfEntries / 2);
+    }
+
+    private void updateDrawValues() {
+        updateDrawValues(INCOME_BAR_SET, display.isViewIncomeValues());
+        updateDrawValues(EXPENSE_BAR_SET, display.isViewExpenseValues());
+        chart.invalidate();
+    }
+
+    private void updateDrawValues(int index, boolean enabled) {
+        chart.getBarData().getDataSetByIndex(index).setDrawValues(enabled);
     }
 
     @Override
@@ -242,11 +312,18 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
 
     @Override
     public void onApplyDisplay(ChartDisplay display) {
-        this.display = (BarChartDisplay) display;
-        IAxisValueFormatter xAxisFormatter = determineXAxisFormatter();
-        setupXAxisValueFormatter(xAxisFormatter);
-        setupMarker(xAxisFormatter);
-        refreshData();
+        BarChartDisplay newDisplay = (BarChartDisplay) display;
+        if (this.display.onlyViewValuesChanged(newDisplay)) {
+            this.display = newDisplay;
+            updateDrawValues();
+        } else {
+            this.display = newDisplay;
+            operationGrouper = determineOperationGrouper();
+            IAxisValueFormatter xAxisFormatter = determineXAxisFormatter();
+            setupXAxisValueFormatter(xAxisFormatter);
+            setupMarker(xAxisFormatter);
+            refreshData();
+        }
     }
 
     @Override
@@ -291,5 +368,22 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
                 return new YearValueFormatter();
         }
         throw new UnsupportedBarChartGroupTypeException();
+    }
+
+    private List<OperationType> determineOperationTypes() {
+        List<OperationType> types = new ArrayList<>();
+        if (display.isViewIncomes()) {
+            types.add(OperationType.INCOME_OPERATION);
+            if (display.isIncludeTransfers()) {
+                types.add(OperationType.TRANSFER_INCOME_OPERATION);
+            }
+        }
+        if (display.isViewExpenses()) {
+            types.add(OperationType.EXPENSE_OPERATION);
+            if (display.isIncludeTransfers()) {
+                types.add(OperationType.TRANSFER_EXPENSE_OPERATION);
+            }
+        }
+        return types;
     }
 }
