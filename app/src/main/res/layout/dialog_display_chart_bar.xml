@@ -18,12 +18,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/entity_edit_padding">
+            android:orientation="horizontal"
+            android:padding="@dimen/entity_edit_padding"
+            android:weightSum="@integer/full_weight">
 
             <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="@dimen/zero_weight"
+                android:layout_height="wrap_content"
+                android:layout_weight="@integer/half_of_weight"
                 android:orientation="vertical">
 
                 <TextView
@@ -60,6 +62,54 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/bar_chart_display_group_by_years"/>
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:layout_width="@dimen/zero_weight"
+                android:layout_height="wrap_content"
+                android:layout_weight="@integer/half_of_weight"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bar_chart_display_view"/>
+
+                <CheckBox
+                    android:id="@+id/view_income_values"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@={display.viewIncomeValues}"
+                    android:text="@string/bar_chart_display_view_income_values"/>
+
+                <CheckBox
+                    android:id="@+id/view_expense_values"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@={display.viewExpenseValues}"
+                    android:text="@string/bar_chart_display_view_expense_values"/>
+
+                <CheckBox
+                    android:id="@+id/view_incomes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@={display.viewIncomes}"
+                    android:text="@string/bar_chart_display_view_incomes"/>
+
+                <CheckBox
+                    android:id="@+id/view_expenses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@={display.viewExpenses}"
+                    android:text="@string/bar_chart_display_view_expenses"/>
+
+                <CheckBox
+                    android:id="@+id/consider_transfers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@={display.includeTransfers}"
+                    android:text="@string/bar_chart_display_include_transfers"/>
 
             </RadioGroup>
 

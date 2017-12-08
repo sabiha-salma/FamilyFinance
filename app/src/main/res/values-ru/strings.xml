@@ -222,6 +222,12 @@
     <string name="bar_chart_display_group_by_months">Месяцам</string>
     <string name="bar_chart_display_group_by_quarters">Кварталам</string>
     <string name="bar_chart_display_group_by_years">Годам</string>
+    <string name="bar_chart_display_view">Просмотр:</string>
+    <string name="bar_chart_display_view_income_values">Отображать значения доходов</string>
+    <string name="bar_chart_display_view_expense_values">Отображать значения расходов</string>
+    <string name="bar_chart_display_view_incomes">Отображать доходы</string>
+    <string name="bar_chart_display_view_expenses">Отображать расходы</string>
+    <string name="bar_chart_display_include_transfers">Учитывать переводы</string>
 
     <!-- Validation Errors -->
     <string name="name_error">Неправильное название</string>

@@ -222,6 +222,12 @@
     <string name="bar_chart_display_group_by_months">Months</string>
     <string name="bar_chart_display_group_by_quarters">Quarters</string>
     <string name="bar_chart_display_group_by_years">Years</string>
+    <string name="bar_chart_display_view">View:</string>
+    <string name="bar_chart_display_view_income_values">View income values</string>
+    <string name="bar_chart_display_view_expense_values">View expense values</string>
+    <string name="bar_chart_display_view_incomes">View incomes</string>
+    <string name="bar_chart_display_view_expenses">View expenses</string>
+    <string name="bar_chart_display_include_transfers">Include transfers</string>
 
     <!-- Validation Errors -->
     <string name="name_error">Invalid name</string>
