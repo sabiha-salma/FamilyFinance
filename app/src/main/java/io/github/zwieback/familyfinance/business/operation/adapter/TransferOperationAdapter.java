@@ -5,6 +5,7 @@ import android.content.Context;
 import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.listener.OnOperationClickListener;
 import io.github.zwieback.familyfinance.business.operation.query.TransferOperationQueryBuilder;
+import io.github.zwieback.familyfinance.business.operation.service.provider.TransferOperationViewProvider;
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.requery.Persistable;

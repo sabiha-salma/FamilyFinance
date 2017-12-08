@@ -1,21 +1,21 @@
-package io.github.zwieback.familyfinance.business.operation.adapter;
+package io.github.zwieback.familyfinance.business.operation.service.provider;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.mikepenz.iconics.typeface.IIcon;
 
-import io.github.zwieback.familyfinance.business.operation.adapter.exception.UndefinedOperationProviderException;
+import io.github.zwieback.familyfinance.business.operation.service.provider.exception.UndefinedOperationProviderException;
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 
-class FlowOfFundsOperationViewProvider extends EntityProvider<OperationView> {
+public class FlowOfFundsOperationViewProvider extends EntityProvider<OperationView> {
 
     private final IncomeOperationViewProvider incomeProvider;
     private final ExpenseOperationViewProvider expenseProvider;
     private final TransferOperationViewProvider transferProvider;
 
-    FlowOfFundsOperationViewProvider(Context context) {
+    public FlowOfFundsOperationViewProvider(Context context) {
         super(context);
         incomeProvider = new IncomeOperationViewProvider(context);
         expenseProvider = new ExpenseOperationViewProvider(context);

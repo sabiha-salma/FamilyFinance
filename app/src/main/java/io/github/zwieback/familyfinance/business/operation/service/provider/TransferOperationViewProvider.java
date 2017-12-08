@@ -1,4 +1,4 @@
-package io.github.zwieback.familyfinance.business.operation.adapter;
+package io.github.zwieback.familyfinance.business.operation.service.provider;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,12 +10,12 @@ import io.github.zwieback.familyfinance.core.adapter.EntityProvider;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.github.zwieback.familyfinance.core.model.type.OperationType;
 
-class TransferOperationViewProvider extends EntityProvider<OperationView> {
+public class TransferOperationViewProvider extends EntityProvider<OperationView> {
 
     private final IncomeOperationViewProvider incomeProvider;
     private final ExpenseOperationViewProvider expenseProvider;
 
-    TransferOperationViewProvider(Context context) {
+    public TransferOperationViewProvider(Context context) {
         super(context);
         incomeProvider = new IncomeOperationViewProvider(context);
         expenseProvider = new ExpenseOperationViewProvider(context);

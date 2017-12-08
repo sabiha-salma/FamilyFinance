@@ -1,4 +1,4 @@
-package io.github.zwieback.familyfinance.business.operation.adapter.exception;
+package io.github.zwieback.familyfinance.business.operation.service.provider.exception;
 
 import io.github.zwieback.familyfinance.core.model.type.OperationType;
 

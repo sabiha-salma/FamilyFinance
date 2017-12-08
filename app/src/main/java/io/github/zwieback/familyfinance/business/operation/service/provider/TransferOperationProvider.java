@@ -1,4 +1,4 @@
-package io.github.zwieback.familyfinance.business.operation.adapter;
+package io.github.zwieback.familyfinance.business.operation.service.provider;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

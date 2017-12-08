@@ -1,4 +1,4 @@
-package io.github.zwieback.familyfinance.business.chart.grouper;
+package io.github.zwieback.familyfinance.business.operation.service.grouper;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;

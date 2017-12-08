@@ -1,4 +1,4 @@
-package io.github.zwieback.familyfinance.business.operation.adapter.calculator;
+package io.github.zwieback.familyfinance.business.operation.service.calculator;
 
 import com.annimon.stream.Objects;
 

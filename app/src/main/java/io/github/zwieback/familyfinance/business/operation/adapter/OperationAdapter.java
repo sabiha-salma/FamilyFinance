@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import io.github.zwieback.familyfinance.R;
-import io.github.zwieback.familyfinance.business.operation.adapter.calculator.BalanceCalculator;
+import io.github.zwieback.familyfinance.business.operation.service.calculator.BalanceCalculator;
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter;
 import io.github.zwieback.familyfinance.business.operation.listener.OnOperationClickListener;
 import io.github.zwieback.familyfinance.core.adapter.BindingHolder;

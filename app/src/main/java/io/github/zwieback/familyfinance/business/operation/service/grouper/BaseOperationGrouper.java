@@ -1,4 +1,4 @@
-package io.github.zwieback.familyfinance.business.chart.grouper;
+package io.github.zwieback.familyfinance.business.operation.service.grouper;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.temporal.TemporalUnit;

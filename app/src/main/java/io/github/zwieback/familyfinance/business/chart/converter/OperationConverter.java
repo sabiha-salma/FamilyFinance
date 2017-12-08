@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-import io.github.zwieback.familyfinance.business.chart.calculator.OperationCalculator;
+import io.github.zwieback.familyfinance.business.operation.service.calculator.OperationCalculator;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 
 public class OperationConverter {

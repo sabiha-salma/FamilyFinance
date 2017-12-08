@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import io.github.zwieback.familyfinance.R;
-import io.github.zwieback.familyfinance.business.operation.adapter.TransferOperationProvider;
+import io.github.zwieback.familyfinance.business.operation.service.provider.TransferOperationProvider;
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider;
 import io.github.zwieback.familyfinance.core.model.Account;
 import io.github.zwieback.familyfinance.core.model.Article;
