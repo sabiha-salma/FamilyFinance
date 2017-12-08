@@ -225,10 +225,12 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
         }
 
         BarDataSet incomeSet = buildBarDataSet(groupedOperations, OperationType.getIncomeTypes(),
-                R.string.bar_set_incomes, R.color.colorIncome, display.isViewIncomeValues());
+                R.string.bar_set_incomes, R.color.colorIncome, display.isViewIncomeValues(),
+                display.isViewIncomes());
 
         BarDataSet expenseSet = buildBarDataSet(groupedOperations, OperationType.getExpenseTypes(),
-                R.string.bar_set_expenses, R.color.colorExpense, display.isViewExpenseValues());
+                R.string.bar_set_expenses, R.color.colorExpense, display.isViewExpenseValues(),
+                display.isViewExpenses());
 
         BarData data = new BarData(incomeSet, expenseSet);
         data.setValueTextSize(barValueTextSize);
@@ -251,13 +253,15 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
                                        List<OperationType> types,
                                        @StringRes int dataSetLabel,
                                        @ColorRes int dataSetColor,
-                                       boolean drawValuesEnabled) {
+                                       boolean drawValuesEnabled,
+                                       boolean visible) {
         Map<Float, List<OperationView>> operations = filterOperations(groupedOperations, types);
         List<BarEntry> barEntries = convertOperations(operations);
         BarDataSet dataSet = new BarDataSet(barEntries, getString(dataSetLabel));
         dataSet.setDrawIcons(false);
         dataSet.setColors(ContextCompat.getColor(extractContext(), dataSetColor));
         dataSet.setDrawValues(drawValuesEnabled);
+        dataSet.setVisible(visible);
         return dataSet;
     }
 
