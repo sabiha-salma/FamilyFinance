@@ -207,8 +207,8 @@
     <string name="restore_failed">Не удалось восстановить резервную копию</string>
 
     <!-- Charts -->
-    <string name="bar_no_data">Отсутствуют данные для отображения</string>
-    <string name="bar_loading">Подождите, данные загружаются</string>
+    <string name="chart_no_data">Отсутствуют данные для отображения</string>
+    <string name="chart_loading">Подождите, данные загружаются</string>
 
     <string name="bar_set_incomes">Доходы</string>
     <string name="bar_set_expenses">Расходы</string>

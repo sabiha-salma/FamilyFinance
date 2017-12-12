@@ -195,7 +195,7 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
     }
 
     private void refreshData() {
-        clearData(R.string.bar_loading);
+        clearData(R.string.chart_loading);
 
         Observable.fromCallable(this::buildOperations)
                 .subscribeOn(Schedulers.io())
@@ -236,7 +236,7 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
 
     private void showData(Map<Float, List<OperationView>> groupedOperations) {
         if (groupedOperations.isEmpty()) {
-            clearData(R.string.bar_no_data);
+            clearData(R.string.chart_no_data);
             return;
         }
 

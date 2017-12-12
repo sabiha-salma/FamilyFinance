@@ -207,8 +207,8 @@
     <string name="restore_failed">Restore of backup failed</string>
 
     <!-- Charts -->
-    <string name="bar_no_data">No chart data available</string>
-    <string name="bar_loading">Please wait, the data is loading</string>
+    <string name="chart_no_data">No chart data available</string>
+    <string name="chart_loading">Please wait, the data is loading</string>
 
     <string name="bar_set_incomes">Incomes</string>
     <string name="bar_set_expenses">Expenses</string>
