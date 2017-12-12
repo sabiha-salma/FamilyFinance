@@ -1,4 +1,4 @@
-package io.github.zwieback.familyfinance.business.chart.service.grouper;
+package io.github.zwieback.familyfinance.business.chart.service.grouper.bar;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
@@ -14,7 +14,7 @@ import java.util.Map;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.github.zwieback.familyfinance.util.DateUtils;
 
-public class OperationGrouperByWeek extends BaseOperationGrouper {
+public class OperationGrouperByWeek extends BarOperationGrouper {
 
     /**
      * Result.Key - weeks from epoch day.<br/>

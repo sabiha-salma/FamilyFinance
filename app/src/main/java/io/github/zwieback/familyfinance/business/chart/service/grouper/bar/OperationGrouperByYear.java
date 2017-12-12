@@ -1,4 +1,4 @@
-package io.github.zwieback.familyfinance.business.chart.service.grouper;
+package io.github.zwieback.familyfinance.business.chart.service.grouper.bar;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 import io.github.zwieback.familyfinance.core.model.OperationView;
 
-public class OperationGrouperByYear extends BaseOperationGrouper {
+public class OperationGrouperByYear extends BarOperationGrouper {
 
     /**
      * Result.Key - year.<br/>

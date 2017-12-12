@@ -44,11 +44,11 @@ import io.github.zwieback.familyfinance.business.chart.formatter.YearValueFormat
 import io.github.zwieback.familyfinance.business.chart.marker.BarChartMarkerView;
 import io.github.zwieback.familyfinance.business.chart.service.converter.OperationConverter;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouper;
-import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByDay;
-import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByMonth;
-import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByQuarter;
-import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByWeek;
-import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByYear;
+import io.github.zwieback.familyfinance.business.chart.service.grouper.bar.OperationGrouperByDay;
+import io.github.zwieback.familyfinance.business.chart.service.grouper.bar.OperationGrouperByMonth;
+import io.github.zwieback.familyfinance.business.chart.service.grouper.bar.OperationGrouperByQuarter;
+import io.github.zwieback.familyfinance.business.chart.service.grouper.bar.OperationGrouperByWeek;
+import io.github.zwieback.familyfinance.business.chart.service.grouper.bar.OperationGrouperByYear;
 import io.github.zwieback.familyfinance.business.chart.service.sieve.OperationSieve;
 import io.github.zwieback.familyfinance.business.operation.dialog.FlowOfFundsOperationFilterDialog;
 import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
