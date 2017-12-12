@@ -1,4 +1,4 @@
-package io.github.zwieback.familyfinance.business.chart.formatter;
+package io.github.zwieback.familyfinance.business.chart.service.formatter;
 
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
