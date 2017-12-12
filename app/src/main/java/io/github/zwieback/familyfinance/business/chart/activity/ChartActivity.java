@@ -9,12 +9,12 @@ import io.github.zwieback.familyfinance.business.chart.display.ChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.fragment.BarChartFragment;
 import io.github.zwieback.familyfinance.business.chart.fragment.ChartFragment;
 import io.github.zwieback.familyfinance.business.chart.listener.ChartDisplayListener;
-import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
-import io.github.zwieback.familyfinance.business.operation.listener.FlowOfFundsOperationFilterListener;
+import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter;
+import io.github.zwieback.familyfinance.business.operation.listener.OperationFilterListener;
 import io.github.zwieback.familyfinance.core.activity.DataActivityWrapper;
 
 public class ChartActivity extends DataActivityWrapper
-        implements FlowOfFundsOperationFilterListener, ChartDisplayListener {
+        implements OperationFilterListener<OperationFilter>, ChartDisplayListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +79,9 @@ public class ChartActivity extends DataActivityWrapper
     // Filter methods
     // -----------------------------------------------------------------------------------------
 
+    @SuppressWarnings("unchecked")
     @Override
-    public void onApplyFilter(FlowOfFundsOperationFilter filter) {
+    public void onApplyFilter(OperationFilter filter) {
         findFragment().onApplyFilter(filter);
     }
 

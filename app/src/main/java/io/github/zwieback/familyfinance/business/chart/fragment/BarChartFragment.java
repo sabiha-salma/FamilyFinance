@@ -34,7 +34,6 @@ import java.util.Map;
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.chart.dialog.BarChartDisplayDialog;
 import io.github.zwieback.familyfinance.business.chart.display.BarChartDisplay;
-import io.github.zwieback.familyfinance.business.chart.display.ChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.exception.UnsupportedBarChartGroupTypeException;
 import io.github.zwieback.familyfinance.business.chart.formatter.DayValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.formatter.LocalizedValueFormatter;
@@ -61,7 +60,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.requery.query.Result;
 
-public class BarChartFragment extends ChartFragment implements OnChartValueSelectedListener {
+public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, BarChartDisplay>
+        implements OnChartValueSelectedListener {
 
     private static final float NORMAL_GRANULARITY = 1f;
     private static final float X_AXIS_MAXIMUM_FIX = 1f;
@@ -75,8 +75,6 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
     private static final int EXPENSE_BAR_SET = 1;
     private static final int Y_AXIS_ANIMATION_DURATION = 500;
 
-    private FlowOfFundsOperationFilter filter;
-    private BarChartDisplay display;
     private RectF onValueSelectedRectF;
     private BarChart chart;
     private int maxBarCount;
@@ -89,8 +87,6 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        filter = new FlowOfFundsOperationFilter();
-        display = new BarChartDisplay();
         maxBarCount = getResources().getInteger(R.integer.max_bar_count);
         barValueTextSize = getResources().getDimension(R.dimen.bar_value_text_size);
         onValueSelectedRectF = new RectF();
@@ -132,6 +128,26 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
     @Override
     protected boolean addFilterMenuItem() {
         return true;
+    }
+
+    @Override
+    protected String getFilterName() {
+        return FlowOfFundsOperationFilter.FLOW_OF_FUNDS_OPERATION_FILTER;
+    }
+
+    @Override
+    protected FlowOfFundsOperationFilter createDefaultFilter() {
+        return new FlowOfFundsOperationFilter();
+    }
+
+    @Override
+    protected String getDisplayName() {
+        return BarChartDisplay.BAR_CHART_DISPLAY;
+    }
+
+    @Override
+    protected BarChartDisplay createDefaultDisplay() {
+        return new BarChartDisplay();
     }
 
     private void setupChart() {
@@ -315,13 +331,12 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
     }
 
     @Override
-    public void onApplyDisplay(ChartDisplay display) {
-        BarChartDisplay newDisplay = (BarChartDisplay) display;
-        if (this.display.onlyViewValuesChanged(newDisplay)) {
-            this.display = newDisplay;
+    public void onApplyDisplay(BarChartDisplay display) {
+        if (this.display.onlyViewValuesChanged(display)) {
+            this.display = display;
             updateDrawValues();
         } else {
-            this.display = newDisplay;
+            this.display = display;
             operationGrouper = determineOperationGrouper();
             IAxisValueFormatter xAxisFormatter = determineXAxisFormatter();
             setupXAxisValueFormatter(xAxisFormatter);
@@ -337,7 +352,8 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
         dialog.show(getChildFragmentManager(), "FlowOfFundsOperationFilterDialog");
     }
 
-    private void showDisplayDialog() {
+    @Override
+    protected void showDisplayDialog() {
         DialogFragment dialog = BarChartDisplayDialog.newInstance(display);
         dialog.show(getChildFragmentManager(), "BarChartDisplayDialog");
     }
