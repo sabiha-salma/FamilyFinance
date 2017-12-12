@@ -44,13 +44,13 @@ import io.github.zwieback.familyfinance.business.chart.formatter.WeekValueFormat
 import io.github.zwieback.familyfinance.business.chart.formatter.YearValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.marker.BarChartMarkerView;
 import io.github.zwieback.familyfinance.business.chart.service.converter.OperationConverter;
-import io.github.zwieback.familyfinance.business.chart.service.filter.OperationFilter;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouper;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByDay;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByMonth;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByQuarter;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByWeek;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouperByYear;
+import io.github.zwieback.familyfinance.business.chart.service.sieve.OperationSieve;
 import io.github.zwieback.familyfinance.business.operation.dialog.FlowOfFundsOperationFilterDialog;
 import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.query.FlowOfFundsOperationQueryBuilder;
@@ -84,7 +84,7 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
 
     private OperationConverter operationConverter;
     private OperationGrouper operationGrouper;
-    private OperationFilter operationFilter;
+    private OperationSieve operationSieve;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,7 +96,7 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
         onValueSelectedRectF = new RectF();
 
         operationConverter = new OperationConverter(extractContext());
-        operationFilter = new OperationFilter();
+        operationSieve = new OperationSieve();
         operationGrouper = determineOperationGrouper();
     }
 
@@ -211,7 +211,7 @@ public class BarChartFragment extends ChartFragment implements OnChartValueSelec
     private Map<Float, List<OperationView>> filterOperations(
             Map<Float, List<OperationView>> operations,
             List<OperationType> types) {
-        return operationFilter.filterByTypes(operations, types);
+        return operationSieve.filterByTypes(operations, types);
     }
 
     private List<BarEntry> convertOperations(Map<Float, List<OperationView>> groupedOperations) {

@@ -1,4 +1,4 @@
-package io.github.zwieback.familyfinance.business.chart.service.filter;
+package io.github.zwieback.familyfinance.business.chart.service.sieve;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
@@ -9,7 +9,7 @@ import java.util.Map;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.github.zwieback.familyfinance.core.model.type.OperationType;
 
-public class OperationFilter {
+public class OperationSieve {
 
     public Map<Float, List<OperationView>> filterByTypes(Map<Float, List<OperationView>> operations,
                                                          List<OperationType> types) {
