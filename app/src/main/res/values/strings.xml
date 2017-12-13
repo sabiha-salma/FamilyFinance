@@ -46,10 +46,12 @@
     <string name="backup_activity_title">Backup &amp; Restore</string>
     <string name="chart_activity_title">Charts</string>
     <string name="bar_chart_title">Bar Chart</string>
-    <string name="pie_chart_title">Pie Chart</string>
+    <string name="pie_chart_of_expenses_title">Pie Chart of Expenses</string>
+    <string name="pie_chart_of_incomes_title">Pie Chart of Incomes</string>
     <string name="bar_chart_filter_title">Bar Chart Filter</string>
     <string name="bar_chart_display_title">Bar Chart Display</string>
-    <string name="pie_chart_filter_title">Pie Chart Filter</string>
+    <string name="pie_chart_of_expenses_filter_title">Pie Chart of Expenses Filter</string>
+    <string name="pie_chart_of_incomes_filter_title">Pie Chart of Incomes Filter</string>
     <string name="pie_chart_display_title">Pie Chart Display</string>
 
     <!-- Dashboard -->

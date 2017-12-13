@@ -34,16 +34,13 @@ import io.github.zwieback.familyfinance.business.chart.service.formatter.Localiz
 import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouper;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.pie.OperationGrouperByArticle;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.pie.OperationGrouperByArticleParent;
-import io.github.zwieback.familyfinance.business.operation.dialog.ExpenseOperationFilterDialog;
-import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter;
-import io.github.zwieback.familyfinance.business.operation.query.ExpenseOperationQueryBuilder;
+import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.github.zwieback.familyfinance.util.ColorUtils;
 import io.github.zwieback.familyfinance.util.ConfigurationUtils;
-import io.requery.query.Result;
 
-public class PieChartFragment extends ChartFragment<PieChart, PieEntry, ExpenseOperationFilter,
-        PieChartDisplay> {
+public abstract class PieChartFragment<F extends OperationFilter> extends ChartFragment<PieChart,
+        PieEntry, F, PieChartDisplay> {
 
     private static final float SLICE_SPACE = 2f;
 
@@ -65,16 +62,6 @@ public class PieChartFragment extends ChartFragment<PieChart, PieEntry, ExpenseO
     @Override
     protected int getChartId() {
         return R.id.pie_chart;
-    }
-
-    @Override
-    protected String getFilterName() {
-        return ExpenseOperationFilter.EXPENSE_OPERATION_FILTER;
-    }
-
-    @Override
-    protected ExpenseOperationFilter createDefaultFilter() {
-        return new ExpenseOperationFilter();
     }
 
     @Override
@@ -119,46 +106,33 @@ public class PieChartFragment extends ChartFragment<PieChart, PieEntry, ExpenseO
     }
 
     @Override
-    protected Result<OperationView> buildOperations() {
-        return ExpenseOperationQueryBuilder.create(data)
-                .setStartDate(filter.getStartDate())
-                .setEndDate(filter.getEndDate())
-                .setStartValue(filter.getStartValue())
-                .setEndValue(filter.getEndValue())
-                .setOwnerId(filter.getOwnerId())
-                .setCurrencyId(filter.getCurrencyId())
-                .setArticleId(filter.getArticleId())
-                .setAccountId(filter.getAccountId())
-                .build();
-    }
-
-    @Override
     protected void showData(Map<Float, List<OperationView>> groupedOperations) {
         if (groupedOperations.isEmpty()) {
             clearData(R.string.chart_no_data);
             return;
         }
 
-        PieDataSet expenseSet = buildPieDataSet(groupedOperations, R.string.data_set_expenses,
-                display.isViewValues());
+        PieDataSet expenseSet = buildPieDataSet(groupedOperations, getDataSetLabel());
 
         PieData data = new PieData(expenseSet);
         data.setValueFormatter(determineFormatter());
+        data.setDrawValues(display.isViewValues());
 
         chart.setUsePercentValues(display.isUsePercentValues());
         chart.setData(data);
         chart.animateY(Y_AXIS_ANIMATION_DURATION, Easing.EasingOption.EaseInOutQuad);
     }
 
+    @StringRes
+    protected abstract int getDataSetLabel();
+
     private PieDataSet buildPieDataSet(Map<Float, List<OperationView>> operations,
-                                       @StringRes int dataSetLabel,
-                                       boolean drawValuesEnabled) {
+                                       @StringRes int dataSetLabel) {
         List<Integer> colors = collectDataColors();
         List<PieEntry> pieEntries = convertOperations(operations);
         PieDataSet dataSet = new PieDataSet(pieEntries, getString(dataSetLabel));
         dataSet.setDrawIcons(false);
         dataSet.setColors(colors);
-        dataSet.setDrawValues(drawValuesEnabled);
         dataSet.setSliceSpace(SLICE_SPACE);
         dataSet.setValueTextSize(pieValueTextSize);
         return dataSet;
@@ -171,7 +145,7 @@ public class PieChartFragment extends ChartFragment<PieChart, PieEntry, ExpenseO
     }
 
     @Override
-    public void onApplyFilter(ExpenseOperationFilter filter) {
+    public void onApplyFilter(F filter) {
         this.filter = filter;
         refreshData();
     }
@@ -190,13 +164,6 @@ public class PieChartFragment extends ChartFragment<PieChart, PieEntry, ExpenseO
             chart.setUsePercentValues(display.isUsePercentValues());
             chart.invalidate();
         }
-    }
-
-    @Override
-    public void showFilterDialog() {
-        DialogFragment dialog = ExpenseOperationFilterDialog.newInstance(filter,
-                R.string.pie_chart_filter_title);
-        dialog.show(getChildFragmentManager(), "FlowOfFundsOperationFilterDialog");
     }
 
     @Override

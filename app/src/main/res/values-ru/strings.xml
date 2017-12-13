@@ -46,10 +46,12 @@
     <string name="backup_activity_title">Резервное копирование</string>
     <string name="chart_activity_title">Диаграммы</string>
     <string name="bar_chart_title">Гистограмма</string>
-    <string name="pie_chart_title">Круговая диаграмма</string>
+    <string name="pie_chart_of_expenses_title">Круговая диаграмма расходов</string>
+    <string name="pie_chart_of_incomes_title">Круговая диаграмма доходов</string>
     <string name="bar_chart_filter_title">Фильтр гистограммы</string>
     <string name="bar_chart_display_title">Отображение гистограммы</string>
-    <string name="pie_chart_filter_title">Фильтр круговой диаграммы</string>
+    <string name="pie_chart_of_expenses_filter_title">Фильтр расходов круговой диаграммы</string>
+    <string name="pie_chart_of_incomes_filter_title">Фильтр доходов круговой диаграммы</string>
     <string name="pie_chart_display_title">Отображение круговой диаграммы</string>
 
     <!-- Dashboard -->

@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.business.operation.dialog;
 
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.widget.EditText;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
@@ -19,6 +20,15 @@ public class IncomeOperationFilterDialog extends OperationWithArticleFilterDialo
     public static IncomeOperationFilterDialog newInstance(IncomeOperationFilter filter) {
         IncomeOperationFilterDialog fragment = new IncomeOperationFilterDialog();
         Bundle args = createArguments(INCOME_OPERATION_FILTER, filter);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static IncomeOperationFilterDialog newInstance(IncomeOperationFilter filter,
+                                                          @StringRes int dialogTitleId) {
+        IncomeOperationFilterDialog fragment = new IncomeOperationFilterDialog();
+        Bundle args = createArguments(INCOME_OPERATION_FILTER, filter);
+        args.putInt(DIALOG_TITLE, dialogTitleId);
         fragment.setArguments(args);
         return fragment;
     }

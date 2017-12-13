@@ -11,13 +11,15 @@ import android.view.ViewGroup;
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.chart.fragment.BarChartFragment;
 import io.github.zwieback.familyfinance.business.chart.fragment.ChartFragment;
-import io.github.zwieback.familyfinance.business.chart.fragment.PieChartFragment;
+import io.github.zwieback.familyfinance.business.chart.fragment.PieChartOfExpensesFragment;
+import io.github.zwieback.familyfinance.business.chart.fragment.PieChartOfIncomesFragment;
 
 public class ChartFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
-    private static final int PAGE_COUNT = 2;
+    private static final int PAGE_COUNT = 3;
     private static final int BAR_CHART = 0;
-    private static final int PIE_CHART = 1;
+    private static final int PIE_CHART_OF_EXPENSES = 1;
+    private static final int PIE_CHART_OF_INCOMES = 2;
 
     private SparseArray<ChartFragment> registeredFragments;
     private String tabTitles[];
@@ -31,7 +33,8 @@ public class ChartFragmentPagerAdapter extends FragmentStatePagerAdapter {
     private void initTabTitles(@NonNull Context context) {
         tabTitles = new String[PAGE_COUNT];
         tabTitles[BAR_CHART] = context.getString(R.string.bar_chart_title);
-        tabTitles[PIE_CHART] = context.getString(R.string.pie_chart_title);
+        tabTitles[PIE_CHART_OF_EXPENSES] = context.getString(R.string.pie_chart_of_expenses_title);
+        tabTitles[PIE_CHART_OF_INCOMES] = context.getString(R.string.pie_chart_of_incomes_title);
     }
 
     @Override
@@ -39,8 +42,10 @@ public class ChartFragmentPagerAdapter extends FragmentStatePagerAdapter {
         switch (position) {
             case BAR_CHART:
                 return new BarChartFragment();
-            case PIE_CHART:
-                return new PieChartFragment();
+            case PIE_CHART_OF_EXPENSES:
+                return new PieChartOfExpensesFragment();
+            case PIE_CHART_OF_INCOMES:
+                return new PieChartOfIncomesFragment();
         }
         throw new UnsupportedOperationException("Tab #" + position + " is not supported");
     }
