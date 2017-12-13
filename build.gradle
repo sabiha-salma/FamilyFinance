@@ -9,7 +9,7 @@ buildscript {
                 targetSdk : 26
         ]
         versions = [
-                supportLib: '27.0.1',
+                supportLib: '27.0.2',
                 requeryLib: '1.4.1',
                 sqliteAndroidLib: '3.21.0',
                 rxJavaLib: '2.1.2',
