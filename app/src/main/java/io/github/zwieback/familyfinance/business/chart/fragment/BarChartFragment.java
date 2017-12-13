@@ -110,16 +110,6 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
     }
 
     @Override
-    protected boolean addFilterMenuItem() {
-        return true;
-    }
-
-    @Override
-    protected boolean addDisplayMenuItem() {
-        return true;
-    }
-
-    @Override
     protected String getFilterName() {
         return FlowOfFundsOperationFilter.FLOW_OF_FUNDS_OPERATION_FILTER;
     }
@@ -335,14 +325,14 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
     }
 
     @Override
-    protected void showFilterDialog() {
+    public void showFilterDialog() {
         DialogFragment dialog = FlowOfFundsOperationFilterDialog.newInstance(filter,
                 R.string.bar_chart_filter_title);
         dialog.show(getChildFragmentManager(), "FlowOfFundsOperationFilterDialog");
     }
 
     @Override
-    protected void showDisplayDialog() {
+    public void showDisplayDialog() {
         DialogFragment dialog = BarChartDisplayDialog.newInstance(display);
         dialog.show(getChildFragmentManager(), "BarChartDisplayDialog");
     }

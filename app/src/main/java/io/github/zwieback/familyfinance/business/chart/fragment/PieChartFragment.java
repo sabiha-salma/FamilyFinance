@@ -84,16 +84,6 @@ public class PieChartFragment extends ChartFragment<ExpenseOperationFilter, PieC
     }
 
     @Override
-    protected boolean addFilterMenuItem() {
-        return true;
-    }
-
-    @Override
-    protected boolean addDisplayMenuItem() {
-        return true;
-    }
-
-    @Override
     protected String getFilterName() {
         return ExpenseOperationFilter.EXPENSE_OPERATION_FILTER;
     }
@@ -241,14 +231,14 @@ public class PieChartFragment extends ChartFragment<ExpenseOperationFilter, PieC
     }
 
     @Override
-    protected void showFilterDialog() {
+    public void showFilterDialog() {
         DialogFragment dialog = ExpenseOperationFilterDialog.newInstance(filter,
                 R.string.pie_chart_filter_title);
         dialog.show(getChildFragmentManager(), "FlowOfFundsOperationFilterDialog");
     }
 
     @Override
-    protected void showDisplayDialog() {
+    public void showDisplayDialog() {
         DialogFragment dialog = PieChartDisplayDialog.newInstance(display);
         dialog.show(getChildFragmentManager(), "PieChartDisplayDialog");
     }

@@ -6,18 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
-import com.annimon.stream.Stream;
-import com.mikepenz.iconics.utils.IconicsMenuInflaterUtil;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.app.FamilyFinanceApplication;
 import io.github.zwieback.familyfinance.business.chart.display.ChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.listener.ChartDisplayListener;
@@ -36,39 +25,9 @@ public abstract class ChartFragment<F extends OperationFilter, D extends ChartDi
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
         data = ((FamilyFinanceApplication) ((Activity) extractContext()).getApplication()).getData();
         filter = loadFilter(savedInstanceState);
         display = loadDisplay(savedInstanceState);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        List<Integer> menuIds = new ArrayList<>(collectMenuIds());
-        if (addFilterMenuItem()) {
-            menuIds.add(R.menu.menu_entity_filter);
-        }
-        if (addDisplayMenuItem()) {
-            menuIds.add(R.menu.menu_chart_display);
-        }
-        Stream.of(menuIds).forEach(menuId ->
-                IconicsMenuInflaterUtil.inflate(inflater, extractContext(), menuId, menu));
-
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_filter:
-                showFilterDialog();
-                return true;
-            case R.id.action_display:
-                showDisplayDialog();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     @Override
@@ -77,14 +36,6 @@ public abstract class ChartFragment<F extends OperationFilter, D extends ChartDi
         outState.putParcelable(getFilterName(), filter);
         outState.putParcelable(getDisplayName(), display);
     }
-
-    protected List<Integer> collectMenuIds() {
-        return Collections.emptyList();
-    }
-
-    protected abstract boolean addFilterMenuItem();
-
-    protected abstract boolean addDisplayMenuItem();
 
     private F loadFilter(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState == null) {
@@ -108,9 +59,9 @@ public abstract class ChartFragment<F extends OperationFilter, D extends ChartDi
 
     protected abstract D createDefaultDisplay();
 
-    protected abstract void showFilterDialog();
+    public abstract void showFilterDialog();
 
-    protected abstract void showDisplayDialog();
+    public abstract void showDisplayDialog();
 
     @NonNull
     protected Context extractContext() {

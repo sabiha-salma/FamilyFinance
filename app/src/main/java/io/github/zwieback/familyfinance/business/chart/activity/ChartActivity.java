@@ -3,6 +3,15 @@ package io.github.zwieback.familyfinance.business.chart.activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
+import com.annimon.stream.Stream;
+import com.mikepenz.iconics.utils.IconicsMenuInflaterUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.chart.adapter.ChartFragmentPagerAdapter;
@@ -44,6 +53,33 @@ public class ChartActivity extends DataActivityWrapper
         viewPager.setAdapter(pagerAdapter);
         tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        List<Integer> menuIds = new ArrayList<>();
+        menuIds.add(R.menu.menu_entity_filter);
+        menuIds.add(R.menu.menu_chart_display);
+
+        MenuInflater inflater = getMenuInflater();
+        Stream.of(menuIds).forEach(menuId ->
+                IconicsMenuInflaterUtil.inflate(inflater, this, menuId, menu));
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_filter:
+                findFragment().showFilterDialog();
+                return true;
+            case R.id.action_display:
+                findFragment().showDisplayDialog();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
