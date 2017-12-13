@@ -51,6 +51,15 @@ public class ChartActivity extends DataActivityWrapper
         pagerAdapter = new ChartFragmentPagerAdapter(getSupportFragmentManager(), this);
         viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                ChartFragment chartFragment = findFragmentByPosition(position);
+                if (!chartFragment.isDataLoaded()) {
+                    chartFragment.refreshData();
+                }
+            }
+        });
         tabLayout = findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -99,7 +108,11 @@ public class ChartActivity extends DataActivityWrapper
     // -----------------------------------------------------------------------------------------
 
     private ChartFragment findFragment() {
-        return pagerAdapter.findFragment(tabLayout.getSelectedTabPosition());
+        return findFragmentByPosition(tabLayout.getSelectedTabPosition());
+    }
+
+    private ChartFragment findFragmentByPosition(int position) {
+        return pagerAdapter.findFragment(position);
     }
 
     // -----------------------------------------------------------------------------------------
