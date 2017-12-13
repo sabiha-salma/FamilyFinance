@@ -45,8 +45,12 @@
     <string name="settings_activity_title">Настройки</string>
     <string name="backup_activity_title">Резервное копирование</string>
     <string name="chart_activity_title">Диаграммы</string>
+    <string name="bar_chart_title">Гистограмма</string>
+    <string name="pie_chart_title">Круговая диаграмма</string>
     <string name="bar_chart_filter_title">Фильтр гистограммы</string>
     <string name="bar_chart_display_title">Отображение гистограммы</string>
+    <string name="pie_chart_filter_title">Фильтр круговой диаграммы</string>
+    <string name="pie_chart_display_title">Отображение круговой диаграммы</string>
 
     <!-- Dashboard -->
     <string name="select_account">Счета</string>
@@ -210,10 +214,12 @@
     <string name="chart_no_data">Отсутствуют данные для отображения</string>
     <string name="chart_loading">Подождите, данные загружаются</string>
 
-    <string name="bar_set_incomes">Доходы</string>
-    <string name="bar_set_expenses">Расходы</string>
-    <string name="bar_set_transfers">Переводы</string>
-    <string name="bar_set_net_profit">Прибыль</string>
+    <string name="data_set_incomes">Доходы</string>
+    <string name="data_set_expenses">Расходы</string>
+    <string name="data_set_transfers">Переводы</string>
+    <string name="data_set_net_profit">Прибыль</string>
+
+    <string name="pie_group_other">Другое (объединенная группа)</string>
 
     <!-- Bar Chart Display -->
     <string name="bar_chart_display_group">Группировать по:</string>
@@ -228,6 +234,16 @@
     <string name="bar_chart_display_view_incomes">Отображать доходы</string>
     <string name="bar_chart_display_view_expenses">Отображать расходы</string>
     <string name="bar_chart_display_include_transfers">Учитывать переводы</string>
+    <!-- Pie Chart Display -->
+    <string name="pie_chart_display_group_by">Группировать по:</string>
+    <string name="pie_chart_display_group_by_article">Статьям</string>
+    <string name="pie_chart_display_group_by_article_parent">Каталогам статей</string>
+    <string name="pie_chart_display_grouping">Группировка:</string>
+    <string name="pie_chart_display_grouping_simple">Упрощенная</string>
+    <string name="pie_chart_display_grouping_limit">С ограниченной группой</string>
+    <string name="pie_chart_display_view">Просмотр:</string>
+    <string name="pie_chart_display_view_values">Отображать значения</string>
+    <string name="pie_chart_display_use_percent_values">Использовать значения в процентах</string>
 
     <!-- Validation Errors -->
     <string name="name_error">Неправильное название</string>

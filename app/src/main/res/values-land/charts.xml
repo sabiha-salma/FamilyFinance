@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Bar Chart -->
     <integer name="max_bar_count">15</integer>
+
+
+    <!-- Pie Chart -->
+    <integer name="pie_min_percent">3</integer>
 </resources>

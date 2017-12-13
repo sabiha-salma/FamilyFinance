@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.business.operation.dialog;
 
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.widget.EditText;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
@@ -19,6 +20,15 @@ public class ExpenseOperationFilterDialog extends OperationWithArticleFilterDial
     public static ExpenseOperationFilterDialog newInstance(ExpenseOperationFilter filter) {
         ExpenseOperationFilterDialog fragment = new ExpenseOperationFilterDialog();
         Bundle args = createArguments(EXPENSE_OPERATION_FILTER, filter);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static ExpenseOperationFilterDialog newInstance(ExpenseOperationFilter filter,
+                                                           @StringRes int dialogTitleId) {
+        ExpenseOperationFilterDialog fragment = new ExpenseOperationFilterDialog();
+        Bundle args = createArguments(EXPENSE_OPERATION_FILTER, filter);
+        args.putInt(DIALOG_TITLE, dialogTitleId);
         fragment.setArguments(args);
         return fragment;
     }

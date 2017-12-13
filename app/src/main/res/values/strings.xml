@@ -45,8 +45,12 @@
     <string name="settings_activity_title">Settings</string>
     <string name="backup_activity_title">Backup &amp; Restore</string>
     <string name="chart_activity_title">Charts</string>
+    <string name="bar_chart_title">Bar Chart</string>
+    <string name="pie_chart_title">Pie Chart</string>
     <string name="bar_chart_filter_title">Bar Chart Filter</string>
     <string name="bar_chart_display_title">Bar Chart Display</string>
+    <string name="pie_chart_filter_title">Pie Chart Filter</string>
+    <string name="pie_chart_display_title">Pie Chart Display</string>
 
     <!-- Dashboard -->
     <string name="select_account">Accounts</string>
@@ -210,10 +214,12 @@
     <string name="chart_no_data">No chart data available</string>
     <string name="chart_loading">Please wait, the data is loading</string>
 
-    <string name="bar_set_incomes">Incomes</string>
-    <string name="bar_set_expenses">Expenses</string>
-    <string name="bar_set_transfers">Transfers</string>
-    <string name="bar_set_net_profit">Net Profit</string>
+    <string name="data_set_incomes">Incomes</string>
+    <string name="data_set_expenses">Expenses</string>
+    <string name="data_set_transfers">Transfers</string>
+    <string name="data_set_net_profit">Net Profit</string>
+
+    <string name="pie_group_other">Other (combined group)</string>
 
     <!-- Bar Chart Display -->
     <string name="bar_chart_display_group">Group by:</string>
@@ -228,6 +234,16 @@
     <string name="bar_chart_display_view_incomes">View incomes</string>
     <string name="bar_chart_display_view_expenses">View expenses</string>
     <string name="bar_chart_display_include_transfers">Include transfers</string>
+    <!-- Pie Chart Display -->
+    <string name="pie_chart_display_group_by">Group by:</string>
+    <string name="pie_chart_display_group_by_article">Article</string>
+    <string name="pie_chart_display_group_by_article_parent">Article parent</string>
+    <string name="pie_chart_display_grouping">Grouping:</string>
+    <string name="pie_chart_display_grouping_simple">Simple</string>
+    <string name="pie_chart_display_grouping_limit">With limited group</string>
+    <string name="pie_chart_display_view">View:</string>
+    <string name="pie_chart_display_view_values">View values</string>
+    <string name="pie_chart_display_use_percent_values">Use percent values</string>
 
     <!-- Validation Errors -->
     <string name="name_error">Invalid name</string>

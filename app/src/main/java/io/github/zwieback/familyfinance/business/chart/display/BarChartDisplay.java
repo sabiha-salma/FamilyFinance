@@ -8,7 +8,7 @@ import com.annimon.stream.Objects;
 import io.github.zwieback.familyfinance.business.chart.display.type.BarChartGroupType;
 import io.github.zwieback.familyfinance.util.BooleanUtils;
 
-public class BarChartDisplay extends ChartDisplay {
+public class BarChartDisplay extends ChartDisplay<BarChartDisplay> {
 
     public static final String BAR_CHART_DISPLAY = "barChartDisplay";
 
@@ -85,13 +85,12 @@ public class BarChartDisplay extends ChartDisplay {
         BooleanUtils.writeBooleanToParcel(out, includeTransfers);
     }
 
-    public boolean onlyViewValuesChanged(BarChartDisplay newDisplay) {
-        return (isViewIncomeValues() != newDisplay.isViewIncomeValues() ||
-                isViewExpenseValues() != newDisplay.isViewExpenseValues()) &&
-                getGroupType() == newDisplay.getGroupType() &&
-                isViewIncomes() == newDisplay.isViewIncomes() &&
-                isViewExpenses() == newDisplay.isViewExpenses() &&
-                isIncludeTransfers() == newDisplay.isIncludeTransfers();
+    @Override
+    public boolean needRefreshData(BarChartDisplay newDisplay) {
+        return getGroupType() != newDisplay.getGroupType() ||
+                isViewIncomes() != newDisplay.isViewIncomes() ||
+                isViewExpenses() != newDisplay.isViewExpenses() ||
+                isIncludeTransfers() != newDisplay.isIncludeTransfers();
     }
 
     @Override

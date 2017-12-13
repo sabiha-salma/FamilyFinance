@@ -4,6 +4,9 @@
 
     <data>
 
+        <import
+            type="io.github.zwieback.familyfinance.business.chart.display.type.BarChartGroupType"/>
+
         <variable
             name="display"
             type="io.github.zwieback.familyfinance.business.chart.display.BarChartDisplay"/>
@@ -37,30 +40,35 @@
                     android:id="@+id/group_by_days"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:checked="@{display.groupType == BarChartGroupType.DAYS}"
                     android:text="@string/bar_chart_display_group_by_days"/>
 
                 <RadioButton
                     android:id="@+id/group_by_weeks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:checked="@{display.groupType == BarChartGroupType.WEEKS}"
                     android:text="@string/bar_chart_display_group_by_weeks"/>
 
                 <RadioButton
                     android:id="@+id/group_by_months"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:checked="@{display.groupType == BarChartGroupType.MONTHS}"
                     android:text="@string/bar_chart_display_group_by_months"/>
 
                 <RadioButton
                     android:id="@+id/group_by_quarters"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:checked="@{display.groupType == BarChartGroupType.QUARTERS}"
                     android:text="@string/bar_chart_display_group_by_quarters"/>
 
                 <RadioButton
                     android:id="@+id/group_by_years"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:checked="@{display.groupType == BarChartGroupType.YEARS}"
                     android:text="@string/bar_chart_display_group_by_years"/>
 
             </RadioGroup>

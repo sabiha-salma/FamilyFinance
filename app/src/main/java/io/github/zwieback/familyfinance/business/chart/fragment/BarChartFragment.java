@@ -9,7 +9,6 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -43,6 +42,7 @@ import io.github.zwieback.familyfinance.business.chart.service.formatter.WeekVal
 import io.github.zwieback.familyfinance.business.chart.service.formatter.YearValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.marker.BarChartMarkerView;
 import io.github.zwieback.familyfinance.business.chart.service.converter.OperationConverter;
+import io.github.zwieback.familyfinance.business.chart.service.converter.bar.OperationBarConverter;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouper;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.bar.OperationGrouperByDay;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.bar.OperationGrouperByMonth;
@@ -80,7 +80,7 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
     private int maxBarCount;
     private float barValueTextSize;
 
-    private OperationConverter operationConverter;
+    private OperationConverter<BarEntry> operationConverter;
     private OperationGrouper operationGrouper;
     private OperationSieve operationSieve;
 
@@ -91,7 +91,7 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
         barValueTextSize = getResources().getDimension(R.dimen.bar_value_text_size);
         onValueSelectedRectF = new RectF();
 
-        operationConverter = new OperationConverter(extractContext());
+        operationConverter = new OperationBarConverter(extractContext());
         operationSieve = new OperationSieve();
         operationGrouper = determineOperationGrouper();
     }
@@ -110,23 +110,12 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_display:
-                showDisplayDialog();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    protected int getMenuId() {
-        return R.menu.menu_chart_bar;
-    }
-
-    @Override
     protected boolean addFilterMenuItem() {
+        return true;
+    }
+
+    @Override
+    protected boolean addDisplayMenuItem() {
         return true;
     }
 
@@ -231,7 +220,7 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
     }
 
     private List<BarEntry> convertOperations(Map<Float, List<OperationView>> groupedOperations) {
-        return operationConverter.convertToBarEntries(groupedOperations);
+        return operationConverter.convertToEntries(groupedOperations);
     }
 
     private void showData(Map<Float, List<OperationView>> groupedOperations) {
@@ -241,11 +230,11 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
         }
 
         BarDataSet incomeSet = buildBarDataSet(groupedOperations, OperationType.getIncomeTypes(),
-                R.string.bar_set_incomes, R.color.colorIncome, display.isViewIncomeValues(),
+                R.string.data_set_incomes, R.color.colorIncome, display.isViewIncomeValues(),
                 display.isViewIncomes());
 
         BarDataSet expenseSet = buildBarDataSet(groupedOperations, OperationType.getExpenseTypes(),
-                R.string.bar_set_expenses, R.color.colorExpense, display.isViewExpenseValues(),
+                R.string.data_set_expenses, R.color.colorExpense, display.isViewExpenseValues(),
                 display.isViewExpenses());
 
         BarData data = new BarData(incomeSet, expenseSet);
@@ -332,16 +321,16 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
 
     @Override
     public void onApplyDisplay(BarChartDisplay display) {
-        if (this.display.onlyViewValuesChanged(display)) {
-            this.display = display;
-            updateDrawValues();
-        } else {
+        if (this.display.needRefreshData(display)) {
             this.display = display;
             operationGrouper = determineOperationGrouper();
             IAxisValueFormatter xAxisFormatter = determineXAxisFormatter();
             setupXAxisValueFormatter(xAxisFormatter);
             setupMarker(xAxisFormatter);
             refreshData();
+        } else {
+            this.display = display;
+            updateDrawValues();
         }
     }
 

@@ -3,7 +3,6 @@ package io.github.zwieback.familyfinance.business.chart.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.MenuRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -49,6 +48,9 @@ public abstract class ChartFragment<F extends OperationFilter, D extends ChartDi
         if (addFilterMenuItem()) {
             menuIds.add(R.menu.menu_entity_filter);
         }
+        if (addDisplayMenuItem()) {
+            menuIds.add(R.menu.menu_chart_display);
+        }
         Stream.of(menuIds).forEach(menuId ->
                 IconicsMenuInflaterUtil.inflate(inflater, extractContext(), menuId, menu));
 
@@ -60,6 +62,9 @@ public abstract class ChartFragment<F extends OperationFilter, D extends ChartDi
         switch (item.getItemId()) {
             case R.id.action_filter:
                 showFilterDialog();
+                return true;
+            case R.id.action_display:
+                showDisplayDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -74,13 +79,12 @@ public abstract class ChartFragment<F extends OperationFilter, D extends ChartDi
     }
 
     protected List<Integer> collectMenuIds() {
-        return Collections.singletonList(getMenuId());
+        return Collections.emptyList();
     }
 
-    @MenuRes
-    protected abstract int getMenuId();
-
     protected abstract boolean addFilterMenuItem();
+
+    protected abstract boolean addDisplayMenuItem();
 
     private F loadFilter(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState == null) {

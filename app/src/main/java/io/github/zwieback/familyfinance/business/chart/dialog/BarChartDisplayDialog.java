@@ -2,12 +2,11 @@ package io.github.zwieback.familyfinance.business.chart.dialog;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.widget.RadioButton;
 
 import io.github.zwieback.familyfinance.R;
-import io.github.zwieback.familyfinance.business.chart.exception.UnsupportedBarChartGroupTypeException;
 import io.github.zwieback.familyfinance.business.chart.display.BarChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.display.type.BarChartGroupType;
+import io.github.zwieback.familyfinance.business.chart.exception.UnsupportedBarChartGroupTypeException;
 import io.github.zwieback.familyfinance.databinding.DialogDisplayChartBarBinding;
 
 import static io.github.zwieback.familyfinance.business.chart.display.BarChartDisplay.BAR_CHART_DISPLAY;
@@ -43,28 +42,10 @@ public class BarChartDisplayDialog extends ChartDisplayDialog<BarChartDisplay,
 
     protected void bind(BarChartDisplay display) {
         binding.setDisplay(display);
-        determineGroupByRadioButton(display.getGroupType()).setChecked(true);
     }
 
     protected void updateDisplayProperties() {
         display.setGroupType(determineGroupType());
-    }
-
-    @NonNull
-    private RadioButton determineGroupByRadioButton(BarChartGroupType groupType) {
-        switch (groupType) {
-            case DAYS:
-                return binding.groupByDays;
-            case WEEKS:
-                return binding.groupByWeeks;
-            case MONTHS:
-                return binding.groupByMonths;
-            case QUARTERS:
-                return binding.groupByQuarters;
-            case YEARS:
-                return binding.groupByYears;
-        }
-        throw new UnsupportedBarChartGroupTypeException();
     }
 
     @NonNull

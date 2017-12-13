@@ -76,12 +76,16 @@
     <dimen name="popup_icon_rounded_corners">12dp</dimen>
 
     <!-- Charts -->
+    <dimen name="marker_margin_side">5dp</dimen>
+    <dimen name="marker_margin_top">7dp</dimen>
+    <dimen name="marker_text_size">12sp</dimen>
+    <!-- Bar Chart -->
+    <dimen name="bar_marker_height">40dp</dimen>
     <dimen name="x_axis_y_offset">4dp</dimen>
     <dimen name="bar_value_text_size">6sp</dimen>
-    <dimen name="bar_marker_height">40dp</dimen>
-    <dimen name="bar_marker_margin_side">5dp</dimen>
-    <dimen name="bar_marker_margin_top">7dp</dimen>
-    <dimen name="bar_marker_text_size">12sp</dimen>
+    <!-- Pie Chart -->
+    <dimen name="pie_marker_height">70dp</dimen>
+    <dimen name="pie_value_text_size">6sp</dimen>
 
     <!-- Preference -->
     <dimen name="preference_icon_size">24dp</dimen>

@@ -3,7 +3,7 @@ package io.github.zwieback.familyfinance.business.chart.display;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public abstract class ChartDisplay implements Parcelable {
+public abstract class ChartDisplay<D extends ChartDisplay> implements Parcelable {
 
     ChartDisplay() {
         init();
@@ -35,4 +35,6 @@ public abstract class ChartDisplay implements Parcelable {
     public int describeContents() {
         return 0;
     }
+
+    public abstract boolean needRefreshData(D newDisplay);
 }
