@@ -24,6 +24,15 @@ public final class ConfigurationUtils {
         return locales.get(0);
     }
 
+    /**
+     * Overall orientation of the screen.
+     *
+     * @return {@link Configuration#ORIENTATION_LANDSCAPE} or {@link Configuration#ORIENTATION_PORTRAIT}
+     */
+    public static int getOrientation() {
+        return Resources.getSystem().getConfiguration().orientation;
+    }
+
     private ConfigurationUtils() {
     }
 }
