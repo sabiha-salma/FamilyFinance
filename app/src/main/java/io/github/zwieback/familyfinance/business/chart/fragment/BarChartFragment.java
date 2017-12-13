@@ -8,9 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.annimon.stream.Stream;
 import com.github.mikephil.charting.charts.BarChart;
@@ -34,15 +32,15 @@ import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.chart.dialog.BarChartDisplayDialog;
 import io.github.zwieback.familyfinance.business.chart.display.BarChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.exception.UnsupportedBarChartGroupTypeException;
+import io.github.zwieback.familyfinance.business.chart.marker.BarChartMarkerView;
+import io.github.zwieback.familyfinance.business.chart.service.converter.OperationConverter;
+import io.github.zwieback.familyfinance.business.chart.service.converter.bar.OperationBarConverter;
 import io.github.zwieback.familyfinance.business.chart.service.formatter.DayValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.service.formatter.LocalizedValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.service.formatter.MonthValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.service.formatter.QuarterValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.service.formatter.WeekValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.service.formatter.YearValueFormatter;
-import io.github.zwieback.familyfinance.business.chart.marker.BarChartMarkerView;
-import io.github.zwieback.familyfinance.business.chart.service.converter.OperationConverter;
-import io.github.zwieback.familyfinance.business.chart.service.converter.bar.OperationBarConverter;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouper;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.bar.OperationGrouperByDay;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.bar.OperationGrouperByMonth;
@@ -55,13 +53,10 @@ import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOpe
 import io.github.zwieback.familyfinance.business.operation.query.FlowOfFundsOperationQueryBuilder;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.github.zwieback.familyfinance.core.model.type.OperationType;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import io.requery.query.Result;
 
-public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, BarChartDisplay>
-        implements OnChartValueSelectedListener {
+public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFundsOperationFilter,
+        BarChartDisplay> implements OnChartValueSelectedListener {
 
     private static final float NORMAL_GRANULARITY = 1f;
     private static final float X_AXIS_MAXIMUM_FIX = 1f;
@@ -75,13 +70,9 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
     private static final int EXPENSE_BAR_SET = 1;
     private static final int Y_AXIS_ANIMATION_DURATION = 500;
 
-    private RectF onValueSelectedRectF;
-    private BarChart chart;
     private int maxBarCount;
     private float barValueTextSize;
-
-    private OperationConverter<BarEntry> operationConverter;
-    private OperationGrouper operationGrouper;
+    private RectF onValueSelectedRectF;
     private OperationSieve operationSieve;
 
     @Override
@@ -90,23 +81,23 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
         maxBarCount = getResources().getInteger(R.integer.max_bar_count);
         barValueTextSize = getResources().getDimension(R.dimen.bar_value_text_size);
         onValueSelectedRectF = new RectF();
-
-        operationConverter = new OperationBarConverter(extractContext());
         operationSieve = new OperationSieve();
-        operationGrouper = determineOperationGrouper();
-    }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_chart_bar, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        chart = view.findViewById(R.id.bar_chart);
-        setupChart();
+        super.onViewCreated(view, savedInstanceState);
         refreshData();
+    }
+
+    @Override
+    protected int getFragmentChartLayout() {
+        return R.layout.fragment_chart_bar;
+    }
+
+    @Override
+    protected int getChartId() {
+        return R.id.bar_chart;
     }
 
     @Override
@@ -129,7 +120,8 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
         return new BarChartDisplay();
     }
 
-    private void setupChart() {
+    @Override
+    protected void setupChart() {
         chart.setOnChartValueSelectedListener(this);
         chart.setDrawValueAboveBar(true);
         chart.getDescription().setEnabled(false);
@@ -173,18 +165,8 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
         chart.setMarker(mv);
     }
 
-    private void refreshData() {
-        clearData(R.string.chart_loading);
-
-        Observable.fromCallable(this::buildOperations)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.computation())
-                .map(this::groupOperations)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::showData);
-    }
-
-    private Result<OperationView> buildOperations() {
+    @Override
+    protected Result<OperationView> buildOperations() {
         return FlowOfFundsOperationQueryBuilder.create(data)
                 .setTypes(determineOperationTypes())
                 .setStartDate(filter.getStartDate())
@@ -198,22 +180,14 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
                 .build();
     }
 
-    private Map<Float, List<OperationView>> groupOperations(Result<OperationView> operations) {
-        return operationGrouper.group(operations.toList(),
-                filter.getStartDate(), filter.getEndDate());
-    }
-
     private Map<Float, List<OperationView>> filterOperations(
             Map<Float, List<OperationView>> operations,
             List<OperationType> types) {
         return operationSieve.filterByTypes(operations, types);
     }
 
-    private List<BarEntry> convertOperations(Map<Float, List<OperationView>> groupedOperations) {
-        return operationConverter.convertToEntries(groupedOperations);
-    }
-
-    private void showData(Map<Float, List<OperationView>> groupedOperations) {
+    @Override
+    protected void showData(Map<Float, List<OperationView>> groupedOperations) {
         if (groupedOperations.isEmpty()) {
             clearData(R.string.chart_no_data);
             return;
@@ -258,11 +232,6 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
         dataSet.setDrawValues(drawValuesEnabled);
         dataSet.setVisible(visible);
         return dataSet;
-    }
-
-    private void clearData(@StringRes int noDataTextRes) {
-        chart.setNoDataText(getString(noDataTextRes));
-        chart.clear();
     }
 
     private void fixChartWidth(int numberOfEntries) {
@@ -337,7 +306,13 @@ public class BarChartFragment extends ChartFragment<FlowOfFundsOperationFilter, 
         dialog.show(getChildFragmentManager(), "BarChartDisplayDialog");
     }
 
-    private OperationGrouper determineOperationGrouper() {
+    @Override
+    protected OperationConverter<BarEntry> determineOperationConverter() {
+        return new OperationBarConverter(extractContext());
+    }
+
+    @Override
+    protected OperationGrouper determineOperationGrouper() {
         switch (display.getGroupType()) {
             case DAYS:
                 return new OperationGrouperByDay();

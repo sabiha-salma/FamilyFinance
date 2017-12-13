@@ -3,13 +3,9 @@ package io.github.zwieback.familyfinance.business.chart.fragment;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -44,43 +40,31 @@ import io.github.zwieback.familyfinance.business.operation.query.ExpenseOperatio
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.github.zwieback.familyfinance.util.ColorUtils;
 import io.github.zwieback.familyfinance.util.ConfigurationUtils;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import io.requery.query.Result;
 
-public class PieChartFragment extends ChartFragment<ExpenseOperationFilter, PieChartDisplay> {
+public class PieChartFragment extends ChartFragment<PieChart, PieEntry, ExpenseOperationFilter,
+        PieChartDisplay> {
 
     private static final float SLICE_SPACE = 2f;
 
     private static final int Y_AXIS_ANIMATION_DURATION = 500;
 
-    private PieChart chart;
     private float pieValueTextSize;
-
-    private OperationConverter<PieEntry> operationConverter;
-    private OperationGrouper operationGrouper;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         pieValueTextSize = getResources().getDimension(R.dimen.pie_value_text_size);
-
-        operationConverter = determineOperationConverter();
-        operationGrouper = determineOperationGrouper();
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_chart_pie, container, false);
+    protected int getFragmentChartLayout() {
+        return R.layout.fragment_chart_pie;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        chart = view.findViewById(R.id.pie_chart);
-        setupChart();
-        refreshData();
+    protected int getChartId() {
+        return R.id.pie_chart;
     }
 
     @Override
@@ -103,7 +87,8 @@ public class PieChartFragment extends ChartFragment<ExpenseOperationFilter, PieC
         return new PieChartDisplay();
     }
 
-    private void setupChart() {
+    @Override
+    protected void setupChart() {
         chart.setUsePercentValues(display.isUsePercentValues());
         chart.getDescription().setEnabled(false);
         chart.setEntryLabelColor(Color.BLACK);
@@ -133,18 +118,8 @@ public class PieChartFragment extends ChartFragment<ExpenseOperationFilter, PieC
         chart.setMarker(mv);
     }
 
-    private void refreshData() {
-        clearData(R.string.chart_loading);
-
-        Observable.fromCallable(this::buildOperations)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.computation())
-                .map(this::groupOperations)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::showData);
-    }
-
-    private Result<OperationView> buildOperations() {
+    @Override
+    protected Result<OperationView> buildOperations() {
         return ExpenseOperationQueryBuilder.create(data)
                 .setStartDate(filter.getStartDate())
                 .setEndDate(filter.getEndDate())
@@ -157,16 +132,8 @@ public class PieChartFragment extends ChartFragment<ExpenseOperationFilter, PieC
                 .build();
     }
 
-    private Map<Float, List<OperationView>> groupOperations(Result<OperationView> operations) {
-        return operationGrouper.group(operations.toList(),
-                filter.getStartDate(), filter.getEndDate());
-    }
-
-    private List<PieEntry> convertOperations(Map<Float, List<OperationView>> groupedOperations) {
-        return operationConverter.convertToEntries(groupedOperations);
-    }
-
-    private void showData(Map<Float, List<OperationView>> groupedOperations) {
+    @Override
+    protected void showData(Map<Float, List<OperationView>> groupedOperations) {
         if (groupedOperations.isEmpty()) {
             clearData(R.string.chart_no_data);
             return;
@@ -201,11 +168,6 @@ public class PieChartFragment extends ChartFragment<ExpenseOperationFilter, PieC
         List<Integer> colors = ColorUtils.collectMaterialDesignColors(extractContext());
         Collections.shuffle(colors);
         return colors;
-    }
-
-    private void clearData(@StringRes int noDataTextRes) {
-        chart.setNoDataText(getString(noDataTextRes));
-        chart.clear();
     }
 
     @Override
@@ -243,7 +205,8 @@ public class PieChartFragment extends ChartFragment<ExpenseOperationFilter, PieC
         dialog.show(getChildFragmentManager(), "PieChartDisplayDialog");
     }
 
-    private OperationConverter<PieEntry> determineOperationConverter() {
+    @Override
+    protected OperationConverter<PieEntry> determineOperationConverter() {
         switch (display.getGroupingType()) {
             case SIMPLE:
                 return new OperationPieSimpleConverter(extractContext(), display.getGroupByType());
@@ -253,7 +216,8 @@ public class PieChartFragment extends ChartFragment<ExpenseOperationFilter, PieC
         throw new UnsupportedPieChartGroupingTypeException();
     }
 
-    public OperationGrouper determineOperationGrouper() {
+    @Override
+    protected OperationGrouper determineOperationGrouper() {
         switch (display.getGroupByType()) {
             case ARTICLE:
                 return new OperationGrouperByArticle();
