@@ -188,6 +188,7 @@ public class PieChartFragment extends ChartFragment<ExpenseOperationFilter, PieC
         PieData data = new PieData(expenseSet);
         data.setValueFormatter(determineFormatter());
 
+        chart.setUsePercentValues(display.isUsePercentValues());
         chart.setData(data);
         chart.animateY(Y_AXIS_ANIMATION_DURATION, Easing.EasingOption.EaseInOutQuad);
     }
