@@ -28,7 +28,7 @@ public abstract class DataActivityWrapper extends ActivityWrapper {
                                                       Consumer<E> onSuccess,
                                                       Consumer<? super Throwable> onError) {
         data.findByKey(entityClass, entityId)
-                .subscribeOn(Schedulers.single())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(onSuccess, onError);
     }

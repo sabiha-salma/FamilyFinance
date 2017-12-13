@@ -157,7 +157,7 @@ public abstract class EntityFilterDialog<F extends EntityFilter, B extends ViewD
                                                             @NonNull Integer entityId,
                                                             Consumer<E> onSuccess) {
         data.findByKey(entityClass, entityId)
-                .subscribeOn(Schedulers.single())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(onSuccess);
     }
