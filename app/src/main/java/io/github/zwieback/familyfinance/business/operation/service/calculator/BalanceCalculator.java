@@ -11,7 +11,7 @@ import java.util.Map;
 
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.github.zwieback.familyfinance.core.model.type.OperationType;
-import io.github.zwieback.familyfinance.util.LocaleUtils;
+import io.github.zwieback.familyfinance.util.ConfigurationUtils;
 import io.requery.query.Result;
 
 import static io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString;
@@ -65,7 +65,7 @@ public final class BalanceCalculator {
     }
 
     private static List<String> formatBalance(Map<CurrencyEntry, BigDecimal> groupedBalance) {
-        Locale locale = LocaleUtils.getSystemLocale();
+        Locale locale = ConfigurationUtils.getSystemLocale();
         return Stream.of(groupedBalance)
                 .map(balance ->
                         String.format(locale, "%s %s",

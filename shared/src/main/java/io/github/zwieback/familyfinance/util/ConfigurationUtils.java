@@ -7,7 +7,7 @@ import android.support.v4.os.LocaleListCompat;
 
 import java.util.Locale;
 
-public final class LocaleUtils {
+public final class ConfigurationUtils {
 
     /**
      * @return system locale
@@ -24,6 +24,6 @@ public final class LocaleUtils {
         return locales.get(0);
     }
 
-    private LocaleUtils() {
+    private ConfigurationUtils() {
     }
 }

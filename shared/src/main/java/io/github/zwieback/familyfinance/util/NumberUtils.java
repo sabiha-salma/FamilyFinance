@@ -28,7 +28,7 @@ public final class NumberUtils {
     private static final DecimalFormat bigDecimalFormat;
 
     static {
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols(LocaleUtils.getSystemLocale());
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(ConfigurationUtils.getSystemLocale());
         // see https://docs.oracle.com/javase/7/docs/api/java/text/DecimalFormat.html
         // and https://docs.oracle.com/javase/tutorial/i18n/format/decimalFormat.html
         bigDecimalFormat = new DecimalFormat("0.00######", symbols);
