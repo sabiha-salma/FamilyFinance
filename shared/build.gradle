@@ -44,6 +44,8 @@ dependencies {
     implementation "com.android.support:design:${versions.supportLib}"
     // java.time
     implementation "com.jakewharton.threetenabp:threetenabp:${versions.timeLib}"
+    // java 8 streams
+    implementation "com.annimon:stream:${versions.streamLib}"
     // icons
     implementation "com.mikepenz:iconics-core:${versions.iconicsLib}"
     implementation "com.mikepenz:iconics-views:${versions.iconicsLib}"
