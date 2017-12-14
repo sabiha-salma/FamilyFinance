@@ -70,7 +70,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
     private static final int EXPENSE_BAR_SET = 1;
     private static final int Y_AXIS_ANIMATION_DURATION = 500;
 
-    private int maxBarCount;
+    private int maxBarCountOnScreen;
     private float barValueTextSize;
     private RectF onValueSelectedRectF;
     private OperationSieve operationSieve;
@@ -78,7 +78,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        maxBarCount = getResources().getInteger(R.integer.max_bar_count);
+        maxBarCountOnScreen = getResources().getInteger(R.integer.max_bar_count_on_screen);
         barValueTextSize = getResources().getDimension(R.dimen.bar_value_text_size);
         onValueSelectedRectF = new RectF();
         operationSieve = new OperationSieve();
@@ -137,7 +137,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
         xAxis.setDrawGridLines(false);
         xAxis.setCenterAxisLabels(true);
         xAxis.setGranularity(NORMAL_GRANULARITY);
-        xAxis.setLabelCount(maxBarCount);
+        xAxis.setLabelCount(maxBarCountOnScreen);
         xAxis.setLabelRotationAngle(xAxisRotationAngle);
         xAxis.setYOffset(xAxisYOffset);
         xAxis.setValueFormatter(xAxisFormatter);
@@ -213,7 +213,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
         chart.getXAxis().setAxisMinimum(minX);
         chart.getXAxis().setAxisMaximum(maxX + X_AXIS_MAXIMUM_FIX);
         chart.groupBars(minX, GROUP_SPACE, BAR_SPACE);
-        chart.setVisibleXRangeMaximum(maxBarCount);
+        chart.setVisibleXRangeMaximum(maxBarCountOnScreen);
         fixChartWidth(groupedOperations.size());
         chart.animateY(Y_AXIS_ANIMATION_DURATION);
     }
@@ -235,7 +235,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
     }
 
     private void fixChartWidth(int numberOfEntries) {
-        if (numberOfEntries < maxBarCount) {
+        if (numberOfEntries < maxBarCountOnScreen) {
             chart.fitScreen();
         } else {
             scaleToAcceptableSize(numberOfEntries);
