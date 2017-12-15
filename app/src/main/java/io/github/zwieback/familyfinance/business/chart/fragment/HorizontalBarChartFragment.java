@@ -38,6 +38,7 @@ import io.github.zwieback.familyfinance.business.chart.display.BarChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.display.HorizontalBarChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.exception.UnsupportedHorizontalBarChartGroupByTypeException;
 import io.github.zwieback.familyfinance.business.chart.marker.HorizontalBarChartMarkerView;
+import io.github.zwieback.familyfinance.business.chart.service.builder.IdIndexMapStateBuilder;
 import io.github.zwieback.familyfinance.business.chart.service.converter.OperationConverter;
 import io.github.zwieback.familyfinance.business.chart.service.converter.bar.OperationHorizontalBarConverter;
 import io.github.zwieback.familyfinance.business.chart.service.converter.bar.OperationHorizontalBarPercentConverter;
@@ -61,6 +62,7 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
     private int maxBarCountOnScreen;
     private float barValueTextSize;
     private RectF onValueSelectedRectF;
+    private IdIndexMapStateBuilder idIndexMapStateBuilder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -148,8 +150,7 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
         }
 
         List<BarEntry> barEntries = convertOperations(groupedOperations);
-        Map<Float, Float> idIndexMap =
-                ((OperationHorizontalBarConverter) operationConverter).getIdIndexMap();
+        Map<Float, Float> idIndexMap = idIndexMapStateBuilder.build();
 
         Map<Float, String> entityMap = convertToEntityMap(idIndexMap);
         IAxisValueFormatter xAxisFormatter = determineXAxisFormatter(entityMap);
@@ -256,10 +257,12 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
 
     @Override
     protected OperationConverter<BarEntry> determineOperationConverter() {
+        idIndexMapStateBuilder = IdIndexMapStateBuilder.create();
         if (display.isUsePercentValues()) {
-            return new OperationHorizontalBarPercentConverter(extractContext());
+            return new OperationHorizontalBarPercentConverter(extractContext(),
+                    idIndexMapStateBuilder);
         }
-        return new OperationHorizontalBarConverter(extractContext());
+        return new OperationHorizontalBarConverter(extractContext(), idIndexMapStateBuilder);
     }
 
     @Override

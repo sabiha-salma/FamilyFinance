@@ -51,6 +51,7 @@ public class HorizontalBarChartOfIncomesFragment
     @Override
     public void onApplyFilter(IncomeOperationFilter filter) {
         this.filter = filter;
+        this.operationConverter = determineOperationConverter();
         refreshData();
     }
 

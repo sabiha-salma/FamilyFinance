@@ -51,6 +51,7 @@ public class HorizontalBarChartOfExpensesFragment
     @Override
     public void onApplyFilter(ExpenseOperationFilter filter) {
         this.filter = filter;
+        this.operationConverter = determineOperationConverter();
         refreshData();
     }
 
