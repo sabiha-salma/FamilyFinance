@@ -2,6 +2,7 @@
 <resources>
     <!-- Bar Chart -->
     <integer name="max_bar_count_on_screen">15</integer>
+    <integer name="max_horizontal_bar_count_on_screen">10</integer>
 
 
     <!-- Pie Chart -->

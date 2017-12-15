@@ -46,13 +46,18 @@
     <string name="backup_activity_title">Backup &amp; Restore</string>
     <string name="chart_activity_title">Charts</string>
     <string name="bar_chart_title">Bar Chart</string>
-    <string name="pie_chart_of_expenses_title">Pie Chart of Expenses</string>
-    <string name="pie_chart_of_incomes_title">Pie Chart of Incomes</string>
     <string name="bar_chart_filter_title">Bar Chart Filter</string>
     <string name="bar_chart_display_title">Bar Chart Display</string>
+    <string name="pie_chart_of_expenses_title">Pie Chart of Expenses</string>
+    <string name="pie_chart_of_incomes_title">Pie Chart of Incomes</string>
     <string name="pie_chart_of_expenses_filter_title">Pie Chart of Expenses Filter</string>
     <string name="pie_chart_of_incomes_filter_title">Pie Chart of Incomes Filter</string>
     <string name="pie_chart_display_title">Pie Chart Display</string>
+    <string name="horizontal_bar_chart_of_expenses_title">H. Bar Chart of Expenses</string>
+    <string name="horizontal_bar_chart_of_incomes_title">H. Bar Chart of Incomes</string>
+    <string name="horizontal_bar_chart_of_expenses_filter_title">Horizontal Bar Chart of Expenses Filter</string>
+    <string name="horizontal_bar_chart_of_incomes_filter_title">Horizontal Bar Chart of Incomes Filter</string>
+    <string name="horizontal_bar_chart_display_title">Horizontal Bar Chart Display</string>
 
     <!-- Dashboard -->
     <string name="select_account">Accounts</string>
@@ -236,6 +241,13 @@
     <string name="bar_chart_display_view_incomes">View incomes</string>
     <string name="bar_chart_display_view_expenses">View expenses</string>
     <string name="bar_chart_display_include_transfers">Include transfers</string>
+    <!-- Horizontal Bar Chart Display -->
+    <string name="horizontal_bar_chart_display_group">Group by:</string>
+    <string name="horizontal_bar_chart_display_group_by_article">Article</string>
+    <string name="horizontal_bar_chart_display_group_by_article_parent">Article parent</string>
+    <string name="horizontal_bar_chart_display_view">View:</string>
+    <string name="horizontal_bar_chart_display_view_values">View values</string>
+    <string name="horizontal_bar_chart_display_use_percent_values">Use percent values</string>
     <!-- Pie Chart Display -->
     <string name="pie_chart_display_group_by">Group by:</string>
     <string name="pie_chart_display_group_by_article">Article</string>

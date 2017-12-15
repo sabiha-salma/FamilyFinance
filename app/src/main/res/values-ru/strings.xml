@@ -46,13 +46,18 @@
     <string name="backup_activity_title">Резервное копирование</string>
     <string name="chart_activity_title">Диаграммы</string>
     <string name="bar_chart_title">Гистограмма</string>
-    <string name="pie_chart_of_expenses_title">Круговая диаграмма расходов</string>
-    <string name="pie_chart_of_incomes_title">Круговая диаграмма доходов</string>
     <string name="bar_chart_filter_title">Фильтр гистограммы</string>
     <string name="bar_chart_display_title">Отображение гистограммы</string>
+    <string name="pie_chart_of_expenses_title">Круговая диаграмма расходов</string>
+    <string name="pie_chart_of_incomes_title">Круговая диаграмма доходов</string>
     <string name="pie_chart_of_expenses_filter_title">Фильтр расходов круговой диаграммы</string>
     <string name="pie_chart_of_incomes_filter_title">Фильтр доходов круговой диаграммы</string>
     <string name="pie_chart_display_title">Отображение круговой диаграммы</string>
+    <string name="horizontal_bar_chart_of_expenses_title">Г. гистограмма расходов</string>
+    <string name="horizontal_bar_chart_of_incomes_title">Г. гистограмма доходов</string>
+    <string name="horizontal_bar_chart_of_expenses_filter_title">Фильтр расходов горизонтальной гистограммы</string>
+    <string name="horizontal_bar_chart_of_incomes_filter_title">Фильтр доходов горизонтальной гистограммы</string>
+    <string name="horizontal_bar_chart_display_title">Отображение горизонтальной гистограммы</string>
 
     <!-- Dashboard -->
     <string name="select_account">Счета</string>
@@ -236,6 +241,13 @@
     <string name="bar_chart_display_view_incomes">Отображать доходы</string>
     <string name="bar_chart_display_view_expenses">Отображать расходы</string>
     <string name="bar_chart_display_include_transfers">Учитывать переводы</string>
+    <!-- Horizontal Bar Chart Display -->
+    <string name="horizontal_bar_chart_display_group">Группировать по:</string>
+    <string name="horizontal_bar_chart_display_group_by_article">Статьям</string>
+    <string name="horizontal_bar_chart_display_group_by_article_parent">Каталогам статей</string>
+    <string name="horizontal_bar_chart_display_view">Просмотр:</string>
+    <string name="horizontal_bar_chart_display_view_values">Отображать значения</string>
+    <string name="horizontal_bar_chart_display_use_percent_values">Использовать значения в процентах</string>
     <!-- Pie Chart Display -->
     <string name="pie_chart_display_group_by">Группировать по:</string>
     <string name="pie_chart_display_group_by_article">Статьям</string>
