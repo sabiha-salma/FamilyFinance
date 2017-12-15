@@ -24,6 +24,37 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-dontobfuscate
+
+# requery: https://github.com/requery/requery/blob/master/requery-android/proguard-rules.pro
+-dontwarn java.lang.FunctionalInterface
+-dontwarn java.util.**
+-dontwarn java.time.**
+-dontwarn javax.annotation.**
+-dontwarn javax.cache.**
+-dontwarn javax.naming.**
+-dontwarn javax.transaction.**
+-dontwarn java.sql.**
+-dontwarn javax.sql.**
+-dontwarn android.support.**
+-dontwarn io.requery.cache.**
+-dontwarn io.requery.rx.**
+-dontwarn io.requery.reactivex.**
+-dontwarn io.requery.reactor.**
+-dontwarn io.requery.query.**
+-dontwarn io.requery.android.sqlcipher.**
+-dontwarn io.requery.android.sqlitex.**
+-keepclassmembers enum io.requery.** {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+# requery: https://github.com/requery/requery/blob/master/requery-android/example/proguard-rules.pro
+-keep class * extends java.lang.Enum {
+}
+-dontwarn rx.internal.**
+-dontwarn android.support.**
+
 # Exclude R from ProGuard to enable the font addon auto detection
 # https://github.com/mikepenz/Android-Iconics#proguard
 -keep class .R

@@ -23,3 +23,12 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-dontobfuscate
+
+# Exclude R from ProGuard to enable the font addon auto detection
+# https://github.com/mikepenz/Android-Iconics#proguard
+-keep class .R
+-keep class **.R$* {
+    <fields>;
+}
