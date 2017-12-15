@@ -22,6 +22,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
@@ -42,7 +43,6 @@ import io.github.zwieback.familyfinance.business.chart.service.builder.IdIndexMa
 import io.github.zwieback.familyfinance.business.chart.service.converter.OperationConverter;
 import io.github.zwieback.familyfinance.business.chart.service.converter.bar.OperationHorizontalBarConverter;
 import io.github.zwieback.familyfinance.business.chart.service.converter.bar.OperationHorizontalBarPercentConverter;
-import io.github.zwieback.familyfinance.business.chart.service.formatter.IndexNameMapFormatter;
 import io.github.zwieback.familyfinance.business.chart.service.formatter.LocalizedValueFormatter;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouper;
 import io.github.zwieback.familyfinance.business.chart.service.grouper.pie.OperationGrouperByArticle;
@@ -152,8 +152,8 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
         List<BarEntry> barEntries = convertOperations(groupedOperations);
         Map<Float, Float> idIndexMap = idIndexMapStateBuilder.build();
 
-        Map<Float, String> entityMap = convertToEntityMap(idIndexMap);
-        IAxisValueFormatter xAxisFormatter = determineXAxisFormatter(entityMap);
+        String[] articleNames = convertToArticleNames(idIndexMap);
+        IAxisValueFormatter xAxisFormatter = determineXAxisFormatter(articleNames);
         setupXAxisValueFormatter(xAxisFormatter);
         setupMarker(xAxisFormatter, determineYAxisFormatter());
 
@@ -177,18 +177,22 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
     @ColorRes
     protected abstract int getDataSetColor();
 
-    private Map<Float, String> convertToEntityMap(Map<Float, Float> idIndexMap) {
-        Set<Integer> entityIds = Stream.of(idIndexMap.keySet())
-                .map(Math::round)
+    private String[] convertToArticleNames(Map<Float, Float> idIndexMap) {
+        Set<Integer> articleIds = Stream.of(idIndexMap.keySet())
+                .map(Float::intValue)
                 .collect(Collectors.toSet());
         List<Article> articles = data
                 .select(Article.class, Article.ID, Article.NAME)
-                .where(Article.ID.in(entityIds))
+                .where(Article.ID.in(articleIds))
                 .get().toList();
-        return Stream.of(articles)
-                .collect(Collectors.toMap(
-                        entity -> idIndexMap.get((float) entity.getId()),
-                        Article::getName));
+        String[] articleNames = new String[articles.size()];
+        Stream.of(articles)
+                .forEach(article -> {
+                    float articleId = article.getId();
+                    int barIndex = idIndexMap.get(articleId).intValue();
+                    articleNames[barIndex] = article.getName();
+                });
+        return articleNames;
     }
 
     private BarDataSet buildBarDataSet(List<BarEntry> barEntries,
@@ -277,8 +281,8 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
     }
 
     @NonNull
-    private IAxisValueFormatter determineXAxisFormatter(Map<Float, String> entityMap) {
-        return new IndexNameMapFormatter(entityMap);
+    private IAxisValueFormatter determineXAxisFormatter(String[] articleNames) {
+        return new IndexAxisValueFormatter(articleNames);
     }
 
     @NonNull

@@ -2,6 +2,7 @@ package io.github.zwieback.familyfinance.business.chart.service.converter.bar;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Pair;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
@@ -37,27 +38,29 @@ public class OperationHorizontalBarPercentConverter extends OperationHorizontalB
     @Override
     public List<BarEntry> convertToEntries(Map<Float, List<OperationView>> operations) {
         Map<Float, BigDecimal> sumMap = sumConverter.convertToSumMap(operations);
-        Map<BigDecimal, Float> swappedSumMap = CollectionUtils.swapMap(sumMap);
-        Map<BigDecimal, Float> percentSumMap = convertToPercentMap(swappedSumMap);
+        List<Pair<BigDecimal, Float>> swappedSumMap = CollectionUtils.swapMap(sumMap);
+        List<Pair<BigDecimal, Float>> percentSumMap = convertToPercentMap(swappedSumMap);
         Map<Float, Float> idIndexMap = builder.setSumMap(percentSumMap).build();
 
         return Stream.of(percentSumMap)
                 .map(entry -> {
-                    Float barIndex = idIndexMap.get(entry.getValue());
-                    Float sumOfOperationsInPercent = entry.getKey().floatValue();
+                    Float barIndex = idIndexMap.get(entry.second);
+                    Float sumOfOperationsInPercent = entry.first.floatValue();
                     return new BarEntry(barIndex, sumOfOperationsInPercent);
                 })
                 .sortBy(Entry::getX)
                 .collect(Collectors.toList());
     }
 
-    private Map<BigDecimal, Float> convertToPercentMap(Map<BigDecimal, Float> swappedSumMap) {
-        BigDecimal totalSum = calculateTotalSum(swappedSumMap.keySet());
+    private List<Pair<BigDecimal, Float>>
+    convertToPercentMap(List<Pair<BigDecimal, Float>> swappedSumMap) {
+        List<BigDecimal> sums = Stream.of(swappedSumMap)
+                .map(pair -> pair.first)
+                .collect(Collectors.toList());
+        BigDecimal totalSum = calculateTotalSum(sums);
         return Stream.of(swappedSumMap)
-                .collect(Collectors.toMap(
-                        entry -> calculatePercent(totalSum, entry.getKey()),
-                        Map.Entry::getValue
-                ));
+                .map(pair -> Pair.create(calculatePercent(totalSum, pair.first), pair.second))
+                .collect(Collectors.toList());
     }
 
     private BigDecimal calculatePercent(BigDecimal totalSum, BigDecimal sumOfOperations) {

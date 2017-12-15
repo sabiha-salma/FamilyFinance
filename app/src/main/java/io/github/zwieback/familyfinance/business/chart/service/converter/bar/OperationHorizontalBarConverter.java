@@ -2,6 +2,7 @@ package io.github.zwieback.familyfinance.business.chart.service.converter.bar;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Pair;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
@@ -39,13 +40,13 @@ public class OperationHorizontalBarConverter implements OperationConverter<BarEn
     @Override
     public List<BarEntry> convertToEntries(Map<Float, List<OperationView>> operations) {
         Map<Float, BigDecimal> sumMap = sumConverter.convertToSumMap(operations);
-        Map<BigDecimal, Float> swappedSumMap = CollectionUtils.swapMap(sumMap);
+        List<Pair<BigDecimal, Float>> swappedSumMap = CollectionUtils.swapMap(sumMap);
         Map<Float, Float> idIndexMap = builder.setSumMap(swappedSumMap).build();
 
         return Stream.of(swappedSumMap)
                 .map(entry -> {
-                    Float barIndex = idIndexMap.get(entry.getValue());
-                    Float sumOfOperations = entry.getKey().floatValue();
+                    Float barIndex = idIndexMap.get(entry.second);
+                    Float sumOfOperations = entry.first.floatValue();
                     return new BarEntry(barIndex, sumOfOperations);
                 })
                 .sortBy(Entry::getX)

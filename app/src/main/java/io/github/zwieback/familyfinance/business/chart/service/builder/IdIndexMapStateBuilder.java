@@ -1,24 +1,27 @@
 package io.github.zwieback.familyfinance.business.chart.service.builder;
 
+import android.util.Pair;
+
 import com.annimon.stream.Stream;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class IdIndexMapStateBuilder {
 
     /**
-     * key - entity id, value - bar index (started from 0)
+     * key - unique entity id, value - unique bar index (started from 0)
      */
     private Map<Float, Float> idIndexMap;
-    private Map<BigDecimal, Float> sumMap;
+    private List<Pair<BigDecimal, Float>> sumMap;
 
     public static IdIndexMapStateBuilder create() {
         return new IdIndexMapStateBuilder();
     }
 
-    public IdIndexMapStateBuilder setSumMap(Map<BigDecimal, Float> sumMap) {
+    public IdIndexMapStateBuilder setSumMap(List<Pair<BigDecimal, Float>> sumMap) {
         this.sumMap = sumMap;
         this.idIndexMap = null;
         return this;
@@ -31,9 +34,9 @@ public class IdIndexMapStateBuilder {
         if (idIndexMap == null) {
             idIndexMap = new HashMap<>();
             Stream.of(sumMap)
-                    .sortBy(Map.Entry::getKey)
-                    .forEachIndexed((index, entry) ->
-                            idIndexMap.put(entry.getValue(), (float) index));
+                    .sortBy(pair -> pair.first)
+                    .forEachIndexed((index, pair) ->
+                            idIndexMap.put(pair.second, (float) index));
         }
         return idIndexMap;
     }
