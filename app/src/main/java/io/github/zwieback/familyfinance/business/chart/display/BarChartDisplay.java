@@ -101,7 +101,6 @@ public class BarChartDisplay extends ChartDisplay<BarChartDisplay> {
         return getGroupType() == that.getGroupType() &&
                 isViewIncomeValues() == that.isViewIncomeValues() &&
                 isViewExpenseValues() == that.isViewExpenseValues() &&
-                isViewExpenseValues() == that.isViewExpenseValues() &&
                 isViewIncomes() == that.isViewIncomes() &&
                 isViewExpenses() == that.isViewExpenses() &&
                 isIncludeTransfers() == that.isIncludeTransfers();
