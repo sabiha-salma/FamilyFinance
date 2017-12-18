@@ -3,6 +3,7 @@ package io.github.zwieback.familyfinance.business.chart.fragment;
 import android.support.v4.app.DialogFragment;
 
 import io.github.zwieback.familyfinance.R;
+import io.github.zwieback.familyfinance.business.chart.dialog.PieChartDisplayDialog;
 import io.github.zwieback.familyfinance.business.operation.dialog.IncomeOperationFilterDialog;
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.query.IncomeOperationQueryBuilder;
@@ -45,5 +46,12 @@ public class PieChartOfIncomesFragment extends PieChartFragment<IncomeOperationF
         DialogFragment dialog = IncomeOperationFilterDialog.newInstance(filter,
                 R.string.pie_chart_of_incomes_filter_title);
         dialog.show(getChildFragmentManager(), "IncomeOperationFilterDialog");
+    }
+
+    @Override
+    public void showDisplayDialog() {
+        DialogFragment dialog = PieChartDisplayDialog.newInstance(display,
+                R.string.pie_chart_of_incomes_display_title);
+        dialog.show(getChildFragmentManager(), "PieChartDisplayDialog");
     }
 }

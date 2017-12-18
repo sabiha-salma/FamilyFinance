@@ -20,6 +20,8 @@ import io.github.zwieback.familyfinance.core.dialog.exception.UndefinedContextEx
 public abstract class ChartDisplayDialog<D extends ChartDisplay, B extends ViewDataBinding>
         extends DialogFragment {
 
+    protected static final String DIALOG_TITLE = "dialogTitle";
+
     B binding;
     D display;
     private ChartDisplayListener<D> listener;
@@ -45,7 +47,7 @@ public abstract class ChartDisplayDialog<D extends ChartDisplay, B extends ViewD
         bind(display);
         return new AlertDialog.Builder(extractContext())
                 .setView(binding.getRoot())
-                .setTitle(getDialogTitle())
+                .setTitle(extractDialogTitle())
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     updateDisplayProperties();
                     listener.onApplyDisplay(display);
@@ -58,6 +60,11 @@ public abstract class ChartDisplayDialog<D extends ChartDisplay, B extends ViewD
 
     private D extractDisplay() {
         return extractArguments().getParcelable(getInputDisplayName());
+    }
+
+    @StringRes
+    private int extractDialogTitle() {
+        return extractArguments().getInt(DIALOG_TITLE, getDialogTitle());
     }
 
     @NonNull
@@ -105,6 +112,15 @@ public abstract class ChartDisplayDialog<D extends ChartDisplay, B extends ViewD
                                                                      D display) {
         Bundle args = new Bundle();
         args.putParcelable(displayName, display);
+        return args;
+    }
+
+    protected static <D extends ChartDisplay> Bundle createArguments(String displayName,
+                                                                     D display,
+                                                                     @StringRes int dialogTitleId) {
+        Bundle args = new Bundle();
+        args.putParcelable(displayName, display);
+        args.putInt(DIALOG_TITLE, dialogTitleId);
         return args;
     }
 }

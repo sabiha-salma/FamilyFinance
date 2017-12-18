@@ -2,6 +2,7 @@ package io.github.zwieback.familyfinance.business.chart.dialog;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.chart.display.HorizontalBarChartDisplay;
@@ -14,9 +15,10 @@ import static io.github.zwieback.familyfinance.business.chart.display.Horizontal
 public class HorizontalBarChartDisplayDialog extends ChartDisplayDialog<HorizontalBarChartDisplay,
         DialogDisplayChartBarHorizontalBinding> {
 
-    public static HorizontalBarChartDisplayDialog newInstance(HorizontalBarChartDisplay display) {
+    public static HorizontalBarChartDisplayDialog newInstance(HorizontalBarChartDisplay display,
+                                                              @StringRes int dialogTitleId) {
         HorizontalBarChartDisplayDialog fragment = new HorizontalBarChartDisplayDialog();
-        Bundle args = createArguments(HORIZONTAL_BAR_CHART_DISPLAY, display);
+        Bundle args = createArguments(HORIZONTAL_BAR_CHART_DISPLAY, display, dialogTitleId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -32,7 +34,7 @@ public class HorizontalBarChartDisplayDialog extends ChartDisplayDialog<Horizont
 
     @Override
     protected int getDialogTitle() {
-        return R.string.horizontal_bar_chart_display_title;
+        return R.string.horizontal_bar_chart_of_expenses_display_title;
     }
 
     @Override

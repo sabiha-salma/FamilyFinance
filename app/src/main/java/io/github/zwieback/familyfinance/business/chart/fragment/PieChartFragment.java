@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.v4.app.DialogFragment;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -22,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import io.github.zwieback.familyfinance.R;
-import io.github.zwieback.familyfinance.business.chart.dialog.PieChartDisplayDialog;
 import io.github.zwieback.familyfinance.business.chart.display.PieChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.exception.UnsupportedPieChartGroupByTypeException;
 import io.github.zwieback.familyfinance.business.chart.exception.UnsupportedPieChartGroupingTypeException;
@@ -164,12 +162,6 @@ public abstract class PieChartFragment<F extends OperationFilter> extends ChartF
             chart.setUsePercentValues(display.isUsePercentValues());
             chart.invalidate();
         }
-    }
-
-    @Override
-    public void showDisplayDialog() {
-        DialogFragment dialog = PieChartDisplayDialog.newInstance(display);
-        dialog.show(getChildFragmentManager(), "PieChartDisplayDialog");
     }
 
     @Override

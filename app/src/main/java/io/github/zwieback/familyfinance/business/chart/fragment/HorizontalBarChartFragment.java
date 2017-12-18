@@ -6,7 +6,6 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
@@ -34,7 +33,6 @@ import java.util.Map;
 import java.util.Set;
 
 import io.github.zwieback.familyfinance.R;
-import io.github.zwieback.familyfinance.business.chart.dialog.HorizontalBarChartDisplayDialog;
 import io.github.zwieback.familyfinance.business.chart.display.BarChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.display.HorizontalBarChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.exception.UnsupportedHorizontalBarChartGroupByTypeException;
@@ -251,12 +249,6 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
             this.display = display;
             updateDrawValues();
         }
-    }
-
-    @Override
-    public void showDisplayDialog() {
-        DialogFragment dialog = HorizontalBarChartDisplayDialog.newInstance(display);
-        dialog.show(getChildFragmentManager(), "HorizontalBarChartDisplayDialog");
     }
 
     @Override

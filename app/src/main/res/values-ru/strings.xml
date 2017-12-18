@@ -44,20 +44,22 @@
     <string name="exchange_rate_filter_title">Фильтр курсов обмена</string>
     <string name="settings_activity_title">Настройки</string>
     <string name="backup_activity_title">Резервное копирование</string>
-    <string name="chart_activity_title">Диаграммы</string>
-    <string name="bar_chart_title">Гистограмма</string>
-    <string name="bar_chart_filter_title">Фильтр гистограммы</string>
-    <string name="bar_chart_display_title">Отображение гистограммы</string>
-    <string name="pie_chart_of_expenses_title">Круговая диаграмма расходов</string>
-    <string name="pie_chart_of_incomes_title">Круговая диаграмма доходов</string>
-    <string name="pie_chart_of_expenses_filter_title">Фильтр расходов круговой диаграммы</string>
-    <string name="pie_chart_of_incomes_filter_title">Фильтр доходов круговой диаграммы</string>
-    <string name="pie_chart_display_title">Отображение круговой диаграммы</string>
-    <string name="horizontal_bar_chart_of_expenses_title">Г. гистограмма расходов</string>
-    <string name="horizontal_bar_chart_of_incomes_title">Г. гистограмма доходов</string>
-    <string name="horizontal_bar_chart_of_expenses_filter_title">Фильтр расходов горизонтальной гистограммы</string>
-    <string name="horizontal_bar_chart_of_incomes_filter_title">Фильтр доходов горизонтальной гистограммы</string>
-    <string name="horizontal_bar_chart_display_title">Отображение горизонтальной гистограммы</string>
+    <string name="chart_activity_title">Отчеты</string>
+    <string name="bar_chart_title">Расходы/доходы</string>
+    <string name="bar_chart_filter_title">Фильтр расходов/доходов</string>
+    <string name="bar_chart_display_title">Отображение расходов/доходов</string>
+    <string name="horizontal_bar_chart_of_expenses_title">Расходы по статьям</string>
+    <string name="horizontal_bar_chart_of_incomes_title">Доходы по статьям</string>
+    <string name="horizontal_bar_chart_of_expenses_filter_title">Фильтр расходов по статьям</string>
+    <string name="horizontal_bar_chart_of_incomes_filter_title">Фильтр доходов по статьям</string>
+    <string name="horizontal_bar_chart_of_expenses_display_title">Отображение расходов по статьям</string>
+    <string name="horizontal_bar_chart_of_incomes_display_title">Отображение доходов по статьям</string>
+    <string name="pie_chart_of_expenses_title">Расходы по статьям (круговая диаграмма)</string>
+    <string name="pie_chart_of_incomes_title">Доходы по статьям (круговая диаграмма)</string>
+    <string name="pie_chart_of_expenses_filter_title">Фильтр расходов по статьям (круговая диаграмма)</string>
+    <string name="pie_chart_of_incomes_filter_title">Фильтр доходов по статьям (круговая диаграмма)</string>
+    <string name="pie_chart_of_expenses_display_title">Отображение расходов по статьям (круговая диаграмма)</string>
+    <string name="pie_chart_of_incomes_display_title">Отображение доходов по статьям (круговая диаграмма)</string>
 
     <!-- Dashboard -->
     <string name="select_account">Счета</string>
@@ -66,7 +68,7 @@
     <string name="select_transfers">Переводы</string>
     <string name="select_flow_of_funds">Движение средств</string>
     <string name="select_templates">Шаблоны</string>
-    <string name="select_charts">Диаграммы</string>
+    <string name="select_charts">Отчеты</string>
     <!-- Backup -->
     <string name="backup_database">Сделать резервную копию БД</string>
     <string name="restore_database">Восстановить резервную копию БД</string>

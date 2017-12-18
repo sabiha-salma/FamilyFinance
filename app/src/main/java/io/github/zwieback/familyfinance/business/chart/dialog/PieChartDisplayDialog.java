@@ -2,6 +2,7 @@ package io.github.zwieback.familyfinance.business.chart.dialog;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.chart.display.PieChartDisplay;
@@ -16,9 +17,10 @@ import static io.github.zwieback.familyfinance.business.chart.display.PieChartDi
 public class PieChartDisplayDialog extends ChartDisplayDialog<PieChartDisplay,
         DialogDisplayChartPieBinding> {
 
-    public static PieChartDisplayDialog newInstance(PieChartDisplay display) {
+    public static PieChartDisplayDialog newInstance(PieChartDisplay display,
+                                                    @StringRes int dialogTitleId) {
         PieChartDisplayDialog fragment = new PieChartDisplayDialog();
-        Bundle args = createArguments(PIE_CHART_DISPLAY, display);
+        Bundle args = createArguments(PIE_CHART_DISPLAY, display, dialogTitleId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -34,7 +36,7 @@ public class PieChartDisplayDialog extends ChartDisplayDialog<PieChartDisplay,
 
     @Override
     protected int getDialogTitle() {
-        return R.string.pie_chart_display_title;
+        return R.string.pie_chart_of_expenses_display_title;
     }
 
     @Override

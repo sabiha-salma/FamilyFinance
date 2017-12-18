@@ -44,20 +44,22 @@
     <string name="exchange_rate_filter_title">Exchange Rate Filter</string>
     <string name="settings_activity_title">Settings</string>
     <string name="backup_activity_title">Backup &amp; Restore</string>
-    <string name="chart_activity_title">Charts</string>
-    <string name="bar_chart_title">Bar Chart</string>
-    <string name="bar_chart_filter_title">Bar Chart Filter</string>
-    <string name="bar_chart_display_title">Bar Chart Display</string>
-    <string name="pie_chart_of_expenses_title">Pie Chart of Expenses</string>
-    <string name="pie_chart_of_incomes_title">Pie Chart of Incomes</string>
-    <string name="pie_chart_of_expenses_filter_title">Pie Chart of Expenses Filter</string>
-    <string name="pie_chart_of_incomes_filter_title">Pie Chart of Incomes Filter</string>
-    <string name="pie_chart_display_title">Pie Chart Display</string>
-    <string name="horizontal_bar_chart_of_expenses_title">H. Bar Chart of Expenses</string>
-    <string name="horizontal_bar_chart_of_incomes_title">H. Bar Chart of Incomes</string>
-    <string name="horizontal_bar_chart_of_expenses_filter_title">Horizontal Bar Chart of Expenses Filter</string>
-    <string name="horizontal_bar_chart_of_incomes_filter_title">Horizontal Bar Chart of Incomes Filter</string>
-    <string name="horizontal_bar_chart_display_title">Horizontal Bar Chart Display</string>
+    <string name="chart_activity_title">Reports</string>
+    <string name="bar_chart_title">Expenses/Incomes</string>
+    <string name="bar_chart_filter_title">Filter of Expenses/Incomes</string>
+    <string name="bar_chart_display_title">Display of Expenses/Incomes</string>
+    <string name="horizontal_bar_chart_of_expenses_title">Expenses by Articles</string>
+    <string name="horizontal_bar_chart_of_incomes_title">Incomes by Articles</string>
+    <string name="horizontal_bar_chart_of_expenses_filter_title">Filter of Expenses by Articles</string>
+    <string name="horizontal_bar_chart_of_incomes_filter_title">Filter of Incomes by Articles</string>
+    <string name="horizontal_bar_chart_of_expenses_display_title">Display of Expenses by Articles</string>
+    <string name="horizontal_bar_chart_of_incomes_display_title">Display of Incomes by Articles</string>
+    <string name="pie_chart_of_expenses_title">Expenses by Articles (Pie Chart)</string>
+    <string name="pie_chart_of_incomes_title">Incomes by Articles (Pie Chart)</string>
+    <string name="pie_chart_of_expenses_filter_title">Filter of Expenses by Articles (Pie Chart)</string>
+    <string name="pie_chart_of_incomes_filter_title">Filter of Incomes by Articles (Pie Chart)</string>
+    <string name="pie_chart_of_expenses_display_title">Display of Expenses by Articles (Pie Chart)</string>
+    <string name="pie_chart_of_incomes_display_title">Display of Incomes by Articles (Pie Chart)</string>
 
     <!-- Dashboard -->
     <string name="select_account">Accounts</string>
@@ -66,7 +68,7 @@
     <string name="select_transfers">Transfers</string>
     <string name="select_flow_of_funds">Flow of Funds</string>
     <string name="select_templates">Templates</string>
-    <string name="select_charts">Charts</string>
+    <string name="select_charts">Reports</string>
     <!-- Backup -->
     <string name="backup_database">Make a backup of DB</string>
     <string name="restore_database">Restore the backup of DB</string>

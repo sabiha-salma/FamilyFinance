@@ -5,6 +5,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
 
 import io.github.zwieback.familyfinance.R;
+import io.github.zwieback.familyfinance.business.chart.dialog.HorizontalBarChartDisplayDialog;
 import io.github.zwieback.familyfinance.business.operation.dialog.ExpenseOperationFilterDialog;
 import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.query.ExpenseOperationQueryBuilder;
@@ -60,5 +61,12 @@ public class HorizontalBarChartOfExpensesFragment
         DialogFragment dialog = ExpenseOperationFilterDialog.newInstance(filter,
                 R.string.horizontal_bar_chart_of_expenses_filter_title);
         dialog.show(getChildFragmentManager(), "ExpenseOperationFilterDialog");
+    }
+
+    @Override
+    public void showDisplayDialog() {
+        DialogFragment dialog = HorizontalBarChartDisplayDialog.newInstance(display,
+                R.string.horizontal_bar_chart_of_expenses_display_title);
+        dialog.show(getChildFragmentManager(), "HorizontalBarChartDisplayDialog");
     }
 }
