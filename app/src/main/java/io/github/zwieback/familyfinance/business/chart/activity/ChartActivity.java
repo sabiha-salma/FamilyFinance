@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.business.chart.activity;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -55,7 +56,7 @@ public class ChartActivity extends DataActivityWrapper
             @Override
             public void onPageSelected(int position) {
                 ChartFragment chartFragment = findFragmentByPosition(position);
-                if (!chartFragment.isDataLoaded()) {
+                if (chartFragment != null && !chartFragment.isDataLoaded()) {
                     chartFragment.refreshData();
                 }
             }
@@ -79,12 +80,19 @@ public class ChartActivity extends DataActivityWrapper
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        ChartFragment chartFragment;
         switch (item.getItemId()) {
             case R.id.action_filter:
-                findFragment().showFilterDialog();
+                chartFragment = findFragment();
+                if (chartFragment != null) {
+                    chartFragment.showFilterDialog();
+                }
                 return true;
             case R.id.action_display:
-                findFragment().showDisplayDialog();
+                chartFragment = findFragment();
+                if (chartFragment != null) {
+                    chartFragment.showDisplayDialog();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -107,10 +115,12 @@ public class ChartActivity extends DataActivityWrapper
     // Fragment methods
     // -----------------------------------------------------------------------------------------
 
+    @Nullable
     private ChartFragment findFragment() {
         return findFragmentByPosition(tabLayout.getSelectedTabPosition());
     }
 
+    @Nullable
     private ChartFragment findFragmentByPosition(int position) {
         return pagerAdapter.findFragment(position);
     }
@@ -122,7 +132,10 @@ public class ChartActivity extends DataActivityWrapper
     @SuppressWarnings("unchecked")
     @Override
     public void onApplyFilter(OperationFilter filter) {
-        findFragment().onApplyFilter(filter);
+        ChartFragment chartFragment = findFragment();
+        if (chartFragment != null) {
+            chartFragment.onApplyFilter(filter);
+        }
     }
 
     // -----------------------------------------------------------------------------------------
@@ -132,6 +145,9 @@ public class ChartActivity extends DataActivityWrapper
     @SuppressWarnings("unchecked")
     @Override
     public void onApplyDisplay(ChartDisplay display) {
-        findFragment().onApplyDisplay(display);
+        ChartFragment chartFragment = findFragment();
+        if (chartFragment != null) {
+            chartFragment.onApplyDisplay(display);
+        }
     }
 }
