@@ -37,8 +37,6 @@ dependencies {
 //    api "com.android.support:design:${versions.supportLib}"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:design:${versions.supportLib}"
-    // java 8 streams
-    implementation "com.annimon:stream:${versions.streamLib}"
     // shared lib
     implementation project(':shared')
 }
