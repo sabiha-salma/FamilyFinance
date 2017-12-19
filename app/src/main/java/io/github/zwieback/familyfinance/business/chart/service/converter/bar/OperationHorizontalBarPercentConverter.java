@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import io.github.zwieback.familyfinance.business.chart.service.builder.IdIndexMapStateBuilder;
+import io.github.zwieback.familyfinance.business.chart.service.builder.IdIndexMapStatefulBuilder;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.github.zwieback.familyfinance.util.CollectionUtils;
 
@@ -24,7 +24,7 @@ public class OperationHorizontalBarPercentConverter extends OperationHorizontalB
     private static final BigDecimal MAX_PERCENT = BigDecimal.valueOf(100);
 
     public OperationHorizontalBarPercentConverter(@NonNull Context context,
-                                                  @NonNull IdIndexMapStateBuilder builder) {
+                                                  @NonNull IdIndexMapStatefulBuilder builder) {
         super(context, builder);
     }
 

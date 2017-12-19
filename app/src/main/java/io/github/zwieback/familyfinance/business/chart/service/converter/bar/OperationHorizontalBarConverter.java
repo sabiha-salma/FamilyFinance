@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-import io.github.zwieback.familyfinance.business.chart.service.builder.IdIndexMapStateBuilder;
+import io.github.zwieback.familyfinance.business.chart.service.builder.IdIndexMapStatefulBuilder;
 import io.github.zwieback.familyfinance.business.chart.service.converter.OperationConverter;
 import io.github.zwieback.familyfinance.business.chart.service.converter.OperationSumConverter;
 import io.github.zwieback.familyfinance.core.model.OperationView;
@@ -22,10 +22,10 @@ import io.github.zwieback.familyfinance.util.CollectionUtils;
 public class OperationHorizontalBarConverter implements OperationConverter<BarEntry> {
 
     final OperationSumConverter sumConverter;
-    final IdIndexMapStateBuilder builder;
+    final IdIndexMapStatefulBuilder builder;
 
     public OperationHorizontalBarConverter(@NonNull Context context,
-                                           @NonNull IdIndexMapStateBuilder builder) {
+                                           @NonNull IdIndexMapStatefulBuilder builder) {
         this.sumConverter = new OperationSumConverter(context);
         this.builder = builder;
     }

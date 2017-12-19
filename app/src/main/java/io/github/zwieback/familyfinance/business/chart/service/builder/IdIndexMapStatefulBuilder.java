@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class IdIndexMapStateBuilder {
+public class IdIndexMapStatefulBuilder {
 
     /**
      * key - unique entity id, value - unique bar index (started from 0)
@@ -17,11 +17,11 @@ public class IdIndexMapStateBuilder {
     private Map<Float, Float> idIndexMap;
     private List<Pair<BigDecimal, Float>> sumMap;
 
-    public static IdIndexMapStateBuilder create() {
-        return new IdIndexMapStateBuilder();
+    public static IdIndexMapStatefulBuilder create() {
+        return new IdIndexMapStatefulBuilder();
     }
 
-    public IdIndexMapStateBuilder setSumMap(List<Pair<BigDecimal, Float>> sumMap) {
+    public IdIndexMapStatefulBuilder setSumMap(List<Pair<BigDecimal, Float>> sumMap) {
         this.sumMap = sumMap;
         this.idIndexMap = null;
         return this;
