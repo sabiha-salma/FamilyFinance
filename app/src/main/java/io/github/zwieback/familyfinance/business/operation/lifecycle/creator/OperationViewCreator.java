@@ -22,7 +22,8 @@ public class OperationViewCreator extends EntityViewCreator {
     @Override
     protected String getViewBody() {
         return " SELECT op.id                           AS id," +
-                "       op.icon_name                    AS icon_name," +
+                "       COALESCE(op.icon_name, ac.icon_name)" +
+                "                                       AS icon_name," +
                 "       op.linked_transfer_operation_id AS linked_transfer_operation_id," +
                 "       ac.id                           AS account_id," +
                 "       ac.name                         AS account_name," +
