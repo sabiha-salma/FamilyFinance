@@ -61,6 +61,7 @@
                         android:hint="@string/hint_name_required"
                         app:errorEnabled="true"
                         app:errorLabel="@string/name_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validateAfterTextChanged="true"
                         app:validator="not_empty">
 
@@ -92,6 +93,7 @@
                         android:hint="@string/hint_article_name"
                         app:errorEnabled="true"
                         app:errorLabel="@string/article_is_not_set_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validator="not_empty">
 
                         <io.github.zwieback.familyfinance.widget.ClearableEditText
@@ -111,6 +113,7 @@
                         android:hint="@string/hint_article_category"
                         app:errorEnabled="true"
                         app:errorLabel="@string/article_is_not_set_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validator="not_empty">
 
                         <io.github.zwieback.familyfinance.widget.ClearableEditText
@@ -139,6 +142,7 @@
                         android:hint="@string/hint_account"
                         app:errorEnabled="true"
                         app:errorLabel="@string/account_is_not_set_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validator="not_empty">
 
                         <io.github.zwieback.familyfinance.widget.ClearableEditText
@@ -158,6 +162,7 @@
                         android:hint="@string/hint_owner"
                         app:errorEnabled="true"
                         app:errorLabel="@string/owner_is_not_set_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validator="not_empty">
 
                         <io.github.zwieback.familyfinance.widget.ClearableEditText
@@ -186,6 +191,7 @@
                         android:hint="@string/hint_transfer_account"
                         app:errorEnabled="true"
                         app:errorLabel="@string/transfer_account_is_not_set_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validator="not_empty">
 
                         <io.github.zwieback.familyfinance.widget.ClearableEditText
@@ -219,6 +225,7 @@
                         android:hint="@string/hint_value"
                         app:errorEnabled="true"
                         app:errorLabel="@string/value_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validator="big_decimal">
 
                         <io.github.zwieback.familyfinance.widget.DecimalNumberTextEdit
@@ -237,6 +244,7 @@
                         android:hint="@string/hint_date"
                         app:errorEnabled="true"
                         app:errorLabel="@string/date_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validator="date">
 
                         <io.github.zwieback.familyfinance.widget.ClearableEditText
@@ -266,6 +274,7 @@
                         android:hint="@string/hint_currency"
                         app:errorEnabled="true"
                         app:errorLabel="@string/currency_is_not_set_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validator="not_empty">
 
                         <io.github.zwieback.familyfinance.widget.ClearableEditText
@@ -285,6 +294,7 @@
                         android:hint="@string/hint_exchange_rate"
                         app:errorEnabled="true"
                         app:errorLabel="@string/exchange_rate_is_not_set_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validator="not_empty">
 
                         <io.github.zwieback.familyfinance.widget.ClearableEditText

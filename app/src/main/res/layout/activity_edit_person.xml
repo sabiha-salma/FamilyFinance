@@ -51,7 +51,8 @@
                     android:layout_marginLeft="@dimen/entity_edit_margin"
                     android:layout_marginStart="@dimen/entity_edit_margin"
                     android:hint="@string/hint_parent"
-                    app:errorEnabled="true">
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance">
 
                     <io.github.zwieback.familyfinance.widget.ClearableEditText
                         android:id="@+id/parent"
@@ -72,6 +73,7 @@
                 android:hint="@string/hint_name"
                 app:errorEnabled="true"
                 app:errorLabel="@string/name_error"
+                app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                 app:validateAfterTextChanged="true"
                 app:validator="not_empty">
 
@@ -92,6 +94,7 @@
                 android:hint="@string/hint_order_code"
                 app:errorEnabled="true"
                 app:errorLabel="@string/order_code_error"
+                app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                 app:validateAfterTextChanged="true"
                 app:validator="integer">
 

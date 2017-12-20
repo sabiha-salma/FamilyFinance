@@ -34,4 +34,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="AppTheme.ErrorTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">?colorError</item>
+    </style>
 </resources>

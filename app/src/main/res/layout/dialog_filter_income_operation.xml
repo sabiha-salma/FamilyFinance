@@ -123,6 +123,7 @@
                     android:hint="@string/hint_start_date"
                     app:errorEnabled="true"
                     app:errorLabel="@string/date_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                     app:validateAfterTextChanged="true"
                     app:validator="date">
 
@@ -144,6 +145,7 @@
                     android:hint="@string/hint_end_date"
                     app:errorEnabled="true"
                     app:errorLabel="@string/date_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                     app:validateAfterTextChanged="true"
                     app:validator="date">
 
@@ -174,6 +176,7 @@
                     android:hint="@string/hint_start_value"
                     app:errorEnabled="true"
                     app:errorLabel="@string/value_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                     app:validator="big_decimal">
 
                     <io.github.zwieback.familyfinance.widget.DecimalNumberTextEdit
@@ -192,6 +195,7 @@
                     android:hint="@string/hint_end_value"
                     app:errorEnabled="true"
                     app:errorLabel="@string/value_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                     app:validator="big_decimal">
 
                     <io.github.zwieback.familyfinance.widget.DecimalNumberTextEdit

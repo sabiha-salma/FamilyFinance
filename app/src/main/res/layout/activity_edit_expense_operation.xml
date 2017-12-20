@@ -64,6 +64,7 @@
                             android:hint="@string/hint_article_name"
                             app:errorEnabled="true"
                             app:errorLabel="@string/article_is_not_set_error"
+                            app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                             app:validateAfterTextChanged="true"
                             app:validator="not_empty">
 
@@ -83,6 +84,7 @@
                             android:layout_height="wrap_content"
                             app:errorEnabled="true"
                             app:errorLabel="@string/article_is_not_set_error"
+                            app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                             app:hintEnabled="false"
                             app:validateAfterTextChanged="true"
                             app:validator="not_empty">
@@ -117,6 +119,7 @@
                         android:hint="@string/hint_expense_account"
                         app:errorEnabled="true"
                         app:errorLabel="@string/expense_account_is_not_set_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validateAfterTextChanged="true"
                         app:validator="not_empty">
 
@@ -137,6 +140,7 @@
                         android:hint="@string/hint_owner"
                         app:errorEnabled="true"
                         app:errorLabel="@string/owner_is_not_set_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validateAfterTextChanged="true"
                         app:validator="not_empty">
 
@@ -166,6 +170,7 @@
                         android:hint="@string/hint_value"
                         app:errorEnabled="true"
                         app:errorLabel="@string/value_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validateAfterTextChanged="true"
                         app:validator="big_decimal">
 
@@ -185,6 +190,7 @@
                         android:hint="@string/hint_date"
                         app:errorEnabled="true"
                         app:errorLabel="@string/date_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validateAfterTextChanged="true"
                         app:validator="date">
 
@@ -215,6 +221,7 @@
                         android:hint="@string/hint_currency"
                         app:errorEnabled="true"
                         app:errorLabel="@string/currency_is_not_set_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validateAfterTextChanged="true"
                         app:validator="not_empty">
 
@@ -235,6 +242,7 @@
                         android:hint="@string/hint_exchange_rate"
                         app:errorEnabled="true"
                         app:errorLabel="@string/exchange_rate_is_not_set_error"
+                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                         app:validateAfterTextChanged="true"
                         app:validator="not_empty">
 
