@@ -20,7 +20,7 @@ public class ExpenseOperationFilterTest {
     }
 
     @Test
-    public void copyOfFilter_isEqual() throws Exception {
+    public void copyOfFilter_isEqual() {
         ExpenseOperationFilter filter = new ExpenseOperationFilter();
         filter.setArticleId(randomGenerator.getRandomInt());
         filter.setAccountId(randomGenerator.getRandomInt());
