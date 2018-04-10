@@ -249,7 +249,8 @@ abstract class OperationQueryBuilder<T extends OperationQueryBuilder>
 
         ReactiveResult<Tuple> result = data.raw(query);
         return Stream.of(result.iterator())
-                .map(tuple -> (Integer) tuple.get("id"))
+                .map(tuple -> tuple.get("id").toString())
+                .map(Integer::parseInt)
                 .collect(Collectors.toSet());
     }
 }
