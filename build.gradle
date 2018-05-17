@@ -25,7 +25,7 @@ buildscript {
                 timeLib: '1.0.5',
                 acraLib: '4.10.0',
                 gendalfLib: '1.3.1',
-                preferenceCompatLib: '27.0.2.0',
+                preferenceCompatLib: '27.1.1.0',
                 filepickerLib: '4.1.0',
                 permissionsDispatcherLib: '3.0.1',
                 rxBinding2Lib: '2.0.0',
