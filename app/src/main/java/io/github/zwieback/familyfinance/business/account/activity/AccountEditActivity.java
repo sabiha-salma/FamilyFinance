@@ -189,9 +189,8 @@ public class AccountEditActivity extends
 
     @Override
     protected List<ValidatingTextInputLayout> getLayoutsForValidation() {
-        List<ValidatingTextInputLayout> layouts = new ArrayList<>();
-        layouts.addAll(Arrays.asList(binding.parentLayout, binding.nameLayout,
-                binding.orderCodeLayout));
+        List<ValidatingTextInputLayout> layouts = new ArrayList<>(Arrays.asList(binding.parentLayout,
+                binding.nameLayout, binding.orderCodeLayout));
         if (!entity.isFolder()) {
             layouts.addAll(Arrays.asList(binding.currencyLayout, binding.ownerLayout,
                     binding.initialBalanceLayout));
