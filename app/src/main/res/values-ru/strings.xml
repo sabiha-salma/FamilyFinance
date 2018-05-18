@@ -102,6 +102,18 @@
     <string name="acra_enabled_preference_summary">ACRA включена</string>
     <string name="acra_disabled_preference_summary">ACRA выключена</string>
 
+    <!-- Types -->
+    <string-array name="account_type">
+        <item>Неопределен</item>
+        <item>Наличные</item>
+        <item>Депозит</item>
+        <item>Кредит</item>
+        <item>Дебетовая карта</item>
+        <item>Кредитная карта</item>
+        <item>Виртуальная дебетовая карта</item>
+        <item>Виртуальная кредитная карта</item>
+    </string-array>
+
     <!-- Hints -->
     <string name="hint_name">Название</string>
     <string name="hint_name_required">Название (обязательно)</string>
@@ -120,6 +132,7 @@
     <string name="hint_owner_disabled">Владелец &disabled;</string>
     <string name="hint_value">Значение</string>
     <string name="hint_account">Счет</string>
+    <string name="hint_account_type">Тип</string>
     <string name="hint_expense_account">Счет расходов</string>
     <string name="hint_income_account">Счет доходов</string>
     <string name="hint_transfer_account">Счет перевода (куда)</string>

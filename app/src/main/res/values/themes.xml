@@ -38,4 +38,11 @@
     <style name="AppTheme.ErrorTextAppearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">?colorError</item>
     </style>
+
+    <style name="AppTheme.HintText" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:paddingBottom">@dimen/hint_text_vertical_spacing</item>
+        <item name="android:paddingLeft">@dimen/hint_text_horizontal_spacing</item>
+        <item name="android:paddingRight">@dimen/hint_text_horizontal_spacing</item>
+        <item name="android:textColor">?android:textColorHint</item>
+    </style>
 </resources>

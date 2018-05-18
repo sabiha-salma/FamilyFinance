@@ -48,6 +48,9 @@
     <dimen name="entity_edit_margin">16dp</dimen>
     <dimen name="entity_edit_icon_size">96dp</dimen>
 
+    <dimen name="hint_text_vertical_spacing">8dp</dimen>
+    <dimen name="hint_text_horizontal_spacing">4dp</dimen>
+
     <!-- Button -->
     <dimen name="button_icon_size">16dp</dimen>
     <dimen name="dashboard_add_button_width">56dp</dimen>

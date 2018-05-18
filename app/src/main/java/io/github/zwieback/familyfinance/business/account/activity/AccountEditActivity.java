@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import io.github.zwieback.familyfinance.R;
+import io.github.zwieback.familyfinance.business.account.activity.helper.AccountTypeHelper;
 import io.github.zwieback.familyfinance.business.account.adapter.AccountProvider;
 import io.github.zwieback.familyfinance.business.currency.activity.CurrencyActivity;
 import io.github.zwieback.familyfinance.business.person.activity.PersonActivity;
@@ -24,6 +25,7 @@ import io.github.zwieback.familyfinance.core.adapter.EntityProvider;
 import io.github.zwieback.familyfinance.core.model.Account;
 import io.github.zwieback.familyfinance.core.model.Currency;
 import io.github.zwieback.familyfinance.core.model.Person;
+import io.github.zwieback.familyfinance.core.model.type.AccountType;
 import io.github.zwieback.familyfinance.databinding.ActivityEditAccountBinding;
 
 import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.ACCOUNT_CODE;
@@ -140,6 +142,7 @@ public class AccountEditActivity extends
         Account account = new Account();
         account.setActive(true);
         account.setFolder(folder);
+        account.setType(AccountType.UNDEFINED_ACCOUNT);
         if (!folder) {
             account.setInitialBalance(BigDecimal.ZERO);
             loadOwner(databasePrefs.getPersonId());
@@ -174,6 +177,7 @@ public class AccountEditActivity extends
         binding.currency.setOnClickListener(this::onCurrencyClick);
         binding.owner.setOnClickListener(this::onOwnerClick);
         binding.parentLayout.setValidator(this::isParentValid);
+        binding.accountType.setSelection(AccountTypeHelper.getAccountTypeIndex(entity));
     }
 
     @Override
@@ -185,6 +189,7 @@ public class AccountEditActivity extends
             account.setInitialBalance(
                     stringToBigDecimal(binding.initialBalance.getText().toString()));
         }
+        account.setType(AccountTypeHelper.getAccountType(binding.accountType));
     }
 
     @Override

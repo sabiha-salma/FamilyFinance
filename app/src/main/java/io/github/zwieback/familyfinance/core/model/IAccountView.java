@@ -8,6 +8,7 @@ import io.github.zwieback.familyfinance.core.model.converter.BigDecimalToWorthCo
 import io.github.zwieback.familyfinance.core.model.restriction.AccountRestriction;
 import io.github.zwieback.familyfinance.core.model.restriction.CurrencyRestriction;
 import io.github.zwieback.familyfinance.core.model.restriction.PersonRestriction;
+import io.github.zwieback.familyfinance.core.model.type.AccountType;
 import io.requery.Column;
 import io.requery.Convert;
 import io.requery.Entity;
@@ -77,4 +78,7 @@ public interface IAccountView extends IBaseEntityFolder {
     @Bindable
     @Column(name = "order_code", nullable = false)
     int getOrderCode();
+
+    @Column(name = "_type", nullable = false, length = AccountRestriction.TYPE_MAX_LENGTH, value = "UNDEFINED_ACCOUNT")
+    AccountType getType();
 }

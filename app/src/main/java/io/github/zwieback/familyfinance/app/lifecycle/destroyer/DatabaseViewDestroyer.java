@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.sql.Connection;
 
+import io.github.zwieback.familyfinance.business.account.lifecycle.destroyer.AccountViewDestroyer;
 import io.github.zwieback.familyfinance.business.operation.lifecycle.destroyer.OperationViewDestroyer;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityViewDestroyer;
 import io.reactivex.Observable;
@@ -22,6 +23,7 @@ public class DatabaseViewDestroyer {
 
     public void destroyViews() {
         destroyView(new OperationViewDestroyer(connection), onOperationViewDestroyed());
+        destroyView(new AccountViewDestroyer(connection), onAccountViewDestroyed());
     }
 
     private void destroyView(EntityViewDestroyer destroyer, Consumer<Boolean> onViewDestroyed) {
@@ -33,6 +35,10 @@ public class DatabaseViewDestroyer {
 
     private Consumer<Boolean> onOperationViewDestroyed() {
         return ignoredResult -> logFinishOfDestroyer(OperationViewDestroyer.class);
+    }
+
+    private Consumer<Boolean> onAccountViewDestroyed() {
+        return ignoredResult -> logFinishOfDestroyer(AccountViewDestroyer.class);
     }
 
     private static void logFinishOfDestroyer(Class destroyerClass) {

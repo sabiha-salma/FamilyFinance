@@ -102,6 +102,18 @@
     <string name="acra_enabled_preference_summary">ACRA is enabled</string>
     <string name="acra_disabled_preference_summary">ACRA is disabled</string>
 
+    <!-- Types -->
+    <string-array name="account_type">
+        <item>Undefined</item>
+        <item>Cash</item>
+        <item>Deposit</item>
+        <item>Credit</item>
+        <item>Debit Card</item>
+        <item>Credit Card</item>
+        <item>Virtual Debit Card</item>
+        <item>Virtual Credit Card</item>
+    </string-array>
+
     <!-- Hints -->
     <string name="hint_name">Name</string>
     <string name="hint_name_required">Name (required)</string>
@@ -120,6 +132,7 @@
     <string name="hint_owner_disabled">Owner &disabled;</string>
     <string name="hint_value">Value</string>
     <string name="hint_account">Account</string>
+    <string name="hint_account_type">Type</string>
     <string name="hint_expense_account">Expense Account</string>
     <string name="hint_income_account">Income Account</string>
     <string name="hint_transfer_account">Transfer Account</string>

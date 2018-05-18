@@ -64,6 +64,15 @@
 
             </LinearLayout>
 
+            <Switch
+                android:id="@+id/active"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/entity_edit_margin"
+                android:checked="@{account.active}"
+                android:text="@string/hint_active"
+                app:readOnly="@{true}"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,14 +103,25 @@
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                <Switch
-                    android:id="@+id/active"
+                <LinearLayout
                     android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
                     android:layout_weight="@integer/half_of_weight"
-                    android:checked="@{account.active}"
-                    android:text="@string/hint_active"
-                    app:readOnly="@{true}"/>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hint_account_type"
+                        style="@style/AppTheme.HintText"/>
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/account_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/account_type"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 

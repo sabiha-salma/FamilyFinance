@@ -13,6 +13,7 @@ import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityCreator;
 import io.github.zwieback.familyfinance.core.model.Account;
 import io.github.zwieback.familyfinance.core.model.Currency;
 import io.github.zwieback.familyfinance.core.model.Person;
+import io.github.zwieback.familyfinance.core.model.type.AccountType;
 import io.requery.Persistable;
 import io.requery.reactivex.ReactiveEntityStore;
 import io.requery.reactivex.ReactiveResult;
@@ -30,14 +31,14 @@ public class AccountCreator extends EntityCreator<Account> {
 
         Set<Account> accounts = new TreeSet<>(this);
         Account cash = createAccount(null, defaultCurrency, chief, getString(R.string.account_cash),
-                false, BigDecimal.ZERO, 1);
+                false, BigDecimal.ZERO, 1, AccountType.CASH_ACCOUNT);
         accounts.add(cash);
         return accounts;
     }
 
     @Override
     public int compare(Account left, Account right) {
-        return Integer.valueOf(left.getOrderCode()).compareTo(right.getOrderCode());
+        return Integer.compare(left.getOrderCode(), right.getOrderCode());
     }
 
     @NonNull
@@ -64,7 +65,8 @@ public class AccountCreator extends EntityCreator<Account> {
                                          @NonNull String name,
                                          boolean folder,
                                          @Nullable BigDecimal initialBalance,
-                                         int orderCode) {
+                                         int orderCode,
+                                         @NonNull AccountType type) {
         return new Account()
                 .setActive(true)
                 .setParent(parent)
@@ -73,6 +75,7 @@ public class AccountCreator extends EntityCreator<Account> {
                 .setName(name)
                 .setFolder(folder)
                 .setInitialBalance(initialBalance)
-                .setOrderCode(orderCode);
+                .setOrderCode(orderCode)
+                .setType(type);
     }
 }
