@@ -15,10 +15,6 @@
 
     </data>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -28,12 +24,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:fillViewport="true"
+            android:padding="@dimen/entity_edit_padding">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar"
-            android:orientation="vertical"
-            android:padding="@dimen/entity_edit_padding">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -210,6 +211,52 @@
                 android:weightSum="@integer/full_weight">
 
                 <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/payment_system_layout"
+                    android:layout_width="@dimen/zero_weight"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@integer/half_of_weight"
+                    android:hint="@string/hint_payment_system">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/payment_system"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLength="@{AccountRestriction.PAYMENT_SYSTEM_MAX_LENGTH}"
+                        android:text="@{account.paymentSystem}"/>
+
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
+
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/card_number_layout"
+                    android:layout_width="@dimen/zero_weight"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@integer/half_of_weight"
+                    android:hint="@string/hint_card_number"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/card_number_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:validator="signed_number">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/card_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number|numberSigned"
+                        android:maxLength="@{AccountRestriction.CARD_NUMBER_MAX_LENGTH}"
+                        android:text="@{account.cardNumber}"/>
+
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="@integer/full_weight">
+
+                <com.johnpetitto.validator.ValidatingTextInputLayout
                     android:id="@+id/initial_balance_layout"
                     android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
@@ -254,8 +301,8 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+        </ScrollView>
 
-    </ScrollView>
+    </RelativeLayout>
 
 </layout>

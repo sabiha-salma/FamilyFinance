@@ -85,4 +85,15 @@ public interface IAccountView extends IBaseEntityFolder {
     @Bindable
     @Column(name = "_number", length = AccountRestriction.NUMBER_MAX_LENGTH)
     String getNumber();
+
+    @Bindable
+    @Column(name = "payment_system", length = AccountRestriction.PAYMENT_SYSTEM_MAX_LENGTH)
+    String getPaymentSystem();
+
+    /**
+     * May be {@code null} only if {@link AccountType#isCard()} is {@code false}
+     */
+    @Bindable
+    @Column(name = "card_number", length = AccountRestriction.CARD_NUMBER_MAX_LENGTH)
+    String getCardNumber();
 }

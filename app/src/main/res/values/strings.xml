@@ -128,6 +128,10 @@
     <string name="hint_default_value_disabled">Initial Default Value &disabled;</string>
     <string name="hint_account_number">Account Number</string>
     <string name="hint_account_number_disabled">Account Number &disabled;</string>
+    <string name="hint_payment_system">Payment System</string>
+    <string name="hint_payment_system_disabled">Payment System &disabled;</string>
+    <string name="hint_card_number">Card Number</string>
+    <string name="hint_card_number_disabled">Card Number &disabled;</string>
     <string name="hint_currency">Currency</string>
     <string name="hint_currency_disabled">Currency &disabled;</string>
     <string name="hint_owner">Owner</string>
@@ -285,6 +289,7 @@
     <string name="default_value_error">Invalid default value</string>
     <string name="value_error">Invalid value</string>
     <string name="account_number_error">Invalid account number (must be 20 digits)</string>
+    <string name="card_number_error">Invalid card number</string>
     <string name="article_is_not_set_error">Article is not set</string>
     <string name="account_is_not_set_error">Account is not set</string>
     <string name="expense_account_is_not_set_error">Expense account is not set</string>

@@ -173,6 +173,8 @@ public class AccountEditActivity extends
             disableLayout(binding.initialBalanceLayout, R.string.hint_initial_balance_disabled);
             disableLayout(binding.accountTypeLayout);
             disableLayout(binding.numberLayout, R.string.hint_account_number_disabled);
+            disableLayout(binding.paymentSystemLayout, R.string.hint_payment_system_disabled);
+            disableLayout(binding.cardNumberLayout, R.string.hint_card_number_disabled);
         }
         binding.icon.setOnClickListener(this::onSelectIconClick);
         binding.parent.setOnClickListener(this::onParentClick);
@@ -193,6 +195,8 @@ public class AccountEditActivity extends
                     stringToBigDecimal(binding.initialBalance.getText().toString()));
             account.setType(AccountTypeHelper.getAccountType(binding.accountType));
             account.setNumber(binding.number.getText().toString());
+            account.setPaymentSystem(binding.paymentSystem.getText().toString());
+            account.setCardNumber(binding.cardNumber.getText().toString());
         }
     }
 
@@ -203,9 +207,12 @@ public class AccountEditActivity extends
         if (!entity.isFolder()) {
             layouts.addAll(Arrays.asList(binding.currencyLayout, binding.ownerLayout,
                     binding.initialBalanceLayout));
-        }
-        if (!entity.isFolder() && isTextNotEmpty(binding.number.getText().toString())) {
-            layouts.add(binding.numberLayout);
+            if (isTextNotEmpty(binding.number.getText().toString())) {
+                layouts.add(binding.numberLayout);
+            }
+            if (isTextNotEmpty(binding.cardNumber.getText().toString())) {
+                layouts.add(binding.cardNumberLayout);
+            }
         }
         return Collections.unmodifiableList(layouts);
     }
