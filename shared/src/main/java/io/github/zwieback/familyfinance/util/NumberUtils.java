@@ -10,6 +10,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
+import java.util.regex.Pattern;
 
 import static io.github.zwieback.familyfinance.util.StringUtils.EMPTY;
 import static io.github.zwieback.familyfinance.util.StringUtils.isTextEmpty;
@@ -26,6 +27,9 @@ public final class NumberUtils {
 
     private static final int DEFAULT_GROUPING_SIZE = 3;
     private static final DecimalFormat bigDecimalFormat;
+
+    private static final Pattern SIGNED_NUMBER_PATTERN = Pattern.compile("\\d+");
+    private static final Pattern ACCOUNT_NUMBER_PATTERN = Pattern.compile("\\d{20}");
 
     static {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols(ConfigurationUtils.getSystemLocale());
@@ -67,12 +71,20 @@ public final class NumberUtils {
         return true;
     }
 
-    public static boolean isTextAnBigDecimal(String text) {
+    public static boolean isTextABigDecimal(String text) {
         try {
             return stringToBigDecimal(text) != null;
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public static boolean isTextASignedNumber(String text) {
+        return SIGNED_NUMBER_PATTERN.matcher(text).matches();
+    }
+
+    public static boolean isTextAnAccountNumber(String text) {
+        return ACCOUNT_NUMBER_PATTERN.matcher(text).matches();
     }
 
     public static int stringToInt(String text) {

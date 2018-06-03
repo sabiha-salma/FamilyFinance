@@ -37,6 +37,7 @@ import static io.github.zwieback.familyfinance.business.dashboard.activity.Dashb
 import static io.github.zwieback.familyfinance.util.NumberUtils.nonNullId;
 import static io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal;
 import static io.github.zwieback.familyfinance.util.NumberUtils.stringToInt;
+import static io.github.zwieback.familyfinance.util.StringUtils.isTextNotEmpty;
 
 public class AccountEditActivity extends
         EntityFolderEditActivity<Account, ActivityEditAccountBinding> {
@@ -170,6 +171,8 @@ public class AccountEditActivity extends
             disableLayout(binding.ownerLayout, R.string.hint_owner_disabled);
             disableLayout(binding.currencyLayout, R.string.hint_currency_disabled);
             disableLayout(binding.initialBalanceLayout, R.string.hint_initial_balance_disabled);
+            disableLayout(binding.accountTypeLayout);
+            disableLayout(binding.numberLayout, R.string.hint_account_number_disabled);
         }
         binding.icon.setOnClickListener(this::onSelectIconClick);
         binding.parent.setOnClickListener(this::onParentClick);
@@ -188,8 +191,9 @@ public class AccountEditActivity extends
         if (!account.isFolder()) {
             account.setInitialBalance(
                     stringToBigDecimal(binding.initialBalance.getText().toString()));
+            account.setType(AccountTypeHelper.getAccountType(binding.accountType));
+            account.setNumber(binding.number.getText().toString());
         }
-        account.setType(AccountTypeHelper.getAccountType(binding.accountType));
     }
 
     @Override
@@ -199,6 +203,9 @@ public class AccountEditActivity extends
         if (!entity.isFolder()) {
             layouts.addAll(Arrays.asList(binding.currencyLayout, binding.ownerLayout,
                     binding.initialBalanceLayout));
+        }
+        if (!entity.isFolder() && isTextNotEmpty(binding.number.getText().toString())) {
+            layouts.add(binding.numberLayout);
         }
         return Collections.unmodifiableList(layouts);
     }

@@ -64,4 +64,8 @@ public interface IAccount extends IBaseEntityFolder {
 
     @Column(name = "_type", nullable = false, length = AccountRestriction.TYPE_MAX_LENGTH, value = "UNDEFINED_ACCOUNT")
     AccountType getType();
+
+    @Bindable
+    @Column(name = "_number", length = AccountRestriction.NUMBER_MAX_LENGTH)
+    String getNumber();
 }

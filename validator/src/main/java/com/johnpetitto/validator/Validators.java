@@ -36,14 +36,24 @@ public final class Validators {
      * Validates input for not empty String.
      */
     public static final Validator NOT_EMPTY;
+    /**
+     * Validates input for number formatting.
+     */
+    public static final Validator SIGNED_NUMBER;
+    /**
+     * Validates input for account number formatting.
+     */
+    public static final Validator ACCOUNT_NUMBER;
 
     static {
         EMAIL = input -> Patterns.EMAIL_ADDRESS.matcher(input).matches();
         PHONE = input -> Patterns.PHONE.matcher(input).matches();
         INTEGER = NumberUtils::isTextAnInteger;
-        BIG_DECIMAL = NumberUtils::isTextAnBigDecimal;
+        BIG_DECIMAL = NumberUtils::isTextABigDecimal;
         DATE = DateUtils::isTextAnLocalDate;
         NOT_EMPTY = StringUtils::isTextNotEmpty;
+        SIGNED_NUMBER = NumberUtils::isTextASignedNumber;
+        ACCOUNT_NUMBER = NumberUtils::isTextAnAccountNumber;
     }
 
     private Validators() {

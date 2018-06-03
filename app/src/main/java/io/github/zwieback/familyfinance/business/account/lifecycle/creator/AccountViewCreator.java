@@ -32,7 +32,8 @@ public class AccountViewCreator extends EntityViewCreator {
                 "       cu.name            AS currency_name," +
                 "       pe.id              AS owner_id," +
                 "       pe.name            AS owner_name," +
-                "       ac._type           AS _type" +
+                "       ac._type           AS _type," +
+                "       ac._number         AS _number" +
                 "  FROM account ac" +
                 "       LEFT JOIN account ap  ON ap.id = ac.parent_id" +
                 "       LEFT JOIN currency cu ON cu.id = ac.currency_id" +

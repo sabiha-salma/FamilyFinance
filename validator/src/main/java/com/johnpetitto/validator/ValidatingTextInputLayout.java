@@ -63,6 +63,8 @@ public class ValidatingTextInputLayout extends TextInputLayout {
     private static final int BIG_DECIMAL_VALIDATOR = 4;
     private static final int DATE_VALIDATOR = 5;
     private static final int NOT_EMPTY_VALIDATOR = 6;
+    private static final int SIGNED_NUMBER_VALIDATOR = 7;
+    private static final int ACCOUNT_NUMBER_VALIDATOR = 8;
 
     private Validator validator;
     private CharSequence errorLabel;
@@ -103,6 +105,12 @@ public class ValidatingTextInputLayout extends TextInputLayout {
                 break;
             case NOT_EMPTY_VALIDATOR:
                 validator = Validators.NOT_EMPTY;
+                break;
+            case SIGNED_NUMBER_VALIDATOR:
+                validator = Validators.SIGNED_NUMBER;
+                break;
+            case ACCOUNT_NUMBER_VALIDATOR:
+                validator = Validators.ACCOUNT_NUMBER;
                 break;
         }
 

@@ -15,9 +15,13 @@
 
     </data>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <include
             layout="@layout/toolbar"
@@ -104,6 +108,7 @@
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
                 <LinearLayout
+                    android:id="@+id/account_type_layout"
                     android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
                     android:layout_weight="@integer/half_of_weight"
@@ -176,6 +181,27 @@
 
             </LinearLayout>
 
+            <com.johnpetitto.validator.ValidatingTextInputLayout
+                android:id="@+id/number_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="@integer/half_of_weight"
+                android:hint="@string/hint_account_number"
+                app:errorEnabled="true"
+                app:errorLabel="@string/account_number_error"
+                app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                app:validator="account_number">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number|numberSigned"
+                    android:maxLength="@{AccountRestriction.NUMBER_MAX_LENGTH}"
+                    android:text="@{account.number}"/>
+
+            </com.johnpetitto.validator.ValidatingTextInputLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -229,5 +255,7 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+    </ScrollView>
 
 </layout>

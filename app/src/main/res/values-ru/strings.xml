@@ -126,6 +126,8 @@
     <string name="hint_initial_balance_disabled">Изначальный баланс &disabled;</string>
     <string name="hint_default_value">Значение по умолчанию</string>
     <string name="hint_default_value_disabled">Значение по умолчанию &disabled;</string>
+    <string name="hint_account_number">Номер счета</string>
+    <string name="hint_account_number_disabled">Номер счета &disabled;</string>
     <string name="hint_currency">Валюта</string>
     <string name="hint_currency_disabled">Валюта &disabled;</string>
     <string name="hint_owner">Владелец</string>
@@ -282,6 +284,7 @@
     <string name="initial_balance_error">Неправильный изначальный баланс</string>
     <string name="default_value_error">Неправильное значение по умолчанию</string>
     <string name="value_error">Неправильное значение</string>
+    <string name="account_number_error">Неправильный номер счета (должно быть 20 цифр)</string>
     <string name="article_is_not_set_error">Статья не выбрана</string>
     <string name="account_is_not_set_error">Счет не выбран</string>
     <string name="expense_account_is_not_set_error">Счет расходов не выбран</string>

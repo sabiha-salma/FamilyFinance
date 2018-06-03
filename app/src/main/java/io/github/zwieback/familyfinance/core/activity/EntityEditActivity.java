@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
@@ -204,11 +205,11 @@ public abstract class EntityEditActivity<E extends IBaseEntity, B extends ViewDa
         finish();
     }
 
-    protected final int extractInputId(String name) {
+    protected final int extractInputId(@NonNull String name) {
         return extractInputId(name, ID_AS_NULL);
     }
 
-    protected final int extractInputId(String name, int defaultValue) {
+    protected final int extractInputId(@NonNull String name, int defaultValue) {
         return getIntent().getIntExtra(name, defaultValue);
     }
 
@@ -226,12 +227,16 @@ public abstract class EntityEditActivity<E extends IBaseEntity, B extends ViewDa
         return getIntent().getStringExtra(name);
     }
 
-    protected final void disableLayout(TextInputLayout layout, @StringRes int hintId) {
+    protected final void disableLayout(@NonNull TextInputLayout layout, @StringRes int hintId) {
         layout.setEnabled(false);
         layout.setHint(getResources().getString(hintId));
     }
 
-    protected static int extractOutputId(Intent resultIntent, String name) {
+    protected final void disableLayout(@NonNull LinearLayout layout) {
+        layout.setEnabled(false);
+    }
+
+    protected static int extractOutputId(@NonNull Intent resultIntent, @NonNull String name) {
         return resultIntent.getIntExtra(name, ID_AS_NULL);
     }
 }

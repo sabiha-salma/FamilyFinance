@@ -53,7 +53,7 @@ public class DecimalNumberInputFilter implements InputFilter {
             return DECIMAL_SEPARATOR;
         }
 
-        if (!NumberUtils.isTextAnBigDecimal(after)) {
+        if (!NumberUtils.isTextABigDecimal(after)) {
             return EMPTY;
         }
         return null;
