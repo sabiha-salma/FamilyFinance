@@ -10,11 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import io.github.zwieback.familyfinance.R;
-import io.github.zwieback.familyfinance.business.operation.activity.helper.ExpenseOperationHelper;
-import io.github.zwieback.familyfinance.business.operation.activity.helper.IncomeOperationHelper;
-import io.github.zwieback.familyfinance.business.operation.activity.helper.OperationHelper;
-import io.github.zwieback.familyfinance.business.operation.activity.helper.TransferOperationHelper;
-import io.github.zwieback.familyfinance.business.template.exception.UnsupportedTemplateTypeException;
+import io.github.zwieback.familyfinance.business.template.activity.helper.TemplateQualifier;
 import io.github.zwieback.familyfinance.business.template.filter.TemplateFilter;
 import io.github.zwieback.familyfinance.business.template.fragment.TemplateFragment;
 import io.github.zwieback.familyfinance.business.template.lifecycle.destroyer.TemplateForceDestroyer;
@@ -32,9 +28,7 @@ public class TemplateActivity
         extends EntityActivity<TemplateView, Template, TemplateFilter, TemplateFragment>
         implements OnTemplateClickListener {
 
-    private IncomeOperationHelper incomeOperationHelper;
-    private ExpenseOperationHelper expenseOperationHelper;
-    private TransferOperationHelper transferOperationHelper;
+    private TemplateQualifier templateQualifier;
 
     @Override
     protected List<Integer> collectMenuIds() {
@@ -69,9 +63,7 @@ public class TemplateActivity
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
-        incomeOperationHelper = new IncomeOperationHelper(this, data);
-        expenseOperationHelper = new ExpenseOperationHelper(this, data);
-        transferOperationHelper = new TransferOperationHelper(this, data);
+        templateQualifier = new TemplateQualifier(this, data);
     }
 
     @NonNull
@@ -104,7 +96,7 @@ public class TemplateActivity
 
     @Override
     public void onEntityClick(View view, TemplateView template) {
-        Intent intent = determineHelper(template).getIntentToAdd(
+        Intent intent = templateQualifier.determineHelper(template).getIntentToAdd(
                 template.getArticleId(), template.getAccountId(), template.getTransferAccountId(),
                 template.getOwnerId(), template.getCurrencyId(), template.getExchangeRateId(),
                 template.getDate(), template.getValue(), template.getDescription());
@@ -146,18 +138,5 @@ public class TemplateActivity
     @Override
     protected EntityDestroyer<Template> createDestroyer(TemplateView template) {
         return new TemplateForceDestroyer(this, data);
-    }
-
-    private OperationHelper<?> determineHelper(TemplateView template) {
-        switch (template.getType()) {
-            case EXPENSE_OPERATION:
-                return expenseOperationHelper;
-            case INCOME_OPERATION:
-                return incomeOperationHelper;
-            case TRANSFER_OPERATION:
-                return transferOperationHelper;
-            default:
-                throw new UnsupportedTemplateTypeException(template.getId(), template.getType());
-        }
     }
 }
