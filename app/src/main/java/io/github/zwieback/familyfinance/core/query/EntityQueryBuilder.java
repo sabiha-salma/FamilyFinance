@@ -34,13 +34,9 @@ public abstract class EntityQueryBuilder<E extends IBaseEntity> {
         return null;
     }
 
-    protected WhereAndOr<ReactiveResult<E>> buildWhere(Where<ReactiveResult<E>> select) {
-        return null;
-    }
+    protected abstract WhereAndOr<ReactiveResult<E>> buildWhere(Where<ReactiveResult<E>> select);
 
-    protected Limit<ReactiveResult<E>> buildOrderBy(OrderBy<Limit<ReactiveResult<E>>> where) {
-        return null;
-    }
+    protected abstract Limit<ReactiveResult<E>> buildOrderBy(OrderBy<Limit<ReactiveResult<E>>> where);
 
     public Result<E> build() {
         Selection<ReactiveResult<E>> select = buildSelect();
