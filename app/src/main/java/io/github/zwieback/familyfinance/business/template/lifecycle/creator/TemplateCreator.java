@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.business.template.lifecycle.creator;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import java.util.TreeSet;
 
@@ -11,10 +12,12 @@ import io.requery.reactivex.ReactiveEntityStore;
 
 public class TemplateCreator extends EntityCreator<Template> {
 
-    public TemplateCreator(Context context, ReactiveEntityStore<Persistable> data) {
+    public TemplateCreator(@NonNull Context context,
+                           @NonNull ReactiveEntityStore<Persistable> data) {
         super(context, data);
     }
 
+    @NonNull
     @Override
     protected Iterable<Template> buildEntities() {
         return new TreeSet<>(this);

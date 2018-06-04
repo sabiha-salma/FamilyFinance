@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.business.article.lifecycle.creator;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -12,10 +13,12 @@ import io.requery.reactivex.ReactiveEntityStore;
 
 public class ArticleRootCreator extends ArticleCreator {
 
-    public ArticleRootCreator(Context context, ReactiveEntityStore<Persistable> data) {
+    public ArticleRootCreator(@NonNull Context context,
+                              @NonNull ReactiveEntityStore<Persistable> data) {
         super(context, data);
     }
 
+    @NonNull
     @Override
     protected Iterable<Article> buildEntities() {
         Set<Article> articles = new TreeSet<>(this);

@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.core.lifecycle.creator;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
 import java.util.Comparator;
@@ -15,16 +16,21 @@ import io.requery.reactivex.ReactiveEntityStore;
 public abstract class EntityCreator<E extends IBaseEntity>
         implements Callable<Observable<Iterable<E>>>, Comparator<E> {
 
+    @NonNull
     protected final Context context;
+    @NonNull
     protected final ReactiveEntityStore<Persistable> data;
+    @NonNull
     protected final DatabasePrefs databasePrefs;
 
-    protected EntityCreator(Context context, ReactiveEntityStore<Persistable> data) {
+    protected EntityCreator(@NonNull Context context,
+                            @NonNull ReactiveEntityStore<Persistable> data) {
         this.context = context;
         this.data = data;
         this.databasePrefs = DatabasePrefs.with(context);
     }
 
+    @NonNull
     protected abstract Iterable<E> buildEntities();
 
     @Override
@@ -32,6 +38,7 @@ public abstract class EntityCreator<E extends IBaseEntity>
         return data.insert(buildEntities()).toObservable();
     }
 
+    @NonNull
     protected String getString(@StringRes int resId) {
         return context.getResources().getString(resId);
     }

@@ -14,10 +14,12 @@ import io.requery.reactivex.ReactiveEntityStore;
 
 public class CurrencyCreator extends EntityCreator<Currency> {
 
-    public CurrencyCreator(Context context, ReactiveEntityStore<Persistable> data) {
+    public CurrencyCreator(@NonNull Context context,
+                           @NonNull ReactiveEntityStore<Persistable> data) {
         super(context, data);
     }
 
+    @NonNull
     @Override
     protected Iterable<Currency> buildEntities() {
         Set<Currency> currencies = new TreeSet<>(this);
@@ -32,6 +34,7 @@ public class CurrencyCreator extends EntityCreator<Currency> {
         return left.getName().compareTo(right.getName());
     }
 
+    @NonNull
     private static Currency createCurrency(@NonNull String name,
                                            @NonNull String description) {
         return new Currency()

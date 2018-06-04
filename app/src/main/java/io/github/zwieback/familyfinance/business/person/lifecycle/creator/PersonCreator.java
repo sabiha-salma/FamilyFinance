@@ -15,10 +15,12 @@ import io.requery.reactivex.ReactiveEntityStore;
 
 public class PersonCreator extends EntityCreator<Person> {
 
-    public PersonCreator(Context context, ReactiveEntityStore<Persistable> data) {
+    public PersonCreator(@NonNull Context context,
+                         @NonNull ReactiveEntityStore<Persistable> data) {
         super(context, data);
     }
 
+    @NonNull
     @Override
     protected Iterable<Person> buildEntities() {
         Set<Person> people = new TreeSet<>(this);
@@ -31,6 +33,7 @@ public class PersonCreator extends EntityCreator<Person> {
         return Integer.valueOf(left.getOrderCode()).compareTo(right.getOrderCode());
     }
 
+    @NonNull
     private static Person createPerson(@Nullable Person parent,
                                        @NonNull String name,
                                        boolean folder,

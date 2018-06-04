@@ -35,11 +35,15 @@ public class DatabaseTableCreator {
 
     private static final String TAG = "DatabaseTableCreator";
 
+    @NonNull
     private final Context context;
+    @NonNull
     private final ReactiveEntityStore<Persistable> data;
+    @NonNull
     private final DatabasePrefs databasePrefs;
 
-    public DatabaseTableCreator(Context context, ReactiveEntityStore<Persistable> data) {
+    public DatabaseTableCreator(@NonNull Context context,
+                                @NonNull ReactiveEntityStore<Persistable> data) {
         this.context = context;
         this.data = data;
         this.databasePrefs = DatabasePrefs.with(context);

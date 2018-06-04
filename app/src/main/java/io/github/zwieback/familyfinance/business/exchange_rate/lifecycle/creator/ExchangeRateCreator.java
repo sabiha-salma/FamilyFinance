@@ -20,10 +20,12 @@ import io.requery.reactivex.ReactiveResult;
 
 public class ExchangeRateCreator extends EntityCreator<ExchangeRate> {
 
-    public ExchangeRateCreator(Context context, ReactiveEntityStore<Persistable> data) {
+    public ExchangeRateCreator(@NonNull Context context,
+                               @NonNull ReactiveEntityStore<Persistable> data) {
         super(context, data);
     }
 
+    @NonNull
     @Override
     protected Iterable<ExchangeRate> buildEntities() {
         Currency defaultCurrency = findCurrency(databasePrefs.getCurrencyId());
@@ -47,6 +49,7 @@ public class ExchangeRateCreator extends EntityCreator<ExchangeRate> {
         return currencies.first();
     }
 
+    @NonNull
     private static ExchangeRate createExchangeRate(@NonNull ICurrency currency,
                                                    @NonNull BigDecimal value,
                                                    @NonNull LocalDate date) {

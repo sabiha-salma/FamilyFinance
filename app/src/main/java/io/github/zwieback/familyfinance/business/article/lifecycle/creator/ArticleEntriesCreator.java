@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.business.article.lifecycle.creator;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,10 +14,12 @@ import io.requery.reactivex.ReactiveEntityStore;
 
 public class ArticleEntriesCreator extends ArticleCreator {
 
-    public ArticleEntriesCreator(Context context, ReactiveEntityStore<Persistable> data) {
+    public ArticleEntriesCreator(@NonNull Context context,
+                                 @NonNull ReactiveEntityStore<Persistable> data) {
         super(context, data);
     }
 
+    @NonNull
     @Override
     protected Iterable<Article> buildEntities() {
         Set<Article> articles = new TreeSet<>(this);
@@ -26,6 +29,7 @@ public class ArticleEntriesCreator extends ArticleCreator {
         return articles;
     }
 
+    @NonNull
     private Set<Article> createIncomes() {
         Article bank = findFolder(R.string.article_bank);
         Article work = findFolder(R.string.article_work);
@@ -37,6 +41,7 @@ public class ArticleEntriesCreator extends ArticleCreator {
         return articles;
     }
 
+    @NonNull
     private Set<Article> createExpenses() {
         Article auto = findFolder(R.string.article_auto);
         Article home = findFolder(R.string.article_home);
@@ -58,6 +63,7 @@ public class ArticleEntriesCreator extends ArticleCreator {
         return articles;
     }
 
+    @NonNull
     private Set<Article> createServices() {
         Article root = findRoot(R.string.article_service);
 

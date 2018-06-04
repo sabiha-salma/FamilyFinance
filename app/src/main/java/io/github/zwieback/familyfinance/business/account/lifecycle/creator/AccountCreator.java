@@ -20,10 +20,12 @@ import io.requery.reactivex.ReactiveResult;
 
 public class AccountCreator extends EntityCreator<Account> {
 
-    public AccountCreator(Context context, ReactiveEntityStore<Persistable> data) {
+    public AccountCreator(@NonNull Context context,
+                          @NonNull ReactiveEntityStore<Persistable> data) {
         super(context, data);
     }
 
+    @NonNull
     @Override
     protected Iterable<Account> buildEntities() {
         Currency defaultCurrency = findCurrency(databasePrefs.getCurrencyId());
@@ -59,6 +61,7 @@ public class AccountCreator extends EntityCreator<Account> {
         return currencies.first();
     }
 
+    @NonNull
     private static Account createAccount(@Nullable Account parent,
                                          @Nullable Currency currency,
                                          @Nullable Person owner,

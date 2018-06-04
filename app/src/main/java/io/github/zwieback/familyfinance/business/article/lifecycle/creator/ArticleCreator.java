@@ -21,7 +21,8 @@ import static io.github.zwieback.familyfinance.util.TransliterationUtils.transli
 
 abstract class ArticleCreator extends EntityCreator<Article> {
 
-    ArticleCreator(Context context, ReactiveEntityStore<Persistable> data) {
+    ArticleCreator(@NonNull Context context,
+                   @NonNull ReactiveEntityStore<Persistable> data) {
         super(context, data);
     }
 
@@ -39,6 +40,7 @@ abstract class ArticleCreator extends EntityCreator<Article> {
                 .compare(left, right);
     }
 
+    @NonNull
     Article findRoot(@StringRes int nameId) {
         String name = getString(nameId);
         return data
@@ -47,6 +49,7 @@ abstract class ArticleCreator extends EntityCreator<Article> {
                 .get().first();
     }
 
+    @NonNull
     Article findFolder(@StringRes int nameId) {
         String name = getString(nameId);
         return data
@@ -55,31 +58,38 @@ abstract class ArticleCreator extends EntityCreator<Article> {
                 .get().first();
     }
 
+    @NonNull
     Article createIncomeFolder(@Nullable Article parent, @StringRes int nameId) {
         return createArticle(parent, INCOME_ARTICLE, nameId, true);
     }
 
+    @NonNull
     Article createIncomeEntry(@Nullable Article parent, @StringRes int nameId) {
         return createArticle(parent, INCOME_ARTICLE, nameId, false);
     }
 
+    @NonNull
     Article createExpenseFolder(@Nullable Article parent, @StringRes int nameId) {
         return createArticle(parent, EXPENSE_ARTICLE, nameId, true);
     }
 
+    @NonNull
     Article createExpenseEntry(@Nullable Article parent, @StringRes int nameId) {
         return createArticle(parent, EXPENSE_ARTICLE, nameId, false);
     }
 
     @SuppressWarnings("SameParameterValue")
+    @NonNull
     Article createServiceFolder(@Nullable Article parent, @StringRes int nameId) {
         return createArticle(parent, SERVICE_ARTICLE, nameId, true);
     }
 
+    @NonNull
     Article createServiceEntry(@Nullable Article parent, @StringRes int nameId) {
         return createArticle(parent, SERVICE_ARTICLE, nameId, false);
     }
 
+    @NonNull
     private Article createArticle(@Nullable Article parent,
                                   @NonNull ArticleType type,
                                   @StringRes int nameId,
