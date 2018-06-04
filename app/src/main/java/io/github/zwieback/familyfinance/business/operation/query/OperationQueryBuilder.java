@@ -124,11 +124,6 @@ abstract class OperationQueryBuilder<T extends OperationQueryBuilder>
     }
 
     @Override
-    protected boolean isJoinRequired() {
-        return false;
-    }
-
-    @Override
     protected WhereAndOr<ReactiveResult<OperationView>>
     buildWhere(Where<ReactiveResult<OperationView>> select) {
         WhereAndOr<ReactiveResult<OperationView>> result =

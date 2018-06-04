@@ -22,7 +22,9 @@ public abstract class EntityQueryBuilder<E extends IBaseEntity> {
 
     protected abstract Class<E> getEntityClass();
 
-    protected abstract boolean isJoinRequired();
+    protected boolean isJoinRequired() {
+        return false;
+    }
 
     private Selection<ReactiveResult<E>> buildSelect() {
         return data.select(getEntityClass());

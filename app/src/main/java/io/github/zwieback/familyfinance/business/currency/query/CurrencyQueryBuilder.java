@@ -26,11 +26,6 @@ public class CurrencyQueryBuilder extends EntityQueryBuilder<CurrencyView> {
     }
 
     @Override
-    protected boolean isJoinRequired() {
-        return false;
-    }
-
-    @Override
     protected WhereAndOr<ReactiveResult<CurrencyView>>
     buildWhere(Where<ReactiveResult<CurrencyView>> select) {
         return select.where(CurrencyView.ID.gt(0));

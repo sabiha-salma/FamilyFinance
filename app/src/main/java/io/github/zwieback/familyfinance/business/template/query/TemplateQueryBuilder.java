@@ -26,11 +26,6 @@ public class TemplateQueryBuilder extends EntityQueryBuilder<TemplateView> {
     }
 
     @Override
-    protected boolean isJoinRequired() {
-        return false;
-    }
-
-    @Override
     protected WhereAndOr<ReactiveResult<TemplateView>>
     buildWhere(Where<ReactiveResult<TemplateView>> select) {
         return select.where(TemplateView.ID.gt(0));

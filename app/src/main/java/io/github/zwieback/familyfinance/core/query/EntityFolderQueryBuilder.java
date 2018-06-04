@@ -22,11 +22,6 @@ public abstract class EntityFolderQueryBuilder<
         super(data);
     }
 
-    @Override
-    protected boolean isJoinRequired() {
-        return false;
-    }
-
     protected abstract QueryExpression<Integer> getParentIdColumn();
 
     protected WhereAndOr<ReactiveResult<E>> buildWhere(Where<ReactiveResult<E>> select) {

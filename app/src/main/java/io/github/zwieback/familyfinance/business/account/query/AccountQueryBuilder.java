@@ -45,11 +45,6 @@ public class AccountQueryBuilder
     }
 
     @Override
-    protected boolean isJoinRequired() {
-        return false;
-    }
-
-    @Override
     protected QueryExpression<Integer> getParentIdColumn() {
         return Account.PARENT_ID;
     }

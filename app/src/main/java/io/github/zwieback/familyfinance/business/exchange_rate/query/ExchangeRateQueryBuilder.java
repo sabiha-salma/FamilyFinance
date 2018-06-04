@@ -68,11 +68,6 @@ public class ExchangeRateQueryBuilder extends EntityQueryBuilder<ExchangeRateVie
     }
 
     @Override
-    protected boolean isJoinRequired() {
-        return false;
-    }
-
-    @Override
     protected WhereAndOr<ReactiveResult<ExchangeRateView>>
     buildWhere(Where<ReactiveResult<ExchangeRateView>> select) {
         WhereAndOr<ReactiveResult<ExchangeRateView>> result =
