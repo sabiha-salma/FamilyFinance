@@ -27,6 +27,7 @@ public abstract class AbstractApplication extends Application {
      * Note if you're using Dagger you can make this part of your application level module returning
      * {@code @Provides @Singleton}.
      */
+    @NonNull
     public final ReactiveEntityStore<Persistable> getData() {
         if (dataStore == null) {
             DatabaseProvider databaseProvider = buildDatabaseProvider();
