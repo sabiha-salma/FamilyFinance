@@ -22,7 +22,7 @@
             android:layout_height="@dimen/template_icon_size"
             android:layout_centerVertical="true"
             app:ico_size="@dimen/template_icon_size"
-            app:iiv_icon="cmd_template_sign"/>
+            app:iiv_icon="faw_file_text"/>
 
         <TextView
             android:id="@+id/name"
