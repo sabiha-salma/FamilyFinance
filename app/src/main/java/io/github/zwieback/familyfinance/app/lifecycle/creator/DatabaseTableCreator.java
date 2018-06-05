@@ -15,6 +15,7 @@ import io.github.zwieback.familyfinance.business.article.lifecycle.creator.excep
 import io.github.zwieback.familyfinance.business.currency.lifecycle.creator.CurrencyCreator;
 import io.github.zwieback.familyfinance.business.exchange_rate.lifecycle.creator.ExchangeRateCreator;
 import io.github.zwieback.familyfinance.business.person.lifecycle.creator.PersonCreator;
+import io.github.zwieback.familyfinance.business.sms_pattern.lifecycle.creator.SmsPatternCreator;
 import io.github.zwieback.familyfinance.business.template.lifecycle.creator.TemplateCreator;
 import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityCreator;
 import io.github.zwieback.familyfinance.core.model.Account;
@@ -23,6 +24,7 @@ import io.github.zwieback.familyfinance.core.model.Currency;
 import io.github.zwieback.familyfinance.core.model.ExchangeRate;
 import io.github.zwieback.familyfinance.core.model.IBaseEntity;
 import io.github.zwieback.familyfinance.core.model.Person;
+import io.github.zwieback.familyfinance.core.model.SmsPattern;
 import io.github.zwieback.familyfinance.core.model.Template;
 import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs;
 import io.reactivex.Observable;
@@ -137,10 +139,19 @@ public class DatabaseTableCreator {
         return articles -> {
             logFinishOfCreator(TemplateCreator.class);
 
+            createTable(new SmsPatternCreator(context, data), onSmsPatternCreated());
+        };
+    }
+
+    private Consumer<Iterable<SmsPattern>> onSmsPatternCreated() {
+        return smsPatterns -> {
+            logFinishOfCreator(SmsPatternCreator.class);
+
             Log.d(TAG, "Tables were created");
         };
     }
 
+    @NonNull
     private static Article findArticle(Iterable<Article> articles, @NonNull String name) {
         return Stream.of(articles)
                 .filter(article -> name.equals(article.getName()))

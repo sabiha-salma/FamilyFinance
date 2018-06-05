@@ -130,6 +130,14 @@
                 app:iiv_start_size="@dimen/button_icon_size"/>
 
             <com.mikepenz.iconics.view.IconicsButton
+                android:id="@+id/select_sms_patterns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_sms_patterns"
+                app:iiv_start_icon="faw_comments"
+                app:iiv_start_size="@dimen/button_icon_size"/>
+
+            <com.mikepenz.iconics.view.IconicsButton
                 android:id="@+id/select_charts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

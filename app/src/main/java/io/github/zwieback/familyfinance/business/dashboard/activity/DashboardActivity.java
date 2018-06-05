@@ -22,6 +22,7 @@ import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperati
 import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter;
+import io.github.zwieback.familyfinance.business.sms_pattern.activity.SmsPatternActivity;
 import io.github.zwieback.familyfinance.business.template.activity.TemplateActivity;
 import io.github.zwieback.familyfinance.core.activity.DataActivityWrapper;
 import io.github.zwieback.familyfinance.core.filter.EntityFilter;
@@ -32,6 +33,7 @@ import static io.github.zwieback.familyfinance.business.operation.filter.FlowOfF
 import static io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter.INCOME_OPERATION_FILTER;
 import static io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter.TRANSFER_OPERATION_FILTER;
 import static io.github.zwieback.familyfinance.core.activity.EntityActivity.INPUT_READ_ONLY;
+import static io.github.zwieback.familyfinance.core.activity.EntityActivity.INPUT_REGULAR_SELECTABLE;
 
 public class DashboardActivity extends DataActivityWrapper {
 
@@ -42,6 +44,7 @@ public class DashboardActivity extends DataActivityWrapper {
     public static final String RESULT_ARTICLE_ID = "resultArticleId";
     public static final String RESULT_OPERATION_ID = "resultOperationId";
     public static final String RESULT_TEMPLATE_ID = "resultTemplateId";
+    public static final String RESULT_SMS_PATTERN_ID = "resultSmsPatternId";
 
     public static final int CURRENCY_CODE = 101;
     public static final int CURRENCY_EDIT_CODE = 102;
@@ -68,6 +71,8 @@ public class DashboardActivity extends DataActivityWrapper {
     public static final int FILE_CODE = 801;
     public static final int TEMPLATE_CODE = 901;
     public static final int TEMPLATE_EDIT_CODE = 902;
+    public static final int SMS_CODE = 1001;
+    public static final int SMS_EDIT_CODE = 1002;
 
     @Nullable
     private ExchangeRateFilter exchangeRateFilter;
@@ -136,6 +141,7 @@ public class DashboardActivity extends DataActivityWrapper {
         findViewById(R.id.add_transfer).setOnClickListener(this::onAddTransferClick);
         findViewById(R.id.select_flow_of_funds).setOnClickListener(this::onSelectFlowOfFundsClick);
         findViewById(R.id.select_templates).setOnClickListener(this::onSelectTemplatesClick);
+        findViewById(R.id.select_sms_patterns).setOnClickListener(this::onSelectSmsPatternsClick);
         findViewById(R.id.select_charts).setOnClickListener(this::onSelectChartsClick);
     }
 
@@ -191,6 +197,8 @@ public class DashboardActivity extends DataActivityWrapper {
                 break;
             case TEMPLATE_CODE:
                 break;
+            case SMS_CODE:
+                break;
         }
     }
 
@@ -231,7 +239,14 @@ public class DashboardActivity extends DataActivityWrapper {
     public void onSelectTemplatesClick(View view) {
         Intent intent = new Intent(this, TemplateActivity.class);
         intent.putExtra(INPUT_READ_ONLY, false);
+        intent.putExtra(INPUT_REGULAR_SELECTABLE, false);
         startActivityForResult(intent, TEMPLATE_CODE);
+    }
+
+    public void onSelectSmsPatternsClick(View view) {
+        Intent intent = new Intent(this, SmsPatternActivity.class);
+        intent.putExtra(INPUT_READ_ONLY, false);
+        startActivityForResult(intent, SMS_CODE);
     }
 
     public void onSelectChartsClick(View view) {

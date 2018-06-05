@@ -47,7 +47,7 @@ public abstract class EntityActivity<
 
     protected FILTER filter;
     protected boolean readOnly;
-    private boolean regularSelectable;
+    protected boolean regularSelectable;
     private boolean filterWasChanged;
 
     @Override

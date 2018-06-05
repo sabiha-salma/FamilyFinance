@@ -37,6 +37,8 @@
     <string name="flow_of_funds_activity_title">Движение средств</string>
     <string name="template_activity_title">Шаблоны</string>
     <string name="template_activity_edit_title">Редактирование шаблона</string>
+    <string name="sms_pattern_activity_title">Смс паттерны</string>
+    <string name="sms_pattern_activity_edit_title">Редактирование смс паттерна</string>
     <string name="expense_operation_filter_title">Фильтр расходов</string>
     <string name="income_operation_filter_title">Фильтр доходов</string>
     <string name="transfer_operation_filter_title">Фильтр переводов</string>
@@ -68,6 +70,7 @@
     <string name="select_transfers">Переводы</string>
     <string name="select_flow_of_funds">Движение средств</string>
     <string name="select_templates">Шаблоны</string>
+    <string name="select_sms_patterns">Смс паттерны</string>
     <string name="select_charts">Отчеты</string>
     <!-- Backup -->
     <string name="backup_database">Сделать резервную копию БД</string>
@@ -148,6 +151,11 @@
     <string name="hint_article_name_disabled">Название статьи &disabled;</string>
     <string name="hint_article_category">Категория статьи</string>
     <string name="hint_article_category_disabled">Категория статьи &disabled;</string>
+    <string name="hint_template_name">Название шаблона</string>
+    <string name="hint_sender">Отправитель</string>
+    <string name="hint_regex">Регулярное выражение</string>
+    <string name="hint_date_group">Группа даты</string>
+    <string name="hint_value_group">Группа значения</string>
     <string name="hint_start_date">Начальная дата</string>
     <string name="hint_end_date">Конечная дата</string>
     <string name="hint_start_value">Начальное значение</string>
@@ -290,6 +298,10 @@
     <string name="value_error">Неправильное значение</string>
     <string name="account_number_error">Неправильный номер счета (должно быть 20 цифр)</string>
     <string name="card_number_error">Неправильный номер карты</string>
+    <string name="sender_error">Неправильный отправитель</string>
+    <string name="regex_error">Неправильное регулярное выражение</string>
+    <string name="date_group_error">Неправильная группа даты</string>
+    <string name="value_group_error">Неправильная группа значения</string>
     <string name="article_is_not_set_error">Статья не выбрана</string>
     <string name="account_is_not_set_error">Счет не выбран</string>
     <string name="expense_account_is_not_set_error">Счет расходов не выбран</string>
@@ -298,6 +310,7 @@
     <string name="owner_is_not_set_error">Владелец не выбран</string>
     <string name="currency_is_not_set_error">Валюта не выбрана</string>
     <string name="exchange_rate_is_not_set_error">Курс обмена не выбран</string>
+    <string name="template_is_not_set_error">Шаблон не выбран</string>
     <string name="parent_can_not_be_inside_itself">Родитель не может находиться внутри себя</string>
     <string name="parent_must_be_a_folder">Родитель должен быть каталогом</string>
     <string name="parent_can_not_be_a_parent_of_itself">Родитель не может быть родителем самого себя</string>
