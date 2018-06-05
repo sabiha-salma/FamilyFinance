@@ -96,6 +96,10 @@ public class TemplateActivity
 
     @Override
     public void onEntityClick(View view, TemplateView template) {
+        super.onEntityClick(view, template);
+        if (regularSelectable) {
+            return;
+        }
         Intent intent = templateQualifier.determineHelper(template).getIntentToAdd(
                 template.getArticleId(), template.getAccountId(), template.getTransferAccountId(),
                 template.getOwnerId(), template.getCurrencyId(), template.getExchangeRateId(),
