@@ -126,8 +126,7 @@ public class SmsPatternEditActivity
     @Override
     protected List<ValidatingTextInputLayout> getLayoutsForValidation() {
         List<ValidatingTextInputLayout> layouts = new ArrayList<>(Arrays.asList(binding.nameLayout,
-                binding.senderLayout, binding.templateNameLayout, binding.regexLayout,
-                binding.dateGroupLayout, binding.valueGroupLayout));
+                binding.senderLayout, binding.templateNameLayout, binding.regexLayout));
         if (isTextNotEmpty(binding.dateGroup.getText().toString())) {
             layouts.add(binding.dateGroupLayout);
         }
