@@ -211,6 +211,13 @@
     <!-- Icon messages -->
     <string name="can_not_find_icon">Can not find icon with name \'%s\'</string>
 
+    <!-- Notification messages -->
+    <string name="sms_received">Sms is received</string>
+    <string name="sms_received_content">%1$s %2$s by \'%3$s\' template from %4$s</string>
+    <string name="expense_operation_type">Expense</string>
+    <string name="income_operation_type">Income</string>
+    <string name="transfer_operation_type">Transfer</string>
+
     <!-- Dialog Buttons -->
     <string name="button_got_it">Got it</string>
     <string name="button_allow">Allow</string>

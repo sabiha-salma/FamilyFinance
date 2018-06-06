@@ -31,6 +31,7 @@ public final class DateUtils {
     public static final DateTimeFormatter ISO_LOCAL_WEEK;
     public static final DateTimeFormatter ISO_LOCAL_MONTH;
     public static final DateTimeFormatter ISO_LOCAL_QUARTER;
+    public static final DateTimeFormatter SBERBANK_DATE_FORMATTER;
 
     private static final LocalDate EPOCH_DATE;
 
@@ -67,6 +68,8 @@ public final class DateUtils {
                 .withResolverStyle(ResolverStyle.STRICT)
                 .withChronology(IsoChronology.INSTANCE);
 
+        SBERBANK_DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yy");
+
         EPOCH_DATE = getEpochDay();
     }
 
@@ -84,6 +87,14 @@ public final class DateUtils {
             return null;
         }
         return LocalDate.parse(text);
+    }
+
+    @NonNull
+    public static LocalDate sberbankDateToLocalDate(@Nullable String text) {
+        if (isTextEmpty(text)) {
+            return now();
+        }
+        return LocalDate.from(SBERBANK_DATE_FORMATTER.parse(text));
     }
 
     @NonNull

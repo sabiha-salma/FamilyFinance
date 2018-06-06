@@ -1,5 +1,6 @@
 package io.github.zwieback.familyfinance.util;
 
+import android.support.annotation.Nullable;
 import android.util.Pair;
 
 import com.annimon.stream.Collectors;
@@ -9,6 +10,17 @@ import java.util.List;
 import java.util.Map;
 
 public final class CollectionUtils {
+
+    /**
+     * Determine emptiness of array.
+     *
+     * @param array source array
+     * @param <T>   any type of object
+     * @return {@code true} if array is empty or null, {@code false} otherwise
+     */
+    public static <T> boolean isEmpty(@Nullable T[] array) {
+        return array == null || array.length == 0;
+    }
 
     /**
      * Swap unique keys and unique values in a map to avoid data loss.

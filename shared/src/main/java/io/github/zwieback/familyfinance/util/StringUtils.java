@@ -8,6 +8,7 @@ public final class StringUtils {
 
     public static final String EMPTY = "";
     public static final String UNDEFINED = "undefined";
+    public static final String QUESTION = "?";
 
     public static boolean isTextEmpty(@Nullable CharSequence text) {
         return TextUtils.isEmpty(text);

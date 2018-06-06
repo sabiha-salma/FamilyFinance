@@ -211,6 +211,13 @@
     <!-- Icon messages -->
     <string name="can_not_find_icon">Не удается найти значок с именем \'%s\'</string>
 
+    <!-- Notification messages -->
+    <string name="sms_received">Смс получена</string>
+    <string name="sms_received_content">%1$s %2$s по \'%3$s\' шаблону от %4$s</string>
+    <string name="expense_operation_type">Расход</string>
+    <string name="income_operation_type">Доход</string>
+    <string name="transfer_operation_type">Перевод</string>
+
     <!-- Dialog Buttons -->
     <string name="button_got_it">Понятно</string>
     <string name="button_allow">Разрешить</string>

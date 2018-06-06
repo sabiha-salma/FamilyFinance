@@ -10,6 +10,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import static io.github.zwieback.familyfinance.util.StringUtils.EMPTY;
@@ -19,7 +20,7 @@ import static io.github.zwieback.familyfinance.util.StringUtils.isTextEmpty;
  * todo refactor this class and another utils
  */
 public final class NumberUtils {
-//    private static final String TAG = "NumberUtils";
+
     public static final int ID_AS_NULL = -1;
     public static final int ACCOUNT_PLACES = 2;
 
@@ -27,6 +28,8 @@ public final class NumberUtils {
 
     private static final int DEFAULT_GROUPING_SIZE = 3;
     private static final DecimalFormat bigDecimalFormat;
+    private static final DecimalFormat sberbankDotFormat;
+    private static final DecimalFormat sberbankCommaFormat;
 
     private static final Pattern SIGNED_NUMBER_PATTERN = Pattern.compile("\\d+");
     private static final Pattern ACCOUNT_NUMBER_PATTERN = Pattern.compile("\\d{20}");
@@ -43,6 +46,11 @@ public final class NumberUtils {
         if (bigDecimalFormat.getGroupingSize() < DEFAULT_GROUPING_SIZE) {
             bigDecimalFormat.setGroupingSize(DEFAULT_GROUPING_SIZE);
         }
+
+        DecimalFormatSymbols sberbankDotSymbols = new DecimalFormatSymbols(Locale.ENGLISH);
+        sberbankDotFormat = new DecimalFormat("0.00", sberbankDotSymbols);
+        DecimalFormatSymbols sberbankCommaSymbols = new DecimalFormatSymbols(Locale.GERMAN);
+        sberbankCommaFormat = new DecimalFormat("0.00", sberbankCommaSymbols);
     }
 
     public static boolean isNullId(int id) {
@@ -103,6 +111,49 @@ public final class NumberUtils {
         }
     }
 
+    @Nullable
+    public static BigDecimal sberbankNumberToBigDecimal(@Nullable String text) {
+        try {
+            return sberbankNumberWithDotToBigDecimal(text);
+        } catch (NumberFormatException e) {
+            return sberbankNumberWithCommaToBigDecimal(text);
+        }
+    }
+
+    @Nullable
+    private static BigDecimal sberbankNumberWithDotToBigDecimal(@Nullable String text) {
+        if (isTextEmpty(text)) {
+            return null;
+        }
+        try {
+            Number number = sberbankDotFormat.parse(text);
+            return new BigDecimal(number.toString());
+        } catch (ParseException e) {
+            throw new NumberFormatException(e.getMessage());
+        }
+    }
+
+    @Nullable
+    private static BigDecimal sberbankNumberWithCommaToBigDecimal(@Nullable String text) {
+        if (isTextEmpty(text)) {
+            return null;
+        }
+        try {
+            Number number = sberbankCommaFormat.parse(text);
+            return new BigDecimal(number.toString());
+        } catch (ParseException e) {
+            throw new NumberFormatException(e.getMessage());
+        }
+    }
+
+    @NonNull
+    public static String integerToString(@Nullable Integer number) {
+        if (number == null) {
+            return StringUtils.EMPTY;
+        }
+        return String.valueOf(number);
+    }
+
     @NonNull
     public static String intToString(int number) {
         return String.valueOf(number);
@@ -117,17 +168,18 @@ public final class NumberUtils {
     }
 
     @NonNull
+    public static String bigDecimalToString(@Nullable BigDecimal number, @NonNull String defaultValue) {
+        if (number == null) {
+            return defaultValue;
+        }
+        return bigDecimalFormat.format(number);
+    }
+
+    @NonNull
     public static String bigDecimalToString(@Nullable BigDecimal number, int places) {
         if (number == null) {
             return EMPTY;
         }
-
-//        Log.d(TAG, "bigDecimalToString: source value = " + bigDecimalFormat.format(number));
-//        for (RoundingMode roundingMode : RoundingMode.values()) {
-//            if (roundingMode.equals(RoundingMode.UNNECESSARY)) continue;
-//            Log.d(TAG, "bigDecimalToString: roundingMode = " + roundingMode + "; value = " + bigDecimalFormat.format(number.setScale(places, roundingMode)));
-//        }
-
         BigDecimal value = number.setScale(places, RoundingMode.HALF_EVEN);
         return bigDecimalFormat.format(value);
     }
