@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2018-06-06
+### Added
+- Type, number, payment_system and card_number fields to account entity.
+- Ability to select template if it is regularSelectable.
+- Sms pattern entity and view.
+- Sms receiver, parser, notification builder and sender.
+
+### Changed
+- Increased gradle and gradle-wrapper versions.
+- Increased support lib version.
+- Increased preference compat lib version.
+- Optimized layouts initializing.
+
+### Removed
+- Unnecessary code.
+- Unnecessary initial layouts.
+
+### Fixed
+- Long to Integer cast exception.
+- Showed class name of OperationViewDestroyer in console.
+- Template item icon.
+
 ## [1.3.4] - 2018-02-11
 ### Fixed
 - Fatal signal 11 (SIGSEGV) at 0xdeadd00d (code=1), thread 15725 (Compiler) described at [StackOverflow.com](https://stackoverflow.com/q/47904589/8035065).
