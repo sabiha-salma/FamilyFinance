@@ -122,6 +122,8 @@
     <string name="hint_name_required">Name (required)</string>
     <string name="hint_description">Description</string>
     <string name="hint_description_optional">Description &optional;</string>
+    <string name="hint_url">URL</string>
+    <string name="hint_url_optional">URL &optional;</string>
     <string name="hint_order_code">Order Code</string>
     <string name="hint_date">Date (ISO format)</string>
     <string name="hint_exchange_rate">Exchange Rate</string>

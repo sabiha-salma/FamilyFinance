@@ -40,7 +40,8 @@ public class TransferOperationHelper extends OperationHelper<TransferOperationFi
                                  @Nullable Integer exchangeRateId,
                                  @Nullable LocalDate date,
                                  @Nullable BigDecimal value,
-                                 @Nullable String description) {
+                                 @Nullable String description,
+                                 @Nullable String url) {
         Intent intent = getEmptyIntent();
         if (accountId != null) {
             intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_ACCOUNT_ID, accountId);
@@ -70,6 +71,9 @@ public class TransferOperationHelper extends OperationHelper<TransferOperationFi
         if (StringUtils.isTextNotEmpty(description)) {
             intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_DESCRIPTION, description);
         }
+        if (StringUtils.isTextNotEmpty(url)) {
+            intent.putExtra(TransferOperationEditActivity.INPUT_EXPENSE_URL, url);
+        }
         return intent;
     }
 
@@ -79,7 +83,7 @@ public class TransferOperationHelper extends OperationHelper<TransferOperationFi
             return getEmptyIntent();
         }
         return getIntentToAdd(null, filter.getAccountId(), null,
-                filter.getOwnerId(), filter.getCurrencyId(), null, null, null, null);
+                filter.getOwnerId(), filter.getCurrencyId(), null, null, null, null, null);
     }
 
     @Override
@@ -99,7 +103,7 @@ public class TransferOperationHelper extends OperationHelper<TransferOperationFi
         return getIntentToAdd(null, expenseOperation.getAccountId(), incomeOperation.getAccountId(),
                 expenseOperation.getOwnerId(), expenseOperation.getCurrencyId(),
                 expenseOperation.getExchangeRateId(), expenseOperation.getDate(),
-                expenseOperation.getValue(), expenseOperation.getDescription());
+                expenseOperation.getValue(), expenseOperation.getDescription(), expenseOperation.getUrl());
     }
 
     @Override

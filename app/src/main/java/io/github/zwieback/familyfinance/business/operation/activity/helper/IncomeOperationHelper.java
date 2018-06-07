@@ -37,7 +37,8 @@ public class IncomeOperationHelper extends OperationHelper<IncomeOperationFilter
                                  @Nullable Integer exchangeRateId,
                                  @Nullable LocalDate date,
                                  @Nullable BigDecimal value,
-                                 @Nullable String description) {
+                                 @Nullable String description,
+                                 @Nullable String url) {
         Intent intent = getEmptyIntent();
         if (articleId != null && articleId != databasePrefs.getIncomesArticleId()) {
             intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_ARTICLE_ID, articleId);
@@ -66,6 +67,9 @@ public class IncomeOperationHelper extends OperationHelper<IncomeOperationFilter
         if (StringUtils.isTextNotEmpty(description)) {
             intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_DESCRIPTION, description);
         }
+        if (StringUtils.isTextNotEmpty(url)) {
+            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_URL, url);
+        }
         return intent;
     }
 
@@ -75,7 +79,7 @@ public class IncomeOperationHelper extends OperationHelper<IncomeOperationFilter
             return getEmptyIntent();
         }
         return getIntentToAdd(filter.getArticleId(), filter.getAccountId(), null,
-                filter.getOwnerId(), filter.getCurrencyId(), null, null, null, null);
+                filter.getOwnerId(), filter.getCurrencyId(), null, null, null, null, null);
     }
 
     @Override
@@ -89,7 +93,7 @@ public class IncomeOperationHelper extends OperationHelper<IncomeOperationFilter
     public Intent getIntentToDuplicate(OperationView operation) {
         return getIntentToAdd(operation.getArticleId(), operation.getAccountId(), null,
                 operation.getOwnerId(), operation.getCurrencyId(), operation.getExchangeRateId(),
-                operation.getDate(), operation.getValue(), operation.getDescription());
+                operation.getDate(), operation.getValue(), operation.getDescription(), operation.getUrl());
     }
 
     @Override

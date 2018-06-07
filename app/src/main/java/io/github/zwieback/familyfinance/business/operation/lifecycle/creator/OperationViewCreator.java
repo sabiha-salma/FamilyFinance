@@ -40,7 +40,8 @@ public class OperationViewCreator extends EntityViewCreator {
                 "       op._type                        AS _type," +
                 "       op._date                        AS _date," +
                 "       op._value                       AS _value," +
-                "       op.description                  AS description" +
+                "       op.description                  AS description," +
+                "       op.url                          AS url" +
                 "  FROM operation op" +
                 "       INNER JOIN account ac ON ac.id = op.account_id" +
                 "       INNER JOIN article ar ON ar.id = op.article_id" +

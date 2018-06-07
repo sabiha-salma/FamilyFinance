@@ -94,6 +94,12 @@ public interface IOperationView extends IBaseEntity {
     BigDecimal getValue();
 
     @Bindable
+    @Nullable
     @Column(length = OperationRestriction.DESCRIPTION_MAX_LENGTH)
     String getDescription();
+
+    @Bindable
+    @Nullable
+    @Column(length = OperationRestriction.URL_MAX_LENGTH)
+    String getUrl();
 }

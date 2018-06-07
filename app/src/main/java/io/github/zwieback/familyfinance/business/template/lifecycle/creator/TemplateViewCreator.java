@@ -39,7 +39,8 @@ public class TemplateViewCreator extends EntityViewCreator {
                 "       te._type       AS _type," +
                 "       te._date       AS _date," +
                 "       te._value      AS _value," +
-                "       te.description AS description" +
+                "       te.description AS description," +
+                "       te.url         AS url" +
                 "  FROM t_template te" +
                 "       LEFT JOIN account ac ON ac.id = te.account_id" +
                 "       LEFT JOIN account at ON at.id = te.transfer_account_id" +

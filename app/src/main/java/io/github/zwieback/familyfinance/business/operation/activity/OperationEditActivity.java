@@ -190,6 +190,7 @@ abstract class OperationEditActivity<B extends ViewDataBinding>
         operation.setDate(stringToLocalDate(getDateEdit().getText().toString()));
         operation.setValue(stringToBigDecimal(getValueEdit().getText().toString()));
         operation.setDescription(getDescriptionEdit().getText().toString());
+        operation.setUrl(getUrlEdit().getText().toString());
     }
 
     abstract OperationType getOperationType();
@@ -205,4 +206,6 @@ abstract class OperationEditActivity<B extends ViewDataBinding>
     abstract EditText getValueEdit();
 
     abstract EditText getDescriptionEdit();
+
+    abstract EditText getUrlEdit();
 }

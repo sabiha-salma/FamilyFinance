@@ -16,6 +16,7 @@ import io.requery.Convert;
 import io.requery.Entity;
 import io.requery.ForeignKey;
 import io.requery.ManyToOne;
+import io.requery.Nullable;
 import io.requery.OneToOne;
 import io.requery.PropertyNameStyle;
 import io.requery.Table;
@@ -30,6 +31,7 @@ public interface IOperation extends IBaseEntity {
      * {@link OperationType#TRANSFER_INCOME_OPERATION})
      */
     @ForeignKey
+    @Nullable
     @OneToOne(mappedBy = "id", cascade = CascadeAction.NONE)
     @Column(name = "linked_transfer_operation_id")
     IOperation getLinkedTransferOperation();
@@ -68,6 +70,12 @@ public interface IOperation extends IBaseEntity {
     BigDecimal getValue();
 
     @Bindable
+    @Nullable
     @Column(length = OperationRestriction.DESCRIPTION_MAX_LENGTH)
     String getDescription();
+
+    @Bindable
+    @Nullable
+    @Column(length = OperationRestriction.URL_MAX_LENGTH)
+    String getUrl();
 }

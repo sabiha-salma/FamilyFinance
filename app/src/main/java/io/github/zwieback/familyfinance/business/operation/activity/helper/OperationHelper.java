@@ -39,7 +39,8 @@ public abstract class OperationHelper<FILTER extends OperationFilter> {
                                           @Nullable Integer exchangeRateId,
                                           @Nullable LocalDate date,
                                           @Nullable BigDecimal value,
-                                          @Nullable String description);
+                                          @Nullable String description,
+                                          @Nullable String url);
 
     public abstract Intent getIntentToAdd(@Nullable FILTER filter);
 

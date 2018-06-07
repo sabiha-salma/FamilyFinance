@@ -342,6 +342,7 @@ public class TemplateEditActivity
         template.setDate(stringToLocalDate(binding.date.getText().toString()));
         template.setValue(stringToBigDecimal(binding.value.getText().toString()));
         template.setDescription(binding.description.getText().toString());
+        template.setUrl(binding.url.getText().toString());
     }
 
     @Override

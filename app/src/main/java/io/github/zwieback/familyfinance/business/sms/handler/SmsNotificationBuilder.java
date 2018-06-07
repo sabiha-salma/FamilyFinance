@@ -113,7 +113,7 @@ public class SmsNotificationBuilder {
         Intent notificationIntent = operationHelper.getIntentToAdd(
                 template.getArticleId(), template.getAccountId(), template.getTransferAccountId(),
                 template.getOwnerId(), template.getCurrencyId(), template.getExchangeRateId(),
-                operationDate, operationValue, template.getDescription());
+                operationDate, operationValue, template.getDescription(), template.getUrl());
 
 //        return PendingIntent.getActivity(context, SMS_HANDLER_REQUEST_CODE,
 //                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);

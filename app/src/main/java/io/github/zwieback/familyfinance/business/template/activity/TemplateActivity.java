@@ -103,7 +103,7 @@ public class TemplateActivity
         Intent intent = templateQualifier.determineHelper(template).getIntentToAdd(
                 template.getArticleId(), template.getAccountId(), template.getTransferAccountId(),
                 template.getOwnerId(), template.getCurrencyId(), template.getExchangeRateId(),
-                template.getDate(), template.getValue(), template.getDescription());
+                template.getDate(), template.getValue(), template.getDescription(), template.getUrl());
         startActivity(intent);
     }
 

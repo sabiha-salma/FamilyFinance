@@ -49,6 +49,7 @@ public class IncomeOperationEditActivity
     public static final String INPUT_INCOME_VALUE = "incomeValue";
     public static final String INPUT_INCOME_DATE = "incomeDate";
     public static final String INPUT_INCOME_DESCRIPTION = "incomeDescription";
+    public static final String INPUT_INCOME_URL = "incomeUrl";
     public static final String OUTPUT_INCOME_OPERATION_ID = "resultIncomeOperationId";
 
     @Override
@@ -171,6 +172,11 @@ public class IncomeOperationEditActivity
         return extractInputString(INPUT_INCOME_DESCRIPTION);
     }
 
+    @Nullable
+    private String extractIncomeUrl() {
+        return extractInputString(INPUT_INCOME_URL);
+    }
+
     @Override
     protected void createEntity() {
         super.createEntity();
@@ -192,6 +198,7 @@ public class IncomeOperationEditActivity
         operation.setDate(extractIncomeDate());
         operation.setValue(extractIncomeValue());
         operation.setDescription(extractIncomeDescription());
+        operation.setUrl(extractIncomeUrl());
         return operation;
     }
 
@@ -262,5 +269,10 @@ public class IncomeOperationEditActivity
     @Override
     EditText getDescriptionEdit() {
         return binding.description;
+    }
+
+    @Override
+    EditText getUrlEdit() {
+        return binding.url;
     }
 }

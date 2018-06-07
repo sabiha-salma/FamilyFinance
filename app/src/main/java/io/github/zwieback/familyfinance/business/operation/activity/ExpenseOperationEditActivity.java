@@ -49,6 +49,7 @@ public class ExpenseOperationEditActivity
     public static final String INPUT_EXPENSE_VALUE = "expenseValue";
     public static final String INPUT_EXPENSE_DATE = "expenseDate";
     public static final String INPUT_EXPENSE_DESCRIPTION = "expenseDescription";
+    public static final String INPUT_EXPENSE_URL = "expenseUrl";
     public static final String OUTPUT_EXPENSE_OPERATION_ID = "resultExpenseOperationId";
 
     @Override
@@ -171,6 +172,11 @@ public class ExpenseOperationEditActivity
         return extractInputString(INPUT_EXPENSE_DESCRIPTION);
     }
 
+    @Nullable
+    private String extractExpenseUrl() {
+        return extractInputString(INPUT_EXPENSE_URL);
+    }
+
     @Override
     protected void createEntity() {
         super.createEntity();
@@ -191,6 +197,7 @@ public class ExpenseOperationEditActivity
         operation.setDate(extractExpenseDate());
         operation.setValue(extractExpenseValue());
         operation.setDescription(extractExpenseDescription());
+        operation.setUrl(extractExpenseUrl());
         return operation;
     }
 
@@ -261,5 +268,10 @@ public class ExpenseOperationEditActivity
     @Override
     EditText getDescriptionEdit() {
         return binding.description;
+    }
+
+    @Override
+    EditText getUrlEdit() {
+        return binding.url;
     }
 }

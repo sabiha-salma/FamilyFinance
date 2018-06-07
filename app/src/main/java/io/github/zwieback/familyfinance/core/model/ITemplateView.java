@@ -114,4 +114,9 @@ public interface ITemplateView extends IBaseEntity {
     @Nullable
     @Column(length = OperationRestriction.DESCRIPTION_MAX_LENGTH)
     String getDescription();
+
+    @Bindable
+    @Nullable
+    @Column(length = OperationRestriction.URL_MAX_LENGTH)
+    String getUrl();
 }

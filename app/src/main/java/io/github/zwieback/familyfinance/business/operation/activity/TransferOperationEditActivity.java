@@ -44,6 +44,7 @@ public class TransferOperationEditActivity
     public static final String INPUT_EXPENSE_VALUE = "expenseValue";
     public static final String INPUT_EXPENSE_DATE = "expenseDate";
     public static final String INPUT_EXPENSE_DESCRIPTION = "expenseDescription";
+    public static final String INPUT_EXPENSE_URL = "expenseUrl";
     public static final String OUTPUT_TRANSFER_OPERATION_ID = "resultTransferExpenseOperationId";
 
     /**
@@ -172,6 +173,11 @@ public class TransferOperationEditActivity
         return extractInputString(INPUT_EXPENSE_DESCRIPTION);
     }
 
+    @Nullable
+    private String extractExpenseUrl() {
+        return extractInputString(INPUT_EXPENSE_URL);
+    }
+
     @Override
     protected void createEntity() {
         super.createEntity();
@@ -194,6 +200,7 @@ public class TransferOperationEditActivity
         operation.setDate(extractExpenseDate());
         operation.setValue(extractExpenseValue());
         operation.setDescription(extractExpenseDescription());
+        operation.setUrl(extractExpenseUrl());
         return operation;
     }
 
@@ -254,6 +261,7 @@ public class TransferOperationEditActivity
         incomeOperation.setDate(operation.getDate());
         incomeOperation.setValue(operation.getValue());
         incomeOperation.setDescription(operation.getDescription());
+        incomeOperation.setUrl(operation.getUrl());
     }
 
     @Override
@@ -317,5 +325,10 @@ public class TransferOperationEditActivity
     @Override
     EditText getDescriptionEdit() {
         return binding.description;
+    }
+
+    @Override
+    EditText getUrlEdit() {
+        return binding.url;
     }
 }
