@@ -7,7 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import java.io.File;
+import java.io.IOException;
 
+import io.github.zwieback.familyfinance.core.storage.exception.UncheckedIOException;
 import io.github.zwieback.familyfinance.util.StringUtils;
 
 public final class ExternalStorageHelper {
@@ -66,6 +68,13 @@ public final class ExternalStorageHelper {
         File externalFile = new File(backupPath, fileName);
         if (externalFile.exists()) {
             return externalFile;
+        }
+        try {
+            if (externalFile.createNewFile()) {
+                return externalFile;
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e.getMessage(), e);
         }
         return null;
     }
