@@ -22,7 +22,7 @@ buildscript {
                 materializeLib: '1.1.2@aar',
                 fastAdapterLib: '3.2.6@aar',
                 materialDrawerLib: '6.0.7@aar',
-                streamLib: '1.1.9',
+                streamLib: '1.2.0',
                 timeLib: '1.0.5',
                 acraLib: '4.10.0',
                 gendalfLib: '1.3.1',
