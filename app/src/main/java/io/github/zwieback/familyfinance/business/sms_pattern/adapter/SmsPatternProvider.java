@@ -20,7 +20,7 @@ public class SmsPatternProvider extends EntityProvider<SmsPattern> {
     @NonNull
     @Override
     public IIcon provideDefaultIcon(SmsPattern smsPattern) {
-        return FontAwesome.Icon.faw_comment;
+        return FontAwesome.Icon.faw_comment2;
     }
 
     @Override

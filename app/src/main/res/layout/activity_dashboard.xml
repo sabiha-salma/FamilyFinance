@@ -126,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/select_templates"
-                app:iiv_start_icon="faw_file_alt"
+                app:iiv_start_icon="faw_file_alt2"
                 app:iiv_start_size="@dimen/button_icon_size"/>
 
             <com.mikepenz.iconics.view.IconicsButton
@@ -134,7 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/select_sms_patterns"
-                app:iiv_start_icon="faw_comments"
+                app:iiv_start_icon="faw_comments2"
                 app:iiv_start_size="@dimen/button_icon_size"/>
 
             <com.mikepenz.iconics.view.IconicsButton
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/select_charts"
-                app:iiv_start_icon="faw_chart_bar"
+                app:iiv_start_icon="faw_chart_bar2"
                 app:iiv_start_size="@dimen/button_icon_size"/>
 
         </LinearLayout>

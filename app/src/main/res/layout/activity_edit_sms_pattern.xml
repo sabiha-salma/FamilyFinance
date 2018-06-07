@@ -48,7 +48,7 @@
                         android:layout_width="@dimen/entity_edit_icon_size"
                         android:layout_height="@dimen/entity_edit_icon_size"
                         app:ico_size="@dimen/entity_edit_icon_size"
-                        app:iiv_icon="faw_comment"/>
+                        app:iiv_icon="faw_comment2"/>
 
                     <com.johnpetitto.validator.ValidatingTextInputLayout
                         android:id="@+id/name_layout"
