@@ -168,7 +168,7 @@
                             android:id="@+id/date_group"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="text|textMultiLine"
+                            android:inputType="number|numberSigned"
                             android:text="@{NumberUtils.integerToString(smsPattern.dateGroup)}"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
@@ -188,6 +188,7 @@
                             android:id="@+id/value_group"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:inputType="number|numberSigned"
                             android:text="@{NumberUtils.integerToString(smsPattern.valueGroup)}"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
