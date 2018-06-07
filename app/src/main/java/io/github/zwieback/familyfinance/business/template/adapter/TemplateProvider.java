@@ -21,7 +21,7 @@ public class TemplateProvider extends EntityProvider<Template> {
     @NonNull
     @Override
     public IIcon provideDefaultIcon(Template template) {
-        return FontAwesome.Icon.faw_file_text;
+        return FontAwesome.Icon.faw_file_alt;
     }
 
     @Override

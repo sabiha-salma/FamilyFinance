@@ -32,7 +32,7 @@
             android:layout_height="@dimen/operation_icon_size"
             android:layout_centerVertical="true"
             app:ico_size="@dimen/operation_icon_size"
-            app:iiv_icon="faw_dot_circle_o"/>
+            app:iiv_icon="faw_dot_circle"/>
 
         <TextView
             android:id="@+id/article_name"

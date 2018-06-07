@@ -24,7 +24,7 @@ public class TransferOperationProvider extends EntityProvider<Operation> {
     @NonNull
     @Override
     public IIcon provideDefaultIcon(Operation operation) {
-        return FontAwesome.Icon.faw_exchange;
+        return FontAwesome.Icon.faw_exchange_alt;
     }
 
     @Override

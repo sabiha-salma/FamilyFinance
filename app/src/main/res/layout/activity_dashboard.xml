@@ -99,7 +99,7 @@
                     android:layout_toLeftOf="@+id/add_transfer"
                     android:layout_toStartOf="@+id/add_transfer"
                     android:text="@string/select_transfers"
-                    app:iiv_start_icon="faw_exchange"
+                    app:iiv_start_icon="faw_exchange_alt"
                     app:iiv_start_size="@dimen/button_icon_size"/>
 
                 <com.mikepenz.iconics.view.IconicsButton
@@ -126,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/select_templates"
-                app:iiv_start_icon="faw_file_text"
+                app:iiv_start_icon="faw_file_alt"
                 app:iiv_start_size="@dimen/button_icon_size"/>
 
             <com.mikepenz.iconics.view.IconicsButton
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/select_charts"
-                app:iiv_start_icon="faw_bar_chart"
+                app:iiv_start_icon="faw_chart_bar"
                 app:iiv_start_size="@dimen/button_icon_size"/>
 
         </LinearLayout>
