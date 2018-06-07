@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.app;
 
-import android.app.Application;
 import android.support.annotation.NonNull;
+import android.support.multidex.MultiDexApplication;
 
 import java.sql.Connection;
 
@@ -15,7 +15,7 @@ import io.requery.reactivex.ReactiveSupport;
 import io.requery.sql.Configuration;
 import io.requery.sql.EntityDataStore;
 
-public abstract class AbstractApplication extends Application {
+public abstract class AbstractApplication extends MultiDexApplication {
 
     protected static final int DB_VERSION = 5;
 
