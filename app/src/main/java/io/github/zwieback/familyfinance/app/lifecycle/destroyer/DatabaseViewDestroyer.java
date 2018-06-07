@@ -6,9 +6,9 @@ import java.sql.Connection;
 
 import io.github.zwieback.familyfinance.business.account.lifecycle.destroyer.AccountViewDestroyer;
 import io.github.zwieback.familyfinance.business.operation.lifecycle.destroyer.OperationViewDestroyer;
+import io.github.zwieback.familyfinance.business.template.lifecycle.destroyer.TemplateViewDestroyer;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityViewDestroyer;
 import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class DatabaseViewDestroyer {
@@ -22,26 +22,19 @@ public class DatabaseViewDestroyer {
     }
 
     public void destroyViews() {
-        destroyView(new OperationViewDestroyer(connection), onOperationViewDestroyed());
-        destroyView(new AccountViewDestroyer(connection), onAccountViewDestroyed());
+        destroyView(new OperationViewDestroyer(connection));
+        destroyView(new AccountViewDestroyer(connection));
+        destroyView(new TemplateViewDestroyer(connection));
     }
 
-    private void destroyView(EntityViewDestroyer destroyer, Consumer<Boolean> onViewDestroyed) {
+    private <T extends EntityViewDestroyer> void destroyView(T destroyer) {
         Observable.fromCallable(destroyer)
                 .flatMap(observable -> observable)
                 .subscribeOn(Schedulers.trampoline())
-                .subscribe(onViewDestroyed);
+                .subscribe(ignoredResult -> logFinishOfDestroyer(destroyer.getClass()));
     }
 
-    private Consumer<Boolean> onOperationViewDestroyed() {
-        return ignoredResult -> logFinishOfDestroyer(OperationViewDestroyer.class);
-    }
-
-    private Consumer<Boolean> onAccountViewDestroyed() {
-        return ignoredResult -> logFinishOfDestroyer(AccountViewDestroyer.class);
-    }
-
-    private static void logFinishOfDestroyer(Class destroyerClass) {
+    private static void logFinishOfDestroyer(Class<?> destroyerClass) {
         Log.d(TAG, "Destroyer '" + destroyerClass.getSimpleName() + "' is finished");
     }
 }
