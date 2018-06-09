@@ -1,14 +1,17 @@
 package io.github.zwieback.familyfinance.app;
 
+import android.content.Context;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import org.acra.ACRA;
-import org.acra.ReportingInteractionMode;
-import org.acra.annotation.ReportsCrashes;
+import org.acra.annotation.AcraCore;
+import org.acra.annotation.AcraDialog;
+import org.acra.annotation.AcraMailSender;
 
+import io.github.zwieback.familyfinance.BuildConfig;
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.app.info.DeveloperInfo;
 import io.github.zwieback.familyfinance.app.lifecycle.creator.DatabaseTableCreator;
@@ -30,19 +33,24 @@ import static org.acra.ReportField.SHARED_PREFERENCES;
 import static org.acra.ReportField.STACK_TRACE;
 import static org.acra.ReportField.USER_COMMENT;
 
-@ReportsCrashes(
-        mode = ReportingInteractionMode.DIALOG,
-        mailTo = DeveloperInfo.EMAIL,
-        resToastText = R.string.crash_toast_text,
-        resDialogText = R.string.crash_dialog_text,
-        resDialogTitle = R.string.crash_dialog_title,
-        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
-        resDialogOkToast = R.string.crash_dialog_ok_toast,
-        resDialogTheme = R.style.AppTheme_Dialog,
-        additionalSharedPreferences = {"database_prefs", "backup_prefs"},
-        customReportContent = {APP_VERSION_CODE, APP_VERSION_NAME, PHONE_MODEL, ANDROID_VERSION,
+@AcraCore(
+        reportContent = {APP_VERSION_CODE, APP_VERSION_NAME, PHONE_MODEL, ANDROID_VERSION,
                 BUILD, BRAND, PRODUCT, CUSTOM_DATA, STACK_TRACE, DISPLAY, USER_COMMENT, LOGCAT,
-                SHARED_PREFERENCES}
+                SHARED_PREFERENCES},
+        additionalSharedPreferences = {"database_prefs", "backup_prefs"},
+        buildConfigClass = BuildConfig.class,
+        stopServicesOnCrash = true,
+        resReportSendSuccessToast = R.string.crash_dialog_report_send_success_toast,
+        resReportSendFailureToast = R.string.crash_dialog_report_send_failure_toast
+)
+@AcraMailSender(
+        mailTo = DeveloperInfo.EMAIL
+)
+@AcraDialog(
+        resCommentPrompt = R.string.crash_dialog_comment_prompt,
+        resText = R.string.crash_dialog_text,
+        resTitle = R.string.crash_dialog_title,
+        resTheme = R.style.AppTheme_Dialog
 )
 public class FamilyFinanceApplication extends AbstractApplication {
 
@@ -51,11 +59,16 @@ public class FamilyFinanceApplication extends AbstractApplication {
         super.onCreate();
         AndroidThreeTen.init(this);
         StrictMode.enableDefaults();
-        // The following line triggers the initialization of ACRA
-        ACRA.init(this);
         if (isNewApp()) {
             createDatabase();
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        // The following line triggers the initialization of ACRA
+        ACRA.init(this);
     }
 
     @NonNull

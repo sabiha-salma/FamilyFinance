@@ -325,13 +325,13 @@
     <string name="parent_can_not_be_a_parent_of_itself">Родитель не может быть родителем самого себя</string>
 
     <!-- Crash Report -->
-    <string name="crash_toast_text">Приложение аварийно завершилось, но разработчику нужно отправить отчет, чтобы помочь решить проблему !</string>
     <string name="crash_dialog_title">Семейные финансы аварийно завершились</string>
     <string name="crash_dialog_text">Произошла непредвиденная ошибка, заставляющая приложение остановиться.
         Пожалуйста, помогите нам исправить это, отправив данные об ошибках.
         Все, что вам нужно сделать, это нажать ОК.</string>
     <string name="crash_dialog_comment_prompt">Вы можете добавить свои комментарии о проблеме ниже:</string>
-    <string name="crash_dialog_ok_toast">Спасибо !</string>
+    <string name="crash_dialog_report_send_success_toast">Спасибо! Отчет успешно отправлен</string>
+    <string name="crash_dialog_report_send_failure_toast">Спасибо! К сожалению, отчет не удалось отправить</string>
 
     <!-- Currency names -->
     <string name="default_currency_name">руб.</string>

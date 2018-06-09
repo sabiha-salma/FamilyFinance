@@ -89,7 +89,8 @@ dependencies {
     // java 8 streams
     implementation "com.annimon:stream:${versions.streamLib}"
     // crash report
-    releaseImplementation "com.faendir:acra:${versions.acraLib}"
+    releaseImplementation "ch.acra:acra-mail:${versions.acraLib}"
+    releaseImplementation "ch.acra:acra-dialog:${versions.acraLib}"
     // preferences
     implementation "com.takisoft.fix:preference-v7:${versions.preferenceCompatLib}"
     // shared preferences

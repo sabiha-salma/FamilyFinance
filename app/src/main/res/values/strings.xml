@@ -325,13 +325,13 @@
     <string name="parent_can_not_be_a_parent_of_itself">Parent can not be a parent of itself</string>
 
     <!-- Crash Report -->
-    <string name="crash_toast_text">The application crashed, but the developer needs to send a report to help solve the problem !</string>
     <string name="crash_dialog_title">Family Finance has crashed</string>
     <string name="crash_dialog_text">An unexpected error occurred forcing the application to stop.
         Please help us fix this by sending error data.
         All you have to do is click OK.</string>
     <string name="crash_dialog_comment_prompt">You might add your comments about the problem below:</string>
-    <string name="crash_dialog_ok_toast">Thank you !</string>
+    <string name="crash_dialog_report_send_success_toast">Thank you! The report has been successfully sent</string>
+    <string name="crash_dialog_report_send_failure_toast">Thank you! The report failed to send</string>
 
     <!-- Currency names -->
     <string name="default_currency_name">USD</string>
