@@ -36,7 +36,7 @@
     </style>
 
     <style name="AppTheme.ErrorTextAppearance" parent="@android:style/TextAppearance">
-        <item name="android:textColor">?colorError</item>
+        <item name="android:textColor">?android:colorError</item>
     </style>
 
     <style name="AppTheme.HintText" parent="TextAppearance.AppCompat.Caption">
