@@ -11,8 +11,8 @@ buildscript {
         versions = [
                 supportLib: '27.1.1',
                 multidexLib: '1.0.3',
-                requeryLib: '1.4.1',
-                sqliteAndroidLib: '3.21.0',
+                requeryLib: '1.5.1',
+                sqliteAndroidLib: '3.23.1',
                 rxJavaLib: '2.1.14',
                 rxAndroidLib: '2.0.2',
                 iconicsLib: '3.0.4@aar',

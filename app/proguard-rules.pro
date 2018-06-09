@@ -55,6 +55,22 @@
 -dontwarn rx.internal.**
 -dontwarn android.support.**
 
+# sqlite-android: https://github.com/requery/sqlite-android/blob/master/sqlite-android/proguard-rules.pro
+-keepclasseswithmembers class io.requery.android.database.** {
+  native <methods>;
+  public <init>(...);
+}
+-keepnames class io.requery.android.database.** { *; }
+-keep public class io.requery.android.database.sqlite.SQLiteFunction { *; }
+-keep public class io.requery.android.database.sqlite.SQLiteCustomFunction { *; }
+-keep public class io.requery.android.database.sqlite.SQLiteCursor { *; }
+-keep public class io.requery.android.database.sqlite.SQLiteDebug** { *; }
+-keep public class io.requery.android.database.sqlite.SQLiteDatabase { *; }
+-keep public class io.requery.android.database.sqlite.SQLiteOpenHelper { *; }
+-keep public class io.requery.android.database.sqlite.SQLiteStatement { *; }
+-keep public class io.requery.android.database.CursorWindow { *; }
+-keepattributes Exceptions,InnerClasses
+
 # Exclude R from ProGuard to enable the font addon auto detection
 # https://github.com/mikepenz/Android-Iconics#proguard
 -keep class .R

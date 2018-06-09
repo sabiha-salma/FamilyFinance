@@ -15,7 +15,7 @@ import io.github.zwieback.familyfinance.core.model.type.OperationType;
 import io.github.zwieback.familyfinance.util.BigDecimalConverterUtils;
 import io.reactivex.functions.Consumer;
 import io.requery.Persistable;
-import io.requery.query.NamedExpression;
+import io.requery.query.NamedNumericExpression;
 import io.requery.reactivex.ReactiveEntityStore;
 
 /**
@@ -60,7 +60,7 @@ public class NonOptimizedAccountCalculator extends AccountCalculator {
                                                     int currencyId,
                                                     List<OperationType> types) {
         Long sumInNativeCurrency = data
-                .select(NamedExpression.of("t_native.value", Long.class).sum()
+                .select(NamedNumericExpression.ofLong("t_native.value").sum()
                         .as("native_sum"))
                 .from(data
                         .select(Operation.VALUE.as("value"))
@@ -114,7 +114,7 @@ public class NonOptimizedAccountCalculator extends AccountCalculator {
                                                   List<OperationType> types,
                                                   ExchangeRate exchangeRate) {
         Long sumInForeignCurrency = data
-                .select(NamedExpression.of("t_foreign.value", Long.class).sum()
+                .select(NamedNumericExpression.ofLong("t_foreign.value").sum()
                         .as("foreign_sum"))
                 .from(data
                         .select(Operation.VALUE.as("value"))
