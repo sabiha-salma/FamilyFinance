@@ -23,6 +23,7 @@ import io.github.zwieback.familyfinance.core.model.IBaseEntity;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 import io.github.zwieback.familyfinance.core.model.type.OperationType;
 import io.github.zwieback.familyfinance.core.query.EntityQueryBuilder;
+import io.github.zwieback.familyfinance.util.CollectionUtils;
 import io.github.zwieback.familyfinance.util.DateUtils;
 import io.github.zwieback.familyfinance.util.SqliteUtils;
 import io.requery.Persistable;
@@ -185,6 +186,14 @@ abstract class OperationQueryBuilder<T extends OperationQueryBuilder>
 
     /**
      * Workaround to get all the entities (this and its children) recursively without using CTE.
+     * <p>
+     * NOTE: Do not use the stream lib version 1.2.0 or above here, because
+     * {@link Collectors#toMap(Function, Function)} will throw a NPE.
+     * The NPE will be thrown because the {@literal parentId} can be {@code null},
+     * but the result {@link Map} of {@link Collectors#toMap(Function, Function)}
+     * doesn't allow {@code null} values.
+     * Or you can rewrite the code without using the
+     * {@link Collectors#toMap(Function, Function)} method.
      */
     private <E extends IBaseEntity> Set<Integer> collectEntityIds(
             @NonNull Integer parentId,
@@ -203,7 +212,7 @@ abstract class OperationQueryBuilder<T extends OperationQueryBuilder>
                         .get().iterator();
 
         Map<Integer, Integer> idWithParentIdMap = Stream.of(iterator)
-                .collect(Collectors.toMap(getIdFunction, getParentIdFunction));
+                .collect(CollectionUtils.toMap(getIdFunction, getParentIdFunction));
 
         Set<Integer> result = new HashSet<>(collectChildIds(idWithParentIdMap, parentId));
         result.add(parentId);
