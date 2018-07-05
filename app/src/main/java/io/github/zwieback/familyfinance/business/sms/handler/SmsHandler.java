@@ -58,10 +58,7 @@ public class SmsHandler {
         // It is desirable to use takeUntil instead of filter, because filter
         // uses all elements, and takeUntil - until the first match.
         Optional<SmsPatternView> smsPatternOptional = Stream.of(smsPatterns)
-                .takeUntil(smsPattern -> {
-                    System.out.println(smsPattern.getRegex());
-                    return doesPatternMatch(smsDto, smsPattern);
-                })
+                .takeUntil(smsPattern -> doesPatternMatch(smsDto, smsPattern))
                 .findLast();
 
         smsPatternOptional.ifPresent(smsPattern -> parseSmsAndGenerateNotification(smsDto, smsPattern));
