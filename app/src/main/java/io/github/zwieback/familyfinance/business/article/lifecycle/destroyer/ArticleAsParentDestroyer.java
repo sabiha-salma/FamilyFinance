@@ -6,7 +6,6 @@ import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityAsParentDestroyer;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer;
 import io.github.zwieback.familyfinance.core.model.Article;
-import io.github.zwieback.familyfinance.core.model.Article;
 import io.requery.Persistable;
 import io.requery.meta.QueryExpression;
 import io.requery.reactivex.ReactiveEntityStore;

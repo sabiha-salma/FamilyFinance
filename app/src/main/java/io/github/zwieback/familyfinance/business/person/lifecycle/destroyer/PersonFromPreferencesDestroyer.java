@@ -6,7 +6,6 @@ import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityFromPreferencesDestroyer;
 import io.github.zwieback.familyfinance.core.model.Person;
-import io.github.zwieback.familyfinance.core.model.PersonView;
 import io.requery.Persistable;
 import io.requery.reactivex.ReactiveEntityStore;
 

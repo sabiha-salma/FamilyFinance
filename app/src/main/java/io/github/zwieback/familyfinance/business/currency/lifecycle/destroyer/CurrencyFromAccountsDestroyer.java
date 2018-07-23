@@ -7,7 +7,6 @@ import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityFromDestroyer;
 import io.github.zwieback.familyfinance.core.model.Account;
 import io.github.zwieback.familyfinance.core.model.Currency;
-import io.github.zwieback.familyfinance.core.model.CurrencyView;
 import io.requery.Persistable;
 import io.requery.query.Condition;
 import io.requery.reactivex.ReactiveEntityStore;
