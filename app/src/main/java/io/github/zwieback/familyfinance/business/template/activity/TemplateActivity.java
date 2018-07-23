@@ -13,7 +13,7 @@ import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.template.activity.helper.TemplateQualifier;
 import io.github.zwieback.familyfinance.business.template.filter.TemplateFilter;
 import io.github.zwieback.familyfinance.business.template.fragment.TemplateFragment;
-import io.github.zwieback.familyfinance.business.template.lifecycle.destroyer.TemplateForceDestroyer;
+import io.github.zwieback.familyfinance.business.template.lifecycle.destroyer.TemplateFromSmsPatternsDestroyer;
 import io.github.zwieback.familyfinance.business.template.listener.OnTemplateClickListener;
 import io.github.zwieback.familyfinance.core.activity.EntityActivity;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer;
@@ -141,6 +141,6 @@ public class TemplateActivity
 
     @Override
     protected EntityDestroyer<Template> createDestroyer(TemplateView template) {
-        return new TemplateForceDestroyer(this, data);
+        return new TemplateFromSmsPatternsDestroyer(this, data);
     }
 }

@@ -8,9 +8,9 @@ import io.requery.Persistable;
 import io.requery.meta.QueryAttribute;
 import io.requery.reactivex.ReactiveEntityStore;
 
-public class TemplateForceDestroyer extends EntityForceDestroyer<Template> {
+class TemplateForceDestroyer extends EntityForceDestroyer<Template> {
 
-    public TemplateForceDestroyer(Context context, ReactiveEntityStore<Persistable> data) {
+    TemplateForceDestroyer(Context context, ReactiveEntityStore<Persistable> data) {
         super(context, data);
     }
 

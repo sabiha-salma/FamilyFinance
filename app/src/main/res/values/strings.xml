@@ -244,6 +244,7 @@
     <string name="accounts_with_owner_exists">&cantDelete; a person, &becauseItIsIncludedInSome; accounts.\n&deleteOrEditThese; accounts &andTryAgain;.</string>
     <string name="accounts_with_currency_exists">&cantDelete; a currency, &becauseItIsIncludedInSome; accounts.\n&deleteOrEditThese; accounts &andTryAgain;.</string>
     <string name="exchange_rates_with_currency_exists">&cantDelete; a currency, &becauseItIsIncludedInSome; exchange rates.\n&deleteOrEditThese; exchange rates &andTryAgain;.</string>
+    <string name="sms_patterns_with_template_exists">&cantDelete; a template, &becauseItIsIncludedInSome; sms patterns.\n&deleteOrEditThese; sms patterns &andTryAgain;.</string>
     <string name="preferences_contains_person">&cantDelete; a person, &becauseItIsIncludedInSome; preferences.\n&deleteOrEditThese; preferences &andTryAgain;.</string>
     <string name="preferences_contains_account">&cantDelete; an account, &becauseItIsIncludedInSome; preferences.\n&deleteOrEditThese; preferences &andTryAgain;.</string>
     <string name="preferences_contains_currency">&cantDelete; a currency, &becauseItIsIncludedInSome; preferences.\n&deleteOrEditThese; preferences &andTryAgain;.</string>

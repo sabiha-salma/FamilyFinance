@@ -244,6 +244,7 @@
     <string name="accounts_with_owner_exists">&cantDelete; пользователя, &becauseItIsIncludedInSome; счета.\n&deleteOrEditThese; счета &andTryAgain;.</string>
     <string name="accounts_with_currency_exists">&cantDelete; валюту, &because; она &isIncluded;а &inSome; счета.\n&deleteOrEditThese; счета &andTryAgain;.</string>
     <string name="exchange_rates_with_currency_exists">&cantDelete; валюту, &because; она &isIncluded;а &inSome; курсы обмена.\n&deleteOrEditThese; курсы обмена &andTryAgain;.</string>
+    <string name="sms_patterns_with_template_exists">&cantDelete; шаблон, &becauseItIsIncludedInSome; смс паттерны.\n&deleteOrEditThese; смс паттерны &andTryAgain;.</string>
     <string name="preferences_contains_person">&cantDelete; пользователя, &becauseItIsIncludedInSome; настройки.\n&deleteOrEditThese; настройки &andTryAgain;.</string>
     <string name="preferences_contains_account">&cantDelete; счет, &becauseItIsIncludedInSome; настройки.\n&deleteOrEditThese; настройки &andTryAgain;.</string>
     <string name="preferences_contains_currency">&cantDelete; валюту, &becauseItIsIncludedInSome; настройки.\n&deleteOrEditThese; настройки &andTryAgain;.</string>
