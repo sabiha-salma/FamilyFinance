@@ -9,7 +9,7 @@ buildscript {
                 targetSdk : 28
         ]
         versions = [
-                supportLib: '28.0.0-alpha1',
+                supportLib: '28.0.0-rc02',
                 multidexLib: '1.0.3',
                 requeryLib: '1.5.1',
                 sqliteAndroidLib: '3.23.1',
@@ -26,7 +26,7 @@ buildscript {
                 timeLib: '1.1.0',
                 acraLib: '5.1.3',
                 gendalfLib: '1.3.1',
-                preferenceCompatLib: '27.1.1.0',
+                preferenceCompatLib: '28.0.0.0-rc02',
                 filepickerLib: '4.2.1',
                 permissionsDispatcherLib: '3.2.0',
                 rxBinding2Lib: '2.1.1',
