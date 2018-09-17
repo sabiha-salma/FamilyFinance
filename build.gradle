@@ -3,13 +3,13 @@
 buildscript {
     ext {
         setup = [
-                compileSdk: 27,
-                buildTools: '27.0.3',
+                compileSdk: 28,
+                buildTools: '28.0.2',
                 minSdk    : 15,
-                targetSdk : 27
+                targetSdk : 28
         ]
         versions = [
-                supportLib: '27.1.1',
+                supportLib: '28.0.0-alpha1',
                 multidexLib: '1.0.3',
                 requeryLib: '1.5.1',
                 sqliteAndroidLib: '3.23.1',
