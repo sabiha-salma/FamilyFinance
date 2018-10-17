@@ -133,9 +133,8 @@ public abstract class ArticleEditActivity
     protected void updateEntityProperties(Article article) {
         article.setName(binding.name.getText().toString());
         article.setNameAscii(transliterate(article.getName()));
-        String defaultValue = binding.defaultValue.getText().toString();
-        if (!entity.isFolder() && isTextNotEmpty(defaultValue)) {
-            article.setDefaultValue(stringToBigDecimal(defaultValue));
+        if (!entity.isFolder()) {
+            article.setDefaultValue(stringToBigDecimal(binding.defaultValue.getText().toString()));
         }
     }
 
