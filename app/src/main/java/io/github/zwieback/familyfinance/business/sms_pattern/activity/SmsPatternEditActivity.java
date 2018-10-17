@@ -23,7 +23,7 @@ import io.reactivex.functions.Consumer;
 
 import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.RESULT_TEMPLATE_ID;
 import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.TEMPLATE_CODE;
-import static io.github.zwieback.familyfinance.util.NumberUtils.stringToInt;
+import static io.github.zwieback.familyfinance.util.NumberUtils.stringToInteger;
 import static io.github.zwieback.familyfinance.util.StringUtils.isTextNotEmpty;
 
 public class SmsPatternEditActivity
@@ -115,12 +115,8 @@ public class SmsPatternEditActivity
         smsPattern.setName(binding.name.getText().toString());
         smsPattern.setSender(binding.sender.getText().toString());
         smsPattern.setRegex(binding.regex.getText().toString());
-        if (isTextNotEmpty(binding.dateGroup.getText().toString())) {
-            smsPattern.setDateGroup(stringToInt(binding.dateGroup.getText().toString()));
-        }
-        if (isTextNotEmpty(binding.valueGroup.getText().toString())) {
-            smsPattern.setValueGroup(stringToInt(binding.valueGroup.getText().toString()));
-        }
+        smsPattern.setDateGroup(stringToInteger(binding.dateGroup.getText().toString()));
+        smsPattern.setValueGroup(stringToInteger(binding.valueGroup.getText().toString()));
     }
 
     @Override

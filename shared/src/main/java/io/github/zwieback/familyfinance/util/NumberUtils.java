@@ -100,6 +100,18 @@ public final class NumberUtils {
     }
 
     @Nullable
+    public static Integer stringToInteger(@Nullable String text) {
+        if (isTextEmpty(text)) {
+            return null;
+        }
+        try {
+            return Integer.valueOf(text);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    @Nullable
     public static BigDecimal stringToBigDecimal(@Nullable String text) {
         if (isTextEmpty(text)) {
             return null;
