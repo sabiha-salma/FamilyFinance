@@ -206,6 +206,7 @@
     <string name="permission_write_external_storage_rationale">Permission is required to write a backup on external storage</string>
     <string name="permission_write_external_storage_denied">Write external storage permission was denied. Please consider granting it in order to access the backup</string>
     <string name="permission_write_external_storage_never_ask">Write external storage permission was denied with never ask again</string>
+    <string name="permission_receive_sms_rationale">Permission is required to read information from SMS for further adding operations to the database</string>
 
     <!-- Folder messages -->
     <string name="access_to_this_folder_is_denied">Access to this folder is denied</string>

@@ -1,9 +1,12 @@
 package io.github.zwieback.familyfinance.business.dashboard.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import io.github.zwieback.familyfinance.R;
@@ -26,6 +29,10 @@ import io.github.zwieback.familyfinance.business.sms_pattern.activity.SmsPattern
 import io.github.zwieback.familyfinance.business.template.activity.TemplateActivity;
 import io.github.zwieback.familyfinance.core.activity.DataActivityWrapper;
 import io.github.zwieback.familyfinance.core.filter.EntityFilter;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnShowRationale;
+import permissions.dispatcher.PermissionRequest;
+import permissions.dispatcher.RuntimePermissions;
 
 import static io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRateFilter.EXCHANGE_RATE_FILTER;
 import static io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter.EXPENSE_OPERATION_FILTER;
@@ -35,6 +42,7 @@ import static io.github.zwieback.familyfinance.business.operation.filter.Transfe
 import static io.github.zwieback.familyfinance.core.activity.EntityActivity.INPUT_READ_ONLY;
 import static io.github.zwieback.familyfinance.core.activity.EntityActivity.INPUT_REGULAR_SELECTABLE;
 
+@RuntimePermissions
 public class DashboardActivity extends DataActivityWrapper {
 
     public static final String RESULT_CURRENCY_ID = "resultCurrencyId";
@@ -95,6 +103,7 @@ public class DashboardActivity extends DataActivityWrapper {
         new DrawerCreator(this).createDrawer(findToolbar());
         init(savedInstanceState);
         bindOnClickListeners();
+        DashboardActivityPermissionsDispatcher.registerSmsReceiverWithPermissionCheck(this);
     }
 
     @Override
@@ -200,6 +209,29 @@ public class DashboardActivity extends DataActivityWrapper {
             case SMS_CODE:
                 break;
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        DashboardActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    @NeedsPermission(Manifest.permission.RECEIVE_SMS)
+    public void registerSmsReceiver() {
+        // empty method because SmsReceiver already registered in the manifest
+        // this method is required only for the PermissionsDispatcher
+    }
+
+    @OnShowRationale(Manifest.permission.RECEIVE_SMS)
+    void showRationaleForReceiveSms(PermissionRequest request) {
+        new AlertDialog.Builder(this)
+                .setMessage(R.string.permission_receive_sms_rationale)
+                .setPositiveButton(R.string.button_allow, (dialog, button) -> request.proceed())
+                .setNegativeButton(R.string.button_deny, (dialog, button) -> request.cancel())
+                .show();
     }
 
     public void onSelectAccountClick(View view) {

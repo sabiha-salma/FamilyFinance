@@ -206,6 +206,7 @@
     <string name="permission_write_external_storage_rationale">Разрешение необходимо для записи резервной копии на внешнее хранилище</string>
     <string name="permission_write_external_storage_denied">Разрешение на доступ к внешнему хранилищу отклонено. Пожалуйста, рассмотрите вопрос о предоставлении его для доступа к резервной копии</string>
     <string name="permission_write_external_storage_never_ask">Разрешение на доступ к внешнему хранилищу отклонено с пометкой "Больше не спрашивать"</string>
+    <string name="permission_receive_sms_rationale">Разрешение необходимо для чтения информации из смс для дальнейшего добавления операций в базу данных</string>
 
     <!-- Folder messages -->
     <string name="access_to_this_folder_is_denied">Доступ к этому каталогу запрещен</string>
