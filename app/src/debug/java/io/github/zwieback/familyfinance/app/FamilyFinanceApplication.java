@@ -18,7 +18,7 @@ public class FamilyFinanceApplication extends AbstractApplication {
     public void onCreate() {
         super.onCreate();
         AndroidThreeTen.init(this);
-        StrictMode.enableDefaults();
+        turnOnStrictMode();
 //        recreateDatabase();
     }
 
@@ -38,5 +38,9 @@ public class FamilyFinanceApplication extends AbstractApplication {
     private void recreateDatabase() {
         new DatabaseDestroyer(this).deleteDatabases();
         new DatabaseTableCreator(this, getData()).createTables();
+    }
+
+    private void turnOnStrictMode() {
+        StrictMode.enableDefaults();
     }
 }

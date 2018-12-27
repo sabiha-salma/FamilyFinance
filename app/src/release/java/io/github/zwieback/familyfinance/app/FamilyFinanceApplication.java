@@ -1,7 +1,6 @@
 package io.github.zwieback.familyfinance.app;
 
 import android.content.Context;
-import android.os.StrictMode;
 import android.support.annotation.NonNull;
 
 import com.jakewharton.threetenabp.AndroidThreeTen;
@@ -58,7 +57,6 @@ public class FamilyFinanceApplication extends AbstractApplication {
     public void onCreate() {
         super.onCreate();
         AndroidThreeTen.init(this);
-        StrictMode.enableDefaults();
         if (isNewApp()) {
             createDatabase();
         }
