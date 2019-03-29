@@ -72,7 +72,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{expenseOperation.owner.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -103,7 +104,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{expenseOperation.account.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -124,7 +126,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{incomeOperation.account.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -205,7 +208,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{expenseOperation.exchangeRate.currency.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -226,7 +230,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{NumberUtils.bigDecimalToString(expenseOperation.exchangeRate.value)}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 

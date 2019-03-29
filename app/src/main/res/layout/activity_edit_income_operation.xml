@@ -74,7 +74,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="@{operation.article.name}"
                                 android:textAppearance="?android:textAppearanceLarge"
-                                app:readOnly="@{true}"/>
+                                app:readOnly="@{true}"
+                                style="@style/AppTheme.EditText.Clearable"/>
 
                         </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -96,7 +97,8 @@
                                 android:hint="@string/hint_article_category"
                                 android:text="@{operation.article.parent.name}"
                                 android:textAppearance="?android:textAppearanceSmall"
-                                app:readOnly="@{true}"/>
+                                app:readOnly="@{true}"
+                                style="@style/AppTheme.EditText.Clearable"/>
 
                         </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -128,7 +130,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{operation.account.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -149,7 +152,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{operation.owner.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -230,7 +234,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{operation.exchangeRate.currency.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -251,7 +256,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{NumberUtils.bigDecimalToString(operation.exchangeRate.value)}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 

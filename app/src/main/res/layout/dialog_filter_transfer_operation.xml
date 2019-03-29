@@ -46,7 +46,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        app:readOnly="@{true}"/>
+                        app:readOnly="@{true}"
+                        style="@style/AppTheme.EditText.Clearable"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -62,7 +63,8 @@
                         android:id="@+id/currency"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:readOnly="@{true}"/>
+                        app:readOnly="@{true}"
+                        style="@style/AppTheme.EditText.Clearable"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -88,7 +90,8 @@
                         android:id="@+id/account"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:readOnly="@{true}"/>
+                        app:readOnly="@{true}"
+                        style="@style/AppTheme.EditText.Clearable"/>
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -104,7 +107,8 @@
                         android:id="@+id/owner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:readOnly="@{true}"/>
+                        app:readOnly="@{true}"
+                        style="@style/AppTheme.EditText.Clearable"/>
 
                 </android.support.design.widget.TextInputLayout>
 

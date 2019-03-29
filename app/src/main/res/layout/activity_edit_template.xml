@@ -71,7 +71,8 @@
                             android:layout_height="wrap_content"
                             android:inputType="text|textMultiLine"
                             android:maxLength="@{TemplateRestriction.NAME_MAX_LENGTH}"
-                            android:text="@{template.name}"/>
+                            android:text="@{template.name}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -101,7 +102,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{template.article.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -121,7 +123,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{template.article.parent.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -150,7 +153,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{template.account.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -170,7 +174,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{template.owner.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -199,7 +204,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{template.transferAccount.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -253,7 +259,8 @@
                             android:layout_height="wrap_content"
                             android:inputType="date"
                             android:text="@{DateUtils.localDateToString(template.date)}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -282,7 +289,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{template.exchangeRate.currency.name}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -302,7 +310,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{NumberUtils.bigDecimalToString(template.exchangeRate.value)}"
-                            app:readOnly="@{true}"/>
+                            app:readOnly="@{true}"
+                            style="@style/AppTheme.EditText.Clearable"/>
 
                     </com.johnpetitto.validator.ValidatingTextInputLayout>
 

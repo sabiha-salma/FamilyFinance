@@ -60,7 +60,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{exchangeRate.currency.name}"
-                        app:readOnly="@{true}"/>
+                        app:readOnly="@{true}"
+                        style="@style/AppTheme.EditText.Clearable"/>
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 

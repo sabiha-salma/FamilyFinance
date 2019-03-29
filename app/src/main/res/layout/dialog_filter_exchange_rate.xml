@@ -37,7 +37,8 @@
                     android:id="@+id/currency"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:readOnly="@{true}"/>
+                    app:readOnly="@{true}"
+                    style="@style/AppTheme.EditText.Clearable"/>
 
             </android.support.design.widget.TextInputLayout>
 

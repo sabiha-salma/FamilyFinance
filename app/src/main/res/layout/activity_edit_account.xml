@@ -63,7 +63,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{account.parent.name}"
-                        app:readOnly="@{true}"/>
+                        app:readOnly="@{true}"
+                        style="@style/AppTheme.EditText.Clearable"/>
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -155,7 +156,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{account.currency.name}"
-                        app:readOnly="@{true}"/>
+                        app:readOnly="@{true}"
+                        style="@style/AppTheme.EditText.Clearable"/>
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -176,7 +178,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{account.owner.name}"
-                        app:readOnly="@{true}"/>
+                        app:readOnly="@{true}"
+                        style="@style/AppTheme.EditText.Clearable"/>
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
