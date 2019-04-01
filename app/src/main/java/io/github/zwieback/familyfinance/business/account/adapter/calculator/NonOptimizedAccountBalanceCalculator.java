@@ -37,22 +37,38 @@ public class NonOptimizedAccountBalanceCalculator extends AccountBalanceCalculat
         BigDecimal nativeExpenses = calculateSumInNativeCurrency(accountId, currencyId,
                 OperationType.getExpenseTypes());
 
-        BigDecimal foreignIncomes = calculateSumInForeignCurrency(accountId, currencyId,
-                OperationType.getIncomeTypes());
-        BigDecimal foreignExpenses = calculateSumInForeignCurrency(accountId, currencyId,
-                OperationType.getExpenseTypes());
-
         BigDecimal balance = account.getInitialBalance()
                 .add(nativeIncomes)
-                .subtract(nativeExpenses)
-                .add(foreignIncomes)
-                .subtract(foreignExpenses);
+                .subtract(nativeExpenses);
+
+        if (accountHasOperationsInForeignCurrency(accountId, currencyId)) {
+            BigDecimal foreignIncomes = calculateSumInForeignCurrency(accountId, currencyId,
+                    OperationType.getIncomeTypes());
+            BigDecimal foreignExpenses = calculateSumInForeignCurrency(accountId, currencyId,
+                    OperationType.getExpenseTypes());
+
+            balance = balance
+                    .add(foreignIncomes)
+                    .subtract(foreignExpenses);
+        }
 
         try {
             showBalanceConsumer.accept(balance);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
         }
+    }
+
+    private boolean accountHasOperationsInForeignCurrency(int accountId, int nativeCurrencyId) {
+        List<ExchangeRate> exchangeRatesNotInNativeCurrency = data
+                .select(ExchangeRate.class)
+                .join(Operation.class)
+                .on(ExchangeRate.ID.eq(Operation.EXCHANGE_RATE_ID))
+                .where(ExchangeRate.CURRENCY_ID.notEqual(nativeCurrencyId)
+                        .and(Operation.ACCOUNT_ID.equal(accountId))
+                )
+                .get().toList();
+        return !exchangeRatesNotInNativeCurrency.isEmpty();
     }
 
     private BigDecimal calculateSumInNativeCurrency(int accountId,
