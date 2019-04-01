@@ -7,12 +7,12 @@ import io.reactivex.functions.Consumer;
 import io.requery.Persistable;
 import io.requery.reactivex.ReactiveEntityStore;
 
-public abstract class AccountCalculator {
+public abstract class AccountBalanceCalculator {
 
     final ReactiveEntityStore<Persistable> data;
     final AccountView account;
 
-    AccountCalculator(ReactiveEntityStore<Persistable> data, AccountView account) {
+    AccountBalanceCalculator(ReactiveEntityStore<Persistable> data, AccountView account) {
         this.data = data;
         this.account = account;
     }

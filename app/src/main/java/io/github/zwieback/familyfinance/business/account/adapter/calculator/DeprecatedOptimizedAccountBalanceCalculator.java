@@ -17,12 +17,12 @@ import io.requery.reactivex.ReactiveResult;
 /**
  * The optimized calculator, but with loss of precision.
  * <p>
- * Use {@link NonOptimizedAccountCalculator} instead.
+ * Use {@link NonOptimizedAccountBalanceCalculator} instead.
  */
 @Deprecated
-public class OptimizedAccountCalculator extends AccountCalculator {
+public class DeprecatedOptimizedAccountBalanceCalculator extends AccountBalanceCalculator {
 
-    public OptimizedAccountCalculator(ReactiveEntityStore<Persistable> data, AccountView account) {
+    public DeprecatedOptimizedAccountBalanceCalculator(ReactiveEntityStore<Persistable> data, AccountView account) {
         super(data, account);
     }
 

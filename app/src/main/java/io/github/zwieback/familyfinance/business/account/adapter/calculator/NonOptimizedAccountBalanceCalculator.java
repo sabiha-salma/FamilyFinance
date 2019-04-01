@@ -19,12 +19,11 @@ import io.requery.query.NamedNumericExpression;
 import io.requery.reactivex.ReactiveEntityStore;
 
 /**
- * Non-optimized calculator, but without loss of accuracy.
+ * Non-optimized calculator, but without loss of precision.
  */
-public class NonOptimizedAccountCalculator extends AccountCalculator {
+public class NonOptimizedAccountBalanceCalculator extends AccountBalanceCalculator {
 
-    public NonOptimizedAccountCalculator(ReactiveEntityStore<Persistable> data,
-                                         AccountView account) {
+    public NonOptimizedAccountBalanceCalculator(ReactiveEntityStore<Persistable> data, AccountView account) {
         super(data, account);
     }
 

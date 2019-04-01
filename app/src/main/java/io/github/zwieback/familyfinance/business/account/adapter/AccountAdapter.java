@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import java.math.BigDecimal;
 
 import io.github.zwieback.familyfinance.R;
-import io.github.zwieback.familyfinance.business.account.adapter.calculator.AccountCalculator;
-import io.github.zwieback.familyfinance.business.account.adapter.calculator.NonOptimizedAccountCalculator;
+import io.github.zwieback.familyfinance.business.account.adapter.calculator.AccountBalanceCalculator;
+import io.github.zwieback.familyfinance.business.account.adapter.calculator.NonOptimizedAccountBalanceCalculator;
 import io.github.zwieback.familyfinance.business.account.filter.AccountFilter;
 import io.github.zwieback.familyfinance.business.account.listener.OnAccountClickListener;
 import io.github.zwieback.familyfinance.business.account.query.AccountQueryBuilder;
@@ -70,7 +70,8 @@ public class AccountAdapter extends EntityFolderAdapter<AccountView, AccountFilt
         if (account.isFolder()) {
             return;
         }
-        AccountCalculator calculator = new NonOptimizedAccountCalculator(data, account);
+        AccountBalanceCalculator calculator =
+                new NonOptimizedAccountBalanceCalculator(data, account);
         calculator.calculateBalance(showBalance(holder));
     }
 
