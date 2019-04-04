@@ -81,6 +81,10 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".business.sms.service.AddOperationImmediatelyService"
+            android:exported="false"/>
     </application>
 
 </manifest>

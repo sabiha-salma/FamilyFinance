@@ -28,12 +28,13 @@ import io.reactivex.schedulers.Schedulers;
 import io.requery.Persistable;
 import io.requery.reactivex.ReactiveEntityStore;
 
+import static io.github.zwieback.familyfinance.business.sms.common.SmsConst.SMS_NOTIFICATION_ID;
+
 public class SmsHandler {
 
     private static final String CHANNEL_ID = "Family Finance Sms Handler Channel Id";
     private static final String CHANNEL_NAME = "Family Finance Sms Handler Channel";
     private static final int REQUEST_CODE = 4944;
-    private static final int NOTIFICATION_ID = 4945;
 
     @NonNull
     private final Context context;
@@ -126,7 +127,7 @@ public class SmsHandler {
                 .setContext(context)
                 .setChannelId(CHANNEL_ID)
                 .setChannelName(CHANNEL_NAME)
-                .setNotificationId(NOTIFICATION_ID)
+                .setNotificationId(SMS_NOTIFICATION_ID)
                 .setNotification(notification)
                 .send();
     }

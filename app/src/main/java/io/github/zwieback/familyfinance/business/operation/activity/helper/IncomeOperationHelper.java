@@ -2,6 +2,7 @@ package io.github.zwieback.familyfinance.business.operation.activity.helper;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import org.threeten.bp.LocalDate;
@@ -10,10 +11,21 @@ import java.math.BigDecimal;
 
 import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperationEditActivity;
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter;
+import io.github.zwieback.familyfinance.core.model.Account;
+import io.github.zwieback.familyfinance.core.model.Article;
+import io.github.zwieback.familyfinance.core.model.ExchangeRate;
+import io.github.zwieback.familyfinance.core.model.Operation;
 import io.github.zwieback.familyfinance.core.model.OperationView;
+import io.github.zwieback.familyfinance.core.model.Person;
+import io.github.zwieback.familyfinance.core.model.type.OperationType;
 import io.github.zwieback.familyfinance.util.DateUtils;
 import io.github.zwieback.familyfinance.util.NumberUtils;
 import io.github.zwieback.familyfinance.util.StringUtils;
+import io.reactivex.Maybe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import io.requery.Persistable;
 import io.requery.reactivex.ReactiveEntityStore;
 
@@ -40,37 +52,61 @@ public class IncomeOperationHelper extends OperationHelper<IncomeOperationFilter
                                  @Nullable String description,
                                  @Nullable String url) {
         Intent intent = getEmptyIntent();
+        return getIntentToAdd(
+                intent,
+                articleId,
+                accountId, ignoredTransferAccountId,
+                ownerId,
+                currencyId, exchangeRateId,
+                date, value,
+                description, url
+        );
+    }
+
+    @NonNull
+    @Override
+    Intent getIntentToAdd(@NonNull Intent preparedIntent,
+                          @Nullable Integer articleId,
+                          @Nullable Integer accountId,
+                          @Nullable Integer ignoredTransferAccountId,
+                          @Nullable Integer ownerId,
+                          @Nullable Integer currencyId,
+                          @Nullable Integer exchangeRateId,
+                          @Nullable LocalDate date,
+                          @Nullable BigDecimal value,
+                          @Nullable String description,
+                          @Nullable String url) {
         if (articleId != null && articleId != databasePrefs.getIncomesArticleId()) {
-            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_ARTICLE_ID, articleId);
+            preparedIntent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_ARTICLE_ID, articleId);
         }
         if (accountId != null) {
-            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_ACCOUNT_ID, accountId);
+            preparedIntent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_ACCOUNT_ID, accountId);
         }
         if (ownerId != null) {
-            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_OWNER_ID, ownerId);
+            preparedIntent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_OWNER_ID, ownerId);
         }
         if (currencyId != null) {
-            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_CURRENCY_ID, currencyId);
+            preparedIntent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_CURRENCY_ID, currencyId);
         }
         if (exchangeRateId != null) {
-            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_EXCHANGE_RATE_ID,
+            preparedIntent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_EXCHANGE_RATE_ID,
                     exchangeRateId);
         }
         if (date != null) {
-            DateUtils.writeLocalDateToIntent(intent,
+            DateUtils.writeLocalDateToIntent(preparedIntent,
                     IncomeOperationEditActivity.INPUT_INCOME_DATE, date);
         }
         if (value != null) {
-            NumberUtils.writeBigDecimalToIntent(intent,
+            NumberUtils.writeBigDecimalToIntent(preparedIntent,
                     IncomeOperationEditActivity.INPUT_INCOME_VALUE, value);
         }
         if (StringUtils.isTextNotEmpty(description)) {
-            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_DESCRIPTION, description);
+            preparedIntent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_DESCRIPTION, description);
         }
         if (StringUtils.isTextNotEmpty(url)) {
-            intent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_URL, url);
+            preparedIntent.putExtra(IncomeOperationEditActivity.INPUT_INCOME_URL, url);
         }
-        return intent;
+        return preparedIntent;
     }
 
     @Override
@@ -99,5 +135,89 @@ public class IncomeOperationHelper extends OperationHelper<IncomeOperationFilter
     @Override
     Intent getEmptyIntent() {
         return new Intent(context, IncomeOperationEditActivity.class);
+    }
+
+    @Override
+    public boolean validToAddImmediately(@Nullable Integer articleId,
+                                         @Nullable Integer accountId,
+                                         @Nullable Integer transferAccountId,
+                                         @Nullable Integer ownerId,
+                                         @Nullable Integer currencyId,
+                                         @Nullable Integer exchangeRateId,
+                                         @Nullable LocalDate date,
+                                         @Nullable BigDecimal value,
+                                         @Nullable String description,
+                                         @Nullable String url) {
+        return articleId != null
+                && accountId != null
+                && ownerId != null
+                && exchangeRateId != null
+                && date != null
+                && value != null;
+    }
+
+    @NonNull
+    @Override
+    public Intent getIntentToAddImmediately(@Nullable Integer articleId,
+                                            @Nullable Integer accountId,
+                                            @Nullable Integer ignoredTransferAccountId,
+                                            @Nullable Integer ownerId,
+                                            @Nullable Integer currencyId,
+                                            @Nullable Integer exchangeRateId,
+                                            @Nullable LocalDate date,
+                                            @Nullable BigDecimal value,
+                                            @Nullable String description,
+                                            @Nullable String url) {
+        Intent intent = getEmptyIntentToAddImmediately();
+        return getIntentToAdd(
+                intent,
+                articleId,
+                accountId, ignoredTransferAccountId,
+                ownerId,
+                currencyId, exchangeRateId,
+                date, value,
+                description, url
+        );
+    }
+
+    @NonNull
+    @Override
+    Intent getEmptyIntentToAddImmediately() {
+        return super.getEmptyIntentToAddImmediately()
+                .putExtra(INPUT_OPERATION_TYPE, OperationType.INCOME_OPERATION);
+    }
+
+    @NonNull
+    @Override
+    public Disposable addOperationImmediately(@NonNull Intent intent, @NonNull Consumer<Operation> onSuccess) {
+        int accountId = intent.getIntExtra(IncomeOperationEditActivity.INPUT_INCOME_ACCOUNT_ID, 0);
+        int articleId = intent.getIntExtra(IncomeOperationEditActivity.INPUT_INCOME_ARTICLE_ID, 0);
+        int ownerId = intent.getIntExtra(IncomeOperationEditActivity.INPUT_INCOME_OWNER_ID, 0);
+        int exchangeRateId = intent.getIntExtra(IncomeOperationEditActivity.INPUT_INCOME_EXCHANGE_RATE_ID, 0);
+        LocalDate date = DateUtils.readLocalDateFromIntent(intent, IncomeOperationEditActivity.INPUT_INCOME_DATE);
+        BigDecimal value = NumberUtils.readBigDecimalFromIntent(intent, IncomeOperationEditActivity.INPUT_INCOME_VALUE);
+        String description = intent.getStringExtra(IncomeOperationEditActivity.INPUT_INCOME_DESCRIPTION);
+        String url = intent.getStringExtra(IncomeOperationEditActivity.INPUT_INCOME_URL);
+        return Maybe.zip(
+                data.findByKey(Account.class, accountId),
+                data.findByKey(Article.class, articleId),
+                data.findByKey(Person.class, ownerId),
+                data.findByKey(ExchangeRate.class, exchangeRateId),
+                (account, article, owner, exchangeRate) ->
+                        new Operation()
+                                .setType(OperationType.INCOME_OPERATION)
+                                .setAccount(account)
+                                .setArticle(article)
+                                .setOwner(owner)
+                                .setExchangeRate(exchangeRate)
+                                .setDate(date)
+                                .setValue(value)
+                                .setDescription(description)
+                                .setUrl(url)
+        )
+                .flatMapSingle(data::insert)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(onSuccess);
     }
 }

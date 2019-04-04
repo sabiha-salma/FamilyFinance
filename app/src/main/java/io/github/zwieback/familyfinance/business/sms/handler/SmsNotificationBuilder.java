@@ -26,6 +26,10 @@ import io.github.zwieback.familyfinance.util.StringUtils;
 
 public class SmsNotificationBuilder {
 
+    private static final int ADD_OPERATION_IMMEDIATELY_REQUEST_CODE = 9872;
+    private static final int ADD_OPERATION_IMMEDIATELY_FLAGS =
+            PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT;
+
     @NonNull
     private Context context;
     @NonNull
@@ -89,7 +93,7 @@ public class SmsNotificationBuilder {
         String contentText = context.getString(R.string.sms_received_content, type, value, template.getName(), date);
         String contentTitle = context.getString(R.string.sms_received);
 
-        return new NotificationCompat.Builder(context, channelId)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, channelId)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(contentTitle)
                 .setContentText(contentText)
@@ -99,8 +103,25 @@ public class SmsNotificationBuilder {
                 // don't include the default values (sound, vibration, light),
                 // because they are included in the input sms
                 .setDefaults(0)
-                .setAutoCancel(true)
-                .build();
+                .setAutoCancel(true);
+
+        if (mayToAddOperationImmediately(template, operationDate, operationValue)) {
+            PendingIntent addOperationImmediatelyPendingIntent =
+                    buildAddOperationImmediatelyPendingIntent(template, operationDate, operationValue);
+
+            notificationBuilder.addAction(
+                    new NotificationCompat.Action.Builder(
+                            0,
+                            context.getString(R.string.action_add_immediately),
+                            addOperationImmediatelyPendingIntent
+                    )
+                            .setAllowGeneratedReplies(false)
+                            .setShowsUserInterface(false)
+                            .build()
+            );
+        }
+
+        return notificationBuilder.build();
     }
 
     /**
@@ -122,6 +143,34 @@ public class SmsNotificationBuilder {
                 .addParentStack(DashboardActivity.class)
                 .addNextIntent(notificationIntent)
                 .getPendingIntent(requestCode, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+    private boolean mayToAddOperationImmediately(@NonNull TemplateView template,
+                                                 @NonNull LocalDate operationDate,
+                                                 @Nullable BigDecimal operationValue) {
+        OperationHelper<?> operationHelper = templateQualifier.determineHelper(template);
+        return operationHelper.validToAddImmediately(
+                template.getArticleId(), template.getAccountId(), template.getTransferAccountId(),
+                template.getOwnerId(), template.getCurrencyId(), template.getExchangeRateId(),
+                operationDate, operationValue, template.getDescription(), template.getUrl()
+        );
+    }
+
+    private PendingIntent buildAddOperationImmediatelyPendingIntent(@NonNull TemplateView template,
+                                                                    @NonNull LocalDate operationDate,
+                                                                    @Nullable BigDecimal operationValue) {
+        OperationHelper<?> operationHelper = templateQualifier.determineHelper(template);
+        Intent addImmediatelyIntent = operationHelper.getIntentToAddImmediately(
+                template.getArticleId(), template.getAccountId(), template.getTransferAccountId(),
+                template.getOwnerId(), template.getCurrencyId(), template.getExchangeRateId(),
+                operationDate, operationValue, template.getDescription(), template.getUrl()
+        );
+        return PendingIntent.getService(
+                context,
+                ADD_OPERATION_IMMEDIATELY_REQUEST_CODE,
+                addImmediatelyIntent,
+                ADD_OPERATION_IMMEDIATELY_FLAGS
+        );
     }
 
     @StringRes

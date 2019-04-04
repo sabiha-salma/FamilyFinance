@@ -221,6 +221,9 @@
     <string name="income_operation_type">Доход</string>
     <string name="transfer_operation_type">Перевод</string>
 
+    <!-- Notification actions -->
+    <string name="action_add_immediately">Добавить сразу</string>
+
     <!-- Dialog Buttons -->
     <string name="button_got_it">Понятно</string>
     <string name="button_allow">Разрешить</string>
