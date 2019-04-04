@@ -7,7 +7,7 @@ public class IllegalOperationTypeException extends IllegalArgumentException {
     private static final long serialVersionUID = 4171955715539750284L;
 
     public static IllegalOperationTypeException unsupportedOperationType(OperationView operation) {
-        return new IllegalOperationTypeException("Transfer operation with id " + operation.getId() +
+        return new IllegalOperationTypeException("Operation with id " + operation.getId() +
                 " has unsupported type: " + operation.getType());
     }
 
