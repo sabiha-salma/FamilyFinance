@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.5.3] - 2019-04-04
+### Added
+- An action 'Add operation immediately' to the notification from the incoming SMS.
+
+### Changed
+- Optimized account's balance calculation.
+
 ## [1.5.2] - 2019-03-29
 ### Fixed
 - Bug in ClearableEditText where icon might not be displayed.
