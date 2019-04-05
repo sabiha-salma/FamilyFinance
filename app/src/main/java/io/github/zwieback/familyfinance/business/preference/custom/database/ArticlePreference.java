@@ -1,4 +1,4 @@
-package io.github.zwieback.familyfinance.business.preference.custom;
+package io.github.zwieback.familyfinance.business.preference.custom.database;
 
 import android.content.Context;
 import android.content.Intent;
