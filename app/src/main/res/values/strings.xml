@@ -78,6 +78,12 @@
     <string name="backup_shared_prefs">Make a backup of shared preferences</string>
     <string name="restore_shared_prefs">Restore the backup of shared preferences</string>
     <!-- Preferences -->
+    <!-- Interface preferences -->
+    <string name="interface_preferences_title">Interface</string>
+    <string name="interface_preferences_summary">Interface preferences</string>
+    <string name="show_balance_on_operation_screens_preference_title">Balance on operation screens</string>
+    <string name="show_balance_on_operation_screens_enabled_preference_summary">Show balance</string>
+    <string name="show_balance_on_operation_screens_disabled_preference_summary">Hide balance</string>
     <!-- Database preferences -->
     <string name="database_preferences_title">Database</string>
     <string name="database_preferences_summary">Initial and default values</string>

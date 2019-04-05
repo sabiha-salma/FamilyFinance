@@ -3,6 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceScreen
+        android:key="interface_prefs"
+        android:summary="@string/interface_preferences_summary"
+        android:title="@string/interface_preferences_title">
+
+        <!--suppress AndroidElementNotAllowed -->
+        <io.github.zwieback.familyfinance.business.preference.custom.interface_.ShowBalanceOnOperationScreensPreference
+            android:defaultValue="true"
+            android:key="showBalanceOnOperationScreens"
+            android:summaryOff="@string/show_balance_on_operation_screens_disabled_preference_summary"
+            android:summaryOn="@string/show_balance_on_operation_screens_enabled_preference_summary"
+            android:title="@string/show_balance_on_operation_screens_preference_title"/>
+
+    </PreferenceScreen>
+
+    <PreferenceScreen
         android:key="database_prefs"
         android:summary="@string/database_preferences_summary"
         android:title="@string/database_preferences_title">

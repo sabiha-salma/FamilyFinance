@@ -15,6 +15,7 @@ import io.github.zwieback.familyfinance.R;
 
 public class SettingsFragment extends PreferenceFragmentCompatDividers {
 
+    private static final String INTERFACE_PREFERENCES_NAME = "interface_prefs";
     private static final String DATABASE_PREFERENCES_NAME = "database_prefs";
     private static final String BACKUP_PREFERENCES_NAME = "backup_prefs";
     private static final String ACRA_PREFERENCES_NAME = "acra_prefs";
@@ -34,6 +35,7 @@ public class SettingsFragment extends PreferenceFragmentCompatDividers {
 
     private void setupPreferenceScreenIcons(@Nullable String rootKey) {
         if (rootKey == null) {
+            setPreferenceScreenIcon(INTERFACE_PREFERENCES_NAME, CommunityMaterial.Icon.cmd_eye);
             setPreferenceScreenIcon(DATABASE_PREFERENCES_NAME, FontAwesome.Icon.faw_database);
             setPreferenceScreenIcon(BACKUP_PREFERENCES_NAME, CommunityMaterial.Icon.cmd_sync);
             setPreferenceScreenIcon(ACRA_PREFERENCES_NAME, FontAwesome.Icon.faw_bug);
