@@ -76,7 +76,7 @@ public class DashboardActivity extends DataActivityWrapper {
     public static final int EXPENSE_OPERATION_EDIT_CODE = 606;
     public static final int TRANSFER_OPERATION_EDIT_CODE = 607;
     public static final int ICONICS_CODE = 701;
-    public static final int FILE_CODE = 801;
+    public static final int BACKUP_PATH_CODE = 801;
     public static final int TEMPLATE_CODE = 901;
     public static final int TEMPLATE_EDIT_CODE = 902;
     public static final int SMS_CODE = 1001;

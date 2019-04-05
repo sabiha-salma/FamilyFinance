@@ -16,39 +16,39 @@ import java.util.List;
 
 import io.github.zwieback.familyfinance.core.preference.custom.ActivityResultPreference;
 
-import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.FILE_CODE;
+import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.BACKUP_PATH_CODE;
 
-public class FilePreference extends ActivityResultPreference {
+public class BackupPathPreference extends ActivityResultPreference {
 
     @SuppressWarnings("unused")
-    public FilePreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public BackupPathPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     @SuppressWarnings("unused")
-    public FilePreference(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BackupPathPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @SuppressWarnings("unused")
-    public FilePreference(Context context, AttributeSet attrs) {
+    public BackupPathPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @SuppressWarnings("unused")
-    public FilePreference(Context context) {
+    public BackupPathPreference(Context context) {
         super(context);
     }
 
     @Override
     protected void init(Context context) {
         super.init(context);
-        callChangeListener(getFilePath());
+        callChangeListener(getBackupPath());
     }
 
     @Override
     protected int getRequestCode() {
-        return FILE_CODE;
+        return BACKUP_PATH_CODE;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class FilePreference extends ActivityResultPreference {
         List<Uri> files = Utils.getSelectedFilesFromResult(resultIntent);
         if (!files.isEmpty()) {
             File file = Utils.getFileForUri(files.iterator().next());
-            setFilePath(file.getAbsolutePath());
+            setBackupPath(file.getAbsolutePath());
             callChangeListener(file.getAbsolutePath());
         }
     }
@@ -80,11 +80,11 @@ public class FilePreference extends ActivityResultPreference {
         return false;
     }
 
-    private String getFilePath() {
+    private String getBackupPath() {
         return backupPrefs.getBackupPath();
     }
 
-    private void setFilePath(String absolutePath) {
+    private void setBackupPath(String absolutePath) {
         backupPrefs.setBackupPath(absolutePath);
     }
 }
