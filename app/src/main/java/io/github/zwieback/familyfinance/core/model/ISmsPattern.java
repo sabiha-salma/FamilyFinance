@@ -41,4 +41,12 @@ public interface ISmsPattern extends IBaseEntity {
     @Nullable
     @Column(name = "value_group")
     Integer getValueGroup();
+
+    /**
+     * Required to create a notification about a partially completed operation
+     * in the {@link io.github.zwieback.familyfinance.business.sms.handler.SmsHandler SmsHandler}
+     */
+    @Bindable
+    @Column(nullable = false, value = "0")
+    boolean isCommon();
 }

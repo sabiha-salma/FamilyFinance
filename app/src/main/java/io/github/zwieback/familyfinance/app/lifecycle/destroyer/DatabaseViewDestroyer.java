@@ -6,6 +6,7 @@ import java.sql.Connection;
 
 import io.github.zwieback.familyfinance.business.account.lifecycle.destroyer.AccountViewDestroyer;
 import io.github.zwieback.familyfinance.business.operation.lifecycle.destroyer.OperationViewDestroyer;
+import io.github.zwieback.familyfinance.business.sms_pattern.lifecycle.destroyer.SmsPatternViewDestroyer;
 import io.github.zwieback.familyfinance.business.template.lifecycle.destroyer.TemplateViewDestroyer;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityViewDestroyer;
 import io.reactivex.Observable;
@@ -25,6 +26,7 @@ public class DatabaseViewDestroyer {
         destroyView(new OperationViewDestroyer(connection));
         destroyView(new AccountViewDestroyer(connection));
         destroyView(new TemplateViewDestroyer(connection));
+        destroyView(new SmsPatternViewDestroyer(connection));
     }
 
     private <T extends EntityViewDestroyer> void destroyView(T destroyer) {

@@ -26,6 +26,7 @@ public class SmsPatternViewCreator extends EntityViewCreator {
                 "       sp.sender        AS sender," +
                 "       sp.date_group    AS date_group," +
                 "       sp.value_group   AS value_group," +
+                "       sp.common        AS common," +
                 "       te.id            AS template_id," +
                 "       te.name          AS template_name" +
                 "  FROM t_sms_pattern sp" +

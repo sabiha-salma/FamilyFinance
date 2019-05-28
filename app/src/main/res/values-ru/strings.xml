@@ -173,6 +173,7 @@
     <string name="hint_parent_disabled">Родитель &disabled;</string>
     <string name="hint_balance">Баланс:</string>
     <string name="hint_calculating">вычисляется…</string>
+    <string name="hint_common">Общий</string>
 
     <!-- Menu items -->
     <!-- Actions -->

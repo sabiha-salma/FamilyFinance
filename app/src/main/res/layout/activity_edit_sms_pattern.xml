@@ -75,6 +75,14 @@
 
                 </LinearLayout>
 
+                <Switch
+                    android:id="@+id/common"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/entity_edit_margin"
+                    android:checked="@{smsPattern.common}"
+                    android:text="@string/hint_common"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

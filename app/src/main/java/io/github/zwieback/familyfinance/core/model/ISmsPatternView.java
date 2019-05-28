@@ -42,4 +42,8 @@ public interface ISmsPatternView extends IBaseEntity {
     @Nullable
     @Column(name = "value_group")
     Integer getValueGroup();
+
+    @Bindable
+    @Column(nullable = false, value = "false")
+    boolean isCommon();
 }

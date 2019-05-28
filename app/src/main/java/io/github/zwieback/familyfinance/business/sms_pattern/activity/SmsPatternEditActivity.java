@@ -117,6 +117,7 @@ public class SmsPatternEditActivity
         smsPattern.setRegex(binding.regex.getText().toString());
         smsPattern.setDateGroup(stringToInteger(binding.dateGroup.getText().toString()));
         smsPattern.setValueGroup(stringToInteger(binding.valueGroup.getText().toString()));
+        smsPattern.setCommon(binding.common.isChecked());
     }
 
     @Override

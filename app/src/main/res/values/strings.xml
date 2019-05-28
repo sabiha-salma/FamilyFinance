@@ -173,6 +173,7 @@
     <string name="hint_parent_disabled">Parent &disabled;</string>
     <string name="hint_balance">Balance:</string>
     <string name="hint_calculating">calculating…</string>
+    <string name="hint_common">Common</string>
 
     <!-- Menu items -->
     <!-- Actions -->
