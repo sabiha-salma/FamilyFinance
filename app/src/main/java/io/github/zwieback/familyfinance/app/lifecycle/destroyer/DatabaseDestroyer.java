@@ -15,8 +15,11 @@ public class DatabaseDestroyer {
 
     public void deleteDatabases() {
         for (String databaseName : context.databaseList()) {
-            Log.d(TAG, "The '" + databaseName + "' database was deleted");
-            context.deleteDatabase(databaseName);
+            if (context.deleteDatabase(databaseName)) {
+                Log.d(TAG, "The '" + databaseName + "' database was deleted");
+            } else {
+                Log.d(TAG, "Can't delete the '" + databaseName + "' database");
+            }
         }
     }
 }

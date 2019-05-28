@@ -33,7 +33,7 @@ public abstract class AbstractApplication extends MultiDexApplication {
             DatabaseProvider databaseProvider = buildDatabaseProvider();
             Configuration configuration = databaseProvider.getConfiguration();
             dataStore = ReactiveSupport.toReactiveStore(
-                    new EntityDataStore<Persistable>(configuration));
+                    new EntityDataStore<>(configuration));
         }
         return dataStore;
     }
