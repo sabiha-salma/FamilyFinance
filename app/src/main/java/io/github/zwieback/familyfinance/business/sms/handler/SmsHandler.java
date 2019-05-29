@@ -65,13 +65,13 @@ public class SmsHandler {
     }
 
     private boolean doesPatternMatch(@NonNull SmsDto smsDto, @NonNull SmsPatternView smsPattern) {
-        Pattern pattern = Pattern.compile(smsPattern.getRegex());
+        Pattern pattern = Pattern.compile(smsPattern.getRegex(), Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(smsDto.getBody());
         return matcher.matches();
     }
 
     private void parseSmsAndGenerateNotification(@NonNull SmsDto smsDto, @NonNull SmsPatternView smsPattern) {
-        Pattern pattern = Pattern.compile(smsPattern.getRegex());
+        Pattern pattern = Pattern.compile(smsPattern.getRegex(), Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(smsDto.getBody());
         if (!matcher.matches()) {
             return;
