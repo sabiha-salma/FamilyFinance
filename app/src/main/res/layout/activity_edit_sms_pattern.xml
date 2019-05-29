@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/entity_edit_margin"
                         android:layout_marginStart="@dimen/entity_edit_margin"
-                        android:hint="@string/hint_name"
+                        android:hint="@string/hint_name_required"
                         app:errorEnabled="true"
                         app:errorLabel="@string/name_error"
                         app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
