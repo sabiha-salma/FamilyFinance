@@ -21,6 +21,7 @@ public class SmsPatternQueryBuilder extends EntityQueryBuilder<SmsPatternView> {
 
     @Nullable
     private String sender;
+    private boolean useOrderByCommon;
 
     private SmsPatternQueryBuilder(ReactiveEntityStore<Persistable> data) {
         super(data);
@@ -33,6 +34,11 @@ public class SmsPatternQueryBuilder extends EntityQueryBuilder<SmsPatternView> {
 
     public SmsPatternQueryBuilder setSender(@Nullable String sender) {
         this.sender = sender;
+        return this;
+    }
+
+    public SmsPatternQueryBuilder orderByCommon() {
+        this.useOrderByCommon = true;
         return this;
     }
 
@@ -49,6 +55,9 @@ public class SmsPatternQueryBuilder extends EntityQueryBuilder<SmsPatternView> {
     @Override
     protected Limit<ReactiveResult<SmsPatternView>>
     buildOrderBy(OrderBy<Limit<ReactiveResult<SmsPatternView>>> where) {
+        if (useOrderByCommon) {
+            return where.orderBy(SmsPatternView.SENDER, SmsPatternView.NAME, SmsPatternView.COMMON);
+        }
         return where.orderBy(SmsPatternView.SENDER, SmsPatternView.NAME);
     }
 }

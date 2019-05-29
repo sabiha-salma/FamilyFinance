@@ -53,14 +53,13 @@ public class SmsHandler {
     public void handleSms(@NonNull SmsDto smsDto) {
         List<SmsPatternView> smsPatterns = SmsPatternQueryBuilder.create(data)
                 .setSender(smsDto.getSender())
+                .orderByCommon()
                 .build()
                 .toList();
 
-        // It is desirable to use takeUntil instead of filter, because filter
-        // uses all elements, and takeUntil - until the first match.
         Optional<SmsPatternView> smsPatternOptional = Stream.of(smsPatterns)
-                .takeUntil(smsPattern -> doesPatternMatch(smsDto, smsPattern))
-                .findLast();
+                .filter(smsPattern -> doesPatternMatch(smsDto, smsPattern))
+                .findFirst();
 
         smsPatternOptional.ifPresent(smsPattern -> parseSmsAndGenerateNotification(smsDto, smsPattern));
     }
