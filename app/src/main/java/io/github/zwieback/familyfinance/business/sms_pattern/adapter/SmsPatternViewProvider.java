@@ -20,6 +20,9 @@ class SmsPatternViewProvider extends EntityProvider<SmsPatternView> {
     @NonNull
     @Override
     public IIcon provideDefaultIcon(SmsPatternView smsPattern) {
+        if (smsPattern.isCommon()) {
+            return FontAwesome.Icon.faw_comment;
+        }
         return FontAwesome.Icon.faw_comment2;
     }
 

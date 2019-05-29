@@ -3,6 +3,7 @@ package io.github.zwieback.familyfinance.business.sms_pattern.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.widget.CompoundButton;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
 import com.mikepenz.iconics.view.IconicsImageView;
@@ -81,6 +82,15 @@ public class SmsPatternEditActivity
         startActivityForResult(intent, TEMPLATE_CODE);
     }
 
+    @SuppressWarnings("unused")
+    public void onCommonChange(CompoundButton buttonView, boolean isChecked) {
+        if (entity.getIconName() == null) {
+            SmsPattern smsPatternCopy = entity.copy();
+            smsPatternCopy.setCommon(isChecked);
+            provider.setupIcon(binding.icon.getIcon(), smsPatternCopy);
+        }
+    }
+
     private void loadTemplate(int templateId) {
         loadEntity(Template.class, templateId, onSuccessfulTemplateFound());
     }
@@ -108,6 +118,7 @@ public class SmsPatternEditActivity
         binding.icon.setOnClickListener(this::onSelectIconClick);
         binding.templateName.setOnClickListener(this::onTemplateClick);
         binding.templateName.setOnClearTextListener(() -> entity.setTemplate(null));
+        binding.common.setOnCheckedChangeListener(this::onCommonChange);
     }
 
     @Override

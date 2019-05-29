@@ -11,7 +11,7 @@ import io.requery.Nullable;
 import io.requery.PropertyNameStyle;
 import io.requery.Table;
 
-@Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN)
+@Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN, copyable = true)
 @Table(name = "t_sms_pattern")
 public interface ISmsPattern extends IBaseEntity {
 
