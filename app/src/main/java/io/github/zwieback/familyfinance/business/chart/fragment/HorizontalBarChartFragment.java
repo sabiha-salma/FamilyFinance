@@ -217,7 +217,10 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
     }
 
     private void updateDrawValues() {
-        chart.getData().setDrawValues(display.isViewValues());
+        BarData chartData = chart.getData();
+        if (chartData != null) {
+            chartData.setDrawValues(display.isViewValues());
+        }
         chart.invalidate();
     }
 

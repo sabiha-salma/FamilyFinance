@@ -157,8 +157,11 @@ public abstract class PieChartFragment<F extends OperationFilter> extends ChartF
             refreshData();
         } else {
             this.display = display;
-            chart.getData().setDrawValues(display.isViewValues());
-            chart.getData().setValueFormatter(determineFormatter());
+            PieData chartData = chart.getData();
+            if (chartData != null) {
+                chartData.setDrawValues(display.isViewValues());
+                chartData.setValueFormatter(determineFormatter());
+            }
             chart.setUsePercentValues(display.isUsePercentValues());
             chart.invalidate();
         }
