@@ -10,7 +10,10 @@ import static android.text.InputType.TYPE_CLASS_TEXT;
 import static android.text.InputType.TYPE_NULL;
 import static android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE;
 
-public class TextViewBindingAdapterEx extends TextViewBindingAdapter {
+/**
+ * @see TextViewBindingAdapter
+ */
+public class TextViewBindingAdapterEx {
 
     /**
      * Make TextView not editable and move text to next line if text is long.

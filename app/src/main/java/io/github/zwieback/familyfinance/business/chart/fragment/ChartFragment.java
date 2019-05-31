@@ -1,7 +1,6 @@
 package io.github.zwieback.familyfinance.business.chart.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
@@ -56,7 +55,7 @@ public abstract class ChartFragment<
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        data = ((FamilyFinanceApplication) ((Activity) extractContext()).getApplication()).getData();
+        data = ((FamilyFinanceApplication) ((Activity) requireContext()).getApplication()).getData();
         filter = loadFilter(savedInstanceState);
         display = loadDisplay(savedInstanceState);
 
@@ -154,13 +153,4 @@ public abstract class ChartFragment<
     protected abstract OperationConverter<E> determineOperationConverter();
 
     protected abstract OperationGrouper determineOperationGrouper();
-
-    @NonNull
-    protected Context extractContext() {
-        Context context = super.getContext();
-        if (context != null) {
-            return context;
-        }
-        throw new IllegalStateException("Context is null");
-    }
 }

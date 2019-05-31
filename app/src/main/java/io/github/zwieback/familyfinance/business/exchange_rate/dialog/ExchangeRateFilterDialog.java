@@ -161,7 +161,6 @@ public class ExchangeRateFilterDialog
      * Update filter.
      * Don't check for {@code null} because the check was completed in {@link #noneErrorFound()}.
      */
-    @SuppressWarnings("ConstantConditions")
     @Override
     protected void updateFilterProperties() {
         filter.setStartDate(stringToLocalDate(getStartDateEdit().getText().toString()));

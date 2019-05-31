@@ -17,11 +17,7 @@
     <dimen name="operation_first_line_text_size">14sp</dimen>
     <dimen name="operation_second_line_text_size">10sp</dimen>
 
-    <dimen name="operation_fragment_balance_height">40dp</dimen>
-    <dimen name="operation_fragment_balance_text_size">16sp</dimen>
-
     <dimen name="account_icon_size">48dp</dimen>
-    <dimen name="account_balance_width">140dp</dimen>
     <dimen name="account_currency_width">56dp</dimen>
     <dimen name="account_text_size">20sp</dimen>
 

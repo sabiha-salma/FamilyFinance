@@ -134,7 +134,7 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
 
     private void setupMarker(@NonNull IAxisValueFormatter xAxisFormatter,
                              @NonNull IAxisValueFormatter yAxisFormatter) {
-        HorizontalBarChartMarkerView mv = new HorizontalBarChartMarkerView(extractContext(),
+        HorizontalBarChartMarkerView mv = new HorizontalBarChartMarkerView(requireContext(),
                 xAxisFormatter, yAxisFormatter);
         mv.setChartView(chart);
         chart.setMarker(mv);
@@ -199,7 +199,7 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
                                        boolean drawValuesEnabled) {
         BarDataSet dataSet = new BarDataSet(barEntries, getString(dataSetLabel));
         dataSet.setDrawIcons(false);
-        dataSet.setColors(ContextCompat.getColor(extractContext(), dataSetColor));
+        dataSet.setColors(ContextCompat.getColor(requireContext(), dataSetColor));
         dataSet.setDrawValues(drawValuesEnabled);
         return dataSet;
     }
@@ -213,7 +213,7 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
     }
 
     private void scaleToAcceptableSize(int numberOfEntries) {
-        chart.getViewPortHandler().setMaximumScaleX(numberOfEntries / 2);
+        chart.getViewPortHandler().setMaximumScaleX(numberOfEntries / 2.0f);
     }
 
     private void updateDrawValues() {
@@ -258,10 +258,10 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
     protected OperationConverter<BarEntry> determineOperationConverter() {
         idIndexMapStatefulBuilder = IdIndexMapStatefulBuilder.create();
         if (display.isUsePercentValues()) {
-            return new OperationHorizontalBarPercentConverter(extractContext(),
+            return new OperationHorizontalBarPercentConverter(requireContext(),
                     idIndexMapStatefulBuilder);
         }
-        return new OperationHorizontalBarConverter(extractContext(), idIndexMapStatefulBuilder);
+        return new OperationHorizontalBarConverter(requireContext(), idIndexMapStatefulBuilder);
     }
 
     @Override

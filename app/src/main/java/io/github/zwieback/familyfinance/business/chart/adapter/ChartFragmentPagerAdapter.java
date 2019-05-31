@@ -27,7 +27,7 @@ public class ChartFragmentPagerAdapter extends FragmentStatePagerAdapter {
     private static final int PIE_CHART_OF_INCOMES = 4;
 
     private SparseArray<ChartFragment> registeredFragments;
-    private String tabTitles[];
+    private String[] tabTitles;
 
     public ChartFragmentPagerAdapter(@NonNull FragmentManager fm, @NonNull Context context) {
         super(fm);
@@ -75,14 +75,14 @@ public class ChartFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         ChartFragment fragment = (ChartFragment) super.instantiateItem(container, position);
         registeredFragments.put(position, fragment);
         return fragment;
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         registeredFragments.remove(position);
         super.destroyItem(container, position, object);
     }

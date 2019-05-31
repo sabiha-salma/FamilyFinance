@@ -97,7 +97,7 @@ public abstract class PieChartFragment<F extends OperationFilter> extends ChartF
     }
 
     private void setupMarker() {
-        PieChartMarkerView mv = new PieChartMarkerView(extractContext(),
+        PieChartMarkerView mv = new PieChartMarkerView(requireContext(),
                 new LocalizedValueFormatter());
         mv.setChartView(chart);
         chart.setMarker(mv);
@@ -137,7 +137,7 @@ public abstract class PieChartFragment<F extends OperationFilter> extends ChartF
     }
 
     private List<Integer> collectDataColors() {
-        List<Integer> colors = ColorUtils.collectMaterialDesignColors(extractContext());
+        List<Integer> colors = ColorUtils.collectMaterialDesignColors(requireContext());
         Collections.shuffle(colors);
         return colors;
     }
@@ -171,9 +171,9 @@ public abstract class PieChartFragment<F extends OperationFilter> extends ChartF
     protected OperationConverter<PieEntry> determineOperationConverter() {
         switch (display.getGroupingType()) {
             case SIMPLE:
-                return new OperationPieSimpleConverter(extractContext(), display.getGroupByType());
+                return new OperationPieSimpleConverter(requireContext(), display.getGroupByType());
             case LIMIT:
-                return new OperationPieLimitConverter(extractContext(), display.getGroupByType());
+                return new OperationPieLimitConverter(requireContext(), display.getGroupByType());
         }
         throw new UnsupportedPieChartGroupingTypeException();
     }

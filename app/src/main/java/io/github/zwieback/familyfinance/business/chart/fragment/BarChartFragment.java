@@ -159,7 +159,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
     }
 
     private void setupMarker(IAxisValueFormatter xAxisFormatter) {
-        BarChartMarkerView mv = new BarChartMarkerView(extractContext(), xAxisFormatter,
+        BarChartMarkerView mv = new BarChartMarkerView(requireContext(), xAxisFormatter,
                 new LocalizedValueFormatter());
         mv.setChartView(chart);
         chart.setMarker(mv);
@@ -228,7 +228,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
         List<BarEntry> barEntries = convertOperations(operations);
         BarDataSet dataSet = new BarDataSet(barEntries, getString(dataSetLabel));
         dataSet.setDrawIcons(false);
-        dataSet.setColors(ContextCompat.getColor(extractContext(), dataSetColor));
+        dataSet.setColors(ContextCompat.getColor(requireContext(), dataSetColor));
         dataSet.setDrawValues(drawValuesEnabled);
         dataSet.setVisible(visible);
         return dataSet;
@@ -243,7 +243,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
     }
 
     private void scaleToAcceptableSize(int numberOfEntries) {
-        chart.getViewPortHandler().setMaximumScaleX(numberOfEntries / 2);
+        chart.getViewPortHandler().setMaximumScaleX(numberOfEntries / 2.0f);
     }
 
     private void updateDrawValues() {
@@ -308,7 +308,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
 
     @Override
     protected OperationConverter<BarEntry> determineOperationConverter() {
-        return new OperationBarConverter(extractContext());
+        return new OperationBarConverter(requireContext());
     }
 
     @Override
