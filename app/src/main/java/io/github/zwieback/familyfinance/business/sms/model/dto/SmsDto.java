@@ -24,6 +24,7 @@ public class SmsDto {
         return body;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "SmsDto{" +

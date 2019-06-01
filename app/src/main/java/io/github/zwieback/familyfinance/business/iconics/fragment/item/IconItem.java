@@ -14,7 +14,7 @@ import io.github.zwieback.familyfinance.R;
 public class IconItem extends AbstractItem<IconItem, ItemViewHolder> {
 
     @NonNull
-    private String icon;
+    private final String icon;
 
     public IconItem(@NonNull String icon) {
         this.icon = icon;
@@ -37,6 +37,7 @@ public class IconItem extends AbstractItem<IconItem, ItemViewHolder> {
         holder.image.getIcon().respectFontBounds(true);
     }
 
+    @NonNull
     @Override
     public ItemViewHolder getViewHolder(@NonNull View v) {
         return new ItemViewHolder(v);

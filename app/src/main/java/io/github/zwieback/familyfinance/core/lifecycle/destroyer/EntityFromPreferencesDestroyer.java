@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.core.lifecycle.destroyer;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import io.github.zwieback.familyfinance.core.model.IBaseEntity;
 import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs;
@@ -11,7 +12,8 @@ import io.requery.reactivex.ReactiveEntityStore;
 public abstract class EntityFromPreferencesDestroyer<E extends IBaseEntity>
         extends EntityAlertDestroyer<E> {
 
-    protected DatabasePrefs databasePrefs;
+    @NonNull
+    protected final DatabasePrefs databasePrefs;
 
     public EntityFromPreferencesDestroyer(Context context, ReactiveEntityStore<Persistable> data) {
         super(context, data);

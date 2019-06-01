@@ -44,8 +44,8 @@ public class OperationHorizontalBarPercentConverter extends OperationHorizontalB
 
         return Stream.of(percentSumMap)
                 .map(entry -> {
-                    Float barIndex = idIndexMap.get(entry.second);
-                    Float sumOfOperationsInPercent = entry.first.floatValue();
+                    float barIndex = idIndexMap.get(entry.second);
+                    float sumOfOperationsInPercent = entry.first.floatValue();
                     return new BarEntry(barIndex, sumOfOperationsInPercent);
                 })
                 .sortBy(Entry::getX)

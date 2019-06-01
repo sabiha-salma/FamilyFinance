@@ -45,8 +45,8 @@ public class OperationHorizontalBarConverter implements OperationConverter<BarEn
 
         return Stream.of(swappedSumMap)
                 .map(entry -> {
-                    Float barIndex = idIndexMap.get(entry.second);
-                    Float sumOfOperations = entry.first.floatValue();
+                    float barIndex = idIndexMap.get(entry.second);
+                    float sumOfOperations = entry.first.floatValue();
                     return new BarEntry(barIndex, sumOfOperations);
                 })
                 .sortBy(Entry::getX)

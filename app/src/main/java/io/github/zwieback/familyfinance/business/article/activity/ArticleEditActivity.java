@@ -140,8 +140,9 @@ public abstract class ArticleEditActivity
 
     @Override
     protected List<ValidatingTextInputLayout> getLayoutsForValidation() {
-        List<ValidatingTextInputLayout> layouts = new ArrayList<>();
-        layouts.addAll(Arrays.asList(binding.parentLayout, binding.nameLayout));
+        List<ValidatingTextInputLayout> layouts = new ArrayList<>(
+                Arrays.asList(binding.parentLayout, binding.nameLayout)
+        );
         if (!entity.isFolder() && isTextNotEmpty(binding.defaultValue.getText().toString())) {
             layouts.add(binding.defaultValueLayout);
         }

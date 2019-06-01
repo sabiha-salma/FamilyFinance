@@ -20,8 +20,10 @@ import io.github.zwieback.familyfinance.core.R;
 public class CalculatorDialog extends AlertDialog implements DialogInterface.OnClickListener,
         OnInvalidateStateListener {
 
-    private OnCalculationResultListener calculationResultListener;
-    private StatefulCalculator calculator;
+    @Nullable
+    private final OnCalculationResultListener calculationResultListener;
+    @NonNull
+    private final StatefulCalculator calculator;
     private TextInputEditText numberEditText;
 
     public CalculatorDialog(@NonNull Context context,

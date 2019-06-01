@@ -2,6 +2,7 @@ package io.github.zwieback.familyfinance.core.adapter;
 
 import android.content.Context;
 import android.databinding.ViewDataBinding;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +48,9 @@ public abstract class EntityAdapter<
 
     protected abstract ENTITY extractEntity(BINDING binding);
 
+    @NonNull
     @Override
-    public BindingHolder<BINDING> onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BindingHolder<BINDING> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         BINDING binding = inflate(inflater);
         binding.getRoot().setTag(binding);

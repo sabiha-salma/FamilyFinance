@@ -17,9 +17,12 @@ import io.github.zwieback.familyfinance.R;
 @SuppressLint("ViewConstructor")
 public class PieChartMarkerView extends MarkerView {
 
-    private TextView labelContent;
-    private TextView valueContent;
-    private IAxisValueFormatter valueFormatter;
+    @NonNull
+    private final TextView labelContent;
+    @NonNull
+    private final TextView valueContent;
+    @NonNull
+    private final IAxisValueFormatter valueFormatter;
 
     public PieChartMarkerView(@NonNull Context context,
                               @NonNull IAxisValueFormatter valueFormatter) {
@@ -40,6 +43,6 @@ public class PieChartMarkerView extends MarkerView {
 
     @Override
     public MPPointF getOffset() {
-        return new MPPointF(-(getWidth() / 2), -(getHeight() * 2));
+        return new MPPointF(-(getWidth() / 2.0f), -(getHeight() * 2));
     }
 }

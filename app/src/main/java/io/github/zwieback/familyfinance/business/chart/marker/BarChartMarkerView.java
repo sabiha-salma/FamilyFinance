@@ -16,9 +16,12 @@ import io.github.zwieback.familyfinance.R;
 @SuppressLint("ViewConstructor")
 public class BarChartMarkerView extends MarkerView {
 
-    private TextView markerContent;
-    private IAxisValueFormatter xAxisValueFormatter;
-    private IAxisValueFormatter yAxisValueFormatter;
+    @NonNull
+    private final TextView markerContent;
+    @NonNull
+    private final IAxisValueFormatter xAxisValueFormatter;
+    @NonNull
+    private final IAxisValueFormatter yAxisValueFormatter;
 
     public BarChartMarkerView(@NonNull Context context,
                               @NonNull IAxisValueFormatter xAxisValueFormatter,
@@ -39,6 +42,6 @@ public class BarChartMarkerView extends MarkerView {
 
     @Override
     public MPPointF getOffset() {
-        return new MPPointF(-(getWidth() / 2), -getHeight());
+        return new MPPointF(-(getWidth() / 2.0f), -getHeight());
     }
 }

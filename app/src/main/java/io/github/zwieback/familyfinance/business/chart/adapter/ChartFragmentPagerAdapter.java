@@ -26,8 +26,10 @@ public class ChartFragmentPagerAdapter extends FragmentStatePagerAdapter {
     private static final int PIE_CHART_OF_EXPENSES = 3;
     private static final int PIE_CHART_OF_INCOMES = 4;
 
-    private SparseArray<ChartFragment> registeredFragments;
-    private String[] tabTitles;
+    @NonNull
+    private final SparseArray<ChartFragment> registeredFragments;
+    @NonNull
+    private final String[] tabTitles = new String[PAGE_COUNT];
 
     public ChartFragmentPagerAdapter(@NonNull FragmentManager fm, @NonNull Context context) {
         super(fm);
@@ -36,7 +38,6 @@ public class ChartFragmentPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     private void initTabTitles(@NonNull Context context) {
-        tabTitles = new String[PAGE_COUNT];
         tabTitles[BAR_CHART] = context.getString(R.string.bar_chart_title);
         tabTitles[HORIZONTAL_BAR_CHART_OF_EXPENSES] =
                 context.getString(R.string.horizontal_bar_chart_of_expenses_title);

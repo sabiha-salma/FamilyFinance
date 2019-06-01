@@ -16,10 +16,14 @@ import io.github.zwieback.familyfinance.R;
 @SuppressLint("ViewConstructor")
 public class HorizontalBarChartMarkerView extends MarkerView {
 
-    private TextView labelContent;
-    private TextView valueContent;
-    private IAxisValueFormatter xAxisValueFormatter;
-    private IAxisValueFormatter yAxisValueFormatter;
+    @NonNull
+    private final TextView labelContent;
+    @NonNull
+    private final TextView valueContent;
+    @NonNull
+    private final IAxisValueFormatter xAxisValueFormatter;
+    @NonNull
+    private final IAxisValueFormatter yAxisValueFormatter;
 
     public HorizontalBarChartMarkerView(@NonNull Context context,
                                         @NonNull IAxisValueFormatter xAxisValueFormatter,

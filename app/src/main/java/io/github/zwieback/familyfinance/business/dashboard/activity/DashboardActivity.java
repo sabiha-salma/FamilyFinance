@@ -219,6 +219,7 @@ public class DashboardActivity extends DataActivityWrapper {
         DashboardActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
+    @SuppressWarnings("EmptyMethod")
     @NeedsPermission(Manifest.permission.RECEIVE_SMS)
     public void registerSmsReceiver() {
         // empty method because SmsReceiver already registered in the manifest

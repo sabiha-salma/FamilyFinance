@@ -30,7 +30,7 @@ public class PersonCreator extends EntityCreator<Person> {
 
     @Override
     public int compare(Person left, Person right) {
-        return Integer.valueOf(left.getOrderCode()).compareTo(right.getOrderCode());
+        return Integer.compare(left.getOrderCode(), right.getOrderCode());
     }
 
     @NonNull
