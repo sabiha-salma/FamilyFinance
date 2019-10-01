@@ -19,7 +19,7 @@ public class ExpenseArticleActivity extends ArticleActivity<ExpenseArticleFragme
 
     @Nullable
     @Override
-    Integer getInitialParentId() {
+    Integer getDefaultParentId() {
         return databasePrefs.getExpensesArticleId();
     }
 

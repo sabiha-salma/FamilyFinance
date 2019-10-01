@@ -19,7 +19,7 @@ public class IncomeArticleActivity extends ArticleActivity<IncomeArticleFragment
 
     @Nullable
     @Override
-    Integer getInitialParentId() {
+    Integer getDefaultParentId() {
         return databasePrefs.getIncomesArticleId();
     }
 

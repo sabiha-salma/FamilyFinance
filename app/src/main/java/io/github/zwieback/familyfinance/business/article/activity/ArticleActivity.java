@@ -73,7 +73,12 @@ public abstract class ArticleActivity<
     }
 
     @Nullable
-    abstract Integer getInitialParentId();
+    protected Integer getInitialParentId() {
+        return parentFolderId != null ? parentFolderId : getDefaultParentId();
+    }
+
+    @Nullable
+    abstract Integer getDefaultParentId();
 
     @NonNull
     @Override

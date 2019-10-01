@@ -13,7 +13,7 @@ public class AllArticleActivity extends ArticleActivity<AllArticleFragment, AllA
 
     @Nullable
     @Override
-    Integer getInitialParentId() {
+    Integer getDefaultParentId() {
         return null;
     }
 

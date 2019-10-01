@@ -20,6 +20,7 @@ import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.article.activity.IncomeArticleActivity;
 import io.github.zwieback.familyfinance.business.operation.service.provider.IncomeOperationProvider;
 import io.github.zwieback.familyfinance.core.activity.EntityActivity;
+import io.github.zwieback.familyfinance.core.activity.EntityFolderActivity;
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider;
 import io.github.zwieback.familyfinance.core.model.Account;
 import io.github.zwieback.familyfinance.core.model.Article;
@@ -107,6 +108,18 @@ public class IncomeOperationEditActivity
     public void onArticleClick(View view) {
         Intent intent = new Intent(this, IncomeArticleActivity.class);
         intent.putExtra(EntityActivity.INPUT_READ_ONLY, false);
+        startActivityForResult(intent, ARTICLE_CODE);
+    }
+
+    public void onArticleCategoryClick(View view) {
+        Intent intent = new Intent(this, IncomeArticleActivity.class);
+        intent.putExtra(EntityActivity.INPUT_READ_ONLY, false);
+        if (entity.getArticle() != null && entity.getArticle().getParent() != null) {
+            intent.putExtra(
+                    EntityFolderActivity.INPUT_PARENT_FOLDER_ID,
+                    entity.getArticle().getParent().getId()
+            );
+        }
         startActivityForResult(intent, ARTICLE_CODE);
     }
 
@@ -216,7 +229,7 @@ public class IncomeOperationEditActivity
         binding.icon.setOnClickListener(this::onSelectIconClick);
         binding.articleName.setOnClickListener(this::onArticleClick);
         binding.articleName.setOnClearTextListener(() -> entity.setArticle(null));
-        binding.articleCategory.setOnClickListener(this::onArticleClick);
+        binding.articleCategory.setOnClickListener(this::onArticleCategoryClick);
         binding.articleCategory.setOnClearTextListener(() -> entity.setArticle(null));
         binding.account.setOnClickListener(this::onAccountClick);
         binding.account.setOnClearTextListener(() -> entity.setAccount(null));
