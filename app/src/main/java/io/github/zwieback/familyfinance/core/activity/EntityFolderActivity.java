@@ -30,6 +30,10 @@ public abstract class EntityFolderActivity<
         implements EntityFolderClickListener<ENTITY> {
 
     /**
+     * Flag indicating that the folder with the specified id should be opened
+     */
+    public static final String INPUT_PARENT_FOLDER_ID = "inputParentFolderId";
+    /**
      * Flag indicating that the folder with the specified id cannot be selected
      */
     public static final String INPUT_PROHIBITED_FOLDER_ID = "inputProhibitedFolderId";
@@ -38,6 +42,8 @@ public abstract class EntityFolderActivity<
      */
     public static final String INPUT_FOLDER_SELECTABLE = "inputFolderSelectable";
 
+    @Nullable
+    protected Integer parentFolderId;
     @Nullable
     private Integer prohibitedFolderId;
     private boolean folderSelectable;
@@ -74,9 +80,10 @@ public abstract class EntityFolderActivity<
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+        parentFolderId = extractId(getIntent().getExtras(), INPUT_PARENT_FOLDER_ID);
         prohibitedFolderId = extractId(getIntent().getExtras(), INPUT_PROHIBITED_FOLDER_ID);
         folderSelectable = extractBoolean(getIntent().getExtras(), INPUT_FOLDER_SELECTABLE, true);
+        super.init(savedInstanceState);
     }
 
     // -----------------------------------------------------------------------------------------
