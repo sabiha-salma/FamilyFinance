@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.5.7] - 2019-10-01
+### Added
+- Ability to open articles in the specified folder when click on the article category (parent) view.
+
 ## [1.5.6] - 2019-05-31
 ### Fixed
 - NPE on reports screen with blank data after display changes (horizontal bar and pie charts).
