@@ -42,7 +42,14 @@ public abstract class EntityActivity<
         extends DataActivityWrapper
         implements EntityClickListener<ENTITY>, EntityFilterListener<FILTER> {
 
+    /**
+     * Flag indicating that the entity is opened for read-only purposes
+     * without editing
+     */
     public static final String INPUT_READ_ONLY = "inputReadOnly";
+    /**
+     * Flag indicating that the entity can be selected
+     */
     public static final String INPUT_REGULAR_SELECTABLE = "inputRegularSelectable";
 
     protected FILTER filter;

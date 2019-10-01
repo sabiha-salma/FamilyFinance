@@ -29,7 +29,13 @@ public abstract class EntityFolderActivity<
         extends EntityActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT>
         implements EntityFolderClickListener<ENTITY> {
 
+    /**
+     * Flag indicating that the folder with the specified id cannot be selected
+     */
     public static final String INPUT_PROHIBITED_FOLDER_ID = "inputProhibitedFolderId";
+    /**
+     * Flag indicating that the folder can be selected
+     */
     public static final String INPUT_FOLDER_SELECTABLE = "inputFolderSelectable";
 
     @Nullable
