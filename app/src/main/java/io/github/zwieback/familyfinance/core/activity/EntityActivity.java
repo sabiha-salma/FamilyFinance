@@ -133,7 +133,7 @@ public abstract class EntityActivity<
     @NonNull
     protected abstract String getFilterName();
 
-    private FILTER loadFilter(Bundle savedInstanceState, FILTER filter) {
+    private FILTER loadFilter(@Nullable Bundle savedInstanceState, @Nullable FILTER filter) {
         if (savedInstanceState == null) {
             if (filter == null) {
                 return createDefaultFilter();
