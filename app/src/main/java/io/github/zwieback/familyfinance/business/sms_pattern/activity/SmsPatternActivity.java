@@ -1,7 +1,6 @@
 package io.github.zwieback.familyfinance.business.sms_pattern.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import io.github.zwieback.familyfinance.R;
@@ -24,11 +23,6 @@ public class SmsPatternActivity
     @Override
     protected int getTitleStringId() {
         return R.string.sms_pattern_activity_title;
-    }
-
-    @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
     }
 
     @NonNull
