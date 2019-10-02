@@ -2,6 +2,16 @@
 
 Family finance manager for Android.
 
+Features include:
+* Multiple money accounts (can be nested).
+* Multiple owners (can be nested).
+* Multiple articles (can be nested).
+* Multiple currencies.
+* Expenses, income and transfers between accounts.
+* Customizable filters.
+* Templates.
+* Reports.
+
 # Installation
 
 <a href='https://play.google.com/store/apps/details?id=io.github.zwieback.familyfinance'>
