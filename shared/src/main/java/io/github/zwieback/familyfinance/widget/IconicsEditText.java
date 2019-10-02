@@ -19,6 +19,9 @@ import io.github.zwieback.familyfinance.core.R;
 import io.github.zwieback.familyfinance.util.ViewUtils;
 import io.github.zwieback.familyfinance.widget.listener.OnIconClickListener;
 
+/**
+ * View with an ability to display custom icon at the end of this view's border
+ */
 public abstract class IconicsEditText extends TextInputEditText implements View.OnTouchListener,
         OnIconClickListener {
 

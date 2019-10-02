@@ -16,6 +16,9 @@ import io.github.zwieback.familyfinance.util.DialogUtils;
 import io.github.zwieback.familyfinance.util.NumberUtils;
 import io.github.zwieback.familyfinance.widget.filter.DecimalNumberInputFilter;
 
+/**
+ * View to input decimal numbers
+ */
 public class DecimalNumberTextEdit extends IconicsEditText implements OnCalculationResultListener {
 
     public DecimalNumberTextEdit(Context context) {

@@ -15,6 +15,9 @@ import static io.github.zwieback.familyfinance.util.StringUtils.EMPTY;
 import static io.github.zwieback.familyfinance.util.StringUtils.isTextEmpty;
 import static io.github.zwieback.familyfinance.util.StringUtils.isTextNotEmpty;
 
+/**
+ * Read-only view with an ability to clear the current text
+ */
 public class ClearableEditText extends IconicsEditText implements TextWatcherListener,
         View.OnFocusChangeListener {
 
