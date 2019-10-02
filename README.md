@@ -2,12 +2,14 @@
 
 Family finance manager for Android.
 
-# Quick links
-- [Google+ community](https://plus.google.com/communities/117217393387989904128)
-- [Join beta testing program](https://play.google.com/apps/testing/io.github.zwieback.familyfinance) *(You must be joined to Google+ community)*
-- [Report an issue or request a feature](https://github.com/zwieback/FamilyFinance/issues/new) but before **[read this](#report-a-bug-or-request-a-feature)**
+# Installation
+
+<a href='https://play.google.com/store/apps/details?id=io.github.zwieback.familyfinance'>
+    <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>
+</a>
 
 ## Report a bug or request a feature
+
 Before creating a new issue please make sure that same or similar issue is not already created by checking 
 [open issues](https://github.com/zwieback/FamilyFinance/issues?state=open) and [closed issues](https://github.com/zwieback/FamilyFinance/issues?state=closed) *(please note that there might be multiple pages)*. If your issue is already 
 there, don't create a new one, but leave a comment under already existing one.
