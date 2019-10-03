@@ -2,10 +2,10 @@ package io.github.zwieback.familyfinance.business.operation.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
 import com.mikepenz.iconics.view.IconicsImageView;

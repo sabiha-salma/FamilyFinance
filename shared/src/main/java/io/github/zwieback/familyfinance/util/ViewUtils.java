@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.util;
 
-import androidx.core.view.ViewCompat;
 import android.view.View;
+import androidx.core.view.ViewCompat;
 
 public final class ViewUtils {
 

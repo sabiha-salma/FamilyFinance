@@ -2,9 +2,9 @@ package io.github.zwieback.familyfinance.business.template.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.view.MenuItem;
 import android.view.View;
+import androidx.annotation.NonNull;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,11 +1,11 @@
 package io.github.zwieback.familyfinance.business.article.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 
 import com.annimon.stream.Objects;
 import com.jakewharton.rxbinding2.support.v7.widget.RxSearchView;

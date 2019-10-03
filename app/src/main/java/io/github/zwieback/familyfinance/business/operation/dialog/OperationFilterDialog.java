@@ -2,11 +2,11 @@ package io.github.zwieback.familyfinance.business.operation.dialog;
 
 import android.app.Activity;
 import android.content.Intent;
-import androidx.databinding.ViewDataBinding;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.ViewDataBinding;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
 

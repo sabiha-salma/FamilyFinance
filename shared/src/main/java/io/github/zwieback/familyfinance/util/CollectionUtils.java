@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.util;
 
-import androidx.annotation.Nullable;
 import android.util.Pair;
+import androidx.annotation.Nullable;
 
 import com.annimon.stream.Collector;
 import com.annimon.stream.Collectors;

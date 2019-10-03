@@ -1,12 +1,12 @@
 package io.github.zwieback.familyfinance.widget;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.InputFilter;
 import android.text.method.DigitsKeyListener;
 import android.util.AttributeSet;
 import android.view.inputmethod.EditorInfo;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.math.BigDecimal;
 

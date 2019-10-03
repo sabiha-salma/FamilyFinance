@@ -6,9 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.util.Log;
 
 import io.github.zwieback.familyfinance.app.FamilyFinanceApplication;
 import io.github.zwieback.familyfinance.business.operation.activity.exception.IllegalOperationTypeException;

@@ -2,14 +2,15 @@ package com.johnpetitto.validator;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import com.google.android.material.textfield.TextInputLayout;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 /**
  * An extension of {@code TextInputLayout} that validates the text of its child {@code EditText}
@@ -32,7 +33,7 @@ import android.widget.EditText;
  * </com.johnpetitto.validator.ValidatingTextInputLayout>
  * }
  * </pre>
- *
+ * <p>
  * To set a {@link Validator} for your {@code ValidatingTextInputLayout}, call
  * {@link #setValidator(Validator)}:
  * <pre><code>
@@ -43,7 +44,7 @@ import android.widget.EditText;
  *     }
  * });
  * </code></pre>
- *
+ * <p>
  * To validate, simply call {@link #validate()}.
  *
  * <p>

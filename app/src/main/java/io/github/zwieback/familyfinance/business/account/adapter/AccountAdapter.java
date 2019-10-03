@@ -1,9 +1,9 @@
 package io.github.zwieback.familyfinance.business.account.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import androidx.annotation.ColorInt;
 import androidx.core.content.ContextCompat;
-import android.view.LayoutInflater;
 
 import java.math.BigDecimal;
 

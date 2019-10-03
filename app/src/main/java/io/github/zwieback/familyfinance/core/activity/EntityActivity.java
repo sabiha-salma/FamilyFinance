@@ -2,18 +2,18 @@ package io.github.zwieback.familyfinance.core.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import androidx.annotation.CallSuper;
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.widget.PopupMenu;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.annimon.stream.Stream;
 import com.mikepenz.iconics.utils.IconicsMenuInflaterUtil;

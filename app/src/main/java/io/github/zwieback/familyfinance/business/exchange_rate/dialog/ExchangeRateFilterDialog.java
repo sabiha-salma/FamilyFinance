@@ -3,9 +3,9 @@ package io.github.zwieback.familyfinance.business.exchange_rate.dialog;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
+import androidx.annotation.Nullable;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
 

@@ -1,13 +1,13 @@
 package io.github.zwieback.familyfinance.business.chart.adapter;
 
 import android.content.Context;
+import android.util.SparseArray;
+import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import android.util.SparseArray;
-import android.view.ViewGroup;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.chart.fragment.BarChartFragment;

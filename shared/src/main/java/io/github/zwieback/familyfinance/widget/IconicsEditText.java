@@ -2,17 +2,17 @@ package io.github.zwieback.familyfinance.widget;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
 import androidx.annotation.CallSuper;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.google.android.material.textfield.TextInputEditText;
 import androidx.core.widget.TextViewCompat;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.mikepenz.iconics.IconicsDrawable;
 
 import io.github.zwieback.familyfinance.core.R;

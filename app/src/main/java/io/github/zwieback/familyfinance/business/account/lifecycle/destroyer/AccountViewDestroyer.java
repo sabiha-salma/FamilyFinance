@@ -1,9 +1,10 @@
 package io.github.zwieback.familyfinance.business.account.lifecycle.destroyer;
 
 import androidx.annotation.NonNull;
-import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityViewDestroyer;
 
 import java.sql.Connection;
+
+import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityViewDestroyer;
 
 public class AccountViewDestroyer extends EntityViewDestroyer {
 

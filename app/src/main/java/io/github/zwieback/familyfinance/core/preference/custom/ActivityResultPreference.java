@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.util.AttributeSet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
-import android.util.AttributeSet;
 
 import com.takisoft.preferencex.PreferenceActivityResultListener;
 import com.takisoft.preferencex.PreferenceFragmentCompat;

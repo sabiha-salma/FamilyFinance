@@ -2,10 +2,10 @@ package io.github.zwieback.familyfinance.business.iconics.fragment.item;
 
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.State;
-import android.view.View;
 
 /**
  * @author pa.gulko zTrap (28.10.2017)

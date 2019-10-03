@@ -1,16 +1,16 @@
 package io.github.zwieback.familyfinance.business.operation.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import android.view.LayoutInflater;
-import android.widget.TextView;
 
 import io.github.zwieback.familyfinance.R;
-import io.github.zwieback.familyfinance.business.operation.service.calculator.BalanceCalculator;
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter;
 import io.github.zwieback.familyfinance.business.operation.listener.OnOperationClickListener;
+import io.github.zwieback.familyfinance.business.operation.service.calculator.BalanceCalculator;
 import io.github.zwieback.familyfinance.core.adapter.BindingHolder;
 import io.github.zwieback.familyfinance.core.adapter.EntityAdapter;
 import io.github.zwieback.familyfinance.core.model.OperationView;

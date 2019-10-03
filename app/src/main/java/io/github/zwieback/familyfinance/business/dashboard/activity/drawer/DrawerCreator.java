@@ -1,9 +1,9 @@
 package io.github.zwieback.familyfinance.business.dashboard.activity.drawer;
 
 import android.content.Intent;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import android.view.View;
 
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;

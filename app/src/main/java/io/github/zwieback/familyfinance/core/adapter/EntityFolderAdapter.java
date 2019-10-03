@@ -1,9 +1,9 @@
 package io.github.zwieback.familyfinance.core.adapter;
 
 import android.content.Context;
-import androidx.databinding.ViewDataBinding;
-import androidx.annotation.Nullable;
 import android.view.View;
+import androidx.annotation.Nullable;
+import androidx.databinding.ViewDataBinding;
 
 import io.github.zwieback.familyfinance.core.filter.EntityFolderFilter;
 import io.github.zwieback.familyfinance.core.listener.EntityFolderClickListener;

@@ -4,10 +4,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import android.view.View;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.account.activity.AccountActivity;

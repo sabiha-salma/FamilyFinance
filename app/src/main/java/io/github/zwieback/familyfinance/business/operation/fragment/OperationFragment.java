@@ -1,11 +1,11 @@
 package io.github.zwieback.familyfinance.business.operation.fragment;
 
 import android.os.Bundle;
-import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.operation.adapter.OperationAdapter;

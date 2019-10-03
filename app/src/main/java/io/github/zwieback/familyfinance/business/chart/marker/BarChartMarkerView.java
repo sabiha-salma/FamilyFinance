@@ -2,8 +2,8 @@ package io.github.zwieback.familyfinance.business.chart.marker;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import androidx.annotation.NonNull;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 
 import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.data.Entry;

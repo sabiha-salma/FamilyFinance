@@ -1,8 +1,8 @@
 package io.github.zwieback.familyfinance.app.lifecycle.creator;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
 import android.util.Log;
+import androidx.annotation.NonNull;
 
 import com.annimon.stream.Stream;
 

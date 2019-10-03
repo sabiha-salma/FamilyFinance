@@ -1,8 +1,8 @@
 package io.github.zwieback.familyfinance.business.iconics.fragment.item;
 
 import android.graphics.Color;
-import androidx.annotation.NonNull;
 import android.view.View;
+import androidx.annotation.NonNull;
 
 import com.mikepenz.fastadapter.items.AbstractItem;
 import com.mikepenz.iconics.IconicsDrawable;

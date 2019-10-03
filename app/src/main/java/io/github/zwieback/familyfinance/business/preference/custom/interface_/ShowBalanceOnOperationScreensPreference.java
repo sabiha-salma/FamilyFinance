@@ -1,9 +1,9 @@
 package io.github.zwieback.familyfinance.business.preference.custom.interface_;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
-import android.util.AttributeSet;
 
 import io.github.zwieback.familyfinance.core.preference.config.InterfacePrefs;
 import io.github.zwieback.familyfinance.core.preference.custom.BooleanPreference;

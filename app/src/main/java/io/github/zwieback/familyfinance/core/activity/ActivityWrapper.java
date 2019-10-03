@@ -1,13 +1,13 @@
 package io.github.zwieback.familyfinance.core.activity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.view.MenuItem;
 
 import io.github.zwieback.familyfinance.R;
 

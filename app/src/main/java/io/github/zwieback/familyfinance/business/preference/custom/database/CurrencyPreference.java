@@ -2,8 +2,8 @@ package io.github.zwieback.familyfinance.business.preference.custom.database;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.annotation.NonNull;
 import android.util.AttributeSet;
+import androidx.annotation.NonNull;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.currency.activity.CurrencyActivity;

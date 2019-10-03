@@ -1,10 +1,10 @@
 package io.github.zwieback.familyfinance.widget;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import io.github.zwieback.familyfinance.core.R;
 import io.github.zwieback.familyfinance.widget.adapter.TextWatcherAdapter;

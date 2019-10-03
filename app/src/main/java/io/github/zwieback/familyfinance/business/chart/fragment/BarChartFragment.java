@@ -2,13 +2,13 @@ package io.github.zwieback.familyfinance.business.chart.fragment;
 
 import android.graphics.RectF;
 import android.os.Bundle;
+import android.view.View;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.fragment.app.DialogFragment;
 import androidx.core.content.ContextCompat;
-import android.view.View;
+import androidx.fragment.app.DialogFragment;
 
 import com.annimon.stream.Stream;
 import com.github.mikephil.charting.charts.BarChart;

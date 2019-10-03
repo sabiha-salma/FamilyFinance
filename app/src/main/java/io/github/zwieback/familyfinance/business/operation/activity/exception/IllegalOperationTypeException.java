@@ -20,7 +20,7 @@ public class IllegalOperationTypeException extends IllegalArgumentException {
 
     public static IllegalOperationTypeException notTransferOperation(OperationView operation) {
         return new IllegalOperationTypeException("Transfer operation with id " + operation.getId() +
-                        " must be transfer operation, not " + operation.getType());
+                " must be transfer operation, not " + operation.getType());
     }
 
     private IllegalOperationTypeException(String message) {

@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.business.sms.parser;
 
-import androidx.annotation.NonNull;
 import android.telephony.SmsMessage;
+import androidx.annotation.NonNull;
 
 import io.github.zwieback.familyfinance.business.sms.model.dto.SmsDto;
 

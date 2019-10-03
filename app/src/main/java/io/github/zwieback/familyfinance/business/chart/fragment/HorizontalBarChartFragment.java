@@ -2,12 +2,12 @@ package io.github.zwieback.familyfinance.business.chart.fragment;
 
 import android.graphics.RectF;
 import android.os.Bundle;
+import android.view.View;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
-import android.view.View;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;

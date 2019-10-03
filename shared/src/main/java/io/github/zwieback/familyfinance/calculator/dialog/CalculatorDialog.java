@@ -2,13 +2,14 @@ package io.github.zwieback.familyfinance.calculator.dialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.TypedValue;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
-import com.google.android.material.textfield.TextInputEditText;
 import androidx.appcompat.app.AlertDialog;
-import android.util.TypedValue;
-import android.view.View;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.math.BigDecimal;
 
