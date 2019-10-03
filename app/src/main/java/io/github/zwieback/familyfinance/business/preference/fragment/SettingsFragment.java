@@ -1,19 +1,19 @@
 package io.github.zwieback.familyfinance.business.preference.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.preference.Preference;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.preference.Preference;
 
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.IIcon;
-import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompatDividers;
+import com.takisoft.preferencex.PreferenceFragmentCompat;
 
 import io.github.zwieback.familyfinance.R;
 
-public class SettingsFragment extends PreferenceFragmentCompatDividers {
+public class SettingsFragment extends PreferenceFragmentCompat {
 
     private static final String INTERFACE_PREFERENCES_NAME = "interface_prefs";
     private static final String DATABASE_PREFERENCES_NAME = "database_prefs";

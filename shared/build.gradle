@@ -10,7 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -36,14 +36,14 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation("androidx.test.espresso:espresso-core:${versions.espressoLib}", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     // support libraries
-    implementation "com.android.support:support-v4:${versions.supportLib}"
-    implementation "com.android.support:appcompat-v7:${versions.supportLib}"
-    implementation "com.android.support:gridlayout-v7:${versions.supportLib}"
-    implementation "com.android.support:design:${versions.supportLib}"
+    implementation "androidx.appcompat:appcompat:${versions.appcompatLib}"
+    implementation "androidx.legacy:legacy-support-v4:${versions.supportLib}"
+    implementation "androidx.gridlayout:gridlayout:${versions.supportLib}"
+    implementation "com.google.android.material:material:${versions.materialLib}"
     // java.time
     implementation "com.jakewharton.threetenabp:threetenabp:${versions.timeLib}"
     // java 8 streams
@@ -51,5 +51,5 @@ dependencies {
     // icons
     implementation "com.mikepenz:iconics-core:${versions.iconicsLib}"
     implementation "com.mikepenz:iconics-views:${versions.iconicsLib}"
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:${versions.junitLib}"
 }

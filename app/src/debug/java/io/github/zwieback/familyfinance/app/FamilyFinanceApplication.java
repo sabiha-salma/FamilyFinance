@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.app;
 
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jakewharton.threetenabp.AndroidThreeTen;
 

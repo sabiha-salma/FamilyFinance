@@ -1,6 +1,6 @@
 package io.github.zwieback.familyfinance.core.model.type;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.Arrays;
 import java.util.List;

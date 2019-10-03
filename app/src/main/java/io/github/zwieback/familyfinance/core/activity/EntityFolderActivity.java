@@ -1,9 +1,9 @@
 package io.github.zwieback.familyfinance.core.activity;
 
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.PopupMenu;
+import androidx.annotation.CallSuper;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;

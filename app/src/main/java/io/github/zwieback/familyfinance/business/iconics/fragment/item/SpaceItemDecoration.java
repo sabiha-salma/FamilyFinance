@@ -2,9 +2,9 @@ package io.github.zwieback.familyfinance.business.iconics.fragment.item;
 
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.State;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.State;
 import android.view.View;
 
 /**

@@ -1,6 +1,6 @@
 package io.github.zwieback.familyfinance.business.iconics.fragment.item;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 

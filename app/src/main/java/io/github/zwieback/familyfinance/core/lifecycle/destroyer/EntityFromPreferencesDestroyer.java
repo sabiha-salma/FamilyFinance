@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.core.lifecycle.destroyer;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import io.github.zwieback.familyfinance.core.model.IBaseEntity;
 import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs;

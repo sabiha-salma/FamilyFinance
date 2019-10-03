@@ -2,9 +2,9 @@ package com.johnpetitto.validator;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.design.widget.TextInputLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import com.google.android.material.textfield.TextInputLayout;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
