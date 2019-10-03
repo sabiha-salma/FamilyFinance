@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.business.operation.adapter;
 
 import android.content.Context;
+import androidx.annotation.NonNull;
 
 import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.listener.OnOperationClickListener;
@@ -26,8 +27,9 @@ public class ExpenseOperationAdapter extends OperationAdapter<ExpenseOperationFi
         return new ExpenseOperationViewProvider(context);
     }
 
+    @NonNull
     @Override
-    public Result<OperationView> performQuery() {
+    protected Result<OperationView> internalPerformQuery() {
         return ExpenseOperationQueryBuilder.create(data)
                 .setStartDate(filter.getStartDate())
                 .setEndDate(filter.getEndDate())

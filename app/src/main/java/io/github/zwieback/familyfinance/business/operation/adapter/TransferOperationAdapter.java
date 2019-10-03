@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.business.operation.adapter;
 
 import android.content.Context;
+import androidx.annotation.NonNull;
 
 import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter;
 import io.github.zwieback.familyfinance.business.operation.listener.OnOperationClickListener;
@@ -26,8 +27,9 @@ public class TransferOperationAdapter extends OperationAdapter<TransferOperation
         return new TransferOperationViewProvider(context);
     }
 
+    @NonNull
     @Override
-    public Result<OperationView> performQuery() {
+    protected Result<OperationView> internalPerformQuery() {
         return TransferOperationQueryBuilder.create(data)
                 .setStartDate(filter.getStartDate())
                 .setEndDate(filter.getEndDate())
