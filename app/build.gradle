@@ -66,6 +66,7 @@ dependencies {
     implementation "io.requery:requery:${versions.requeryLib}"
     implementation "io.requery:requery-android:${versions.requeryLib}"
     implementation "io.requery:sqlite-android:${versions.sqliteAndroidLib}"
+    annotationProcessor "io.requery:requery-processor:${versions.requeryLib}"
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:${versions.rxJavaLib}"
     implementation "io.reactivex.rxjava2:rxandroid:${versions.rxAndroidLib}"
@@ -107,11 +108,12 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${versions.rxBinding2Lib}"
     // chart
     implementation "com.github.PhilJay:MPAndroidChart:${versions.mpAndroidChartLib}"
+    // shared preferences
+    annotationProcessor "ds.gendalf:compiler:${versions.gendalfLib}"
     // project libs
     implementation project(':shared')
     implementation project(':validator')
+    // tests
     androidTestImplementation "androidx.test.ext:junit:${versions.androidxJunitLib}"
     testImplementation "junit:junit:${versions.junitLib}"
-    annotationProcessor "io.requery:requery-processor:${versions.requeryLib}"
-    annotationProcessor "ds.gendalf:compiler:${versions.gendalfLib}"
 }
