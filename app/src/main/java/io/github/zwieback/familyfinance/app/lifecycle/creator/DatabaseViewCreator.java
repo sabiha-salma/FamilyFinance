@@ -13,7 +13,7 @@ import io.github.zwieback.familyfinance.business.person.lifecycle.creator.Person
 import io.github.zwieback.familyfinance.business.sms_pattern.lifecycle.creator.SmsPatternViewCreator;
 import io.github.zwieback.familyfinance.business.template.lifecycle.creator.TemplateViewCreator;
 import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -39,8 +39,8 @@ public class DatabaseViewCreator {
     }
 
     private void createView(EntityViewCreator creator, Consumer<Boolean> onViewCreated) {
-        Observable.fromCallable(creator)
-                .flatMap(observable -> observable)
+        Single.fromCallable(creator)
+                .flatMap(single -> single)
                 .subscribeOn(Schedulers.trampoline())
                 .subscribe(onViewCreated);
     }

@@ -9,7 +9,7 @@ import io.github.zwieback.familyfinance.business.operation.lifecycle.destroyer.O
 import io.github.zwieback.familyfinance.business.sms_pattern.lifecycle.destroyer.SmsPatternViewDestroyer;
 import io.github.zwieback.familyfinance.business.template.lifecycle.destroyer.TemplateViewDestroyer;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityViewDestroyer;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 
 public class DatabaseViewDestroyer {
@@ -30,8 +30,8 @@ public class DatabaseViewDestroyer {
     }
 
     private <T extends EntityViewDestroyer> void destroyView(T destroyer) {
-        Observable.fromCallable(destroyer)
-                .flatMap(observable -> observable)
+        Single.fromCallable(destroyer)
+                .flatMap(single -> single)
                 .subscribeOn(Schedulers.trampoline())
                 .subscribe(ignoredResult -> logFinishOfDestroyer(destroyer.getClass()));
     }

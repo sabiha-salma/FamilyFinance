@@ -27,7 +27,7 @@ import io.github.zwieback.familyfinance.business.chart.service.grouper.Operation
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter;
 import io.github.zwieback.familyfinance.business.operation.listener.OperationFilterListener;
 import io.github.zwieback.familyfinance.core.model.OperationView;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.requery.Persistable;
@@ -120,7 +120,7 @@ public abstract class ChartFragment<
         dataLoaded = true;
         clearData(R.string.chart_loading);
 
-        Observable.fromCallable(this::buildOperations)
+        Single.fromCallable(this::buildOperations)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
                 .map(this::groupOperations)

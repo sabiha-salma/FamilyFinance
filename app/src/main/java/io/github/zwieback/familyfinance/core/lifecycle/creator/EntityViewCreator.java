@@ -6,9 +6,9 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.util.concurrent.Callable;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
-public abstract class EntityViewCreator implements Callable<Observable<Boolean>> {
+public abstract class EntityViewCreator implements Callable<Single<Boolean>> {
 
     private final Connection connection;
 
@@ -26,8 +26,8 @@ public abstract class EntityViewCreator implements Callable<Observable<Boolean>>
      * @return {@code false} because "CREATE VIEW" is DDL operation
      */
     @Override
-    public Observable<Boolean> call() {
-        return Observable.fromCallable(() -> {
+    public Single<Boolean> call() {
+        return Single.fromCallable(() -> {
             try (Statement statement = connection.createStatement()) {
                 return statement.execute("CREATE VIEW IF NOT EXISTS " + getViewName() + " AS " +
                         getViewBody());

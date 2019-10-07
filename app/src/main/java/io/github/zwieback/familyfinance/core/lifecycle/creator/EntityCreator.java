@@ -9,12 +9,12 @@ import java.util.concurrent.Callable;
 
 import io.github.zwieback.familyfinance.core.model.IBaseEntity;
 import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.requery.Persistable;
 import io.requery.reactivex.ReactiveEntityStore;
 
 public abstract class EntityCreator<E extends IBaseEntity>
-        implements Callable<Observable<Iterable<E>>>, Comparator<E> {
+        implements Callable<Single<Iterable<E>>>, Comparator<E> {
 
     @NonNull
     protected final Context context;
@@ -34,8 +34,8 @@ public abstract class EntityCreator<E extends IBaseEntity>
     protected abstract Iterable<E> buildEntities();
 
     @Override
-    public Observable<Iterable<E>> call() {
-        return data.insert(buildEntities()).toObservable();
+    public Single<Iterable<E>> call() {
+        return data.insert(buildEntities());
     }
 
     @NonNull

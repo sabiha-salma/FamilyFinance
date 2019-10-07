@@ -27,7 +27,7 @@ import io.github.zwieback.familyfinance.core.model.Person;
 import io.github.zwieback.familyfinance.core.model.SmsPattern;
 import io.github.zwieback.familyfinance.core.model.Template;
 import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.requery.Persistable;
@@ -58,8 +58,8 @@ public class DatabaseTableCreator {
 
     private <E extends IBaseEntity> void createTable(EntityCreator<E> creator,
                                                      Consumer<Iterable<E>> onEntitiesCreated) {
-        Observable.fromCallable(creator)
-                .flatMap(observable -> observable)
+        Single.fromCallable(creator)
+                .flatMap(single -> single)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
                 .subscribe(onEntitiesCreated);

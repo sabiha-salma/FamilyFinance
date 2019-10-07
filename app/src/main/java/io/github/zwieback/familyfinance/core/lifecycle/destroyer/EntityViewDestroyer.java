@@ -6,9 +6,9 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.util.concurrent.Callable;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
-public abstract class EntityViewDestroyer implements Callable<Observable<Boolean>> {
+public abstract class EntityViewDestroyer implements Callable<Single<Boolean>> {
 
     private final Connection connection;
 
@@ -23,8 +23,8 @@ public abstract class EntityViewDestroyer implements Callable<Observable<Boolean
      * @return {@code false} because "DROP VIEW" is DDL operation
      */
     @Override
-    public Observable<Boolean> call() {
-        return Observable.fromCallable(() -> {
+    public Single<Boolean> call() {
+        return Single.fromCallable(() -> {
             try (Statement statement = connection.createStatement()) {
                 return statement.execute("DROP VIEW IF EXISTS " + getViewName());
             }
