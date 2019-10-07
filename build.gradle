@@ -22,7 +22,7 @@ buildscript {
                 requeryLib: '1.6.1',
                 sqliteAndroidXLib: '2.0.1',
                 sqliteAndroidLib: '3.29.0',
-                rxJavaLib: '2.2.2',
+                rxJavaLib: '2.2.13',
                 rxAndroidLib: '2.1.0',
                 iconicsLib: '3.0.4@aar',
                 materialDesignTypeface: '2.2.0.4@aar',
