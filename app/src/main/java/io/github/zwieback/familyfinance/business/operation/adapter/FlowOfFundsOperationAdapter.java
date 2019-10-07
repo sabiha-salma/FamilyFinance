@@ -29,7 +29,7 @@ public class FlowOfFundsOperationAdapter extends OperationAdapter<FlowOfFundsOpe
 
     @NonNull
     @Override
-    protected Result<OperationView> internalPerformQuery() {
+    public Result<OperationView> performQuery() {
         return FlowOfFundsOperationQueryBuilder.create(data)
                 .setStartDate(filter.getStartDate())
                 .setEndDate(filter.getEndDate())

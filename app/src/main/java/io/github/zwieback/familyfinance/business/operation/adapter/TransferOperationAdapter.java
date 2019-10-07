@@ -29,7 +29,7 @@ public class TransferOperationAdapter extends OperationAdapter<TransferOperation
 
     @NonNull
     @Override
-    protected Result<OperationView> internalPerformQuery() {
+    public Result<OperationView> performQuery() {
         return TransferOperationQueryBuilder.create(data)
                 .setStartDate(filter.getStartDate())
                 .setEndDate(filter.getEndDate())

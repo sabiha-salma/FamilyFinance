@@ -29,7 +29,7 @@ public class IncomeOperationAdapter extends OperationAdapter<IncomeOperationFilt
 
     @NonNull
     @Override
-    protected Result<OperationView> internalPerformQuery() {
+    public Result<OperationView> performQuery() {
         return IncomeOperationQueryBuilder.create(data)
                 .setStartDate(filter.getStartDate())
                 .setEndDate(filter.getEndDate())

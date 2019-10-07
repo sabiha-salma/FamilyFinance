@@ -29,7 +29,7 @@ public class ExpenseOperationAdapter extends OperationAdapter<ExpenseOperationFi
 
     @NonNull
     @Override
-    protected Result<OperationView> internalPerformQuery() {
+    public Result<OperationView> performQuery() {
         return ExpenseOperationQueryBuilder.create(data)
                 .setStartDate(filter.getStartDate())
                 .setEndDate(filter.getEndDate())

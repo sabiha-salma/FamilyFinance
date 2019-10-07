@@ -6,6 +6,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.recyclerview.widget.RecyclerView;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter;
@@ -27,8 +28,12 @@ public abstract class OperationAdapter<FILTER extends OperationFilter>
         extends EntityAdapter<OperationView, FILTER, ItemOperationBinding,
         OnOperationClickListener> {
 
+    @NonNull
+    private final OperationAdapterDataObserver observable = new OperationAdapterDataObserver();
+
     @Nullable
     private TextView balanceView;
+    @Nullable
     private Disposable balanceCalculation;
 
     OperationAdapter(Context context,
@@ -57,6 +62,19 @@ public abstract class OperationAdapter<FILTER extends OperationFilter>
         provider.setupIcon(holder.binding.icon.getIcon(), operation);
     }
 
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        registerAdapterDataObserver(observable);
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        cancelBalanceCalculation();
+        unregisterAdapterDataObserver(observable);
+        super.onDetachedFromRecyclerView(recyclerView);
+    }
+
     public final void setBalanceView(@Nullable TextView balanceView) {
         this.balanceView = balanceView;
     }
@@ -67,24 +85,13 @@ public abstract class OperationAdapter<FILTER extends OperationFilter>
         cancelBalanceCalculation();
     }
 
-    @NonNull
-    @Override
-    public final Result<OperationView> performQuery() {
-        Result<OperationView> result = internalPerformQuery();
-        calculateBalanceInBackground();
-        return result;
-    }
-
-    @NonNull
-    protected abstract Result<OperationView> internalPerformQuery();
-
     private void calculateBalanceInBackground() {
         if (balanceView == null) {
             return;
         }
         cancelBalanceCalculation();
         showBalance(R.string.hint_calculating);
-        balanceCalculation = Single.fromCallable(this::internalPerformQuery)
+        balanceCalculation = Single.fromCallable(this::performQuery)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
                 .map(this::calculateBalance)
@@ -111,6 +118,43 @@ public abstract class OperationAdapter<FILTER extends OperationFilter>
     private void showBalance(@StringRes int resId) {
         if (balanceView != null) {
             balanceView.setText(resId);
+        }
+    }
+
+    private class OperationAdapterDataObserver extends RecyclerView.AdapterDataObserver {
+
+        @Override
+        public void onChanged() {
+            triggerUpdateProcessor();
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+            triggerUpdateProcessor();
+        }
+
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount, @Nullable Object payload) {
+            triggerUpdateProcessor();
+        }
+
+        @Override
+        public void onItemRangeInserted(int positionStart, int itemCount) {
+            triggerUpdateProcessor();
+        }
+
+        @Override
+        public void onItemRangeRemoved(int positionStart, int itemCount) {
+            triggerUpdateProcessor();
+        }
+
+        @Override
+        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+            triggerUpdateProcessor();
+        }
+
+        private void triggerUpdateProcessor() {
+            calculateBalanceInBackground();
         }
     }
 }
