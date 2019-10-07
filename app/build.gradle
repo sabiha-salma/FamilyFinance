@@ -101,9 +101,8 @@ dependencies {
     // file/directory picker
     implementation "com.nononsenseapps:filepicker:${versions.filepickerLib}"
     // permissions dispatcher
-    implementation("com.github.hotchemi:permissionsdispatcher:${versions.permissionsDispatcherLib}") {
-        exclude module: "support-v13"
-    }
+    implementation "org.permissionsdispatcher:permissionsdispatcher:${versions.permissionsDispatcherLib}"
+    annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:${versions.permissionsDispatcherLib}"
     // RxBinding
     implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${versions.rxBinding2Lib}"
     // chart
@@ -115,5 +114,4 @@ dependencies {
     testImplementation "junit:junit:${versions.junitLib}"
     annotationProcessor "io.requery:requery-processor:${versions.requeryLib}"
     annotationProcessor "ds.gendalf:compiler:${versions.gendalfLib}"
-    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:${versions.permissionsDispatcherLib}"
 }
