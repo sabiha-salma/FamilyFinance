@@ -64,12 +64,14 @@ public abstract class ArticleActivity<
     }
 
     private void setupSearchView(SearchView searchView) {
-        RxSearchView.queryTextChanges(searchView)
-                .debounce(UI_DEBOUNCE_TIMEOUT, TimeUnit.MILLISECONDS)
-                .subscribe(searchName -> {
-                    filter.setSearchName(searchName.toString());
-                    applyFilter(filter);
-                });
+        addDisposable(
+                RxSearchView.queryTextChanges(searchView)
+                        .debounce(UI_DEBOUNCE_TIMEOUT, TimeUnit.MILLISECONDS)
+                        .subscribe(searchName -> {
+                            filter.setSearchName(searchName.toString());
+                            applyFilter(filter);
+                        })
+        );
     }
 
     @Nullable

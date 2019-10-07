@@ -10,8 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import io.github.zwieback.familyfinance.R;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 public abstract class ActivityWrapper extends AppCompatActivity {
+
+    @NonNull
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,17 @@ public abstract class ActivityWrapper extends AppCompatActivity {
     @StringRes
     protected abstract int getTitleStringId();
 
+    /**
+     * @see <a href="https://blog.kaush.co/2017/06/21/rxjava-1-rxjava-2-disposing-subscriptions/">
+     * "to .clear or to .dispose" section
+     * </a>
+     */
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.clear();
+        super.onDestroy();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -64,5 +80,12 @@ public abstract class ActivityWrapper extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Add disposable to unsubscribe from it on activity destroy.
+     */
+    protected void addDisposable(@NonNull Disposable disposable) {
+        compositeDisposable.add(disposable);
     }
 }

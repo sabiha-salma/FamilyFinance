@@ -185,9 +185,11 @@ public abstract class EntityEditActivity<E extends IBaseEntity, B extends ViewDa
 
     protected final void saveEntity(E entity, Consumer<E> onSuccessfulSaving) {
         Single<E> single = entity.getId() == 0 ? data.insert(entity) : data.update(entity);
-        single.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(onSuccessfulSaving);
+        addDisposable(
+                single.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(onSuccessfulSaving)
+        );
     }
 
     protected Consumer<E> onSuccessfulSaving() {

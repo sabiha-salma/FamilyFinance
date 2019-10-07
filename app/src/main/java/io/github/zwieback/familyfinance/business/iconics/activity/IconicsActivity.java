@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
@@ -34,11 +33,12 @@ import java.util.concurrent.TimeUnit;
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.iconics.fragment.IconicsFragment;
 import io.github.zwieback.familyfinance.business.iconics.listener.OnIconSelectListener;
+import io.github.zwieback.familyfinance.core.activity.ActivityWrapper;
 import io.github.zwieback.familyfinance.core.drawer.DrawerListener;
 import io.github.zwieback.familyfinance.util.NumberUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
-public class IconicsActivity extends AppCompatActivity implements OnIconSelectListener {
+public class IconicsActivity extends ActivityWrapper implements OnIconSelectListener {
 
     public static final String OUTPUT_ICON_NAME = "iconName";
 
@@ -49,15 +49,26 @@ public class IconicsActivity extends AppCompatActivity implements OnIconSelectLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_iconics);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setupToolbar(toolbar);
-
         mFonts = getAndSortFonts();
         List<IDrawerItem> items = buildDrawerItems(mFonts);
         int mIdentifierCmd = determineIdentifierOfCommunityMaterial(mFonts);
         mDrawer = buildDrawer(toolbar, mFonts, items, mIdentifierCmd);
+    }
+
+    @Override
+    protected void setupContentView() {
+        setContentView(R.layout.activity_iconics);
+    }
+
+    @Override
+    protected int getTitleStringId() {
+        return 0;
+    }
+
+    @Override
+    protected boolean isDisplayHomeAsUpEnabled() {
+        return false;
     }
 
     @Override
@@ -69,20 +80,22 @@ public class IconicsActivity extends AppCompatActivity implements OnIconSelectLi
     }
 
     private void setupSearchView(SearchView searchView) {
-        RxSearchView.queryTextChanges(searchView)
-                .debounce(NumberUtils.UI_DEBOUNCE_TIMEOUT, TimeUnit.MILLISECONDS,
-                        AndroidSchedulers.mainThread())
-                .subscribe(searchName -> {
-                    mCurrentSearch = searchName.toString();
-                    if (mDrawer != null) {
-                        Stream.of(mFonts)
-                                .forEachIndexed((index, font) -> {
-                                    long foundCount = findMatchedIconCount(mCurrentSearch, font);
-                                    mDrawer.updateBadge(index, new StringHolder(foundCount + ""));
-                                });
-                    }
-                    searchInFragment(mCurrentSearch);
-                });
+        addDisposable(
+                RxSearchView.queryTextChanges(searchView)
+                        .debounce(NumberUtils.UI_DEBOUNCE_TIMEOUT, TimeUnit.MILLISECONDS,
+                                AndroidSchedulers.mainThread())
+                        .subscribe(searchName -> {
+                            mCurrentSearch = searchName.toString();
+                            if (mDrawer != null) {
+                                Stream.of(mFonts)
+                                        .forEachIndexed((index, font) -> {
+                                            long foundCount = findMatchedIconCount(mCurrentSearch, font);
+                                            mDrawer.updateBadge(index, new StringHolder(foundCount + ""));
+                                        });
+                            }
+                            searchInFragment(mCurrentSearch);
+                        })
+        );
     }
 
     @Override
@@ -98,13 +111,6 @@ public class IconicsActivity extends AppCompatActivity implements OnIconSelectLi
         return Stream.ofNullable(font.getIcons())
                 .filter(icon -> icon.toLowerCase().contains(searchInLowerCase))
                 .count();
-    }
-
-    private void setupToolbar(Toolbar toolbar) {
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
     }
 
     private List<ITypeface> getAndSortFonts() {
