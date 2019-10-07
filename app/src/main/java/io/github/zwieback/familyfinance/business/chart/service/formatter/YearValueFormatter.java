@@ -1,12 +1,11 @@
 package io.github.zwieback.familyfinance.business.chart.service.formatter;
 
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
-public class YearValueFormatter implements IAxisValueFormatter {
+public class YearValueFormatter extends ValueFormatter {
 
     @Override
-    public String getFormattedValue(float year, AxisBase axis) {
+    public String getFormattedValue(float year) {
         return String.valueOf((int) year);
     }
 }

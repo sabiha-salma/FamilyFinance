@@ -12,9 +12,9 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.util.Collections;
 import java.util.List;
@@ -118,7 +118,7 @@ public abstract class PieChartFragment<F extends OperationFilter> extends ChartF
 
         chart.setUsePercentValues(display.isUsePercentValues());
         chart.setData(data);
-        chart.animateY(Y_AXIS_ANIMATION_DURATION, Easing.EasingOption.EaseInOutQuad);
+        chart.animateY(Y_AXIS_ANIMATION_DURATION, Easing.EaseInOutQuad);
     }
 
     @StringRes
@@ -189,7 +189,7 @@ public abstract class PieChartFragment<F extends OperationFilter> extends ChartF
         throw new UnsupportedPieChartGroupByTypeException();
     }
 
-    private IValueFormatter determineFormatter() {
+    private ValueFormatter determineFormatter() {
         return display.isUsePercentValues()
                 ? new PercentFormatter()
                 : new LargeValueFormatter();

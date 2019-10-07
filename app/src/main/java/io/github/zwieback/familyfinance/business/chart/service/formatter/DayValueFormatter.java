@@ -1,16 +1,15 @@
 package io.github.zwieback.familyfinance.business.chart.service.formatter;
 
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import org.threeten.bp.LocalDate;
 
 import io.github.zwieback.familyfinance.util.DateUtils;
 
-public class DayValueFormatter implements IAxisValueFormatter {
+public class DayValueFormatter extends ValueFormatter {
 
     @Override
-    public String getFormattedValue(float daysFromEpoch, AxisBase axis) {
+    public String getFormattedValue(float daysFromEpoch) {
         LocalDate day = determineCorrectDay(daysFromEpoch);
         return DateUtils.localDateToString(day);
     }

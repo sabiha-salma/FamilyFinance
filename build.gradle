@@ -39,7 +39,7 @@ buildscript {
                 filepickerLib: '4.2.1',
                 permissionsDispatcherLib: '4.5.0',
                 rxBinding2Lib: '2.2.0',
-                mpAndroidChartLib: 'v3.0.3'
+                mpAndroidChartLib: 'v3.1.0'
         ]
     }
     repositories {

@@ -18,8 +18,8 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.MPPointF;
@@ -126,8 +126,8 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
         chart.setDrawValueAboveBar(true);
         chart.getDescription().setEnabled(false);
 
-        IAxisValueFormatter xAxisFormatter = determineXAxisFormatter();
-        IAxisValueFormatter yAxisFormatter = new LargeValueFormatter();
+        ValueFormatter xAxisFormatter = determineXAxisFormatter();
+        ValueFormatter yAxisFormatter = new LargeValueFormatter();
         float xAxisYOffset = getResources().getDimension(R.dimen.x_axis_y_offset);
         int yAxisMinimum = getResources().getInteger(R.integer.y_axis_minimum);
         int xAxisRotationAngle = getResources().getInteger(R.integer.x_axis_label_rotation_angle);
@@ -153,12 +153,12 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
         setupMarker(xAxisFormatter);
     }
 
-    private void setupXAxisValueFormatter(IAxisValueFormatter xAxisFormatter) {
+    private void setupXAxisValueFormatter(ValueFormatter xAxisFormatter) {
         XAxis xAxis = chart.getXAxis();
         xAxis.setValueFormatter(xAxisFormatter);
     }
 
-    private void setupMarker(IAxisValueFormatter xAxisFormatter) {
+    private void setupMarker(ValueFormatter xAxisFormatter) {
         BarChartMarkerView mv = new BarChartMarkerView(requireContext(), xAxisFormatter,
                 new LocalizedValueFormatter());
         mv.setChartView(chart);
@@ -283,7 +283,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
         if (this.display.needRefreshData(display)) {
             this.display = display;
             operationGrouper = determineOperationGrouper();
-            IAxisValueFormatter xAxisFormatter = determineXAxisFormatter();
+            ValueFormatter xAxisFormatter = determineXAxisFormatter();
             setupXAxisValueFormatter(xAxisFormatter);
             setupMarker(xAxisFormatter);
             refreshData();
@@ -328,7 +328,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
         throw new UnsupportedBarChartGroupTypeException();
     }
 
-    private IAxisValueFormatter determineXAxisFormatter() {
+    private ValueFormatter determineXAxisFormatter() {
         switch (display.getGroupType()) {
             case DAYS:
                 return new DayValueFormatter();

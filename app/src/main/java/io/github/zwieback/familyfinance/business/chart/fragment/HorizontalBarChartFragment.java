@@ -19,11 +19,10 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.MPPointF;
@@ -127,13 +126,13 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
         legend.setEnabled(false);
     }
 
-    private void setupXAxisValueFormatter(@NonNull IAxisValueFormatter xAxisFormatter) {
+    private void setupXAxisValueFormatter(@NonNull ValueFormatter xAxisFormatter) {
         XAxis xAxis = chart.getXAxis();
         xAxis.setValueFormatter(xAxisFormatter);
     }
 
-    private void setupMarker(@NonNull IAxisValueFormatter xAxisFormatter,
-                             @NonNull IAxisValueFormatter yAxisFormatter) {
+    private void setupMarker(@NonNull ValueFormatter xAxisFormatter,
+                             @NonNull ValueFormatter yAxisFormatter) {
         HorizontalBarChartMarkerView mv = new HorizontalBarChartMarkerView(requireContext(),
                 xAxisFormatter, yAxisFormatter);
         mv.setChartView(chart);
@@ -151,7 +150,7 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
         Map<Float, Float> idIndexMap = idIndexMapStatefulBuilder.build();
 
         String[] articleNames = convertToArticleNames(idIndexMap);
-        IAxisValueFormatter xAxisFormatter = determineXAxisFormatter(articleNames);
+        ValueFormatter xAxisFormatter = determineXAxisFormatter(articleNames);
         setupXAxisValueFormatter(xAxisFormatter);
         setupMarker(xAxisFormatter, determineYAxisFormatter());
 
@@ -276,12 +275,12 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
     }
 
     @NonNull
-    private IAxisValueFormatter determineXAxisFormatter(String[] articleNames) {
+    private ValueFormatter determineXAxisFormatter(String[] articleNames) {
         return new IndexAxisValueFormatter(articleNames);
     }
 
     @NonNull
-    private IAxisValueFormatter determineYAxisFormatter() {
+    private ValueFormatter determineYAxisFormatter() {
         if (display.isUsePercentValues()) {
             return new PercentFormatter();
         }
@@ -289,7 +288,7 @@ public abstract class HorizontalBarChartFragment<F extends OperationFilter>
     }
 
     @NonNull
-    private IValueFormatter determineDataSetValueFormatter() {
+    private ValueFormatter determineDataSetValueFormatter() {
         if (display.isUsePercentValues()) {
             return new PercentFormatter();
         }
