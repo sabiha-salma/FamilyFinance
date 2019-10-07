@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -25,8 +24,6 @@ import static io.github.zwieback.familyfinance.business.sms.common.SmsConst.SMS_
 
 public class AddOperationImmediatelyService extends Service {
 
-    private static final String TAG = "AddOpImmService";
-
     private IncomeOperationHelper incomeOperationHelper;
     private ExpenseOperationHelper expenseOperationHelper;
     private TransferOperationHelper transferOperationHelper;
@@ -41,12 +38,10 @@ public class AddOperationImmediatelyService extends Service {
         expenseOperationHelper = new ExpenseOperationHelper(this, data);
         transferOperationHelper = new TransferOperationHelper(this, data);
         compositeDisposable = new CompositeDisposable();
-        Log.e(TAG, "Service created");
     }
 
     @Override
     public void onDestroy() {
-        Log.e(TAG, "Service destroyed");
         compositeDisposable.clear();
         super.onDestroy();
     }
@@ -61,10 +56,6 @@ public class AddOperationImmediatelyService extends Service {
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
         if (intent != null && intent.getExtras() != null) {
             Bundle extras = intent.getExtras();
-            Log.e(TAG, "extras: " + extras);
-            for (String key : extras.keySet()) {
-                Log.e(TAG, "extra[" + key + "] = " + extras.get(key));
-            }
             OperationType operationType = (OperationType) extras.getSerializable(OperationHelper.INPUT_OPERATION_TYPE);
             if (operationType == null) {
                 throw new IllegalArgumentException("INPUT_OPERATION_TYPE extra must be not null");
@@ -73,10 +64,7 @@ public class AddOperationImmediatelyService extends Service {
             compositeDisposable.add(
                     operationHelper.addOperationImmediately(
                             intent,
-                            operation -> {
-                                closeNotification(this);
-//                                stopSelf();
-                            }
+                            operation -> closeNotification(this)
                     )
             );
         }

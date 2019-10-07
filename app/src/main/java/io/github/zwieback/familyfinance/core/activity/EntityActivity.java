@@ -153,7 +153,7 @@ public abstract class EntityActivity<
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(getFilterName(), filter);
     }
