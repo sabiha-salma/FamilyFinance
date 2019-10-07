@@ -38,7 +38,7 @@ buildscript {
                 preferenceCompatLib: '1.1.0-alpha05',
                 filepickerLib: '4.2.1',
                 permissionsDispatcherLib: '4.5.0',
-                rxBinding2Lib: '2.2.0',
+                rxBinding3Lib: '3.0.0',
                 mpAndroidChartLib: 'v3.1.0'
         ]
     }

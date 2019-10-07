@@ -12,7 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.annimon.stream.IntPair;
 import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
-import com.jakewharton.rxbinding2.support.v7.widget.RxSearchView;
+import com.jakewharton.rxbinding3.appcompat.RxSearchView;
 import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.iconics.Iconics;
 import com.mikepenz.iconics.typeface.IIcon;

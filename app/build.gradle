@@ -105,7 +105,7 @@ dependencies {
     implementation "org.permissionsdispatcher:permissionsdispatcher:${versions.permissionsDispatcherLib}"
     annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:${versions.permissionsDispatcherLib}"
     // RxBinding
-    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${versions.rxBinding2Lib}"
+    implementation "com.jakewharton.rxbinding3:rxbinding-appcompat:${versions.rxBinding3Lib}"
     // chart
     implementation "com.github.PhilJay:MPAndroidChart:${versions.mpAndroidChartLib}"
     // shared preferences

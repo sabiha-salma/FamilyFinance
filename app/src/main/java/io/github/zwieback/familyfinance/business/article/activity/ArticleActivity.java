@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 
 import com.annimon.stream.Objects;
-import com.jakewharton.rxbinding2.support.v7.widget.RxSearchView;
+import com.jakewharton.rxbinding3.appcompat.RxSearchView;
 
 import java.util.concurrent.TimeUnit;
 
