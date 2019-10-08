@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion setup.compileSdk
@@ -36,6 +38,9 @@ dependencies {
 //    implementation fileTree(include: ['*.jar'], dir: 'libs')
 //    api "com.android.support:design:${versions.supportLib}"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlinLib}"
+    // support libs
     implementation "com.google.android.material:material:${versions.materialLib}"
     // shared lib
     implementation project(':shared')

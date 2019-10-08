@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 //wrap with try and catch so the build is working even if the signing stuff is missing
 try {
     apply from: '../../personal_signing.gradle'
@@ -66,7 +68,7 @@ dependencies {
     implementation "io.requery:requery:${versions.requeryLib}"
     implementation "io.requery:requery-android:${versions.requeryLib}"
     implementation "io.requery:sqlite-android:${versions.sqliteAndroidLib}"
-    annotationProcessor "io.requery:requery-processor:${versions.requeryLib}"
+    kapt "io.requery:requery-processor:${versions.requeryLib}"
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:${versions.rxJavaLib}"
     implementation "io.reactivex.rxjava2:rxandroid:${versions.rxAndroidLib}"
@@ -101,13 +103,13 @@ dependencies {
     implementation "com.nononsenseapps:filepicker:${versions.filepickerLib}"
     // permissions dispatcher
     implementation "org.permissionsdispatcher:permissionsdispatcher:${versions.permissionsDispatcherLib}"
-    annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:${versions.permissionsDispatcherLib}"
+    kapt "org.permissionsdispatcher:permissionsdispatcher-processor:${versions.permissionsDispatcherLib}"
     // RxBinding
     implementation "com.jakewharton.rxbinding3:rxbinding-appcompat:${versions.rxBinding3Lib}"
     // chart
     implementation "com.github.PhilJay:MPAndroidChart:${versions.mpAndroidChartLib}"
     // shared preferences
-    annotationProcessor "ds.gendalf:compiler:${versions.gendalfLib}"
+    kapt "ds.gendalf:compiler:${versions.gendalfLib}"
     // project libs
     implementation project(':shared')
     implementation project(':validator')
