@@ -5,8 +5,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
-import com.mikepenz.community_material_typeface_library.CommunityMaterial;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.iconics.typeface.library.community.material.CommunityMaterial;
+import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -124,8 +124,8 @@ public class DrawerCreator implements Drawer.OnDrawerItemClickListener {
         activity.startActivityForResult(intent, requestCode);
     }
 
-    private static List<IDrawerItem> createItems() {
-        List<IDrawerItem> items = new ArrayList<>();
+    private static List<IDrawerItem<?>> createItems() {
+        List<IDrawerItem<?>> items = new ArrayList<>();
         items.add(new PrimaryDrawerItem()
                 .withIdentifier(CURRENCIES_ID)
                 .withIcon(CommunityMaterial.Icon.cmd_currency_sign)
@@ -143,18 +143,18 @@ public class DrawerCreator implements Drawer.OnDrawerItemClickListener {
                 .withSelectable(false));
         items.add(new PrimaryDrawerItem()
                 .withIdentifier(EXPENSE_ARTICLES_ID)
-                .withIcon(CommunityMaterial.Icon.cmd_trending_down)
+                .withIcon(CommunityMaterial.Icon2.cmd_trending_down)
                 .withName(R.string.drawer_item_expense_articles)
                 .withSelectable(false));
         items.add(new PrimaryDrawerItem()
                 .withIdentifier(INCOME_ARTICLES_ID)
-                .withIcon(CommunityMaterial.Icon.cmd_trending_up)
+                .withIcon(CommunityMaterial.Icon2.cmd_trending_up)
                 .withName(R.string.drawer_item_income_articles)
                 .withSelectable(false));
         items.add(new DividerDrawerItem());
         items.add(new SecondaryDrawerItem()
                 .withIdentifier(BACKUP_ID)
-                .withIcon(CommunityMaterial.Icon.cmd_sync)
+                .withIcon(CommunityMaterial.Icon2.cmd_sync)
                 .withName(R.string.drawer_item_backup)
                 .withSelectable(false));
         items.add(new DividerDrawerItem());

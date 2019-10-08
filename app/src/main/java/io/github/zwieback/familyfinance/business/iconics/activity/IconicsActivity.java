@@ -13,10 +13,10 @@ import com.annimon.stream.IntPair;
 import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
 import com.jakewharton.rxbinding3.appcompat.RxSearchView;
-import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.iconics.Iconics;
 import com.mikepenz.iconics.typeface.IIcon;
 import com.mikepenz.iconics.typeface.ITypeface;
+import com.mikepenz.iconics.typeface.library.community.material.CommunityMaterial;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.holder.BadgeStyle;
@@ -51,7 +51,7 @@ public class IconicsActivity extends ActivityWrapper implements OnIconSelectList
         super.onCreate(savedInstanceState);
         Toolbar toolbar = findViewById(R.id.toolbar);
         mFonts = getAndSortFonts();
-        List<IDrawerItem> items = buildDrawerItems(mFonts);
+        List<IDrawerItem<?>> items = buildDrawerItems(mFonts);
         int mIdentifierCmd = determineIdentifierOfCommunityMaterial(mFonts);
         mDrawer = buildDrawer(toolbar, mFonts, items, mIdentifierCmd);
     }
@@ -120,8 +120,8 @@ public class IconicsActivity extends ActivityWrapper implements OnIconSelectList
         return fonts;
     }
 
-    private List<IDrawerItem> buildDrawerItems(List<ITypeface> fonts) {
-        List<IDrawerItem> items = new ArrayList<>(fonts.size());
+    private List<IDrawerItem<?>> buildDrawerItems(List<ITypeface> fonts) {
+        List<IDrawerItem<?>> items = new ArrayList<>(fonts.size());
         int count = 0;
         for (ITypeface font : fonts) {
             String description =
@@ -152,8 +152,7 @@ public class IconicsActivity extends ActivityWrapper implements OnIconSelectList
     }
 
     private int determineIdentifierOfCommunityMaterial(List<ITypeface> fonts) {
-        CommunityMaterial communityMaterial = new CommunityMaterial();
-        String communityMaterialFontName = communityMaterial.getFontName();
+        String communityMaterialFontName = CommunityMaterial.INSTANCE.getFontName();
 
         Optional<Integer> communityMaterialIdentifier = Stream.of(fonts)
                 .findIndexed((index, font) -> communityMaterialFontName.equals(font.getFontName()))
@@ -163,7 +162,7 @@ public class IconicsActivity extends ActivityWrapper implements OnIconSelectList
 
     private Drawer buildDrawer(Toolbar toolbar,
                                List<ITypeface> fonts,
-                               List<IDrawerItem> items,
+                               List<IDrawerItem<?>> items,
                                int selectedItem) {
         return new DrawerBuilder()
                 .withActivity(this)

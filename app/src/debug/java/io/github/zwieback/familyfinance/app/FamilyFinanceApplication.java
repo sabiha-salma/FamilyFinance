@@ -3,8 +3,6 @@ package io.github.zwieback.familyfinance.app;
 import android.os.StrictMode;
 import androidx.annotation.NonNull;
 
-import com.jakewharton.threetenabp.AndroidThreeTen;
-
 import io.github.zwieback.familyfinance.app.lifecycle.creator.DatabaseTableCreator;
 import io.github.zwieback.familyfinance.app.lifecycle.destroyer.DatabaseDestroyer;
 import io.github.zwieback.familyfinance.core.model.Models;
@@ -17,7 +15,6 @@ public class FamilyFinanceApplication extends AbstractApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        AndroidThreeTen.init(this);
         turnOnStrictMode();
 //        recreateDatabase();
     }

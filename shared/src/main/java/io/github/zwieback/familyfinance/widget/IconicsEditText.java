@@ -13,7 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.core.widget.TextViewCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.mikepenz.iconics.IconicsColor;
 import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.iconics.IconicsSize;
 
 import io.github.zwieback.familyfinance.core.R;
 import io.github.zwieback.familyfinance.util.ViewUtils;
@@ -59,8 +61,8 @@ public abstract class IconicsEditText extends TextInputEditText implements View.
     @NonNull
     private IconicsDrawable createIcon(Context context) {
         return new IconicsDrawable(context, getIconName())
-                .sizeRes(getIconSize())
-                .colorRes(getIconColor());
+                .size(IconicsSize.res(getIconSize()))
+                .color(IconicsColor.colorRes(getIconColor()));
     }
 
     @NonNull

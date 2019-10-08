@@ -80,13 +80,11 @@ dependencies {
     implementation "com.mikepenz:materialize:${versions.materializeLib}"
     // fast adapter
     implementation "com.mikepenz:fastadapter:${versions.fastAdapterLib}"
-    implementation "com.mikepenz:fastadapter-commons:${versions.fastAdapterLib}"
+    implementation "com.mikepenz:fastadapter-extensions-utils:${versions.fastAdapterLib}"
     // material drawer
     implementation("com.mikepenz:materialdrawer:${versions.materialDrawerLib}") {
         transitive = true
-        exclude module: "fastadapter"
-        exclude module: "iconics-core"
-        exclude group: "com.android.support"
+        exclude group: "com.mikepenz"
     }
     // java.time
     implementation "com.jakewharton.threetenabp:threetenabp:${versions.timeLib}"

@@ -4,8 +4,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.typeface.IIcon;
+import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider;
@@ -23,7 +23,7 @@ class SmsPatternViewProvider extends EntityProvider<SmsPatternView> {
         if (smsPattern.isCommon()) {
             return FontAwesome.Icon.faw_comment;
         }
-        return FontAwesome.Icon.faw_comment2;
+        return FontAwesome.Icon.faw_comment1;
     }
 
     @Override

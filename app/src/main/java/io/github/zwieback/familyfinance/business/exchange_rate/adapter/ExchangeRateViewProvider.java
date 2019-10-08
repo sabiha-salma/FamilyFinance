@@ -3,8 +3,8 @@ package io.github.zwieback.familyfinance.business.exchange_rate.adapter;
 import android.content.Context;
 import androidx.annotation.NonNull;
 
-import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.iconics.typeface.IIcon;
+import com.mikepenz.iconics.typeface.library.community.material.CommunityMaterial;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider;

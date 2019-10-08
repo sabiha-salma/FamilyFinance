@@ -3,8 +3,6 @@ package io.github.zwieback.familyfinance.app;
 import android.content.Context;
 import androidx.annotation.NonNull;
 
-import com.jakewharton.threetenabp.AndroidThreeTen;
-
 import org.acra.ACRA;
 import org.acra.annotation.AcraCore;
 import org.acra.annotation.AcraDialog;
@@ -56,7 +54,6 @@ public class FamilyFinanceApplication extends AbstractApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        AndroidThreeTen.init(this);
         if (isNewApp()) {
             createDatabase();
         }

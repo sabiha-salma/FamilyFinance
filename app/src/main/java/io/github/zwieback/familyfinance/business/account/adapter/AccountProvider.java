@@ -3,8 +3,8 @@ package io.github.zwieback.familyfinance.business.account.adapter;
 import android.content.Context;
 import androidx.annotation.NonNull;
 
-import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.iconics.typeface.IIcon;
+import com.mikepenz.iconics.typeface.library.community.material.CommunityMaterial;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider;
@@ -24,7 +24,7 @@ public class AccountProvider extends EntityProvider<Account> {
                     ? CommunityMaterial.Icon.cmd_folder
                     : CommunityMaterial.Icon.cmd_folder_remove;
         }
-        return CommunityMaterial.Icon.cmd_wallet;
+        return CommunityMaterial.Icon2.cmd_wallet;
     }
 
     @Override

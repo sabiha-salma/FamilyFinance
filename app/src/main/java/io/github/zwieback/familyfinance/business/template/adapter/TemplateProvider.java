@@ -4,8 +4,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.typeface.IIcon;
+import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.template.exception.UnsupportedTemplateTypeException;
@@ -21,7 +21,7 @@ public class TemplateProvider extends EntityProvider<Template> {
     @NonNull
     @Override
     public IIcon provideDefaultIcon(Template template) {
-        return FontAwesome.Icon.faw_file_alt2;
+        return FontAwesome.Icon.faw_file_alt1;
     }
 
     @Override

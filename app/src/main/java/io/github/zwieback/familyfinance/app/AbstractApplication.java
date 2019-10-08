@@ -3,6 +3,9 @@ package io.github.zwieback.familyfinance.app;
 import androidx.annotation.NonNull;
 import androidx.multidex.MultiDexApplication;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
+import com.mikepenz.iconics.Iconics;
+
 import java.sql.Connection;
 
 import io.github.zwieback.familyfinance.app.lifecycle.creator.DatabaseViewCreator;
@@ -20,6 +23,13 @@ public abstract class AbstractApplication extends MultiDexApplication {
     protected static final int DB_VERSION = 6;
 
     private ReactiveEntityStore<Persistable> dataStore;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        AndroidThreeTen.init(this);
+        Iconics.init(this);
+    }
 
     /**
      * @return {@link EntityDataStore} single instance for the application.

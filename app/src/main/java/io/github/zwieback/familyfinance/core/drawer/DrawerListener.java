@@ -2,9 +2,10 @@ package io.github.zwieback.familyfinance.core.drawer;
 
 import android.app.Activity;
 import android.view.View;
+import androidx.annotation.NonNull;
 
 import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.util.KeyboardUtil;
+import com.mikepenz.materialize.util.KeyboardUtil;
 
 public class DrawerListener implements Drawer.OnDrawerListener {
 
@@ -15,17 +16,17 @@ public class DrawerListener implements Drawer.OnDrawerListener {
     }
 
     @Override
-    public void onDrawerOpened(View drawerView) {
+    public void onDrawerOpened(@NonNull View drawerView) {
         KeyboardUtil.hideKeyboard(activity);
     }
 
     @Override
-    public void onDrawerClosed(View drawerView) {
+    public void onDrawerClosed(@NonNull View drawerView) {
         // stub
     }
 
     @Override
-    public void onDrawerSlide(View drawerView, float slideOffset) {
+    public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
         // stub
     }
 }

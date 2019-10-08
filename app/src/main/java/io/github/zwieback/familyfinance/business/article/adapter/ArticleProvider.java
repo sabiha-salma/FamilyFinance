@@ -3,8 +3,8 @@ package io.github.zwieback.familyfinance.business.article.adapter;
 import android.content.Context;
 import androidx.annotation.NonNull;
 
-import com.mikepenz.community_material_typeface_library.CommunityMaterial;
 import com.mikepenz.iconics.typeface.IIcon;
+import com.mikepenz.iconics.typeface.library.community.material.CommunityMaterial;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider;
@@ -24,11 +24,11 @@ public class ArticleProvider extends EntityProvider<Article> {
         }
         switch (article.getType()) {
             case EXPENSE_ARTICLE:
-                return CommunityMaterial.Icon.cmd_trending_down;
+                return CommunityMaterial.Icon2.cmd_trending_down;
             case INCOME_ARTICLE:
-                return CommunityMaterial.Icon.cmd_trending_up;
+                return CommunityMaterial.Icon2.cmd_trending_up;
             default:
-                return CommunityMaterial.Icon.cmd_swap_horizontal;
+                return CommunityMaterial.Icon2.cmd_swap_horizontal;
         }
     }
 

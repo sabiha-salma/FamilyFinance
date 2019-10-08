@@ -18,12 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
-import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
+import com.mikepenz.fastadapter.adapters.FastItemAdapter;
 import com.mikepenz.fastadapter.listeners.OnBindViewHolderListener;
 import com.mikepenz.iconics.Iconics;
+import com.mikepenz.iconics.IconicsColor;
 import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.iconics.IconicsSize;
 import com.mikepenz.iconics.typeface.ITypeface;
-import com.mikepenz.iconics.utils.Utils;
+import com.mikepenz.iconics.utils.IconicsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +57,7 @@ public class IconicsFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnIconSelectListener) {
             this.mIconSelectListener = (OnIconSelectListener) context;
@@ -120,30 +122,30 @@ public class IconicsFragment extends Fragment {
     private FastItemAdapter<IconItem> createAdapter() {
         FastItemAdapter<IconItem> fastAdapter = new FastItemAdapter<>();
 
-        fastAdapter.withOnClickListener((v, adapter, item, position) -> {
+        fastAdapter.setOnClickListener((v, adapter, item, position) -> {
             mIconSelectListener.onIconSelected(item.getIcon());
             return true;
         });
 
-        fastAdapter.withOnLongClickListener((v, adapter, item, position) -> {
+        fastAdapter.setOnLongClickListener((v, adapter, item, position) -> {
             closePopup();
             int popupIconSize = getPopupIconSize();
             IconicsDrawable icon = new IconicsDrawable(v.getContext())
                     .icon(item.getIcon())
-                    .sizeDp(popupIconSize)
-                    .paddingRes(R.dimen.popup_icon_padding)
-                    .backgroundColorRes(R.color.popup_icon_background)
-                    .roundedCornersRes(R.dimen.popup_icon_rounded_corners);
+                    .size(IconicsSize.dp(popupIconSize))
+                    .padding(IconicsSize.res(R.dimen.popup_icon_padding))
+                    .backgroundColor(IconicsColor.colorRes(R.color.popup_icon_background))
+                    .roundedCorners(IconicsSize.res(R.dimen.popup_icon_rounded_corners));
 
             ImageView imageView = new ImageView(v.getContext());
             imageView.setImageDrawable(icon);
-            int size = Utils.convertDpToPx(v.getContext(), popupIconSize);
+            int size = IconicsUtils.convertDpToPx(v.getContext(), popupIconSize);
             mPopup = new PopupWindow(imageView, size, size);
             mPopup.showAsDropDown(v);
             return true;
         });
 
-        fastAdapter.withOnBindViewHolderListener(new OnBindViewHolderListener() {
+        fastAdapter.setOnBindViewHolderListener(new OnBindViewHolderListener() {
             @Override
             public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder,
                                          int position,
@@ -213,11 +215,11 @@ public class IconicsFragment extends Fragment {
         if (mAdapter != null) {
             if (TextUtils.isEmpty(searchName)) {
                 mAdapter.clear();
-                mAdapter.setNewList(mIcons);
+                mAdapter.setNewList(mIcons, false);
             } else {
                 String searchInLowerCase = mSearch.toLowerCase();
                 List<IconItem> filteredIcons = filterIcons(searchInLowerCase);
-                mAdapter.setNewList(filteredIcons);
+                mAdapter.setNewList(filteredIcons, false);
             }
         }
     }

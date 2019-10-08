@@ -5,10 +5,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
-import com.mikepenz.community_material_typeface_library.CommunityMaterial;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.iconics.IconicsSize;
 import com.mikepenz.iconics.typeface.IIcon;
+import com.mikepenz.iconics.typeface.library.community.material.CommunityMaterial;
+import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome;
 import com.takisoft.preferencex.PreferenceFragmentCompat;
 
 import io.github.zwieback.familyfinance.R;
@@ -37,7 +38,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (rootKey == null) {
             setPreferenceScreenIcon(INTERFACE_PREFERENCES_NAME, CommunityMaterial.Icon.cmd_eye);
             setPreferenceScreenIcon(DATABASE_PREFERENCES_NAME, FontAwesome.Icon.faw_database);
-            setPreferenceScreenIcon(BACKUP_PREFERENCES_NAME, CommunityMaterial.Icon.cmd_sync);
+            setPreferenceScreenIcon(BACKUP_PREFERENCES_NAME, CommunityMaterial.Icon2.cmd_sync);
             setPreferenceScreenIcon(ACRA_PREFERENCES_NAME, FontAwesome.Icon.faw_bug);
         }
     }
@@ -48,7 +49,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (preference != null) {
             IconicsDrawable drawable = new IconicsDrawable(preference.getContext())
                     .icon(icon)
-                    .sizeRes(R.dimen.preference_icon_size);
+                    .size(IconicsSize.res(R.dimen.preference_icon_size));
             preference.setIcon(drawable);
         }
     }
