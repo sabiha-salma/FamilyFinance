@@ -7,6 +7,7 @@ import io.requery.CascadeAction;
 import io.requery.Column;
 import io.requery.Entity;
 import io.requery.ForeignKey;
+import io.requery.Index;
 import io.requery.OneToOne;
 import io.requery.PropertyNameStyle;
 import io.requery.Table;
@@ -18,6 +19,7 @@ public interface IPerson extends IBaseEntityFolder {
     @Bindable
     @ForeignKey
     @OneToOne(mappedBy = "id", cascade = CascadeAction.NONE)
+    @Index("idx_parent_person_id")
     @Column(name = "parent_id")
     IPerson getParent();
 

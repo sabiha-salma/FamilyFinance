@@ -12,6 +12,7 @@ import io.requery.Column;
 import io.requery.Convert;
 import io.requery.Entity;
 import io.requery.ForeignKey;
+import io.requery.Index;
 import io.requery.ManyToOne;
 import io.requery.OneToOne;
 import io.requery.PropertyNameStyle;
@@ -27,6 +28,7 @@ public interface IAccount extends IBaseEntityFolder {
     @Bindable
     @ForeignKey
     @OneToOne(mappedBy = "id", cascade = CascadeAction.NONE)
+    @Index("idx_parent_account_id")
     @Column(name = "parent_id")
     IAccount getParent();
 
