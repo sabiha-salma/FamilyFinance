@@ -11,7 +11,7 @@ public class QuarterValueFormatter extends ValueFormatter {
     @Override
     public String getFormattedValue(float quartersFromEpoch) {
         LocalDate quarter = determineCorrectQuarter(quartersFromEpoch);
-        return DateUtils.localDateToString(quarter, DateUtils.ISO_LOCAL_QUARTER);
+        return DateUtils.localDateToString(quarter, DateUtils.getISO_LOCAL_QUARTER());
     }
 
     private static LocalDate determineCorrectQuarter(float quartersFromEpoch) {

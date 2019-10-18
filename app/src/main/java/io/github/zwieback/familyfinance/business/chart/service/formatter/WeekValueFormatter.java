@@ -11,7 +11,7 @@ public class WeekValueFormatter extends ValueFormatter {
     @Override
     public String getFormattedValue(float weeksFromEpoch) {
         LocalDate month = determineCorrectWeek(weeksFromEpoch);
-        return DateUtils.localDateToString(month, DateUtils.ISO_LOCAL_WEEK);
+        return DateUtils.localDateToString(month, DateUtils.getISO_LOCAL_WEEK());
     }
 
     private static LocalDate determineCorrectWeek(float weeksFromEpoch) {

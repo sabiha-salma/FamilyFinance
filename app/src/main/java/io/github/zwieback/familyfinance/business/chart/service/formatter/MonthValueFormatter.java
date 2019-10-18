@@ -11,7 +11,7 @@ public class MonthValueFormatter extends ValueFormatter {
     @Override
     public String getFormattedValue(float monthsFromEpoch) {
         LocalDate month = determineCorrectMonth(monthsFromEpoch);
-        return DateUtils.localDateToString(month, DateUtils.ISO_LOCAL_MONTH);
+        return DateUtils.localDateToString(month, DateUtils.getISO_LOCAL_MONTH());
     }
 
     private static LocalDate determineCorrectMonth(float monthsFromEpoch) {

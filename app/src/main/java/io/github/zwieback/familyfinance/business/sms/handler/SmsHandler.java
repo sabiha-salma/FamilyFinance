@@ -84,8 +84,8 @@ public class SmsHandler {
         if (smsPattern.getValueGroup() != null) {
             value = matcher.group(smsPattern.getValueGroup());
         }
-        LocalDate operationDate = DateUtils.sberbankDateToLocalDate(date);
-        BigDecimal operationValue = NumberUtils.sberbankNumberToBigDecimal(value);
+        LocalDate operationDate = DateUtils.bankDateToLocalDate(date);
+        BigDecimal operationValue = NumberUtils.bankNumberToBigDecimal(value);
         findTemplate(smsPattern, buildAndSendNotificationOnSuccess(operationDate, operationValue));
     }
 

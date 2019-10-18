@@ -88,7 +88,7 @@ public class SmsNotificationBuilder {
         PendingIntent pendingIntent = buildPendingIntent(template, operationDate, operationValue);
 
         String type = context.getString(determineOperationTypeRes(template));
-        String date = DateUtils.localDateToString(operationDate, DateUtils.SBERBANK_DATE_FORMATTER);
+        String date = DateUtils.localDateToString(operationDate, DateUtils.getBANK_DATE_FORMATTER());
         String value = NumberUtils.bigDecimalToString(operationValue, StringUtils.QUESTION);
         String contentText = context.getString(R.string.sms_received_content, type, value, template.getName(), date);
         String contentTitle = context.getString(R.string.sms_received);
