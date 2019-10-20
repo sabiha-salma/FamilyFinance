@@ -5,6 +5,8 @@ import android.widget.EditText;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter;
 import io.github.zwieback.familyfinance.databinding.DialogFilterTransferOperationBinding;
@@ -22,6 +24,7 @@ public class TransferOperationFilterDialog extends OperationFilterDialog<Transfe
         return fragment;
     }
 
+    @NotNull
     @Override
     protected final TransferOperationFilter createCopyOfFilter(TransferOperationFilter filter) {
         return new TransferOperationFilter(filter);
@@ -43,7 +46,7 @@ public class TransferOperationFilterDialog extends OperationFilterDialog<Transfe
     }
 
     @Override
-    protected void bind(TransferOperationFilter filter) {
+    protected void bind(@NotNull TransferOperationFilter filter) {
         binding.setFilter(filter);
         loadArticle(databasePrefs.getTransferArticleId());
         super.bind(filter);

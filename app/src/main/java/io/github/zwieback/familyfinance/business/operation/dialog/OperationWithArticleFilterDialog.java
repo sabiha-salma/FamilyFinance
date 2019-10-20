@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.View;
 import androidx.databinding.ViewDataBinding;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.github.zwieback.familyfinance.business.article.activity.ArticleActivity;
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter;
 
@@ -32,7 +34,7 @@ abstract class OperationWithArticleFilterDialog<
     }
 
     @Override
-    protected void bind(F filter) {
+    protected void bind(@NotNull F filter) {
         getArticleEdit().setOnClickListener(this::onArticleClick);
         getArticleEdit().setOnClearTextListener(this::onArticleRemoved);
 

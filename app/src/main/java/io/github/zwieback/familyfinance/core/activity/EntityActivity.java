@@ -159,7 +159,7 @@ public abstract class EntityActivity<
     }
 
     @Override
-    public void onApplyFilter(FILTER filter) {
+    public void onApplyFilter(@NonNull FILTER filter) {
         if (!this.filter.equals(filter)) {
             filterWasChanged = true;
         }
@@ -241,14 +241,14 @@ public abstract class EntityActivity<
     // -----------------------------------------------------------------------------------------
 
     @Override
-    public void onEntityClick(View view, ENTITY entity) {
+    public void onEntityClick(@NonNull View view, @NonNull ENTITY entity) {
         if (regularSelectable) {
             closeActivity(entity);
         }
     }
 
     @Override
-    public void onEntityLongClick(View view, ENTITY entity) {
+    public void onEntityLongClick(@NonNull View view, @NonNull ENTITY entity) {
         showPopup(view, entity);
     }
 

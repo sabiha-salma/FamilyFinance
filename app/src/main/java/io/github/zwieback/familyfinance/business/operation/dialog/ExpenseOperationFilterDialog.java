@@ -6,6 +6,8 @@ import androidx.annotation.StringRes;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
 
+import org.jetbrains.annotations.NotNull;
+
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.article.activity.ExpenseArticleActivity;
 import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter;
@@ -33,6 +35,7 @@ public class ExpenseOperationFilterDialog extends OperationWithArticleFilterDial
         return fragment;
     }
 
+    @NotNull
     @Override
     protected final ExpenseOperationFilter createCopyOfFilter(ExpenseOperationFilter filter) {
         return new ExpenseOperationFilter(filter);
@@ -54,7 +57,7 @@ public class ExpenseOperationFilterDialog extends OperationWithArticleFilterDial
     }
 
     @Override
-    protected final void bind(ExpenseOperationFilter filter) {
+    protected final void bind(@NotNull ExpenseOperationFilter filter) {
         binding.setFilter(filter);
         super.bind(filter);
     }

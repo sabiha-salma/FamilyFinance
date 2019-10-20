@@ -95,7 +95,7 @@ public class TemplateActivity
     }
 
     @Override
-    public void onEntityClick(View view, TemplateView template) {
+    public void onEntityClick(@NonNull View view, @NonNull TemplateView template) {
         super.onEntityClick(view, template);
         if (regularSelectable) {
             return;

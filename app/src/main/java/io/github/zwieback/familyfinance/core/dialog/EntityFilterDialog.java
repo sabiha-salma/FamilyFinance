@@ -50,6 +50,7 @@ public abstract class EntityFilterDialog<F extends EntityFilter, B extends ViewD
     protected static final String DIALOG_TITLE = "dialogTitle";
 
     protected B binding;
+    @NonNull
     protected F filter;
     protected DatabasePrefs databasePrefs;
     private ReactiveEntityStore<Persistable> data;
@@ -57,7 +58,7 @@ public abstract class EntityFilterDialog<F extends EntityFilter, B extends ViewD
 
     @SuppressWarnings("unchecked")
     @Override
-    public final void onAttach(Context context) {
+    public final void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof EntityFilterListener) {
             listener = (EntityFilterListener<F>) context;
@@ -133,6 +134,7 @@ public abstract class EntityFilterDialog<F extends EntityFilter, B extends ViewD
      * @param filter an input filter
      * @return a copy of input filter
      */
+    @NonNull
     protected abstract F createCopyOfFilter(F filter);
 
     protected abstract String getInputFilterName();
@@ -149,7 +151,7 @@ public abstract class EntityFilterDialog<F extends EntityFilter, B extends ViewD
     }
 
     @CallSuper
-    protected void bind(F filter) {
+    protected void bind(@NonNull F filter) {
         // stub
     }
 

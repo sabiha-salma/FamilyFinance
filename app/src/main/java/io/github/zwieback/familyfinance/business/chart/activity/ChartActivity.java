@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
@@ -131,7 +133,7 @@ public class ChartActivity extends DataActivityWrapper
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onApplyFilter(OperationFilter filter) {
+    public void onApplyFilter(@NonNull OperationFilter filter) {
         ChartFragment chartFragment = findFragment();
         if (chartFragment != null) {
             chartFragment.onApplyFilter(filter);

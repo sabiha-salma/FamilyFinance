@@ -10,6 +10,7 @@ import androidx.databinding.ViewDataBinding;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
 
+import org.jetbrains.annotations.NotNull;
 import org.threeten.bp.LocalDate;
 
 import java.math.BigDecimal;
@@ -68,7 +69,7 @@ abstract class OperationFilterDialog<F extends OperationFilter, B extends ViewDa
     }
 
     @Override
-    protected void bind(F filter) {
+    protected void bind(@NotNull F filter) {
         getAccountEdit().setOnClickListener(this::onAccountClick);
         getAccountEdit().setOnClearTextListener(this::onAccountRemoved);
         getOwnerEdit().setOnClickListener(this::onOwnerClick);

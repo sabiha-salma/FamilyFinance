@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 
@@ -100,7 +101,7 @@ public abstract class EntityFolderActivity<
     // -----------------------------------------------------------------------------------------
 
     @Override
-    public void onFolderClick(View view, ENTITY entity) {
+    public void onFolderClick(@NonNull View view, @NonNull ENTITY entity) {
         if (accessAllowed(entity)) {
             filter.setParentId(entity.getId());
             replaceFragment(true);
@@ -110,7 +111,7 @@ public abstract class EntityFolderActivity<
     }
 
     @Override
-    public void onFolderLongClick(View view, ENTITY entity) {
+    public void onFolderLongClick(@NonNull View view, @NonNull ENTITY entity) {
         if (accessAllowed(entity)) {
             showPopup(view, entity);
         } else {

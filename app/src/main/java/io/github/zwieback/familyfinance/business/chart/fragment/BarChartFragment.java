@@ -273,7 +273,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
     }
 
     @Override
-    public void onApplyFilter(FlowOfFundsOperationFilter filter) {
+    public void onApplyFilter(@NonNull FlowOfFundsOperationFilter filter) {
         this.filter = filter;
         refreshData();
     }

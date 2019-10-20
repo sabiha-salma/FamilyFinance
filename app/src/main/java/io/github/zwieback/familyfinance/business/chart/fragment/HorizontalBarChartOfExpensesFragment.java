@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.business.chart.fragment;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.DialogFragment;
 
@@ -50,7 +51,7 @@ public class HorizontalBarChartOfExpensesFragment
     }
 
     @Override
-    public void onApplyFilter(ExpenseOperationFilter filter) {
+    public void onApplyFilter(@NonNull ExpenseOperationFilter filter) {
         this.filter = filter;
         this.operationConverter = determineOperationConverter();
         refreshData();

@@ -38,7 +38,7 @@ abstract class OperationActivity<
     }
 
     @Override
-    public void onEntityClick(View view, OperationView entity) {
+    public void onEntityClick(@NonNull View view, @NonNull OperationView entity) {
         // do nothing
     }
 

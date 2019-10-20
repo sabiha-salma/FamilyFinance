@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.johnpetitto.validator.ValidatingTextInputLayout;
 
+import org.jetbrains.annotations.NotNull;
 import org.threeten.bp.LocalDate;
 
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ public class ExchangeRateFilterDialog
         }
     }
 
+    @NotNull
     @Override
     protected ExchangeRateFilter createCopyOfFilter(ExchangeRateFilter filter) {
         return new ExchangeRateFilter(filter);
@@ -78,7 +80,7 @@ public class ExchangeRateFilterDialog
     }
 
     @Override
-    protected void bind(ExchangeRateFilter filter) {
+    protected void bind(@NotNull ExchangeRateFilter filter) {
         binding.setFilter(filter);
 
         getCurrencyEdit().setOnClickListener(this::onCurrencyClick);

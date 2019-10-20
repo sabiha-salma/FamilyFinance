@@ -99,7 +99,7 @@ public abstract class ArticleActivity<
     }
 
     @Override
-    public void onFolderClick(View view, ArticleView article) {
+    public void onFolderClick(@NonNull View view, @NonNull ArticleView article) {
         closeSearchView();
         super.onFolderClick(view, article);
     }

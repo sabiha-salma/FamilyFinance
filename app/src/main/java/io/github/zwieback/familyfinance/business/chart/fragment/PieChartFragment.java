@@ -3,6 +3,8 @@ package io.github.zwieback.familyfinance.business.chart.fragment;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
@@ -143,7 +145,7 @@ public abstract class PieChartFragment<F extends OperationFilter> extends ChartF
     }
 
     @Override
-    public void onApplyFilter(F filter) {
+    public void onApplyFilter(@NonNull F filter) {
         this.filter = filter;
         refreshData();
     }
