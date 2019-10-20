@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import com.mikepenz.iconics.view.IconicsImageView;
 
 import org.threeten.bp.LocalDate;
 
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -151,13 +153,24 @@ public abstract class EntityEditActivity<E extends IBaseEntity, B extends ViewDa
     private void setupIcon(String iconName) {
         String oldIconName = entity.getIconName();
         try {
-            entity.setIconName(iconName);
+            setIconNameByReflection(entity, iconName);
             provider.setupIcon(getIconView().getIcon(), entity);
         } catch (IllegalArgumentException | NullPointerException e) {
-            entity.setIconName(oldIconName);
+            setIconNameByReflection(entity, oldIconName);
             String errorMessage = getResources().getString(R.string.can_not_find_icon, iconName);
             Log.w(TAG, "setupIcon: " + errorMessage, e);
             Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setIconNameByReflection(@NonNull E entity, @Nullable String iconName) {
+        try {
+            Method method = entity.getClass().getDeclaredMethod("setIconName", String.class);
+            // next method.invoke is analog of the following method:
+            // entity.setIconName(iconName);
+            method.invoke(entity, iconName);
+        } catch (Exception e) {
+            Log.e(TAG, "setIconNameByReflection", e);
         }
     }
 

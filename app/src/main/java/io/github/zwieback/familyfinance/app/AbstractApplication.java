@@ -20,7 +20,7 @@ import io.requery.sql.EntityDataStore;
 
 public abstract class AbstractApplication extends MultiDexApplication {
 
-    protected static final int DB_VERSION = 7;
+    protected static final int DB_VERSION = 8;
 
     private ReactiveEntityStore<Persistable> dataStore;
 

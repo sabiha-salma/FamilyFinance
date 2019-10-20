@@ -33,9 +33,9 @@ public class NonOptimizedAccountBalanceCalculator extends AccountBalanceCalculat
         int currencyId = account.getCurrencyId();
 
         BigDecimal nativeIncomes = calculateSumInNativeCurrency(accountId, currencyId,
-                OperationType.getIncomeTypes());
+                OperationType.Companion.getIncomeTypes());
         BigDecimal nativeExpenses = calculateSumInNativeCurrency(accountId, currencyId,
-                OperationType.getExpenseTypes());
+                OperationType.Companion.getExpenseTypes());
 
         BigDecimal balance = account.getInitialBalance()
                 .add(nativeIncomes)
@@ -43,9 +43,9 @@ public class NonOptimizedAccountBalanceCalculator extends AccountBalanceCalculat
 
         if (accountHasOperationsInForeignCurrency(accountId, currencyId)) {
             BigDecimal foreignIncomes = calculateSumInForeignCurrency(accountId, currencyId,
-                    OperationType.getIncomeTypes());
+                    OperationType.Companion.getIncomeTypes());
             BigDecimal foreignExpenses = calculateSumInForeignCurrency(accountId, currencyId,
-                    OperationType.getExpenseTypes());
+                    OperationType.Companion.getExpenseTypes());
 
             balance = balance
                     .add(foreignIncomes)

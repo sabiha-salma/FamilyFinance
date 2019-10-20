@@ -57,11 +57,11 @@ public final class BalanceCalculator {
     }
 
     private static boolean isIncomeOperation(OperationView operation) {
-        return OperationType.getIncomeTypes().contains(operation.getType());
+        return OperationType.Companion.getIncomeTypes().contains(operation.getType());
     }
 
     private static boolean isExpenseOperation(OperationView operation) {
-        return OperationType.getExpenseTypes().contains(operation.getType());
+        return OperationType.Companion.getExpenseTypes().contains(operation.getType());
     }
 
     private static List<String> formatBalance(Map<CurrencyEntry, BigDecimal> groupedBalance) {

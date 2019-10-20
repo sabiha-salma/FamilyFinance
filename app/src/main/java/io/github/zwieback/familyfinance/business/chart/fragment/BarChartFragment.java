@@ -193,11 +193,11 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
             return;
         }
 
-        BarDataSet incomeSet = buildBarDataSet(groupedOperations, OperationType.getIncomeTypes(),
+        BarDataSet incomeSet = buildBarDataSet(groupedOperations, OperationType.Companion.getIncomeTypes(),
                 R.string.data_set_incomes, R.color.colorIncome, display.isViewIncomeValues(),
                 display.isViewIncomes());
 
-        BarDataSet expenseSet = buildBarDataSet(groupedOperations, OperationType.getExpenseTypes(),
+        BarDataSet expenseSet = buildBarDataSet(groupedOperations, OperationType.Companion.getExpenseTypes(),
                 R.string.data_set_expenses, R.color.colorExpense, display.isViewExpenseValues(),
                 display.isViewExpenses());
 

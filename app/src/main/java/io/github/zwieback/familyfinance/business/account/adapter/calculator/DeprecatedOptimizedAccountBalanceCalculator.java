@@ -81,8 +81,8 @@ public class DeprecatedOptimizedAccountBalanceCalculator extends AccountBalanceC
         int currencyId = account.getCurrencyId();
         query = query.replaceAll(":accountId", String.valueOf(accountId));
         query = query.replaceAll(":currencyId", String.valueOf(currencyId));
-        List<OperationType> incomeTypes = OperationType.getIncomeTypes();
-        List<OperationType> expenseTypes = OperationType.getExpenseTypes();
+        List<OperationType> incomeTypes = OperationType.Companion.getIncomeTypes();
+        List<OperationType> expenseTypes = OperationType.Companion.getExpenseTypes();
         Object[] parameters = {incomeTypes, expenseTypes, incomeTypes, expenseTypes};
         ReactiveResult<Tuple> result = data.raw(query, parameters);
 
