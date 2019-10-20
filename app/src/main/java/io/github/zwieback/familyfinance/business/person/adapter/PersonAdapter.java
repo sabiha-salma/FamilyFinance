@@ -43,7 +43,7 @@ public class PersonAdapter extends EntityFolderAdapter<PersonView, PersonFilter,
     @Override
     public Result<PersonView> performQuery() {
         return PersonQueryBuilder.create(data)
-                .setParentId(parentId)
+                .withParentId(parentId)
                 .build();
     }
 

@@ -17,7 +17,7 @@ import io.requery.reactivex.ReactiveResult;
 import static io.github.zwieback.familyfinance.util.StringUtils.isTextNotEmpty;
 import static io.github.zwieback.familyfinance.util.TransliterationUtils.transliterate;
 
-public abstract class ArticleQueryBuilder<T extends ArticleQueryBuilder>
+public abstract class ArticleQueryBuilder<T extends ArticleQueryBuilder<T>>
         extends EntityFolderQueryBuilder<T, ArticleView> {
 
     @Nullable

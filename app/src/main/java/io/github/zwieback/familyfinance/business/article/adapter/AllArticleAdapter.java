@@ -22,7 +22,7 @@ public class AllArticleAdapter extends ArticleAdapter {
     @Override
     public Result<ArticleView> performQuery() {
         return AllArticleQueryBuilder.create(data)
-                .setParentId(parentId)
+                .withParentId(parentId)
                 .setSearchName(filter.getSearchName())
                 .build();
     }

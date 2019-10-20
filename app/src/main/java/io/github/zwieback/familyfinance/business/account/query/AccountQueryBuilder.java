@@ -55,8 +55,8 @@ public class AccountQueryBuilder
         WhereAndOr<ReactiveResult<AccountView>> result = super.buildWhere(select);
         if (ownerId != null) {
             result = select
-                    .where(AccountView.PARENT_ID.eq(parentId).and(AccountView.OWNER_ID.isNull()))
-                    .or(AccountView.PARENT_ID.eq(parentId).and(AccountView.OWNER_ID.eq(ownerId)));
+                    .where(AccountView.PARENT_ID.eq(getParentId()).and(AccountView.OWNER_ID.isNull()))
+                    .or(AccountView.PARENT_ID.eq(getParentId()).and(AccountView.OWNER_ID.eq(ownerId)));
         }
         if (onlyActive) {
             result = result.and(AccountView.ACTIVE.eq(true));

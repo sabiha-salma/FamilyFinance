@@ -51,7 +51,7 @@ public class AccountAdapter extends EntityFolderAdapter<AccountView, AccountFilt
     @Override
     public Result<AccountView> performQuery() {
         return AccountQueryBuilder.create(data)
-                .setParentId(parentId)
+                .withParentId(parentId)
                 .setOwnerId(filter.getOwnerId())
                 .setOnlyActive(filter.isOnlyActive())
                 .build();

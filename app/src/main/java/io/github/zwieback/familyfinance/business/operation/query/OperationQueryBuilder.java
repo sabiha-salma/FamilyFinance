@@ -37,7 +37,7 @@ import io.requery.query.WhereAndOr;
 import io.requery.reactivex.ReactiveEntityStore;
 import io.requery.reactivex.ReactiveResult;
 
-abstract class OperationQueryBuilder<T extends OperationQueryBuilder>
+abstract class OperationQueryBuilder<T extends OperationQueryBuilder<T>>
         extends EntityQueryBuilder<OperationView> {
 
     @NonNull
@@ -208,7 +208,7 @@ abstract class OperationQueryBuilder<T extends OperationQueryBuilder>
         }
 
         Iterator<E> iterator =
-                data.select(entityType.getClassType(), entityIdAttribute, parentIdAttribute)
+                getData().select(entityType.getClassType(), entityIdAttribute, parentIdAttribute)
                         .get().iterator();
 
         Map<Integer, Integer> idWithParentIdMap = Stream.of(iterator)
@@ -251,7 +251,7 @@ abstract class OperationQueryBuilder<T extends OperationQueryBuilder>
         query = query.replaceAll(":parentId", String.valueOf(parentId));
         query = query.replaceAll(":tableName", tableName);
 
-        ReactiveResult<Tuple> result = data.raw(query);
+        ReactiveResult<Tuple> result = getData().raw(query);
         return Stream.of(result.iterator())
                 .map(tuple -> tuple.get("id").toString())
                 .map(Integer::parseInt)
