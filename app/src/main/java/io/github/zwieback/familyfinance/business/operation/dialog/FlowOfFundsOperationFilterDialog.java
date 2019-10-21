@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.article.activity.AllArticleActivity;
 import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter;
+import io.github.zwieback.familyfinance.core.dialog.EntityFilterDialog;
 import io.github.zwieback.familyfinance.databinding.DialogFilterFlowOfFundsOperationBinding;
 import io.github.zwieback.familyfinance.widget.ClearableEditText;
 
@@ -21,7 +22,7 @@ public class FlowOfFundsOperationFilterDialog extends OperationWithArticleFilter
 
     public static FlowOfFundsOperationFilterDialog newInstance(FlowOfFundsOperationFilter filter) {
         FlowOfFundsOperationFilterDialog fragment = new FlowOfFundsOperationFilterDialog();
-        Bundle args = createArguments(FLOW_OF_FUNDS_OPERATION_FILTER, filter);
+        Bundle args = Companion.createArguments(FLOW_OF_FUNDS_OPERATION_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -29,8 +30,8 @@ public class FlowOfFundsOperationFilterDialog extends OperationWithArticleFilter
     public static FlowOfFundsOperationFilterDialog newInstance(FlowOfFundsOperationFilter filter,
                                                                @StringRes int dialogTitleId) {
         FlowOfFundsOperationFilterDialog fragment = new FlowOfFundsOperationFilterDialog();
-        Bundle args = createArguments(FLOW_OF_FUNDS_OPERATION_FILTER, filter);
-        args.putInt(DIALOG_TITLE, dialogTitleId);
+        Bundle args = Companion.createArguments(FLOW_OF_FUNDS_OPERATION_FILTER, filter);
+        args.putInt(EntityFilterDialog.DIALOG_TITLE, dialogTitleId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,7 +60,7 @@ public class FlowOfFundsOperationFilterDialog extends OperationWithArticleFilter
 
     @Override
     protected final void bind(@NotNull FlowOfFundsOperationFilter filter) {
-        binding.setFilter(filter);
+        getBinding().setFilter(filter);
         super.bind(filter);
     }
 
@@ -70,61 +71,61 @@ public class FlowOfFundsOperationFilterDialog extends OperationWithArticleFilter
 
     @Override
     final ClearableEditText getArticleEdit() {
-        return binding.article;
+        return getBinding().article;
     }
 
     @Override
     final ClearableEditText getAccountEdit() {
-        return binding.account;
+        return getBinding().account;
     }
 
     @Override
     final ClearableEditText getOwnerEdit() {
-        return binding.owner;
+        return getBinding().owner;
     }
 
     @Override
     final ClearableEditText getCurrencyEdit() {
-        return binding.currency;
+        return getBinding().currency;
     }
 
     @Override
     final EditText getStartDateEdit() {
-        return binding.startDate;
+        return getBinding().startDate;
     }
 
     @Override
     final EditText getEndDateEdit() {
-        return binding.endDate;
+        return getBinding().endDate;
     }
 
     @Override
     final EditText getStartValueEdit() {
-        return binding.startValue;
+        return getBinding().startValue;
     }
 
     @Override
     final EditText getEndValueEdit() {
-        return binding.endValue;
+        return getBinding().endValue;
     }
 
     @Override
     final ValidatingTextInputLayout getStartDateLayout() {
-        return binding.startDateLayout;
+        return getBinding().startDateLayout;
     }
 
     @Override
     final ValidatingTextInputLayout getEndDateLayout() {
-        return binding.endDateLayout;
+        return getBinding().endDateLayout;
     }
 
     @Override
     final ValidatingTextInputLayout getStartValueLayout() {
-        return binding.startValueLayout;
+        return getBinding().startValueLayout;
     }
 
     @Override
     final ValidatingTextInputLayout getEndValueLayout() {
-        return binding.endValueLayout;
+        return getBinding().endValueLayout;
     }
 }

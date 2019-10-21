@@ -54,15 +54,15 @@ abstract class OperationFilterDialog<F extends OperationFilter, B extends ViewDa
         }
         switch (requestCode) {
             case ACCOUNT_CODE:
-                int accountId = extractId(resultIntent, RESULT_ACCOUNT_ID);
+                int accountId = Companion.extractId(resultIntent, RESULT_ACCOUNT_ID);
                 loadAccount(accountId);
                 break;
             case PERSON_CODE:
-                int ownerId = extractId(resultIntent, RESULT_PERSON_ID);
+                int ownerId = Companion.extractId(resultIntent, RESULT_PERSON_ID);
                 loadOwner(ownerId);
                 break;
             case CURRENCY_CODE:
-                int currencyId = extractId(resultIntent, RESULT_CURRENCY_ID);
+                int currencyId = Companion.extractId(resultIntent, RESULT_CURRENCY_ID);
                 loadCurrency(currencyId);
                 break;
         }
@@ -110,7 +110,7 @@ abstract class OperationFilterDialog<F extends OperationFilter, B extends ViewDa
 
     @SuppressWarnings("unused")
     private void onStartDateClick(View view) {
-        LocalDate startDate = determineDate(getStartDateEdit(), filter.getStartDate());
+        LocalDate startDate = Companion.determineDate(getStartDateEdit(), getFilter().getStartDate());
         showDatePickerDialog(getContext(), startDate, (datePicker, year, month, day) -> {
             LocalDate date = calendarDateToLocalDate(year, month, day);
             loadStartDate(date);
@@ -119,7 +119,7 @@ abstract class OperationFilterDialog<F extends OperationFilter, B extends ViewDa
 
     @SuppressWarnings("unused")
     private void onEndDateClick(View view) {
-        LocalDate endDate = determineDate(getEndDateEdit(), filter.getEndDate());
+        LocalDate endDate = Companion.determineDate(getEndDateEdit(), getFilter().getEndDate());
         showDatePickerDialog(getContext(), endDate, (datePicker, year, month, day) -> {
             LocalDate date = calendarDateToLocalDate(year, month, day);
             loadEndDate(date);
@@ -127,41 +127,41 @@ abstract class OperationFilterDialog<F extends OperationFilter, B extends ViewDa
     }
 
     private void onAccountRemoved() {
-        filter.setAccountId(null);
+        getFilter().setAccountId(null);
     }
 
     private void onOwnerRemoved() {
-        filter.setOwnerId(null);
+        getFilter().setOwnerId(null);
     }
 
     private void onCurrencyRemoved() {
-        filter.setCurrencyId(null);
+        getFilter().setCurrencyId(null);
     }
 
     private Consumer<Article> onSuccessfulArticleFound() {
         return foundArticle -> {
-            filter.setArticleId(foundArticle.getId());
+            getFilter().setArticleId(foundArticle.getId());
             getArticleEdit().setText(foundArticle.getName());
         };
     }
 
     private Consumer<Account> onSuccessfulAccountFound() {
         return foundAccount -> {
-            filter.setAccountId(foundAccount.getId());
+            getFilter().setAccountId(foundAccount.getId());
             getAccountEdit().setText(foundAccount.getName());
         };
     }
 
     private Consumer<Person> onSuccessfulOwnerFound() {
         return foundOwner -> {
-            filter.setOwnerId(foundOwner.getId());
+            getFilter().setOwnerId(foundOwner.getId());
             getOwnerEdit().setText(foundOwner.getName());
         };
     }
 
     private Consumer<Currency> onSuccessfulCurrencyFound() {
         return foundCurrency -> {
-            filter.setCurrencyId(foundCurrency.getId());
+            getFilter().setCurrencyId(foundCurrency.getId());
             getCurrencyEdit().setText(foundCurrency.getName());
         };
     }
@@ -191,12 +191,12 @@ abstract class OperationFilterDialog<F extends OperationFilter, B extends ViewDa
     }
 
     private void loadStartDate(@NonNull LocalDate date) {
-        filter.setStartDate(date);
+        getFilter().setStartDate(date);
         getStartDateEdit().setText(localDateToString(date));
     }
 
     private void loadEndDate(@NonNull LocalDate date) {
-        filter.setEndDate(date);
+        getFilter().setEndDate(date);
         getEndDateEdit().setText(localDateToString(date));
     }
 
@@ -229,10 +229,10 @@ abstract class OperationFilterDialog<F extends OperationFilter, B extends ViewDa
     @SuppressWarnings("ConstantConditions")
     @Override
     protected void updateFilterProperties() {
-        filter.setStartDate(stringToLocalDate(getStartDateEdit().getText().toString()));
-        filter.setEndDate(stringToLocalDate(getEndDateEdit().getText().toString()));
-        filter.setStartValue(stringToBigDecimal(getStartValueEdit().getText().toString()));
-        filter.setEndValue(stringToBigDecimal(getEndValueEdit().getText().toString()));
+        getFilter().setStartDate(stringToLocalDate(getStartDateEdit().getText().toString()));
+        getFilter().setEndDate(stringToLocalDate(getEndDateEdit().getText().toString()));
+        getFilter().setStartValue(stringToBigDecimal(getStartValueEdit().getText().toString()));
+        getFilter().setEndValue(stringToBigDecimal(getEndValueEdit().getText().toString()));
     }
 
     abstract ClearableEditText getArticleEdit();

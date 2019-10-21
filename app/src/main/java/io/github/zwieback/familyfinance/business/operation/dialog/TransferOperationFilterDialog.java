@@ -19,7 +19,7 @@ public class TransferOperationFilterDialog extends OperationFilterDialog<Transfe
 
     public static TransferOperationFilterDialog newInstance(TransferOperationFilter filter) {
         TransferOperationFilterDialog fragment = new TransferOperationFilterDialog();
-        Bundle args = createArguments(TRANSFER_OPERATION_FILTER, filter);
+        Bundle args = Companion.createArguments(TRANSFER_OPERATION_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,68 +47,68 @@ public class TransferOperationFilterDialog extends OperationFilterDialog<Transfe
 
     @Override
     protected void bind(@NotNull TransferOperationFilter filter) {
-        binding.setFilter(filter);
-        loadArticle(databasePrefs.getTransferArticleId());
+        getBinding().setFilter(filter);
+        loadArticle(getDatabasePrefs().getTransferArticleId());
         super.bind(filter);
     }
 
     @Override
     final ClearableEditText getArticleEdit() {
-        return binding.article;
+        return getBinding().article;
     }
 
     @Override
     final ClearableEditText getAccountEdit() {
-        return binding.account;
+        return getBinding().account;
     }
 
     @Override
     final ClearableEditText getOwnerEdit() {
-        return binding.owner;
+        return getBinding().owner;
     }
 
     @Override
     final ClearableEditText getCurrencyEdit() {
-        return binding.currency;
+        return getBinding().currency;
     }
 
     @Override
     final EditText getStartDateEdit() {
-        return binding.startDate;
+        return getBinding().startDate;
     }
 
     @Override
     final EditText getEndDateEdit() {
-        return binding.endDate;
+        return getBinding().endDate;
     }
 
     @Override
     final EditText getStartValueEdit() {
-        return binding.startValue;
+        return getBinding().startValue;
     }
 
     @Override
     final EditText getEndValueEdit() {
-        return binding.endValue;
+        return getBinding().endValue;
     }
 
     @Override
     final ValidatingTextInputLayout getStartDateLayout() {
-        return binding.startDateLayout;
+        return getBinding().startDateLayout;
     }
 
     @Override
     final ValidatingTextInputLayout getEndDateLayout() {
-        return binding.endDateLayout;
+        return getBinding().endDateLayout;
     }
 
     @Override
     final ValidatingTextInputLayout getStartValueLayout() {
-        return binding.startValueLayout;
+        return getBinding().startValueLayout;
     }
 
     @Override
     final ValidatingTextInputLayout getEndValueLayout() {
-        return binding.endValueLayout;
+        return getBinding().endValueLayout;
     }
 }

@@ -27,7 +27,7 @@ abstract class OperationWithArticleFilterDialog<
         }
         switch (requestCode) {
             case ARTICLE_CODE:
-                int articleId = extractId(resultIntent, RESULT_ARTICLE_ID);
+                int articleId = Companion.extractId(resultIntent, RESULT_ARTICLE_ID);
                 loadArticle(articleId);
                 break;
         }
@@ -52,6 +52,6 @@ abstract class OperationWithArticleFilterDialog<
     }
 
     private void onArticleRemoved() {
-        filter.setArticleId(null);
+        getFilter().setArticleId(null);
     }
 }

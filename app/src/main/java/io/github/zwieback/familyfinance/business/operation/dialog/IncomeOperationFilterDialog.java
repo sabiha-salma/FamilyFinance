@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.article.activity.IncomeArticleActivity;
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter;
+import io.github.zwieback.familyfinance.core.dialog.EntityFilterDialog;
 import io.github.zwieback.familyfinance.databinding.DialogFilterIncomeOperationBinding;
 import io.github.zwieback.familyfinance.widget.ClearableEditText;
 
@@ -21,7 +22,7 @@ public class IncomeOperationFilterDialog extends OperationWithArticleFilterDialo
 
     public static IncomeOperationFilterDialog newInstance(IncomeOperationFilter filter) {
         IncomeOperationFilterDialog fragment = new IncomeOperationFilterDialog();
-        Bundle args = createArguments(INCOME_OPERATION_FILTER, filter);
+        Bundle args = Companion.createArguments(INCOME_OPERATION_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -29,8 +30,8 @@ public class IncomeOperationFilterDialog extends OperationWithArticleFilterDialo
     public static IncomeOperationFilterDialog newInstance(IncomeOperationFilter filter,
                                                           @StringRes int dialogTitleId) {
         IncomeOperationFilterDialog fragment = new IncomeOperationFilterDialog();
-        Bundle args = createArguments(INCOME_OPERATION_FILTER, filter);
-        args.putInt(DIALOG_TITLE, dialogTitleId);
+        Bundle args = Companion.createArguments(INCOME_OPERATION_FILTER, filter);
+        args.putInt(EntityFilterDialog.DIALOG_TITLE, dialogTitleId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,7 +59,7 @@ public class IncomeOperationFilterDialog extends OperationWithArticleFilterDialo
 
     @Override
     protected final void bind(@NotNull IncomeOperationFilter filter) {
-        binding.setFilter(filter);
+        getBinding().setFilter(filter);
         super.bind(filter);
     }
 
@@ -69,61 +70,61 @@ public class IncomeOperationFilterDialog extends OperationWithArticleFilterDialo
 
     @Override
     final ClearableEditText getArticleEdit() {
-        return binding.article;
+        return getBinding().article;
     }
 
     @Override
     final ClearableEditText getAccountEdit() {
-        return binding.account;
+        return getBinding().account;
     }
 
     @Override
     final ClearableEditText getOwnerEdit() {
-        return binding.owner;
+        return getBinding().owner;
     }
 
     @Override
     final ClearableEditText getCurrencyEdit() {
-        return binding.currency;
+        return getBinding().currency;
     }
 
     @Override
     final EditText getStartDateEdit() {
-        return binding.startDate;
+        return getBinding().startDate;
     }
 
     @Override
     final EditText getEndDateEdit() {
-        return binding.endDate;
+        return getBinding().endDate;
     }
 
     @Override
     final EditText getStartValueEdit() {
-        return binding.startValue;
+        return getBinding().startValue;
     }
 
     @Override
     final EditText getEndValueEdit() {
-        return binding.endValue;
+        return getBinding().endValue;
     }
 
     @Override
     final ValidatingTextInputLayout getStartDateLayout() {
-        return binding.startDateLayout;
+        return getBinding().startDateLayout;
     }
 
     @Override
     final ValidatingTextInputLayout getEndDateLayout() {
-        return binding.endDateLayout;
+        return getBinding().endDateLayout;
     }
 
     @Override
     final ValidatingTextInputLayout getStartValueLayout() {
-        return binding.startValueLayout;
+        return getBinding().startValueLayout;
     }
 
     @Override
     final ValidatingTextInputLayout getEndValueLayout() {
-        return binding.endValueLayout;
+        return getBinding().endValueLayout;
     }
 }

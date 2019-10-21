@@ -14,8 +14,6 @@ import androidx.fragment.app.DialogFragment;
 
 import io.github.zwieback.familyfinance.business.chart.display.ChartDisplay;
 import io.github.zwieback.familyfinance.business.chart.listener.ChartDisplayListener;
-import io.github.zwieback.familyfinance.core.dialog.exception.UndefinedArgumentsException;
-import io.github.zwieback.familyfinance.core.dialog.exception.UndefinedContextException;
 
 public abstract class ChartDisplayDialog<D extends ChartDisplay, B extends ViewDataBinding>
         extends DialogFragment {
@@ -45,7 +43,7 @@ public abstract class ChartDisplayDialog<D extends ChartDisplay, B extends ViewD
         display = createCopyOfDisplay(inputDisplay);
         binding = createBinding();
         bind(display);
-        return new AlertDialog.Builder(extractContext())
+        return new AlertDialog.Builder(requireContext())
                 .setView(binding.getRoot())
                 .setTitle(extractDialogTitle())
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
@@ -59,28 +57,12 @@ public abstract class ChartDisplayDialog<D extends ChartDisplay, B extends ViewD
     }
 
     private D extractDisplay() {
-        return extractArguments().getParcelable(getInputDisplayName());
+        return requireArguments().getParcelable(getInputDisplayName());
     }
 
     @StringRes
     private int extractDialogTitle() {
-        return extractArguments().getInt(DIALOG_TITLE, getDialogTitle());
-    }
-
-    @NonNull
-    private Bundle extractArguments() {
-        if (getArguments() == null) {
-            throw new UndefinedArgumentsException();
-        }
-        return getArguments();
-    }
-
-    @NonNull
-    private Context extractContext() {
-        if (getContext() == null) {
-            throw new UndefinedContextException();
-        }
-        return getContext();
+        return requireArguments().getInt(DIALOG_TITLE, getDialogTitle());
     }
 
     /**

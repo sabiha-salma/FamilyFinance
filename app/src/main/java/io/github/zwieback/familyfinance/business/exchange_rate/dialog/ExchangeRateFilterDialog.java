@@ -39,7 +39,7 @@ public class ExchangeRateFilterDialog
 
     public static ExchangeRateFilterDialog newInstance(ExchangeRateFilter filter) {
         ExchangeRateFilterDialog fragment = new ExchangeRateFilterDialog();
-        Bundle args = createArguments(EXCHANGE_RATE_FILTER, filter);
+        Bundle args = Companion.createArguments(EXCHANGE_RATE_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,7 +52,7 @@ public class ExchangeRateFilterDialog
         }
         switch (requestCode) {
             case CURRENCY_CODE:
-                int currencyId = extractId(resultIntent, RESULT_CURRENCY_ID);
+                int currencyId = Companion.extractId(resultIntent, RESULT_CURRENCY_ID);
                 loadCurrency(currencyId);
                 break;
         }
@@ -81,7 +81,7 @@ public class ExchangeRateFilterDialog
 
     @Override
     protected void bind(@NotNull ExchangeRateFilter filter) {
-        binding.setFilter(filter);
+        getBinding().setFilter(filter);
 
         getCurrencyEdit().setOnClickListener(this::onCurrencyClick);
         getCurrencyEdit().setOnClearTextListener(this::onCurrencyRemoved);
@@ -99,7 +99,7 @@ public class ExchangeRateFilterDialog
     }
 
     private void onStartDateClick(View view) {
-        LocalDate startDate = determineDate(getStartDateEdit(), filter.getStartDate());
+        LocalDate startDate = Companion.determineDate(getStartDateEdit(), getFilter().getStartDate());
         showDatePickerDialog(getContext(), startDate, (datePicker, year, month, day) -> {
             LocalDate date = calendarDateToLocalDate(year, month, day);
             loadStartDate(date);
@@ -107,7 +107,7 @@ public class ExchangeRateFilterDialog
     }
 
     private void onEndDateClick(View view) {
-        LocalDate endDate = determineDate(getEndDateEdit(), filter.getEndDate());
+        LocalDate endDate = Companion.determineDate(getEndDateEdit(), getFilter().getEndDate());
         showDatePickerDialog(getContext(), endDate, (datePicker, year, month, day) -> {
             LocalDate date = calendarDateToLocalDate(year, month, day);
             loadEndDate(date);
@@ -115,12 +115,12 @@ public class ExchangeRateFilterDialog
     }
 
     private void onCurrencyRemoved() {
-        filter.setCurrencyId(null);
+        getFilter().setCurrencyId(null);
     }
 
     private Consumer<Currency> onSuccessfulCurrencyFound() {
         return foundCurrency -> {
-            filter.setCurrencyId(foundCurrency.getId());
+            getFilter().setCurrencyId(foundCurrency.getId());
             getCurrencyEdit().setText(foundCurrency.getName());
         };
     }
@@ -132,12 +132,12 @@ public class ExchangeRateFilterDialog
     }
 
     private void loadStartDate(@Nullable LocalDate date) {
-        filter.setStartDate(date);
+        getFilter().setStartDate(date);
         getStartDateEdit().setText(localDateToString(date));
     }
 
     private void loadEndDate(@Nullable LocalDate date) {
-        filter.setEndDate(date);
+        getFilter().setEndDate(date);
         getEndDateEdit().setText(localDateToString(date));
     }
 
@@ -165,45 +165,45 @@ public class ExchangeRateFilterDialog
      */
     @Override
     protected void updateFilterProperties() {
-        filter.setStartDate(stringToLocalDate(getStartDateEdit().getText().toString()));
-        filter.setEndDate(stringToLocalDate(getEndDateEdit().getText().toString()));
-        filter.setStartValue(stringToBigDecimal(getStartValueEdit().getText().toString()));
-        filter.setEndValue(stringToBigDecimal(getEndValueEdit().getText().toString()));
+        getFilter().setStartDate(stringToLocalDate(getStartDateEdit().getText().toString()));
+        getFilter().setEndDate(stringToLocalDate(getEndDateEdit().getText().toString()));
+        getFilter().setStartValue(stringToBigDecimal(getStartValueEdit().getText().toString()));
+        getFilter().setEndValue(stringToBigDecimal(getEndValueEdit().getText().toString()));
     }
 
     private ClearableEditText getCurrencyEdit() {
-        return binding.currency;
+        return getBinding().currency;
     }
 
     private EditText getStartDateEdit() {
-        return binding.startDate;
+        return getBinding().startDate;
     }
 
     private EditText getEndDateEdit() {
-        return binding.endDate;
+        return getBinding().endDate;
     }
 
     private EditText getStartValueEdit() {
-        return binding.startValue;
+        return getBinding().startValue;
     }
 
     private EditText getEndValueEdit() {
-        return binding.endValue;
+        return getBinding().endValue;
     }
 
     private ValidatingTextInputLayout getStartDateLayout() {
-        return binding.startDateLayout;
+        return getBinding().startDateLayout;
     }
 
     private ValidatingTextInputLayout getEndDateLayout() {
-        return binding.endDateLayout;
+        return getBinding().endDateLayout;
     }
 
     private ValidatingTextInputLayout getStartValueLayout() {
-        return binding.startValueLayout;
+        return getBinding().startValueLayout;
     }
 
     private ValidatingTextInputLayout getEndValueLayout() {
-        return binding.endValueLayout;
+        return getBinding().endValueLayout;
     }
 }
