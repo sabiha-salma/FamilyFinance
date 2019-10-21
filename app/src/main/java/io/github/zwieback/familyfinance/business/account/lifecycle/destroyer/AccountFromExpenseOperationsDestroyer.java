@@ -22,7 +22,7 @@ public class AccountFromExpenseOperationsDestroyer
 
     @Override
     protected EntityDestroyer<Account> next() {
-        return new AccountFromIncomeOperationsDestroyer(context, data);
+        return new AccountFromIncomeOperationsDestroyer(getContext(), getData());
     }
 
     @Override

@@ -19,7 +19,7 @@ public class TemplateFromSmsPatternsDestroyer extends EntityFromDestroyer<Templa
 
     @Override
     protected EntityDestroyer<Template> next() {
-        return new TemplateForceDestroyer(context, data);
+        return new TemplateForceDestroyer(getContext(), getData());
     }
 
     @Override

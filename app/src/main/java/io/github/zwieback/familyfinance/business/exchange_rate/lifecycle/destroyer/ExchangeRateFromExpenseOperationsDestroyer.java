@@ -22,7 +22,7 @@ public class ExchangeRateFromExpenseOperationsDestroyer
 
     @Override
     protected EntityDestroyer<ExchangeRate> next() {
-        return new ExchangeRateFromIncomeOperationsDestroyer(context, data);
+        return new ExchangeRateFromIncomeOperationsDestroyer(getContext(), getData());
     }
 
     @Override

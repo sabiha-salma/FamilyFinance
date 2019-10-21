@@ -24,7 +24,7 @@ class ExchangeRateFromTransferOperationsDestroyer
 
     @Override
     protected EntityDestroyer<ExchangeRate> next() {
-        return new ExchangeRateForceDestroyer(context, data);
+        return new ExchangeRateForceDestroyer(getContext(), getData());
     }
 
     @Override

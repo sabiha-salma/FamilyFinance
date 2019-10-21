@@ -22,7 +22,7 @@ class AccountFromTransferOperationsDestroyer extends EntityFromDestroyer<Account
 
     @Override
     protected EntityDestroyer<Account> next() {
-        return new AccountFromPreferencesDestroyer(context, data);
+        return new AccountFromPreferencesDestroyer(getContext(), getData());
     }
 
     @Override

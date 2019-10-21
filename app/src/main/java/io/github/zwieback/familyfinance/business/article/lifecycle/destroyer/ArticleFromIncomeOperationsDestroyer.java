@@ -20,7 +20,7 @@ class ArticleFromIncomeOperationsDestroyer extends EntityFromDestroyer<Article, 
 
     @Override
     protected EntityDestroyer<Article> next() {
-        return new ArticleFromTransferOperationsDestroyer(context, data);
+        return new ArticleFromTransferOperationsDestroyer(getContext(), getData());
     }
 
     @Override

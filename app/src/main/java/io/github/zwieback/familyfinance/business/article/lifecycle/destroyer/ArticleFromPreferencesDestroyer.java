@@ -20,7 +20,7 @@ class ArticleFromPreferencesDestroyer extends EntityFromPreferencesDestroyer<Art
 
     @Override
     protected EntityDestroyer<Article> next() {
-        return new ArticleForceDestroyer(context, data);
+        return new ArticleForceDestroyer(getContext(), getData());
     }
 
     @Override
@@ -31,9 +31,9 @@ class ArticleFromPreferencesDestroyer extends EntityFromPreferencesDestroyer<Art
     @Override
     protected boolean preferencesContainsEntity(Article article) {
         List<Integer> articleIds = Arrays.asList(
-                databasePrefs.getIncomesArticleId(),
-                databasePrefs.getExpensesArticleId(),
-                databasePrefs.getTransferArticleId());
+                getDatabasePrefs().getIncomesArticleId(),
+                getDatabasePrefs().getExpensesArticleId(),
+                getDatabasePrefs().getTransferArticleId());
         return articleIds.contains(article.getId());
     }
 }

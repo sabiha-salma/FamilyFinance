@@ -22,7 +22,7 @@ public class ArticleFromExpenseOperationsDestroyer
 
     @Override
     protected EntityDestroyer<Article> next() {
-        return new ArticleFromIncomeOperationsDestroyer(context, data);
+        return new ArticleFromIncomeOperationsDestroyer(getContext(), getData());
     }
 
     @Override

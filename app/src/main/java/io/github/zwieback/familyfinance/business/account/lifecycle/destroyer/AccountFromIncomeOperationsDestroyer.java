@@ -20,7 +20,7 @@ class AccountFromIncomeOperationsDestroyer extends EntityFromDestroyer<Account, 
 
     @Override
     protected EntityDestroyer<Account> next() {
-        return new AccountFromTransferOperationsDestroyer(context, data);
+        return new AccountFromTransferOperationsDestroyer(getContext(), getData());
     }
 
     @Override

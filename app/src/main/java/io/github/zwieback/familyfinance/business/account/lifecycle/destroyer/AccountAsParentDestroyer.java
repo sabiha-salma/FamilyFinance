@@ -18,7 +18,7 @@ public class AccountAsParentDestroyer extends EntityAsParentDestroyer<Account> {
 
     @Override
     protected EntityDestroyer<Account> next() {
-        return new AccountFromExpenseOperationsDestroyer(context, data);
+        return new AccountFromExpenseOperationsDestroyer(getContext(), getData());
     }
 
     @Override

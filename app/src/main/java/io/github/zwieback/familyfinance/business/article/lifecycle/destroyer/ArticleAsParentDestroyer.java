@@ -18,7 +18,7 @@ public class ArticleAsParentDestroyer extends EntityAsParentDestroyer<Article> {
 
     @Override
     protected EntityDestroyer<Article> next() {
-        return new ArticleFromExpenseOperationsDestroyer(context, data);
+        return new ArticleFromExpenseOperationsDestroyer(getContext(), getData());
     }
 
     @Override

@@ -17,7 +17,7 @@ class CurrencyFromPreferencesDestroyer extends EntityFromPreferencesDestroyer<Cu
 
     @Override
     protected EntityDestroyer<Currency> next() {
-        return new CurrencyForceDestroyer(context, data);
+        return new CurrencyForceDestroyer(getContext(), getData());
     }
 
     @Override
@@ -27,7 +27,7 @@ class CurrencyFromPreferencesDestroyer extends EntityFromPreferencesDestroyer<Cu
 
     @Override
     protected boolean preferencesContainsEntity(Currency currency) {
-        int currencyId = databasePrefs.getCurrencyId();
+        int currencyId = getDatabasePrefs().getCurrencyId();
         return currencyId == currency.getId();
     }
 }

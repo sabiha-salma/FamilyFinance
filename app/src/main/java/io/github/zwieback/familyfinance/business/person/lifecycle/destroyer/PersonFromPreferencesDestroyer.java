@@ -17,7 +17,7 @@ class PersonFromPreferencesDestroyer extends EntityFromPreferencesDestroyer<Pers
 
     @Override
     protected EntityDestroyer<Person> next() {
-        return new PersonForceDestroyer(context, data);
+        return new PersonForceDestroyer(getContext(), getData());
     }
 
     @Override
@@ -27,7 +27,7 @@ class PersonFromPreferencesDestroyer extends EntityFromPreferencesDestroyer<Pers
 
     @Override
     protected boolean preferencesContainsEntity(Person person) {
-        int personId = databasePrefs.getPersonId();
+        int personId = getDatabasePrefs().getPersonId();
         return personId == person.getId();
     }
 }

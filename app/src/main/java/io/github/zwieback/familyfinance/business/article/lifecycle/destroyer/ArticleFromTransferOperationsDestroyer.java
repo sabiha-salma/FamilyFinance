@@ -21,7 +21,7 @@ class ArticleFromTransferOperationsDestroyer extends EntityFromDestroyer<Article
 
     @Override
     protected EntityDestroyer<Article> next() {
-        return new ArticleFromPreferencesDestroyer(context, data);
+        return new ArticleFromPreferencesDestroyer(getContext(), getData());
     }
 
     @Override

@@ -20,7 +20,7 @@ class PersonFromIncomeOperationsDestroyer extends EntityFromDestroyer<Person, Op
 
     @Override
     protected EntityDestroyer<Person> next() {
-        return new PersonFromTransferOperationsDestroyer(context, data);
+        return new PersonFromTransferOperationsDestroyer(getContext(), getData());
     }
 
     @Override

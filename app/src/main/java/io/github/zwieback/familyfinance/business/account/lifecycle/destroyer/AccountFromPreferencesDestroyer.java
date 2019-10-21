@@ -17,7 +17,7 @@ class AccountFromPreferencesDestroyer extends EntityFromPreferencesDestroyer<Acc
 
     @Override
     protected EntityDestroyer<Account> next() {
-        return new AccountForceDestroyer(context, data);
+        return new AccountForceDestroyer(getContext(), getData());
     }
 
     @Override
@@ -27,7 +27,7 @@ class AccountFromPreferencesDestroyer extends EntityFromPreferencesDestroyer<Acc
 
     @Override
     protected boolean preferencesContainsEntity(Account account) {
-        int accountId = databasePrefs.getAccountId();
+        int accountId = getDatabasePrefs().getAccountId();
         return accountId == account.getId();
     }
 }

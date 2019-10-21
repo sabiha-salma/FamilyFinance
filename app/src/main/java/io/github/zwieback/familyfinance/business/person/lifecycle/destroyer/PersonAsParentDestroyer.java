@@ -18,7 +18,7 @@ public class PersonAsParentDestroyer extends EntityAsParentDestroyer<Person> {
 
     @Override
     protected EntityDestroyer<Person> next() {
-        return new PersonFromAccountsDestroyer(context, data);
+        return new PersonFromAccountsDestroyer(getContext(), getData());
     }
 
     @Override

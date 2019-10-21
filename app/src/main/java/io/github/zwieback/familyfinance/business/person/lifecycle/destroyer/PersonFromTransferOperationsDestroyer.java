@@ -22,7 +22,7 @@ class PersonFromTransferOperationsDestroyer extends EntityFromDestroyer<Person, 
 
     @Override
     protected EntityDestroyer<Person> next() {
-        return new PersonFromPreferencesDestroyer(context, data);
+        return new PersonFromPreferencesDestroyer(getContext(), getData());
     }
 
     @Override

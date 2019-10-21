@@ -19,7 +19,7 @@ public class CurrencyFromAccountsDestroyer extends EntityFromDestroyer<Currency,
 
     @Override
     protected EntityDestroyer<Currency> next() {
-        return new CurrencyFromExchangeRatesDestroyer(context, data);
+        return new CurrencyFromExchangeRatesDestroyer(getContext(), getData());
     }
 
     @Override
