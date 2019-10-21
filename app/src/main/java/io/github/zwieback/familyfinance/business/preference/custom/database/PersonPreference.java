@@ -42,6 +42,7 @@ public class PersonPreference extends EntityActivityResultPreference<Person> {
         return PERSON_CODE;
     }
 
+    @NonNull
     @Override
     protected Intent getRequestIntent() {
         return new Intent(getContext(), PersonActivity.class)
@@ -64,11 +65,13 @@ public class PersonPreference extends EntityActivityResultPreference<Person> {
         databasePrefs.setPersonId(personId);
     }
 
+    @NonNull
     @Override
     protected Class<Person> getEntityClass() {
         return Person.class;
     }
 
+    @NonNull
     @Override
     protected String getEntityName(@NonNull Person person) {
         return person.getName();

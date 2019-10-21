@@ -41,6 +41,7 @@ public class CurrencyPreference extends EntityActivityResultPreference<Currency>
         return CURRENCY_CODE;
     }
 
+    @NonNull
     @Override
     protected Intent getRequestIntent() {
         return new Intent(getContext(), CurrencyActivity.class);
@@ -62,11 +63,13 @@ public class CurrencyPreference extends EntityActivityResultPreference<Currency>
         databasePrefs.setCurrencyId(currencyId);
     }
 
+    @NonNull
     @Override
     protected Class<Currency> getEntityClass() {
         return Currency.class;
     }
 
+    @NonNull
     @Override
     protected String getEntityName(@NonNull Currency currency) {
         return currency.getName();

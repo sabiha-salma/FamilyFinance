@@ -37,7 +37,7 @@ public class ShowBalanceOnOperationScreensPreference extends BooleanPreference {
     }
 
     @Override
-    protected void init(Context context) {
+    protected void init(@NonNull Context context) {
         super.init(context);
         interfacePrefs = InterfacePrefs.with(context);
         callChangeListener(isShowBalance());

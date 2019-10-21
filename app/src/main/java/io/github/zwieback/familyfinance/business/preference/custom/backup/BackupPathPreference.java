@@ -41,7 +41,7 @@ public class BackupPathPreference extends ActivityResultPreference {
     }
 
     @Override
-    protected void init(Context context) {
+    protected void init(@NonNull Context context) {
         super.init(context);
         callChangeListener(getBackupPath());
     }
@@ -51,6 +51,7 @@ public class BackupPathPreference extends ActivityResultPreference {
         return BACKUP_PATH_CODE;
     }
 
+    @NonNull
     @Override
     protected Intent getRequestIntent() {
         return new Intent(getContext(), FilePickerActivity.class)

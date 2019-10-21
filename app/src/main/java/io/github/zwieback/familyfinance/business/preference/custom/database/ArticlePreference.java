@@ -29,6 +29,7 @@ abstract class ArticlePreference extends EntityActivityResultPreference<Article>
         super(context);
     }
 
+    @NonNull
     @Override
     protected Intent getRequestIntent() {
         return new Intent(getContext(), AllArticleActivity.class);
@@ -40,11 +41,13 @@ abstract class ArticlePreference extends EntityActivityResultPreference<Article>
         return RESULT_ARTICLE_ID;
     }
 
+    @NonNull
     @Override
     protected Class<Article> getEntityClass() {
         return Article.class;
     }
 
+    @NonNull
     @Override
     protected String getEntityName(@NonNull Article article) {
         return article.getName();

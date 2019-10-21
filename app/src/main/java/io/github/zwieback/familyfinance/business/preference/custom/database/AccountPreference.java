@@ -42,6 +42,7 @@ public class AccountPreference extends EntityActivityResultPreference<Account> {
         return ACCOUNT_CODE;
     }
 
+    @NonNull
     @Override
     protected Intent getRequestIntent() {
         return new Intent(getContext(), AccountActivity.class)
@@ -65,11 +66,13 @@ public class AccountPreference extends EntityActivityResultPreference<Account> {
         databasePrefs.setAccountId(accountId);
     }
 
+    @NonNull
     @Override
     protected Class<Account> getEntityClass() {
         return Account.class;
     }
 
+    @NonNull
     @Override
     protected String getEntityName(@NonNull Account account) {
         return account.getName();
