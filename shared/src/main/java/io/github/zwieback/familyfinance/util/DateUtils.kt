@@ -74,12 +74,20 @@ object DateUtils {
 
     @JvmStatic
     fun stringToLocalDate(text: String?): LocalDate? {
-        return text?.let { LocalDate.parse(text) }
+        return if (!text.isNullOrEmpty()) {
+            LocalDate.parse(text)
+        } else {
+            null
+        }
     }
 
     @JvmStatic
     fun bankDateToLocalDate(text: String?): LocalDate {
-        return text?.let { LocalDate.from(BANK_DATE_FORMATTER.parse(text)) } ?: now()
+        return if (!text.isNullOrEmpty()) {
+            LocalDate.from(BANK_DATE_FORMATTER.parse(text))
+        } else {
+            now()
+        }
     }
 
     @JvmStatic
