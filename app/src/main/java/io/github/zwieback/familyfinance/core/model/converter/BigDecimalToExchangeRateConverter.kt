@@ -22,7 +22,7 @@ class BigDecimalToExchangeRateConverter : Converter<BigDecimal, Long> {
         return null
     }
 
-    override fun convertToPersisted(value: BigDecimal): Long? {
+    override fun convertToPersisted(value: BigDecimal?): Long? {
         return bigDecimalToExchangeRate(value)
     }
 
