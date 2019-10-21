@@ -17,6 +17,7 @@ interface IBaseEntity :
     @get:Generated
     val id: Int
 
+    @get:Nullable
     @get:Column(name = "icon_name", length = BaseRestriction.ICON_NAME_MAX_LENGTH)
     val iconName: String?
 }
