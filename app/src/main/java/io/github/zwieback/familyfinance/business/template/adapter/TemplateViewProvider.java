@@ -40,6 +40,6 @@ class TemplateViewProvider extends EntityProvider<TemplateView> {
 
     @Override
     public int provideTextColor(TemplateView template) {
-        return ContextCompat.getColor(context, provideDefaultIconColor(template));
+        return ContextCompat.getColor(getContext(), provideDefaultIconColor(template));
     }
 }

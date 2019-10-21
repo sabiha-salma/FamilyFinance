@@ -30,14 +30,14 @@ public class TransferOperationAdapter extends OperationAdapter<TransferOperation
     @NonNull
     @Override
     public Result<OperationView> performQuery() {
-        return TransferOperationQueryBuilder.create(data)
-                .setStartDate(filter.getStartDate())
-                .setEndDate(filter.getEndDate())
-                .setStartValue(filter.getStartValue())
-                .setEndValue(filter.getEndValue())
-                .setOwnerId(filter.getOwnerId())
-                .setCurrencyId(filter.getCurrencyId())
-                .setAccountId(filter.getAccountId())
+        return TransferOperationQueryBuilder.create(getData())
+                .setStartDate(getFilter().getStartDate())
+                .setEndDate(getFilter().getEndDate())
+                .setStartValue(getFilter().getStartValue())
+                .setEndValue(getFilter().getEndValue())
+                .setOwnerId(getFilter().getOwnerId())
+                .setCurrencyId(getFilter().getCurrencyId())
+                .setAccountId(getFilter().getAccountId())
                 .build();
     }
 }

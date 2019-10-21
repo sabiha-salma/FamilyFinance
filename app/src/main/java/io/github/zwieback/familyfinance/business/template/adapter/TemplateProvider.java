@@ -40,6 +40,6 @@ public class TemplateProvider extends EntityProvider<Template> {
 
     @Override
     public int provideTextColor(Template template) {
-        return ContextCompat.getColor(context, provideDefaultIconColor(template));
+        return ContextCompat.getColor(getContext(), provideDefaultIconColor(template));
     }
 }

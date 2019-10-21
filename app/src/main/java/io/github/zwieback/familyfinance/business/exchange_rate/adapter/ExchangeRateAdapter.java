@@ -42,19 +42,19 @@ public class ExchangeRateAdapter extends EntityAdapter<ExchangeRateView, Exchang
 
     @Override
     public Result<ExchangeRateView> performQuery() {
-        return ExchangeRateQueryBuilder.create(data)
-                .setCurrencyId(filter.getCurrencyId())
-                .setStartDate(filter.getStartDate())
-                .setEndDate(filter.getEndDate())
-                .setStartValue(filter.getStartValue())
-                .setEndValue(filter.getEndValue())
+        return ExchangeRateQueryBuilder.create(getData())
+                .setCurrencyId(getFilter().getCurrencyId())
+                .setStartDate(getFilter().getStartDate())
+                .setEndDate(getFilter().getEndDate())
+                .setStartValue(getFilter().getStartValue())
+                .setEndValue(getFilter().getEndValue())
                 .build();
     }
 
     @Override
     public void onBindViewHolder(ExchangeRateView exchangeRate,
                                  BindingHolder<ItemExchangeRateBinding> holder, int position) {
-        holder.binding.setExchangeRate(exchangeRate);
-        provider.setupIcon(holder.binding.icon.getIcon(), exchangeRate);
+        holder.getBinding().setExchangeRate(exchangeRate);
+        getProvider().setupIcon(holder.getBinding().icon.getIcon(), exchangeRate);
     }
 }

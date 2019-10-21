@@ -21,9 +21,9 @@ public class ExpenseArticleAdapter extends ArticleAdapter {
 
     @Override
     public Result<ArticleView> performQuery() {
-        return ExpenseArticleQueryBuilder.create(data)
-                .withParentId(parentId)
-                .setSearchName(filter.getSearchName())
+        return ExpenseArticleQueryBuilder.create(getData())
+                .withParentId(getParentId())
+                .setSearchName(getFilter().getSearchName())
                 .build();
     }
 }

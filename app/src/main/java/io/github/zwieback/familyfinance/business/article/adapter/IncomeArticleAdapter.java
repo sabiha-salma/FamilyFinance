@@ -21,9 +21,9 @@ public class IncomeArticleAdapter extends ArticleAdapter {
 
     @Override
     public Result<ArticleView> performQuery() {
-        return IncomeArticleQueryBuilder.create(data)
-                .withParentId(parentId)
-                .setSearchName(filter.getSearchName())
+        return IncomeArticleQueryBuilder.create(getData())
+                .withParentId(getParentId())
+                .setSearchName(getFilter().getSearchName())
                 .build();
     }
 }

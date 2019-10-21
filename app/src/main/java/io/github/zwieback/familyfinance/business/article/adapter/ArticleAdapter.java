@@ -41,7 +41,7 @@ public abstract class ArticleAdapter extends EntityFolderAdapter<ArticleView, Ar
     @Override
     public void onBindViewHolder(ArticleView article, BindingHolder<ItemArticleBinding> holder,
                                  int position) {
-        holder.binding.setArticle(article);
-        provider.setupIcon(holder.binding.icon.getIcon(), article);
+        holder.getBinding().setArticle(article);
+        getProvider().setupIcon(holder.getBinding().icon.getIcon(), article);
     }
 }

@@ -21,9 +21,9 @@ public class AllArticleAdapter extends ArticleAdapter {
 
     @Override
     public Result<ArticleView> performQuery() {
-        return AllArticleQueryBuilder.create(data)
-                .withParentId(parentId)
-                .setSearchName(filter.getSearchName())
+        return AllArticleQueryBuilder.create(getData())
+                .withParentId(getParentId())
+                .setSearchName(getFilter().getSearchName())
                 .build();
     }
 }

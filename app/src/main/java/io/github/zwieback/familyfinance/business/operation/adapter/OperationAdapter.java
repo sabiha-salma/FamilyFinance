@@ -57,9 +57,9 @@ public abstract class OperationAdapter<FILTER extends OperationFilter>
     public void onBindViewHolder(OperationView operation,
                                  BindingHolder<ItemOperationBinding> holder,
                                  int position) {
-        holder.binding.setOperation(operation);
-        holder.binding.value.setTextColor(provider.provideTextColor(operation));
-        provider.setupIcon(holder.binding.icon.getIcon(), operation);
+        holder.getBinding().setOperation(operation);
+        holder.getBinding().value.setTextColor(getProvider().provideTextColor(operation));
+        getProvider().setupIcon(holder.getBinding().icon.getIcon(), operation);
     }
 
     @Override

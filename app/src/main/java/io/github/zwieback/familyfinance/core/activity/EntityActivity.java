@@ -52,6 +52,7 @@ public abstract class EntityActivity<
      */
     public static final String INPUT_REGULAR_SELECTABLE = "inputRegularSelectable";
 
+    @NonNull
     protected FILTER filter;
     protected boolean readOnly;
     protected boolean regularSelectable;
@@ -122,8 +123,8 @@ public abstract class EntityActivity<
     protected void init(Bundle savedInstanceState) {
         readOnly = extractBoolean(getIntent().getExtras(), INPUT_READ_ONLY, true);
         regularSelectable = extractBoolean(getIntent().getExtras(), INPUT_REGULAR_SELECTABLE, true);
-        filter = extractFilter(getIntent().getExtras(), getFilterName());
-        filter = loadFilter(savedInstanceState, filter);
+        FILTER localFilter = extractFilter(getIntent().getExtras(), getFilterName());
+        filter = loadFilter(savedInstanceState, localFilter);
     }
 
     // -----------------------------------------------------------------------------------------
@@ -133,6 +134,7 @@ public abstract class EntityActivity<
     @NonNull
     protected abstract String getFilterName();
 
+    @NonNull
     private FILTER loadFilter(@Nullable Bundle savedInstanceState, @Nullable FILTER filter) {
         if (savedInstanceState == null) {
             if (filter == null) {
@@ -140,7 +142,11 @@ public abstract class EntityActivity<
             }
             return filter;
         }
-        return savedInstanceState.getParcelable(getFilterName());
+        FILTER savedFilter = savedInstanceState.getParcelable(getFilterName());
+        if (savedFilter != null) {
+            return savedFilter;
+        }
+        throw new IllegalStateException("Filter wasn't saved early");
     }
 
     @NonNull
@@ -168,7 +174,7 @@ public abstract class EntityActivity<
     }
 
     @SuppressWarnings("unchecked")
-    protected final void applyFilter(FILTER filter) {
+    protected final void applyFilter(@NonNull FILTER filter) {
         FRAGMENT fragment = findFragment();
         if (fragment != null) {
             fragment.applyFilter(filter);

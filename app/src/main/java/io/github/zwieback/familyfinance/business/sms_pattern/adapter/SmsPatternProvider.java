@@ -33,6 +33,6 @@ public class SmsPatternProvider extends EntityProvider<SmsPattern> {
 
     @Override
     public int provideTextColor(SmsPattern smsPattern) {
-        return ContextCompat.getColor(context, provideDefaultIconColor(smsPattern));
+        return ContextCompat.getColor(getContext(), provideDefaultIconColor(smsPattern));
     }
 }

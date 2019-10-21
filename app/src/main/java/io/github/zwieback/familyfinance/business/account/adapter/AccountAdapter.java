@@ -50,18 +50,18 @@ public class AccountAdapter extends EntityFolderAdapter<AccountView, AccountFilt
 
     @Override
     public Result<AccountView> performQuery() {
-        return AccountQueryBuilder.create(data)
-                .withParentId(parentId)
-                .setOwnerId(filter.getOwnerId())
-                .setOnlyActive(filter.isOnlyActive())
+        return AccountQueryBuilder.create(getData())
+                .withParentId(getParentId())
+                .setOwnerId(getFilter().getOwnerId())
+                .setOnlyActive(getFilter().isOnlyActive())
                 .build();
     }
 
     @Override
     public void onBindViewHolder(AccountView account, BindingHolder<ItemAccountBinding> holder,
                                  int position) {
-        holder.binding.setAccount(account);
-        provider.setupIcon(holder.binding.icon.getIcon(), account);
+        holder.getBinding().setAccount(account);
+        getProvider().setupIcon(holder.getBinding().icon.getIcon(), account);
         calculateAndShowBalance(account, holder);
     }
 
@@ -71,17 +71,17 @@ public class AccountAdapter extends EntityFolderAdapter<AccountView, AccountFilt
             return;
         }
         AccountBalanceCalculator calculator =
-                new NonOptimizedAccountBalanceCalculator(data, account);
+                new NonOptimizedAccountBalanceCalculator(getData(), account);
         calculator.calculateBalance(showBalance(holder));
     }
 
     private Consumer<BigDecimal> showBalance(BindingHolder<ItemAccountBinding> holder) {
         return balance -> {
-            holder.binding.setBalanceValue(balance);
+            holder.getBinding().setBalanceValue(balance);
             if (balance.signum() < 0) {
                 @ColorInt int negativeBalanceColor =
-                        ContextCompat.getColor(context, R.color.colorNegativeBalance);
-                holder.binding.balance.setTextColor(negativeBalanceColor);
+                        ContextCompat.getColor(getContext(), R.color.colorNegativeBalance);
+                holder.getBinding().balance.setTextColor(negativeBalanceColor);
             }
         };
     }

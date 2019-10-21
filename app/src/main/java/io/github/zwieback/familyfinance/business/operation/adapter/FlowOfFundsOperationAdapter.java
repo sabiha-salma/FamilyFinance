@@ -30,15 +30,15 @@ public class FlowOfFundsOperationAdapter extends OperationAdapter<FlowOfFundsOpe
     @NonNull
     @Override
     public Result<OperationView> performQuery() {
-        return FlowOfFundsOperationQueryBuilder.create(data)
-                .setStartDate(filter.getStartDate())
-                .setEndDate(filter.getEndDate())
-                .setStartValue(filter.getStartValue())
-                .setEndValue(filter.getEndValue())
-                .setOwnerId(filter.getOwnerId())
-                .setCurrencyId(filter.getCurrencyId())
-                .setArticleId(filter.getArticleId())
-                .setAccountId(filter.getAccountId())
+        return FlowOfFundsOperationQueryBuilder.create(getData())
+                .setStartDate(getFilter().getStartDate())
+                .setEndDate(getFilter().getEndDate())
+                .setStartValue(getFilter().getStartValue())
+                .setEndValue(getFilter().getEndValue())
+                .setOwnerId(getFilter().getOwnerId())
+                .setCurrencyId(getFilter().getCurrencyId())
+                .setArticleId(getFilter().getArticleId())
+                .setAccountId(getFilter().getAccountId())
                 .build();
     }
 }

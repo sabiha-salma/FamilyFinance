@@ -42,15 +42,15 @@ public class PersonAdapter extends EntityFolderAdapter<PersonView, PersonFilter,
 
     @Override
     public Result<PersonView> performQuery() {
-        return PersonQueryBuilder.create(data)
-                .withParentId(parentId)
+        return PersonQueryBuilder.create(getData())
+                .withParentId(getParentId())
                 .build();
     }
 
     @Override
     public void onBindViewHolder(PersonView person, BindingHolder<ItemPersonBinding> holder,
                                  int position) {
-        holder.binding.setPerson(person);
-        provider.setupIcon(holder.binding.icon.getIcon(), person);
+        holder.getBinding().setPerson(person);
+        getProvider().setupIcon(holder.getBinding().icon.getIcon(), person);
     }
 }

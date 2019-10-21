@@ -42,14 +42,14 @@ public class SmsPatternAdapter extends EntityAdapter<SmsPatternView, SmsPatternF
 
     @Override
     public Result<SmsPatternView> performQuery() {
-        return SmsPatternQueryBuilder.create(data)
+        return SmsPatternQueryBuilder.create(getData())
                 .build();
     }
 
     @Override
     public void onBindViewHolder(SmsPatternView smsPattern, BindingHolder<ItemSmsPatternBinding> holder,
                                  int position) {
-        holder.binding.setSmsPattern(smsPattern);
-        provider.setupIcon(holder.binding.icon.getIcon(), smsPattern);
+        holder.getBinding().setSmsPattern(smsPattern);
+        getProvider().setupIcon(holder.getBinding().icon.getIcon(), smsPattern);
     }
 }

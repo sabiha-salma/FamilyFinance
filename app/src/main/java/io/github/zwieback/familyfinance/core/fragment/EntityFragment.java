@@ -20,7 +20,6 @@ import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.app.FamilyFinanceApplication;
 import io.github.zwieback.familyfinance.core.adapter.EntityAdapter;
 import io.github.zwieback.familyfinance.core.filter.EntityFilter;
-import io.github.zwieback.familyfinance.core.fragment.exception.FragmentWithoutArgumentsException;
 import io.github.zwieback.familyfinance.core.listener.EntityClickListener;
 import io.github.zwieback.familyfinance.core.model.IBaseEntity;
 import io.requery.Persistable;
@@ -110,20 +109,22 @@ public abstract class EntityFragment<
         adapter.queryAsync();
     }
 
-    public final void applyFilter(FILTER filter) {
+    public final void applyFilter(@NonNull FILTER filter) {
         adapter.applyFilter(filter);
         adapter.queryAsync();
     }
 
-    protected final FILTER extractFilter(String filterName) {
-        if (getArguments() == null) {
-            throw new FragmentWithoutArgumentsException(getClass());
+    @NonNull
+    protected final FILTER extractFilter(@NonNull String filterName) {
+        FILTER savedFilter = requireArguments().getParcelable(filterName);
+        if (savedFilter != null) {
+            return savedFilter;
         }
-        return getArguments().getParcelable(filterName);
+        throw new IllegalStateException("Filter wasn't saved early");
     }
 
-    protected static <FILTER extends EntityFilter> Bundle createArguments(String filterName,
-                                                                          FILTER filter) {
+    protected static <FILTER extends EntityFilter> Bundle createArguments(@NonNull String filterName,
+                                                                          @NonNull FILTER filter) {
         Bundle args = new Bundle();
         args.putParcelable(filterName, filter);
         return args;

@@ -42,14 +42,14 @@ public class CurrencyAdapter extends EntityAdapter<CurrencyView, CurrencyFilter,
 
     @Override
     public Result<CurrencyView> performQuery() {
-        return CurrencyQueryBuilder.create(data)
+        return CurrencyQueryBuilder.create(getData())
                 .build();
     }
 
     @Override
     public void onBindViewHolder(CurrencyView currency, BindingHolder<ItemCurrencyBinding> holder,
                                  int position) {
-        holder.binding.setCurrency(currency);
-        provider.setupIcon(holder.binding.icon.getIcon(), currency);
+        holder.getBinding().setCurrency(currency);
+        getProvider().setupIcon(holder.getBinding().icon.getIcon(), currency);
     }
 }

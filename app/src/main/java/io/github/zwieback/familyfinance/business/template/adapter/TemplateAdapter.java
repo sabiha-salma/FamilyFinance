@@ -42,14 +42,14 @@ public class TemplateAdapter extends EntityAdapter<TemplateView, TemplateFilter,
 
     @Override
     public Result<TemplateView> performQuery() {
-        return TemplateQueryBuilder.create(data)
+        return TemplateQueryBuilder.create(getData())
                 .build();
     }
 
     @Override
     public void onBindViewHolder(TemplateView template, BindingHolder<ItemTemplateBinding> holder,
                                  int position) {
-        holder.binding.setTemplate(template);
-        provider.setupIcon(holder.binding.icon.getIcon(), template);
+        holder.getBinding().setTemplate(template);
+        getProvider().setupIcon(holder.getBinding().icon.getIcon(), template);
     }
 }

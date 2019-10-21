@@ -30,6 +30,6 @@ public class ExpenseOperationViewProvider extends EntityProvider<OperationView> 
 
     @Override
     public int provideTextColor(OperationView operation) {
-        return ContextCompat.getColor(context, provideDefaultIconColor(operation));
+        return ContextCompat.getColor(getContext(), provideDefaultIconColor(operation));
     }
 }

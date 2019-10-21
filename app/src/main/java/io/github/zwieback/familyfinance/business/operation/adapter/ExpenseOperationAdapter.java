@@ -30,15 +30,15 @@ public class ExpenseOperationAdapter extends OperationAdapter<ExpenseOperationFi
     @NonNull
     @Override
     public Result<OperationView> performQuery() {
-        return ExpenseOperationQueryBuilder.create(data)
-                .setStartDate(filter.getStartDate())
-                .setEndDate(filter.getEndDate())
-                .setStartValue(filter.getStartValue())
-                .setEndValue(filter.getEndValue())
-                .setOwnerId(filter.getOwnerId())
-                .setCurrencyId(filter.getCurrencyId())
-                .setArticleId(filter.getArticleId())
-                .setAccountId(filter.getAccountId())
+        return ExpenseOperationQueryBuilder.create(getData())
+                .setStartDate(getFilter().getStartDate())
+                .setEndDate(getFilter().getEndDate())
+                .setStartValue(getFilter().getStartValue())
+                .setEndValue(getFilter().getEndValue())
+                .setOwnerId(getFilter().getOwnerId())
+                .setCurrencyId(getFilter().getCurrencyId())
+                .setArticleId(getFilter().getArticleId())
+                .setAccountId(getFilter().getAccountId())
                 .build();
     }
 }
