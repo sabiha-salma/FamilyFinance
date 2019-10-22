@@ -16,7 +16,7 @@ public class TemplateFragment extends EntityFragment<TemplateView, TemplateFilte
 
     public static TemplateFragment newInstance(TemplateFilter filter) {
         TemplateFragment fragment = new TemplateFragment();
-        Bundle args = createArguments(TEMPLATE_FILTER, filter);
+        Bundle args = Companion.createArguments(TEMPLATE_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -24,6 +24,6 @@ public class TemplateFragment extends EntityFragment<TemplateView, TemplateFilte
     @Override
     protected TemplateAdapter createEntityAdapter() {
         TemplateFilter filter = extractFilter(TEMPLATE_FILTER);
-        return new TemplateAdapter(context, clickListener, data, filter);
+        return new TemplateAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }

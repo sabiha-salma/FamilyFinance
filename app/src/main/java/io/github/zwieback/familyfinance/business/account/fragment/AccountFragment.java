@@ -16,7 +16,7 @@ public class AccountFragment extends EntityFolderFragment<AccountView, AccountFi
 
     public static AccountFragment newInstance(AccountFilter filter) {
         AccountFragment fragment = new AccountFragment();
-        Bundle args = createArguments(ACCOUNT_FILTER, filter);
+        Bundle args = Companion.createArguments(ACCOUNT_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -24,6 +24,6 @@ public class AccountFragment extends EntityFolderFragment<AccountView, AccountFi
     @Override
     protected AccountAdapter createEntityAdapter() {
         AccountFilter filter = extractFilter(ACCOUNT_FILTER);
-        return new AccountAdapter(context, clickListener, data, filter);
+        return new AccountAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }

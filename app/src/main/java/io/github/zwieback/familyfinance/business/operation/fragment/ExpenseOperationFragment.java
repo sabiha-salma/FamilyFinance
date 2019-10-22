@@ -11,7 +11,7 @@ public class ExpenseOperationFragment extends OperationFragment<ExpenseOperation
 
     public static ExpenseOperationFragment newInstance(ExpenseOperationFilter filter) {
         ExpenseOperationFragment fragment = new ExpenseOperationFragment();
-        Bundle args = createArguments(EXPENSE_OPERATION_FILTER, filter);
+        Bundle args = Companion.createArguments(EXPENSE_OPERATION_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -19,6 +19,6 @@ public class ExpenseOperationFragment extends OperationFragment<ExpenseOperation
     @Override
     protected ExpenseOperationAdapter createEntityAdapter() {
         ExpenseOperationFilter filter = extractFilter(EXPENSE_OPERATION_FILTER);
-        return new ExpenseOperationAdapter(context, clickListener, data, filter);
+        return new ExpenseOperationAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }

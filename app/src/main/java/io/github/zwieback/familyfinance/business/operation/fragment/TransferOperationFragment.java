@@ -11,7 +11,7 @@ public class TransferOperationFragment extends OperationFragment<TransferOperati
 
     public static TransferOperationFragment newInstance(TransferOperationFilter filter) {
         TransferOperationFragment fragment = new TransferOperationFragment();
-        Bundle args = createArguments(TRANSFER_OPERATION_FILTER, filter);
+        Bundle args = Companion.createArguments(TRANSFER_OPERATION_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -19,6 +19,6 @@ public class TransferOperationFragment extends OperationFragment<TransferOperati
     @Override
     protected TransferOperationAdapter createEntityAdapter() {
         TransferOperationFilter filter = extractFilter(TRANSFER_OPERATION_FILTER);
-        return new TransferOperationAdapter(context, clickListener, data, filter);
+        return new TransferOperationAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }

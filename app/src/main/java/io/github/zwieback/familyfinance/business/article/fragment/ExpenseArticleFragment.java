@@ -11,7 +11,7 @@ public class ExpenseArticleFragment extends ArticleFragment<ExpenseArticleAdapte
 
     public static ExpenseArticleFragment newInstance(ArticleFilter filter) {
         ExpenseArticleFragment fragment = new ExpenseArticleFragment();
-        Bundle args = createArguments(EXPENSE_ARTICLE_FILTER, filter);
+        Bundle args = Companion.createArguments(EXPENSE_ARTICLE_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -19,6 +19,6 @@ public class ExpenseArticleFragment extends ArticleFragment<ExpenseArticleAdapte
     @Override
     protected ExpenseArticleAdapter createEntityAdapter() {
         ArticleFilter filter = extractFilter(EXPENSE_ARTICLE_FILTER);
-        return new ExpenseArticleAdapter(context, clickListener, data, filter);
+        return new ExpenseArticleAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }

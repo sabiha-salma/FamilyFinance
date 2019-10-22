@@ -16,7 +16,7 @@ public class CurrencyFragment extends EntityFragment<CurrencyView, CurrencyFilte
 
     public static CurrencyFragment newInstance(CurrencyFilter filter) {
         CurrencyFragment fragment = new CurrencyFragment();
-        Bundle args = createArguments(CURRENCY_FILTER, filter);
+        Bundle args = Companion.createArguments(CURRENCY_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -24,6 +24,6 @@ public class CurrencyFragment extends EntityFragment<CurrencyView, CurrencyFilte
     @Override
     protected CurrencyAdapter createEntityAdapter() {
         CurrencyFilter filter = extractFilter(CURRENCY_FILTER);
-        return new CurrencyAdapter(context, clickListener, data, filter);
+        return new CurrencyAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }

@@ -16,7 +16,7 @@ public class ExchangeRateFragment extends EntityFragment<ExchangeRateView, Excha
 
     public static ExchangeRateFragment newInstance(ExchangeRateFilter filter) {
         ExchangeRateFragment fragment = new ExchangeRateFragment();
-        Bundle args = createArguments(EXCHANGE_RATE_FILTER, filter);
+        Bundle args = Companion.createArguments(EXCHANGE_RATE_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -24,6 +24,6 @@ public class ExchangeRateFragment extends EntityFragment<ExchangeRateView, Excha
     @Override
     protected ExchangeRateAdapter createEntityAdapter() {
         ExchangeRateFilter filter = extractFilter(EXCHANGE_RATE_FILTER);
-        return new ExchangeRateAdapter(context, clickListener, data, filter);
+        return new ExchangeRateAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }

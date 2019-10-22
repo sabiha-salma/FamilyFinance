@@ -11,7 +11,7 @@ public class IncomeArticleFragment extends ArticleFragment<IncomeArticleAdapter>
 
     public static IncomeArticleFragment newInstance(ArticleFilter filter) {
         IncomeArticleFragment fragment = new IncomeArticleFragment();
-        Bundle args = createArguments(INCOME_ARTICLE_FILTER, filter);
+        Bundle args = Companion.createArguments(INCOME_ARTICLE_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -19,6 +19,6 @@ public class IncomeArticleFragment extends ArticleFragment<IncomeArticleAdapter>
     @Override
     protected IncomeArticleAdapter createEntityAdapter() {
         ArticleFilter filter = extractFilter(INCOME_ARTICLE_FILTER);
-        return new IncomeArticleAdapter(context, clickListener, data, filter);
+        return new IncomeArticleAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }

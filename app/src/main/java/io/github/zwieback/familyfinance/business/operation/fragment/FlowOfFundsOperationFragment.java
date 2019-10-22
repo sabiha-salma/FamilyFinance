@@ -11,7 +11,7 @@ public class FlowOfFundsOperationFragment extends OperationFragment<FlowOfFundsO
 
     public static FlowOfFundsOperationFragment newInstance(FlowOfFundsOperationFilter filter) {
         FlowOfFundsOperationFragment fragment = new FlowOfFundsOperationFragment();
-        Bundle args = createArguments(FLOW_OF_FUNDS_OPERATION_FILTER, filter);
+        Bundle args = Companion.createArguments(FLOW_OF_FUNDS_OPERATION_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -19,6 +19,6 @@ public class FlowOfFundsOperationFragment extends OperationFragment<FlowOfFundsO
     @Override
     protected FlowOfFundsOperationAdapter createEntityAdapter() {
         FlowOfFundsOperationFilter filter = extractFilter(FLOW_OF_FUNDS_OPERATION_FILTER);
-        return new FlowOfFundsOperationAdapter(context, clickListener, data, filter);
+        return new FlowOfFundsOperationAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }

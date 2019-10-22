@@ -11,7 +11,7 @@ public class AllArticleFragment extends ArticleFragment<AllArticleAdapter> {
 
     public static AllArticleFragment newInstance(ArticleFilter filter) {
         AllArticleFragment fragment = new AllArticleFragment();
-        Bundle args = createArguments(ALL_ARTICLE_FILTER, filter);
+        Bundle args = Companion.createArguments(ALL_ARTICLE_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -19,6 +19,6 @@ public class AllArticleFragment extends ArticleFragment<AllArticleAdapter> {
     @Override
     protected AllArticleAdapter createEntityAdapter() {
         ArticleFilter filter = extractFilter(ALL_ARTICLE_FILTER);
-        return new AllArticleAdapter(context, clickListener, data, filter);
+        return new AllArticleAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }

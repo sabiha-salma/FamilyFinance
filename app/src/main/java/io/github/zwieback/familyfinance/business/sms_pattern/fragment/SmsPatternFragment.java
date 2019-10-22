@@ -16,7 +16,7 @@ public class SmsPatternFragment extends EntityFragment<SmsPatternView, SmsPatter
 
     public static SmsPatternFragment newInstance(SmsPatternFilter filter) {
         SmsPatternFragment fragment = new SmsPatternFragment();
-        Bundle args = createArguments(SMS_PATTERN_FILTER, filter);
+        Bundle args = Companion.createArguments(SMS_PATTERN_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -24,6 +24,6 @@ public class SmsPatternFragment extends EntityFragment<SmsPatternView, SmsPatter
     @Override
     protected SmsPatternAdapter createEntityAdapter() {
         SmsPatternFilter filter = extractFilter(SMS_PATTERN_FILTER);
-        return new SmsPatternAdapter(context, clickListener, data, filter);
+        return new SmsPatternAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }

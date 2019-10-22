@@ -11,7 +11,7 @@ public class IncomeOperationFragment extends OperationFragment<IncomeOperationFi
 
     public static IncomeOperationFragment newInstance(IncomeOperationFilter filter) {
         IncomeOperationFragment fragment = new IncomeOperationFragment();
-        Bundle args = createArguments(INCOME_OPERATION_FILTER, filter);
+        Bundle args = Companion.createArguments(INCOME_OPERATION_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -19,6 +19,6 @@ public class IncomeOperationFragment extends OperationFragment<IncomeOperationFi
     @Override
     protected IncomeOperationAdapter createEntityAdapter() {
         IncomeOperationFilter filter = extractFilter(INCOME_OPERATION_FILTER);
-        return new IncomeOperationAdapter(context, clickListener, data, filter);
+        return new IncomeOperationAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }

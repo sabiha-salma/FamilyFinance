@@ -26,7 +26,7 @@ public abstract class OperationFragment<FILTER extends OperationFilter>
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        interfacePrefs = InterfacePrefs.with(context);
+        interfacePrefs = InterfacePrefs.with(requireContext());
     }
 
     @Override
@@ -34,7 +34,7 @@ public abstract class OperationFragment<FILTER extends OperationFilter>
         super.onViewCreated(view, savedInstanceState);
         if (interfacePrefs.isShowBalanceOnOperationScreens()) {
             TextView balanceView = view.findViewById(getBalanceViewId());
-            adapter.setBalanceView(balanceView);
+            getAdapter().setBalanceView(balanceView);
         } else {
             ViewGroup balanceViewGroup = view.findViewById(getBalanceViewGroupId());
             balanceViewGroup.setVisibility(View.GONE);

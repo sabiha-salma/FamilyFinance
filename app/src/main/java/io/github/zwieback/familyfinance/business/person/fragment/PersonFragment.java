@@ -16,7 +16,7 @@ public class PersonFragment extends EntityFolderFragment<PersonView, PersonFilte
 
     public static PersonFragment newInstance(PersonFilter filter) {
         PersonFragment fragment = new PersonFragment();
-        Bundle args = createArguments(PERSON_FILTER, filter);
+        Bundle args = Companion.createArguments(PERSON_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -24,6 +24,6 @@ public class PersonFragment extends EntityFolderFragment<PersonView, PersonFilte
     @Override
     protected PersonAdapter createEntityAdapter() {
         PersonFilter filter = extractFilter(PERSON_FILTER);
-        return new PersonAdapter(context, clickListener, data, filter);
+        return new PersonAdapter(requireContext(), getClickListener(), getData(), filter);
     }
 }
