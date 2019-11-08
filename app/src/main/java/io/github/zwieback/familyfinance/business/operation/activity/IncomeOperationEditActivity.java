@@ -151,7 +151,7 @@ public class IncomeOperationEditActivity
     }
 
     private int extractIncomeAccountId() {
-        return extractInputId(INPUT_INCOME_ACCOUNT_ID, databasePrefs.getAccountId());
+        return extractInputId(INPUT_INCOME_ACCOUNT_ID, getDatabasePrefs().getAccountId());
     }
 
     private int extractIncomeArticleId() {
@@ -159,11 +159,11 @@ public class IncomeOperationEditActivity
     }
 
     private int extractIncomeOwnerId() {
-        return extractInputId(INPUT_INCOME_OWNER_ID, databasePrefs.getPersonId());
+        return extractInputId(INPUT_INCOME_OWNER_ID, getDatabasePrefs().getPersonId());
     }
 
     private int extractIncomeCurrencyId() {
-        return extractInputId(INPUT_INCOME_CURRENCY_ID, databasePrefs.getCurrencyId());
+        return extractInputId(INPUT_INCOME_CURRENCY_ID, getDatabasePrefs().getCurrencyId());
     }
 
     private int extractIncomeExchangeRateId() {

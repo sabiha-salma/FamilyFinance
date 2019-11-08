@@ -33,7 +33,7 @@ public class FlowOfFundsOperationActivity
 
     @Override
     protected List<Integer> collectMenuIds() {
-        if (!readOnly) {
+        if (!getReadOnly()) {
             return Collections.singletonList(R.menu.menu_entity_flow_of_funds_operation);
         }
         return Collections.emptyList();
@@ -64,9 +64,9 @@ public class FlowOfFundsOperationActivity
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
-        incomeOperationHelper = new IncomeOperationHelper(this, data);
-        expenseOperationHelper = new ExpenseOperationHelper(this, data);
-        transferOperationHelper = new TransferOperationHelper(this, data);
+        incomeOperationHelper = new IncomeOperationHelper(this, getData());
+        expenseOperationHelper = new ExpenseOperationHelper(this, getData());
+        transferOperationHelper = new TransferOperationHelper(this, getData());
     }
 
     @NonNull
@@ -83,7 +83,7 @@ public class FlowOfFundsOperationActivity
 
     @Override
     protected FlowOfFundsOperationFragment createFragment() {
-        return FlowOfFundsOperationFragment.newInstance(filter);
+        return FlowOfFundsOperationFragment.newInstance(getFilter());
     }
 
     private void addExpenseOperation() {
@@ -125,7 +125,7 @@ public class FlowOfFundsOperationActivity
 
     @Override
     protected void showFilterDialog() {
-        DialogFragment dialog = FlowOfFundsOperationFilterDialog.newInstance(filter);
+        DialogFragment dialog = FlowOfFundsOperationFilterDialog.newInstance(getFilter());
         dialog.show(getSupportFragmentManager(), "FlowOfFundsOperationFilterDialog");
     }
 

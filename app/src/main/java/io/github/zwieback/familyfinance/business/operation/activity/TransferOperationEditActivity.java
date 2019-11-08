@@ -134,12 +134,12 @@ public class TransferOperationEditActivity
     }
 
     private void loadDefaultArticle() {
-        int transferArticleId = databasePrefs.getTransferArticleId();
+        int transferArticleId = getDatabasePrefs().getTransferArticleId();
         loadEntity(Article.class, transferArticleId, onSuccessfulArticleFound());
     }
 
     private int extractExpenseAccountId() {
-        return extractInputId(INPUT_EXPENSE_ACCOUNT_ID, databasePrefs.getAccountId());
+        return extractInputId(INPUT_EXPENSE_ACCOUNT_ID, getDatabasePrefs().getAccountId());
     }
 
     private int extractIncomeAccountId() {
@@ -147,11 +147,11 @@ public class TransferOperationEditActivity
     }
 
     private int extractExpenseOwnerId() {
-        return extractInputId(INPUT_EXPENSE_OWNER_ID, databasePrefs.getPersonId());
+        return extractInputId(INPUT_EXPENSE_OWNER_ID, getDatabasePrefs().getPersonId());
     }
 
     private int extractExpenseCurrencyId() {
-        return extractInputId(INPUT_EXPENSE_CURRENCY_ID, databasePrefs.getCurrencyId());
+        return extractInputId(INPUT_EXPENSE_CURRENCY_ID, getDatabasePrefs().getCurrencyId());
     }
 
     private int extractExpenseExchangeRateId() {

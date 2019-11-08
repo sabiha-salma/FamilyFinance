@@ -127,9 +127,9 @@ public class DashboardActivity extends DataActivityWrapper {
         incomeOperationFilter = loadFilter(savedInstanceState, INCOME_OPERATION_FILTER);
         transferOperationFilter = loadFilter(savedInstanceState, TRANSFER_OPERATION_FILTER);
         flowOfFundsOperationFilter = loadFilter(savedInstanceState, FLOW_OF_FUNDS_OPERATION_FILTER);
-        incomeOperationHelper = new IncomeOperationHelper(this, data);
-        expenseOperationHelper = new ExpenseOperationHelper(this, data);
-        transferOperationHelper = new TransferOperationHelper(this, data);
+        incomeOperationHelper = new IncomeOperationHelper(this, getData());
+        expenseOperationHelper = new ExpenseOperationHelper(this, getData());
+        transferOperationHelper = new TransferOperationHelper(this, getData());
     }
 
     private <F extends EntityFilter> F loadFilter(@Nullable Bundle savedInstanceState,

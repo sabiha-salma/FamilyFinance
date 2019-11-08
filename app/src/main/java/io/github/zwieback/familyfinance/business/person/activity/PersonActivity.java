@@ -48,12 +48,12 @@ public class PersonActivity
 
     @Override
     protected String getFragmentTag() {
-        return String.format("%s_%s", getLocalClassName(), filter.getParentId());
+        return String.format("%s_%s", getLocalClassName(), getFilter().getParentId());
     }
 
     @Override
     protected PersonFragment createFragment() {
-        return PersonFragment.newInstance(filter);
+        return PersonFragment.newInstance(getFilter());
     }
 
     @Override
@@ -81,8 +81,8 @@ public class PersonActivity
     @Override
     protected EntityDestroyer<Person> createDestroyer(PersonView person) {
         if (person.isFolder()) {
-            return new PersonAsParentDestroyer(this, data);
+            return new PersonAsParentDestroyer(this, getData());
         }
-        return new PersonFromAccountsDestroyer(this, data);
+        return new PersonFromAccountsDestroyer(this, getData());
     }
 }

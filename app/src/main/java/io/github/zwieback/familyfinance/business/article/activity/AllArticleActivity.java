@@ -38,6 +38,6 @@ public class AllArticleActivity extends ArticleActivity<AllArticleFragment, AllA
 
     @Override
     protected AllArticleFragment createFragment() {
-        return AllArticleFragment.newInstance(filter);
+        return AllArticleFragment.newInstance(getFilter());
     }
 }

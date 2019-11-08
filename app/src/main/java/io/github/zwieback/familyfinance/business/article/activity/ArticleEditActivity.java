@@ -166,7 +166,6 @@ public abstract class ArticleEditActivity
     @Override
     protected boolean isParentInsideItself(int parentId, int newParentId) {
         return isParentInsideItself(newParentId, Article.ID,
-                Article.PARENT_ID.eq(parentId).and(Article.FOLDER.eq(true)),
-                this::isParentInsideItself);
+                Article.PARENT_ID.eq(parentId).and(Article.FOLDER.eq(true)));
     }
 }

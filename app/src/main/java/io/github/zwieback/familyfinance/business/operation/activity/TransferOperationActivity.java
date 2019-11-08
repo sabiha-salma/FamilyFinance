@@ -30,7 +30,7 @@ public class TransferOperationActivity
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
-        operationHelper = new TransferOperationHelper(this, data);
+        operationHelper = new TransferOperationHelper(this, getData());
     }
 
     @NonNull
@@ -43,19 +43,19 @@ public class TransferOperationActivity
     @Override
     protected TransferOperationFilter createDefaultFilter() {
         TransferOperationFilter filter = new TransferOperationFilter();
-        filter.setArticleId(databasePrefs.getTransferArticleId());
+        filter.setArticleId(getDatabasePrefs().getTransferArticleId());
         return filter;
     }
 
     @Override
     protected TransferOperationFragment createFragment() {
-        return TransferOperationFragment.newInstance(filter);
+        return TransferOperationFragment.newInstance(getFilter());
     }
 
     @Override
     protected void addEntity() {
         super.addEntity();
-        Intent intent = operationHelper.getIntentToAdd(filter);
+        Intent intent = operationHelper.getIntentToAdd(getFilter());
         startActivity(intent);
     }
 
@@ -75,12 +75,12 @@ public class TransferOperationActivity
 
     @Override
     protected EntityDestroyer<Operation> createDestroyer(OperationView operation) {
-        return new TransferOperationForceDestroyer(this, data);
+        return new TransferOperationForceDestroyer(this, getData());
     }
 
     @Override
     protected void showFilterDialog() {
-        DialogFragment dialog = TransferOperationFilterDialog.newInstance(filter);
+        DialogFragment dialog = TransferOperationFilterDialog.newInstance(getFilter());
         dialog.show(getSupportFragmentManager(), "TransferOperationFilterDialog");
     }
 }

@@ -20,7 +20,7 @@ public class IncomeArticleActivity extends ArticleActivity<IncomeArticleFragment
     @Nullable
     @Override
     Integer getDefaultParentId() {
-        return databasePrefs.getIncomesArticleId();
+        return getDatabasePrefs().getIncomesArticleId();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class IncomeArticleActivity extends ArticleActivity<IncomeArticleFragment
 
     @Override
     protected IncomeArticleFragment createFragment() {
-        return IncomeArticleFragment.newInstance(filter);
+        return IncomeArticleFragment.newInstance(getFilter());
     }
 
     @Override

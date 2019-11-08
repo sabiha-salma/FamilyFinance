@@ -29,7 +29,7 @@ public class ExpenseOperationActivity
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
-        operationHelper = new ExpenseOperationHelper(this, data);
+        operationHelper = new ExpenseOperationHelper(this, getData());
     }
 
     @NonNull
@@ -42,19 +42,19 @@ public class ExpenseOperationActivity
     @Override
     protected ExpenseOperationFilter createDefaultFilter() {
         ExpenseOperationFilter filter = new ExpenseOperationFilter();
-        filter.setArticleId(databasePrefs.getExpensesArticleId());
+        filter.setArticleId(getDatabasePrefs().getExpensesArticleId());
         return filter;
     }
 
     @Override
     protected ExpenseOperationFragment createFragment() {
-        return ExpenseOperationFragment.newInstance(filter);
+        return ExpenseOperationFragment.newInstance(getFilter());
     }
 
     @Override
     protected void addEntity() {
         super.addEntity();
-        Intent intent = operationHelper.getIntentToAdd(filter);
+        Intent intent = operationHelper.getIntentToAdd(getFilter());
         startActivity(intent);
     }
 
@@ -79,7 +79,7 @@ public class ExpenseOperationActivity
 
     @Override
     protected void showFilterDialog() {
-        DialogFragment dialog = ExpenseOperationFilterDialog.newInstance(filter);
+        DialogFragment dialog = ExpenseOperationFilterDialog.newInstance(getFilter());
         dialog.show(getSupportFragmentManager(), "ExpenseOperationFilterDialog");
     }
 }

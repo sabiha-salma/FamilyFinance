@@ -9,6 +9,7 @@ import io.github.zwieback.familyfinance.business.account.fragment.AccountFragmen
 import io.github.zwieback.familyfinance.business.account.lifecycle.destroyer.AccountAsParentDestroyer;
 import io.github.zwieback.familyfinance.business.account.lifecycle.destroyer.AccountFromExpenseOperationsDestroyer;
 import io.github.zwieback.familyfinance.business.account.listener.OnAccountClickListener;
+import io.github.zwieback.familyfinance.core.activity.EntityActivity;
 import io.github.zwieback.familyfinance.core.activity.EntityFolderActivity;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer;
 import io.github.zwieback.familyfinance.core.model.Account;
@@ -40,7 +41,7 @@ public class AccountActivity
     @Override
     protected AccountFilter createDefaultFilter() {
         AccountFilter filter = new AccountFilter();
-        filter.setOnlyActive(extractBoolean(getIntent().getExtras(), INPUT_ONLY_ACTIVE, false));
+        filter.setOnlyActive(EntityActivity.Companion.extractBoolean(getIntent().getExtras(), INPUT_ONLY_ACTIVE, false));
         return filter;
     }
 
@@ -52,12 +53,12 @@ public class AccountActivity
 
     @Override
     protected String getFragmentTag() {
-        return String.format("%s_%s", getLocalClassName(), filter.getParentId());
+        return String.format("%s_%s", getLocalClassName(), getFilter().getParentId());
     }
 
     @Override
     protected AccountFragment createFragment() {
-        return AccountFragment.newInstance(filter);
+        return AccountFragment.newInstance(getFilter());
     }
 
     @Override
@@ -85,8 +86,8 @@ public class AccountActivity
     @Override
     protected EntityDestroyer<Account> createDestroyer(AccountView account) {
         if (account.isFolder()) {
-            return new AccountAsParentDestroyer(this, data);
+            return new AccountAsParentDestroyer(this, getData());
         }
-        return new AccountFromExpenseOperationsDestroyer(this, data);
+        return new AccountFromExpenseOperationsDestroyer(this, getData());
     }
 }

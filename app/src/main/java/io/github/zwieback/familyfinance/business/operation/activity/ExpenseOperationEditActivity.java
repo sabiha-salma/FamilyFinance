@@ -151,7 +151,7 @@ public class ExpenseOperationEditActivity
     }
 
     private int extractExpenseAccountId() {
-        return extractInputId(INPUT_EXPENSE_ACCOUNT_ID, databasePrefs.getAccountId());
+        return extractInputId(INPUT_EXPENSE_ACCOUNT_ID, getDatabasePrefs().getAccountId());
     }
 
     private int extractExpenseArticleId() {
@@ -159,11 +159,11 @@ public class ExpenseOperationEditActivity
     }
 
     private int extractExpenseOwnerId() {
-        return extractInputId(INPUT_EXPENSE_OWNER_ID, databasePrefs.getPersonId());
+        return extractInputId(INPUT_EXPENSE_OWNER_ID, getDatabasePrefs().getPersonId());
     }
 
     private int extractExpenseCurrencyId() {
-        return extractInputId(INPUT_EXPENSE_CURRENCY_ID, databasePrefs.getCurrencyId());
+        return extractInputId(INPUT_EXPENSE_CURRENCY_ID, getDatabasePrefs().getCurrencyId());
     }
 
     private int extractExpenseExchangeRateId() {

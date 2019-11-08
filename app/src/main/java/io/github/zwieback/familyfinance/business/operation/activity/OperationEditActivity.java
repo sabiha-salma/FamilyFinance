@@ -134,7 +134,7 @@ abstract class OperationEditActivity<B extends ViewDataBinding>
 
     @Nullable
     private ExchangeRate findLastExchangeRate(int currencyId) {
-        return new ExchangeRateFinder(data).findLastExchangeRate(currencyId);
+        return new ExchangeRateFinder(getData()).findLastExchangeRate(currencyId);
     }
 
     private Consumer<Person> onSuccessfulOwnerFound() {

@@ -29,7 +29,7 @@ public class IncomeOperationActivity
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
-        operationHelper = new IncomeOperationHelper(this, data);
+        operationHelper = new IncomeOperationHelper(this, getData());
     }
 
     @NonNull
@@ -42,19 +42,19 @@ public class IncomeOperationActivity
     @Override
     protected IncomeOperationFilter createDefaultFilter() {
         IncomeOperationFilter filter = new IncomeOperationFilter();
-        filter.setArticleId(databasePrefs.getIncomesArticleId());
+        filter.setArticleId(getDatabasePrefs().getIncomesArticleId());
         return filter;
     }
 
     @Override
     protected IncomeOperationFragment createFragment() {
-        return IncomeOperationFragment.newInstance(filter);
+        return IncomeOperationFragment.newInstance(getFilter());
     }
 
     @Override
     protected void addEntity() {
         super.addEntity();
-        Intent intent = operationHelper.getIntentToAdd(filter);
+        Intent intent = operationHelper.getIntentToAdd(getFilter());
         startActivity(intent);
     }
 
@@ -79,7 +79,7 @@ public class IncomeOperationActivity
 
     @Override
     protected void showFilterDialog() {
-        DialogFragment dialog = IncomeOperationFilterDialog.newInstance(filter);
+        DialogFragment dialog = IncomeOperationFilterDialog.newInstance(getFilter());
         dialog.show(getSupportFragmentManager(), "IncomeOperationFilterDialog");
     }
 }

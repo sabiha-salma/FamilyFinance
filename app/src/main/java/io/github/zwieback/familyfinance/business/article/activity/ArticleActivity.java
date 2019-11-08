@@ -3,6 +3,7 @@ package io.github.zwieback.familyfinance.business.article.activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
@@ -14,28 +15,29 @@ import java.util.concurrent.TimeUnit;
 
 import io.github.zwieback.familyfinance.R;
 import io.github.zwieback.familyfinance.business.article.filter.ArticleFilter;
-import io.github.zwieback.familyfinance.business.article.fragment.ArticleFragment;
 import io.github.zwieback.familyfinance.business.article.lifecycle.destroyer.ArticleAsParentDestroyer;
 import io.github.zwieback.familyfinance.business.article.lifecycle.destroyer.ArticleFromExpenseOperationsDestroyer;
 import io.github.zwieback.familyfinance.business.article.listener.OnArticleClickListener;
 import io.github.zwieback.familyfinance.core.activity.EntityFolderActivity;
+import io.github.zwieback.familyfinance.core.fragment.EntityFolderFragment;
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer;
 import io.github.zwieback.familyfinance.core.model.Article;
 import io.github.zwieback.familyfinance.core.model.ArticleView;
+import io.github.zwieback.familyfinance.databinding.ItemArticleBinding;
 
 import static io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.RESULT_ARTICLE_ID;
 import static io.github.zwieback.familyfinance.util.NumberUtils.UI_DEBOUNCE_TIMEOUT;
 
 public abstract class ArticleActivity<
-        FRAGMENT extends ArticleFragment,
+        FRAGMENT extends EntityFolderFragment<ArticleView, ArticleFilter, ItemArticleBinding, OnArticleClickListener, ?>,
         FILTER extends ArticleFilter>
-        extends EntityFolderActivity<ArticleView, Article, FILTER, FRAGMENT>
+        extends EntityFolderActivity<ArticleView, Article, ArticleFilter, FRAGMENT>
         implements OnArticleClickListener {
 
     private MenuItem searchItem;
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.menu_entity_search, menu);
         searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -44,7 +46,10 @@ public abstract class ArticleActivity<
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void setupSearchItem(MenuItem searchItem, Menu menu) {
+    private void setupSearchItem(@Nullable MenuItem searchItem, @NonNull Menu menu) {
+        if (searchItem == null) {
+            return;
+        }
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
@@ -63,20 +68,20 @@ public abstract class ArticleActivity<
         });
     }
 
-    private void setupSearchView(SearchView searchView) {
+    private void setupSearchView(@NonNull SearchView searchView) {
         addDisposable(
                 RxSearchView.queryTextChanges(searchView)
                         .debounce(UI_DEBOUNCE_TIMEOUT, TimeUnit.MILLISECONDS)
                         .subscribe(searchName -> {
-                            filter.setSearchName(searchName.toString());
-                            applyFilter(filter);
+                            getFilter().setSearchName(searchName.toString());
+                            applyFilter(getFilter());
                         })
         );
     }
 
     @Nullable
     protected Integer getInitialParentId() {
-        return parentFolderId != null ? parentFolderId : getDefaultParentId();
+        return getParentFolderId() != null ? getParentFolderId() : getDefaultParentId();
     }
 
     @Nullable
@@ -90,12 +95,13 @@ public abstract class ArticleActivity<
 
     @Override
     protected boolean isFirstFrame() {
-        return Objects.equals(filter.getParentId(), getInitialParentId());
+        return Objects.equals(getFilter().getParentId(), getInitialParentId());
     }
 
+    @NonNull
     @Override
     protected String getFragmentTag() {
-        return String.format("%s_%s", getLocalClassName(), filter.getParentId());
+        return String.format("%s_%s", getLocalClassName(), getFilter().getParentId());
     }
 
     @Override
@@ -111,22 +117,24 @@ public abstract class ArticleActivity<
     }
 
     @Override
-    protected void editEntity(ArticleView entity) {
+    protected void editEntity(@NonNull ArticleView entity) {
         closeSearchView();
         super.editEntity(entity);
     }
 
+    @NonNull
     @Override
     protected Class<Article> getClassOfRegularEntity() {
         return Article.class;
     }
 
+    @NonNull
     @Override
     protected EntityDestroyer<Article> createDestroyer(ArticleView article) {
         if (article.isFolder()) {
-            return new ArticleAsParentDestroyer(this, data);
+            return new ArticleAsParentDestroyer(this, getData());
         }
-        return new ArticleFromExpenseOperationsDestroyer(this, data);
+        return new ArticleFromExpenseOperationsDestroyer(this, getData());
     }
 
     private void closeSearchView() {

@@ -44,7 +44,7 @@ abstract class OperationActivity<
 
     @Override
     protected int getPopupMenuId(OperationView entity) {
-        if (readOnly) {
+        if (getReadOnly()) {
             return super.getPopupMenuId(entity);
         }
         return R.menu.popup_entity_operation;

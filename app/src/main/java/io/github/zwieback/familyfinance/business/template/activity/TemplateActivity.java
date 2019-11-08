@@ -32,7 +32,7 @@ public class TemplateActivity
 
     @Override
     protected List<Integer> collectMenuIds() {
-        if (!readOnly) {
+        if (!getReadOnly()) {
             return Collections.singletonList(R.menu.menu_entity_template);
         }
         return Collections.emptyList();
@@ -63,7 +63,7 @@ public class TemplateActivity
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
-        templateQualifier = new TemplateQualifier(this, data);
+        templateQualifier = new TemplateQualifier(this, getData());
     }
 
     @NonNull
@@ -91,13 +91,13 @@ public class TemplateActivity
 
     @Override
     protected TemplateFragment createFragment() {
-        return TemplateFragment.newInstance(filter);
+        return TemplateFragment.newInstance(getFilter());
     }
 
     @Override
     public void onEntityClick(@NonNull View view, @NonNull TemplateView template) {
         super.onEntityClick(view, template);
-        if (regularSelectable) {
+        if (getRegularSelectable()) {
             return;
         }
         Intent intent = templateQualifier.determineHelper(template).getIntentToAdd(
@@ -141,6 +141,6 @@ public class TemplateActivity
 
     @Override
     protected EntityDestroyer<Template> createDestroyer(TemplateView template) {
-        return new TemplateFromSmsPatternsDestroyer(this, data);
+        return new TemplateFromSmsPatternsDestroyer(this, getData());
     }
 }

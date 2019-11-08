@@ -146,8 +146,8 @@ public class AccountEditActivity extends
         account.setType(AccountType.UNDEFINED_ACCOUNT);
         if (!folder) {
             account.setInitialBalance(BigDecimal.ZERO);
-            loadOwner(databasePrefs.getPersonId());
-            loadCurrency(databasePrefs.getCurrencyId());
+            loadOwner(getDatabasePrefs().getPersonId());
+            loadCurrency(getDatabasePrefs().getCurrencyId());
         }
         bind(account);
         loadParent(parentId);
@@ -234,7 +234,6 @@ public class AccountEditActivity extends
     @Override
     protected boolean isParentInsideItself(int parentId, int newParentId) {
         return isParentInsideItself(newParentId, Account.ID,
-                Account.PARENT_ID.eq(parentId).and(Account.FOLDER.eq(true)),
-                this::isParentInsideItself);
+                Account.PARENT_ID.eq(parentId).and(Account.FOLDER.eq(true)));
     }
 }

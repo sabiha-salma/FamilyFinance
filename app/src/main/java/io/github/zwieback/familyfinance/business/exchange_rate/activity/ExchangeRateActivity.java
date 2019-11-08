@@ -34,9 +34,9 @@ public class ExchangeRateActivity
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
-        Integer currencyId = extractId(getIntent().getExtras(), INPUT_CURRENCY_ID);
+        Integer currencyId = Companion.extractId(getIntent().getExtras(), INPUT_CURRENCY_ID);
         if (currencyId != null) {
-            filter.setCurrencyId(currencyId);
+            getFilter().setCurrencyId(currencyId);
         }
     }
 
@@ -55,7 +55,7 @@ public class ExchangeRateActivity
     @Override
     protected ExchangeRateFilter createDefaultFilter() {
         ExchangeRateFilter filter = new ExchangeRateFilter();
-        filter.setCurrencyId(databasePrefs.getCurrencyId());
+        filter.setCurrencyId(getDatabasePrefs().getCurrencyId());
         return filter;
     }
 
@@ -72,14 +72,14 @@ public class ExchangeRateActivity
 
     @Override
     protected ExchangeRateFragment createFragment() {
-        return ExchangeRateFragment.newInstance(filter);
+        return ExchangeRateFragment.newInstance(getFilter());
     }
 
     @Override
     protected void addEntity() {
         super.addEntity();
         Intent intent = new Intent(this, ExchangeRateEditActivity.class);
-        intent.putExtra(ExchangeRateEditActivity.INPUT_CURRENCY_ID, filter.getCurrencyId());
+        intent.putExtra(ExchangeRateEditActivity.INPUT_CURRENCY_ID, getFilter().getCurrencyId());
         startActivity(intent);
     }
 
@@ -98,12 +98,12 @@ public class ExchangeRateActivity
 
     @Override
     protected EntityDestroyer<ExchangeRate> createDestroyer(ExchangeRateView exchangeRateView) {
-        return new ExchangeRateFromExpenseOperationsDestroyer(this, data);
+        return new ExchangeRateFromExpenseOperationsDestroyer(this, getData());
     }
 
     @Override
     protected void showFilterDialog() {
-        DialogFragment dialog = ExchangeRateFilterDialog.newInstance(filter);
+        DialogFragment dialog = ExchangeRateFilterDialog.newInstance(getFilter());
         dialog.show(getSupportFragmentManager(), "ExchangeRateFilterDialog");
     }
 }

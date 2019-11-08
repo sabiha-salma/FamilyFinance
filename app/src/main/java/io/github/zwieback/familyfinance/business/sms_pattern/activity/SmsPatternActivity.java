@@ -50,7 +50,7 @@ public class SmsPatternActivity
 
     @Override
     protected SmsPatternFragment createFragment() {
-        return SmsPatternFragment.newInstance(filter);
+        return SmsPatternFragment.newInstance(getFilter());
     }
 
     @Override
@@ -75,6 +75,6 @@ public class SmsPatternActivity
 
     @Override
     protected EntityDestroyer<SmsPattern> createDestroyer(SmsPatternView smsPattern) {
-        return new SmsPatternForceDestroyer(this, data);
+        return new SmsPatternForceDestroyer(this, getData());
     }
 }

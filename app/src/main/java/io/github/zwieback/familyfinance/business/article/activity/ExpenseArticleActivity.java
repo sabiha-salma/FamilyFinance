@@ -20,7 +20,7 @@ public class ExpenseArticleActivity extends ArticleActivity<ExpenseArticleFragme
     @Nullable
     @Override
     Integer getDefaultParentId() {
-        return databasePrefs.getExpensesArticleId();
+        return getDatabasePrefs().getExpensesArticleId();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ExpenseArticleActivity extends ArticleActivity<ExpenseArticleFragme
 
     @Override
     protected ExpenseArticleFragment createFragment() {
-        return ExpenseArticleFragment.newInstance(filter);
+        return ExpenseArticleFragment.newInstance(getFilter());
     }
 
     @Override

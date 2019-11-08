@@ -10,6 +10,7 @@ import androidx.preference.R
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
 import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
 import io.github.zwieback.familyfinance.util.StringUtils
+import io.reactivex.functions.Consumer
 
 abstract class EntityActivityResultPreference<E : IBaseEntity> @JvmOverloads constructor(
     context: Context,
@@ -49,11 +50,11 @@ abstract class EntityActivityResultPreference<E : IBaseEntity> @JvmOverloads con
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         val newEntityId = newValue as Int
         activity.loadEntity(entityClass, newEntityId,
-            { foundEntity ->
+            Consumer { foundEntity ->
                 val entityTitle = activity.getString(preferenceTitleRes, getEntityName(foundEntity))
                 preference.title = entityTitle
             },
-            {
+            Consumer {
                 val entityTitle = activity.getString(preferenceTitleRes, StringUtils.UNDEFINED)
                 preference.title = entityTitle
             }

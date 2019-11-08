@@ -218,7 +218,7 @@ public class TemplateEditActivity
 
     @Nullable
     private ExchangeRate findLastExchangeRate(int currencyId) {
-        return new ExchangeRateFinder(data).findLastExchangeRate(currencyId);
+        return new ExchangeRateFinder(getData()).findLastExchangeRate(currencyId);
     }
 
     private Consumer<Article> onSuccessfulArticleFound() {
@@ -328,7 +328,7 @@ public class TemplateEditActivity
         binding.date.setOnClearTextListener(() -> entity.setDate(null));
 
         if (TemplateType.TRANSFER_OPERATION == entity.getType()) {
-            loadArticle(databasePrefs.getTransferArticleId());
+            loadArticle(getDatabasePrefs().getTransferArticleId());
             disableLayout(binding.articleNameLayout, R.string.hint_article_name_disabled);
             disableLayout(binding.articleCategoryLayout, R.string.hint_article_category_disabled);
         } else {

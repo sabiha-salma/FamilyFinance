@@ -51,7 +51,7 @@ public class CurrencyActivity
 
     @Override
     protected CurrencyFragment createFragment() {
-        return CurrencyFragment.newInstance(filter);
+        return CurrencyFragment.newInstance(getFilter());
     }
 
     @Override
@@ -76,6 +76,6 @@ public class CurrencyActivity
 
     @Override
     protected EntityDestroyer<Currency> createDestroyer(CurrencyView entity) {
-        return new CurrencyFromAccountsDestroyer(this, data);
+        return new CurrencyFromAccountsDestroyer(this, getData());
     }
 }

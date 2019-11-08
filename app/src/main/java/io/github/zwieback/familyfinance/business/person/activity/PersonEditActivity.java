@@ -150,7 +150,6 @@ public class PersonEditActivity
     @Override
     protected boolean isParentInsideItself(int parentId, int newParentId) {
         return isParentInsideItself(newParentId, Person.ID,
-                Person.PARENT_ID.eq(parentId).and(Person.FOLDER.eq(true)),
-                this::isParentInsideItself);
+                Person.PARENT_ID.eq(parentId).and(Person.FOLDER.eq(true)));
     }
 }
