@@ -1,0 +1,34 @@
+package io.github.zwieback.familyfinance.business.account.lifecycle.destroyer
+
+import android.content.Context
+import io.github.zwieback.familyfinance.R
+import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer
+import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityFromDestroyer
+import io.github.zwieback.familyfinance.core.model.Account
+import io.github.zwieback.familyfinance.core.model.Operation
+import io.github.zwieback.familyfinance.core.model.type.OperationType
+import io.requery.Persistable
+import io.requery.query.Condition
+import io.requery.reactivex.ReactiveEntityStore
+
+internal class AccountFromIncomeOperationsDestroyer(
+    context: Context,
+    data: ReactiveEntityStore<Persistable>
+) : EntityFromDestroyer<Account, Operation>(context, data) {
+
+    override val fromClass: Class<Operation>
+        get() = Operation::class.java
+
+    override val alertResourceId: Int
+        get() = R.string.income_operations_with_account_exists
+
+    override fun next(): EntityDestroyer<Account>? {
+        return AccountFromTransferOperationsDestroyer(context, data)
+    }
+
+    @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+    override fun getWhereCondition(account: Account): Condition<*, *> {
+        return Operation.TYPE.eq(OperationType.INCOME_OPERATION)
+            .and(Operation.ACCOUNT_ID.eq(account.id))
+    }
+}
