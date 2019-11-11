@@ -1,25 +1,15 @@
-package io.github.zwieback.familyfinance.business.template.lifecycle.creator;
+package io.github.zwieback.familyfinance.business.template.lifecycle.creator
 
-import androidx.annotation.NonNull;
+import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator
+import java.sql.Connection
 
-import java.sql.Connection;
+class TemplateViewCreator(connection: Connection) : EntityViewCreator(connection) {
 
-import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator;
+    override val viewName: String
+        get() = "v_template"
 
-public class TemplateViewCreator extends EntityViewCreator {
-
-    public TemplateViewCreator(Connection connection) {
-        super(connection);
-    }
-
-    @NonNull
-    protected String getViewName() {
-        return "v_template";
-    }
-
-    @NonNull
-    protected String getViewBody() {
-        return " SELECT te.id          AS id," +
+    override val viewBody: String
+        get() = " SELECT te.id         AS id," +
                 "       te.icon_name   AS icon_name," +
                 "       te.name        AS name," +
                 "       ac.id          AS account_id," +
@@ -48,6 +38,5 @@ public class TemplateViewCreator extends EntityViewCreator {
                 "       LEFT JOIN article ap ON ap.id = ar.parent_id" +
                 "       LEFT JOIN person  pe ON pe.id = te.owner_id" +
                 "       LEFT JOIN exchange_rate er ON er.id = te.exchange_rate_id" +
-                "       LEFT JOIN currency cu ON cu.id = er.currency_id";
-    }
+                "       LEFT JOIN currency cu ON cu.id = er.currency_id"
 }

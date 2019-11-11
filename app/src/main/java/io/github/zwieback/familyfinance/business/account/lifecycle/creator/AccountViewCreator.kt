@@ -1,25 +1,15 @@
-package io.github.zwieback.familyfinance.business.account.lifecycle.creator;
+package io.github.zwieback.familyfinance.business.account.lifecycle.creator
 
-import androidx.annotation.NonNull;
+import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator
+import java.sql.Connection
 
-import java.sql.Connection;
+class AccountViewCreator(connection: Connection) : EntityViewCreator(connection) {
 
-import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator;
+    override val viewName: String
+        get() = "v_account"
 
-public class AccountViewCreator extends EntityViewCreator {
-
-    public AccountViewCreator(Connection connection) {
-        super(connection);
-    }
-
-    @NonNull
-    protected String getViewName() {
-        return "v_account";
-    }
-
-    @NonNull
-    protected String getViewBody() {
-        return " SELECT ac.id              AS id," +
+    override val viewBody: String
+        get() = " SELECT ac.id             AS id," +
                 "       ac.icon_name       AS icon_name," +
                 "       ac.is_folder       AS is_folder," +
                 "       ac.active          AS active," +
@@ -39,6 +29,5 @@ public class AccountViewCreator extends EntityViewCreator {
                 "  FROM account ac" +
                 "       LEFT JOIN account ap  ON ap.id = ac.parent_id" +
                 "       LEFT JOIN currency cu ON cu.id = ac.currency_id" +
-                "       LEFT JOIN person pe   ON pe.id = ac.owner_id";
-    }
+                "       LEFT JOIN person pe   ON pe.id = ac.owner_id"
 }

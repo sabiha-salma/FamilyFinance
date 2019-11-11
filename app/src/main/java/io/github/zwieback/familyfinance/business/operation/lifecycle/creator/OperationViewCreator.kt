@@ -1,27 +1,15 @@
-package io.github.zwieback.familyfinance.business.operation.lifecycle.creator;
+package io.github.zwieback.familyfinance.business.operation.lifecycle.creator
 
-import androidx.annotation.NonNull;
+import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator
+import java.sql.Connection
 
-import java.sql.Connection;
+class OperationViewCreator(connection: Connection) : EntityViewCreator(connection) {
 
-import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator;
+    override val viewName: String
+        get() = "v_operation"
 
-public class OperationViewCreator extends EntityViewCreator {
-
-    public OperationViewCreator(Connection connection) {
-        super(connection);
-    }
-
-    @NonNull
-    @Override
-    protected String getViewName() {
-        return "v_operation";
-    }
-
-    @NonNull
-    @Override
-    protected String getViewBody() {
-        return " SELECT op.id                           AS id," +
+    override val viewBody: String
+        get() = " SELECT op.id                          AS id," +
                 "       COALESCE(op.icon_name, ac.icon_name)" +
                 "                                       AS icon_name," +
                 "       op.linked_transfer_operation_id AS linked_transfer_operation_id," +
@@ -48,6 +36,5 @@ public class OperationViewCreator extends EntityViewCreator {
                 "        LEFT JOIN article ap ON ap.id = ar.parent_id" +
                 "       INNER JOIN person pe ON pe.id = op.owner_id" +
                 "       INNER JOIN exchange_rate er ON er.id = op.exchange_rate_id" +
-                "       INNER JOIN currency cu ON cu.id = er.currency_id";
-    }
+                "       INNER JOIN currency cu ON cu.id = er.currency_id"
 }
