@@ -51,9 +51,9 @@ public class SmsHandler {
     }
 
     public void handleSms(@NonNull SmsDto smsDto) {
-        List<SmsPatternView> smsPatterns = SmsPatternQueryBuilder.create(data)
-                .setSender(smsDto.getSender())
-                .orderByCommon()
+        List<SmsPatternView> smsPatterns = SmsPatternQueryBuilder.Companion.create(data)
+                .withSender(smsDto.getSender())
+                .withUseOrderByCommon()
                 .build()
                 .toList();
 
