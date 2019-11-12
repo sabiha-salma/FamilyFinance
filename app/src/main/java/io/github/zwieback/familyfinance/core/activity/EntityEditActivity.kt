@@ -19,7 +19,7 @@ import com.johnpetitto.validator.ValidatingTextInputLayout
 import com.johnpetitto.validator.Validators
 import com.mikepenz.iconics.view.IconicsImageView
 import io.github.zwieback.familyfinance.R
-import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.ICONICS_CODE
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.ICONICS_CODE
 import io.github.zwieback.familyfinance.business.iconics.activity.IconicsActivity
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.IBaseEntity

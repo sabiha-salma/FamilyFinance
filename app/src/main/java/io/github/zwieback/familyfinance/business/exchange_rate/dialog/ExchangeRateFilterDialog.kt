@@ -7,8 +7,8 @@ import android.widget.EditText
 import com.johnpetitto.validator.ValidatingTextInputLayout
 import io.github.zwieback.familyfinance.R
 import io.github.zwieback.familyfinance.business.currency.activity.CurrencyActivity
-import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.CURRENCY_CODE
-import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.RESULT_CURRENCY_ID
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.CURRENCY_CODE
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_CURRENCY_ID
 import io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRateFilter
 import io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRateFilter.Companion.EXCHANGE_RATE_FILTER
 import io.github.zwieback.familyfinance.core.dialog.EntityFilterDialog

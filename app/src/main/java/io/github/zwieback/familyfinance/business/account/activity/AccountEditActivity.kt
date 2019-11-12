@@ -9,7 +9,12 @@ import io.github.zwieback.familyfinance.R
 import io.github.zwieback.familyfinance.business.account.activity.helper.AccountTypeHelper
 import io.github.zwieback.familyfinance.business.account.adapter.AccountProvider
 import io.github.zwieback.familyfinance.business.currency.activity.CurrencyActivity
-import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.*
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.ACCOUNT_CODE
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.CURRENCY_CODE
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.PERSON_CODE
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_ACCOUNT_ID
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_CURRENCY_ID
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_PERSON_ID
 import io.github.zwieback.familyfinance.business.person.activity.PersonActivity
 import io.github.zwieback.familyfinance.core.activity.EntityActivity
 import io.github.zwieback.familyfinance.core.activity.EntityFolderActivity

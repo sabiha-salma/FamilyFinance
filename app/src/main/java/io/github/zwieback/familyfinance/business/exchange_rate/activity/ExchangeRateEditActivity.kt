@@ -8,8 +8,8 @@ import com.johnpetitto.validator.ValidatingTextInputLayout
 import com.mikepenz.iconics.view.IconicsImageView
 import io.github.zwieback.familyfinance.R
 import io.github.zwieback.familyfinance.business.currency.activity.CurrencyActivity
-import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.CURRENCY_CODE
-import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.RESULT_CURRENCY_ID
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.CURRENCY_CODE
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_CURRENCY_ID
 import io.github.zwieback.familyfinance.business.exchange_rate.adapter.ExchangeRateProvider
 import io.github.zwieback.familyfinance.core.activity.EntityEditActivity
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider

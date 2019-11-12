@@ -3,7 +3,7 @@ package io.github.zwieback.familyfinance.business.exchange_rate.activity
 import android.content.Intent
 import android.os.Bundle
 import io.github.zwieback.familyfinance.R
-import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.RESULT_EXCHANGE_RATE_ID
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_EXCHANGE_RATE_ID
 import io.github.zwieback.familyfinance.business.exchange_rate.dialog.ExchangeRateFilterDialog
 import io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRateFilter
 import io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRateFilter.Companion.EXCHANGE_RATE_FILTER

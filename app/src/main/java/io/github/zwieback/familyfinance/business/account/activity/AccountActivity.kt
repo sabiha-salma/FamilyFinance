@@ -8,7 +8,7 @@ import io.github.zwieback.familyfinance.business.account.fragment.AccountFragmen
 import io.github.zwieback.familyfinance.business.account.lifecycle.destroyer.AccountAsParentDestroyer
 import io.github.zwieback.familyfinance.business.account.lifecycle.destroyer.AccountFromExpenseOperationsDestroyer
 import io.github.zwieback.familyfinance.business.account.listener.OnAccountClickListener
-import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.RESULT_ACCOUNT_ID
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_ACCOUNT_ID
 import io.github.zwieback.familyfinance.core.activity.EntityFolderActivity
 import io.github.zwieback.familyfinance.core.activity.EntityFolderEditActivity.Companion.INPUT_IS_FOLDER
 import io.github.zwieback.familyfinance.core.activity.EntityFolderEditActivity.Companion.INPUT_PARENT_ID
