@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.business.chart.service.converter;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import com.annimon.stream.Collectors;
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-import io.github.zwieback.familyfinance.business.operation.service.calculator.OperationCalculator;
+import io.github.zwieback.familyfinance.business.chart.service.calculator.OperationCalculator;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 
 public class OperationSumConverter {

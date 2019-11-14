@@ -28,15 +28,15 @@ public class HorizontalBarChartOfIncomesFragment
 
     @Override
     protected Result<OperationView> buildOperations() {
-        return IncomeOperationQueryBuilder.create(data)
-                .setStartDate(filter.getStartDate())
-                .setEndDate(filter.getEndDate())
-                .setStartValue(filter.getStartValue())
-                .setEndValue(filter.getEndValue())
-                .setOwnerId(filter.getOwnerId())
-                .setCurrencyId(filter.getCurrencyId())
-                .setArticleId(filter.getArticleId())
-                .setAccountId(filter.getAccountId())
+        return IncomeOperationQueryBuilder.Companion.create(data)
+                .withStartDate(filter.getStartDate())
+                .withEndDate(filter.getEndDate())
+                .withStartValue(filter.getStartValue())
+                .withEndValue(filter.getEndValue())
+                .withOwnerId(filter.getOwnerId())
+                .withCurrencyId(filter.getCurrencyId())
+                .withArticleId(filter.getArticleId())
+                .withAccountId(filter.getAccountId())
                 .build();
     }
 
@@ -59,7 +59,7 @@ public class HorizontalBarChartOfIncomesFragment
 
     @Override
     public void showFilterDialog() {
-        DialogFragment dialog = IncomeOperationFilterDialog.newInstance(filter,
+        DialogFragment dialog = IncomeOperationFilterDialog.Companion.newInstance(filter,
                 R.string.horizontal_bar_chart_of_incomes_filter_title);
         dialog.show(getChildFragmentManager(), "IncomeOperationFilterDialog");
     }

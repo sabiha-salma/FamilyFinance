@@ -13,6 +13,7 @@ import io.github.zwieback.familyfinance.business.operation.activity.helper.Trans
 import io.github.zwieback.familyfinance.business.sms.common.SmsConst.SMS_NOTIFICATION_ID
 import io.github.zwieback.familyfinance.core.model.type.OperationType
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.Consumer
 
 class AddOperationImmediatelyService : Service() {
 
@@ -47,9 +48,10 @@ class AddOperationImmediatelyService : Service() {
                     ?: throw IllegalArgumentException("INPUT_OPERATION_TYPE extra must be not null")
             val operationHelper = determineOperationHelper(operationType)
             compositeDisposable.add(
-                operationHelper.addOperationImmediately(intent) {
-                    closeNotification(this)
-                }
+                operationHelper.addOperationImmediately(
+                    intent,
+                    Consumer { closeNotification(this) }
+                )
             )
         }
         return super.onStartCommand(intent, flags, startId)

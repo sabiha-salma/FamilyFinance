@@ -148,7 +148,7 @@ abstract class EntityFilterDialog<F : EntityFilter, B : ViewDataBinding> : Dialo
     protected abstract fun updateFilterProperties()
 
     companion object {
-        protected const val DIALOG_TITLE = "dialogTitle"
+        const val DIALOG_TITLE = "dialogTitle"
 
         fun <F : EntityFilter> createArguments(filterName: String, filter: F): Bundle {
             return Bundle().apply {

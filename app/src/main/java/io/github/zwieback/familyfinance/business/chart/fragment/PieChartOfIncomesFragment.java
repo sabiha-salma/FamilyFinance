@@ -24,15 +24,15 @@ public class PieChartOfIncomesFragment extends PieChartFragment<IncomeOperationF
 
     @Override
     protected Result<OperationView> buildOperations() {
-        return IncomeOperationQueryBuilder.create(data)
-                .setStartDate(filter.getStartDate())
-                .setEndDate(filter.getEndDate())
-                .setStartValue(filter.getStartValue())
-                .setEndValue(filter.getEndValue())
-                .setOwnerId(filter.getOwnerId())
-                .setCurrencyId(filter.getCurrencyId())
-                .setArticleId(filter.getArticleId())
-                .setAccountId(filter.getAccountId())
+        return IncomeOperationQueryBuilder.Companion.create(data)
+                .withStartDate(filter.getStartDate())
+                .withEndDate(filter.getEndDate())
+                .withStartValue(filter.getStartValue())
+                .withEndValue(filter.getEndValue())
+                .withOwnerId(filter.getOwnerId())
+                .withCurrencyId(filter.getCurrencyId())
+                .withArticleId(filter.getArticleId())
+                .withAccountId(filter.getAccountId())
                 .build();
     }
 
@@ -43,7 +43,7 @@ public class PieChartOfIncomesFragment extends PieChartFragment<IncomeOperationF
 
     @Override
     public void showFilterDialog() {
-        DialogFragment dialog = IncomeOperationFilterDialog.newInstance(filter,
+        DialogFragment dialog = IncomeOperationFilterDialog.Companion.newInstance(filter,
                 R.string.pie_chart_of_incomes_filter_title);
         dialog.show(getChildFragmentManager(), "IncomeOperationFilterDialog");
     }

@@ -28,15 +28,15 @@ public class HorizontalBarChartOfExpensesFragment
 
     @Override
     protected Result<OperationView> buildOperations() {
-        return ExpenseOperationQueryBuilder.create(data)
-                .setStartDate(filter.getStartDate())
-                .setEndDate(filter.getEndDate())
-                .setStartValue(filter.getStartValue())
-                .setEndValue(filter.getEndValue())
-                .setOwnerId(filter.getOwnerId())
-                .setCurrencyId(filter.getCurrencyId())
-                .setArticleId(filter.getArticleId())
-                .setAccountId(filter.getAccountId())
+        return ExpenseOperationQueryBuilder.Companion.create(data)
+                .withStartDate(filter.getStartDate())
+                .withEndDate(filter.getEndDate())
+                .withStartValue(filter.getStartValue())
+                .withEndValue(filter.getEndValue())
+                .withOwnerId(filter.getOwnerId())
+                .withCurrencyId(filter.getCurrencyId())
+                .withArticleId(filter.getArticleId())
+                .withAccountId(filter.getAccountId())
                 .build();
     }
 
@@ -59,7 +59,7 @@ public class HorizontalBarChartOfExpensesFragment
 
     @Override
     public void showFilterDialog() {
-        DialogFragment dialog = ExpenseOperationFilterDialog.newInstance(filter,
+        DialogFragment dialog = ExpenseOperationFilterDialog.Companion.newInstance(filter,
                 R.string.horizontal_bar_chart_of_expenses_filter_title);
         dialog.show(getChildFragmentManager(), "ExpenseOperationFilterDialog");
     }

@@ -167,16 +167,16 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
 
     @Override
     protected Result<OperationView> buildOperations() {
-        return FlowOfFundsOperationQueryBuilder.create(data)
-                .setTypes(determineOperationTypes())
-                .setStartDate(filter.getStartDate())
-                .setEndDate(filter.getEndDate())
-                .setStartValue(filter.getStartValue())
-                .setEndValue(filter.getEndValue())
-                .setOwnerId(filter.getOwnerId())
-                .setCurrencyId(filter.getCurrencyId())
-                .setArticleId(filter.getArticleId())
-                .setAccountId(filter.getAccountId())
+        return FlowOfFundsOperationQueryBuilder.Companion.create(data)
+                .withTypes(determineOperationTypes())
+                .withStartDate(filter.getStartDate())
+                .withEndDate(filter.getEndDate())
+                .withStartValue(filter.getStartValue())
+                .withEndValue(filter.getEndValue())
+                .withOwnerId(filter.getOwnerId())
+                .withCurrencyId(filter.getCurrencyId())
+                .withArticleId(filter.getArticleId())
+                .withAccountId(filter.getAccountId())
                 .build();
     }
 
@@ -295,7 +295,7 @@ public class BarChartFragment extends ChartFragment<BarChart, BarEntry, FlowOfFu
 
     @Override
     public void showFilterDialog() {
-        DialogFragment dialog = FlowOfFundsOperationFilterDialog.newInstance(filter,
+        DialogFragment dialog = FlowOfFundsOperationFilterDialog.Companion.newInstance(filter,
                 R.string.bar_chart_filter_title);
         dialog.show(getChildFragmentManager(), "FlowOfFundsOperationFilterDialog");
     }

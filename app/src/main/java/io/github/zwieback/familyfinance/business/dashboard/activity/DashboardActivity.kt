@@ -20,13 +20,13 @@ import io.github.zwieback.familyfinance.business.operation.activity.helper.Expen
 import io.github.zwieback.familyfinance.business.operation.activity.helper.IncomeOperationHelper
 import io.github.zwieback.familyfinance.business.operation.activity.helper.TransferOperationHelper
 import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter
-import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter.EXPENSE_OPERATION_FILTER
+import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperationFilter.Companion.EXPENSE_OPERATION_FILTER
 import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter
-import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter.FLOW_OF_FUNDS_OPERATION_FILTER
+import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOperationFilter.Companion.FLOW_OF_FUNDS_OPERATION_FILTER
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter
-import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter.INCOME_OPERATION_FILTER
+import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter.Companion.INCOME_OPERATION_FILTER
 import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter
-import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter.TRANSFER_OPERATION_FILTER
+import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter.Companion.TRANSFER_OPERATION_FILTER
 import io.github.zwieback.familyfinance.business.sms_pattern.activity.SmsPatternActivity
 import io.github.zwieback.familyfinance.business.template.activity.TemplateActivity
 import io.github.zwieback.familyfinance.core.activity.DataActivityWrapper

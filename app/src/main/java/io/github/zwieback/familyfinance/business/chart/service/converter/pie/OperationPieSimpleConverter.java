@@ -14,7 +14,7 @@ import java.util.Map;
 import io.github.zwieback.familyfinance.business.chart.display.type.PieChartGroupByType;
 import io.github.zwieback.familyfinance.business.chart.exception.UnsupportedPieChartGroupByTypeException;
 import io.github.zwieback.familyfinance.business.chart.service.converter.OperationConverter;
-import io.github.zwieback.familyfinance.business.operation.service.calculator.OperationCalculator;
+import io.github.zwieback.familyfinance.business.chart.service.calculator.OperationCalculator;
 import io.github.zwieback.familyfinance.core.model.OperationView;
 
 public class OperationPieSimpleConverter implements OperationConverter<PieEntry> {
