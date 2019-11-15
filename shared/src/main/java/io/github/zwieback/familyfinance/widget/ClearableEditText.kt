@@ -6,6 +6,7 @@ import android.view.View
 import io.github.zwieback.familyfinance.core.R
 import io.github.zwieback.familyfinance.util.StringUtils.EMPTY
 import io.github.zwieback.familyfinance.widget.adapter.TextWatcherAdapter
+import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.github.zwieback.familyfinance.widget.listener.TextWatcherListener
 
 /**
@@ -19,7 +20,7 @@ class ClearableEditText @JvmOverloads constructor(
     TextWatcherListener,
     View.OnFocusChangeListener {
 
-    private var onClearTextListener: () -> Unit = {}
+    private var onClearTextListener: OnClearTextListener? = null
 
     override val iconName: String
         get() = "faw_times_circle"
@@ -48,7 +49,7 @@ class ClearableEditText @JvmOverloads constructor(
             setIconVisible(text.isNotEmpty())
         }
         if (text.isEmpty()) {
-            onClearTextListener()
+            onClearTextListener?.invoke()
         }
     }
 
@@ -60,7 +61,7 @@ class ClearableEditText @JvmOverloads constructor(
      * See [Java SAM vs. Kotlin Function Types](https://medium.com/tompee/idiomatic-kotlin-lambdas-and-sam-constructors-fe2075965bfb)
      * paragraph why required to use a function type rather than an interface.
      */
-    fun setOnClearTextListener(onClearText: () -> Unit) {
-        this.onClearTextListener = onClearText
+    fun setOnClearTextListener(onClearTextListener: OnClearTextListener?) {
+        this.onClearTextListener = onClearTextListener
     }
 }
