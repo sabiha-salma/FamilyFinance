@@ -5,8 +5,6 @@ import android.util.AttributeSet
 import android.view.View
 import io.github.zwieback.familyfinance.core.R
 import io.github.zwieback.familyfinance.util.StringUtils.EMPTY
-import io.github.zwieback.familyfinance.util.StringUtils.isTextEmpty
-import io.github.zwieback.familyfinance.util.StringUtils.isTextNotEmpty
 import io.github.zwieback.familyfinance.widget.adapter.TextWatcherAdapter
 import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.github.zwieback.familyfinance.widget.listener.TextWatcherListener
@@ -45,18 +43,18 @@ class ClearableEditText @JvmOverloads constructor(
     override fun onTextChanged(text: String) {
         if (isFocusable) {
             if (isFocused) {
-                setIconVisible(isTextNotEmpty(text))
+                setIconVisible(text.isNotEmpty())
             }
         } else {
-            setIconVisible(isTextNotEmpty(text))
+            setIconVisible(text.isNotEmpty())
         }
-        if (isTextEmpty(text)) {
+        if (text.isEmpty()) {
             onClearTextListener?.onTextCleared()
         }
     }
 
     override fun onFocusChange(v: View, hasFocus: Boolean) {
-        setIconVisible(hasFocus && isTextNotEmpty(text))
+        setIconVisible(hasFocus && !text.isNullOrEmpty())
     }
 
     fun setOnClearTextListener(onClearTextListener: OnClearTextListener?) {

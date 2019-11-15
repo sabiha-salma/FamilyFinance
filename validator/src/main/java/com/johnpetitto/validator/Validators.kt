@@ -1,10 +1,8 @@
 package com.johnpetitto.validator
 
 import android.util.Patterns
-
 import io.github.zwieback.familyfinance.util.DateUtils
 import io.github.zwieback.familyfinance.util.NumberUtils
-import io.github.zwieback.familyfinance.util.StringUtils
 
 /**
  * Validates input for [ValidatingTextInputLayout] to meet some requirement.
@@ -66,7 +64,7 @@ object DateValidator : Validator {
  */
 object NotEmptyValidator : Validator {
     override fun isValid(input: String): Boolean {
-        return StringUtils.isTextNotEmpty(input)
+        return input.isNotEmpty()
     }
 }
 

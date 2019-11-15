@@ -7,16 +7,6 @@ object StringUtils {
     const val QUESTION = "?"
 
     @JvmStatic
-    fun isTextEmpty(text: CharSequence?): Boolean {
-        return text.isNullOrEmpty()
-    }
-
-    @JvmStatic
-    fun isTextNotEmpty(text: CharSequence?): Boolean {
-        return !isTextEmpty(text)
-    }
-
-    @JvmStatic
     fun deleteLastChar(text: String?): String {
         return if (text?.isNotEmpty() == true) {
             text.substring(0, text.length - 1)
