@@ -8,10 +8,7 @@ import io.github.zwieback.familyfinance.business.sms.model.dto.SmsDto
 class SmsParser {
 
     fun parseSms(pdus: Array<*>, intent: Intent): SmsDto {
-        val messages = mutableListOf<SmsMessage>()
-        pdus.forEach { pdu ->
-            messages.add(createSmsMessageFromPdu(pdu as ByteArray, intent))
-        }
+        val messages = pdus.map { pdu -> createSmsMessageFromPdu(pdu as ByteArray, intent) }
         val sender = messages.first().originatingAddress ?: error("Can't extract sender from SMS")
         val body = messages.joinToString(separator = "") { message -> message.messageBody }
         return SmsDto(sender, body)
