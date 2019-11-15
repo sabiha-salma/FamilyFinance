@@ -129,7 +129,7 @@ class ValidatingTextInputLayout @JvmOverloads constructor(
      * an error is triggered and no error label is set.
      */
     fun validate(): Boolean {
-        val input = editText?.text.toString()
+        val input = editText?.text?.toString() ?: error("EditText or its text is empty")
         val valid = validator?.isValid(input)
             ?: error("A Validator must be set; call setValidator first.")
 

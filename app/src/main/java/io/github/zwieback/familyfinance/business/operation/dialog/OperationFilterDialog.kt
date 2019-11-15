@@ -243,11 +243,11 @@ abstract class OperationFilterDialog<F, B> :
      * Don't check for `null` because the check was completed in [noneErrorFound].
      */
     override fun updateFilterProperties() {
-        filter.startDate = stringToLocalDate(startDateEdit.text.toString())
+        filter.startDate = stringToLocalDate(startDateEdit.text?.toString())
             ?: error("Are you check the noneErrorFound() method?")
-        filter.endDate = stringToLocalDate(endDateEdit.text.toString())
+        filter.endDate = stringToLocalDate(endDateEdit.text?.toString())
             ?: error("Are you check the noneErrorFound() method?")
-        filter.startValue = stringToBigDecimal(startValueEdit.text.toString())
-        filter.endValue = stringToBigDecimal(endValueEdit.text.toString())
+        filter.startValue = stringToBigDecimal(startValueEdit.text?.toString())
+        filter.endValue = stringToBigDecimal(endValueEdit.text?.toString())
     }
 }

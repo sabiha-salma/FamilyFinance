@@ -45,7 +45,7 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
         get() = Operation::class.java
 
     private val isCorrectDate: Boolean
-        get() = isTextAnLocalDate(dateEdit.text.toString())
+        get() = isTextAnLocalDate(dateEdit.text?.toString())
 
     protected abstract val operationType: OperationType
 
