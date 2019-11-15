@@ -18,25 +18,31 @@ abstract class EntityFolderFilter : EntityFilter {
     protected constructor(`in`: Parcel) : super(`in`)
 
     override fun init() {
+        super.init()
         parentId = ID_AS_NULL
     }
 
     override fun readFromParcel(`in`: Parcel) {
-        `in`.writeInt(parentId)
+        parentId = `in`.readInt()
     }
 
     override fun writeToParcel(out: Parcel, flags: Int) {
-        parentId = out.readInt()
+        out.writeInt(parentId)
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is EntityFolderFilter) return false
-        return getParentId() == other.getParentId()
+        if (javaClass != other?.javaClass) return false
+
+        other as EntityFolderFilter
+
+        if (parentId != other.parentId) return false
+
+        return true
     }
 
     override fun hashCode(): Int {
-        return parentId.hashCode()
+        return parentId
     }
 
     fun getParentId(): Int? {
