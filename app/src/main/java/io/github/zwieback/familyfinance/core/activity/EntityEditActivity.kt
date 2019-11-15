@@ -227,11 +227,6 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
         return intent.getStringExtra(name)
     }
 
-    // TODO: move to Companion
-    protected fun extractOutputId(resultIntent: Intent, name: String): Int {
-        return resultIntent.getIntExtra(name, ID_AS_NULL)
-    }
-
     protected fun disableLayout(layout: TextInputLayout, @StringRes hintId: Int) {
         layout.isEnabled = false
         layout.hint = resources.getString(hintId)
@@ -243,5 +238,9 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
 
     companion object {
         private const val TAG = "EntityEditActivity"
+
+        fun extractOutputId(resultIntent: Intent, name: String): Int {
+            return resultIntent.getIntExtra(name, ID_AS_NULL)
+        }
     }
 }

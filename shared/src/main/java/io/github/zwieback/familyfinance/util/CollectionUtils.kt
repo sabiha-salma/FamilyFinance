@@ -15,7 +15,6 @@ object CollectionUtils {
      * unique, but the value is not, and swap of the keys and the values does
      * not guarantee this
      */
-    @JvmStatic
     fun <K, V> swapMap(map: Map<K, V>): List<Pair<V, K>> {
         return map.map { entry -> Pair.create(entry.value, entry.key) }
     }

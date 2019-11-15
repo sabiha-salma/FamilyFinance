@@ -20,6 +20,7 @@ class SmsParser {
      *
      * @return one message in array, because multipart message due to SMS max char
      */
+    @Suppress("DEPRECATION")
     private fun createSmsMessageFromPdu(pdu: ByteArray, intent: Intent): SmsMessage {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val format = intent.getStringExtra("format")

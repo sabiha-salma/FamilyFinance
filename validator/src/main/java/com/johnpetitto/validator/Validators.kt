@@ -75,7 +75,6 @@ object Validators {
      * Validates multiple inputs at once and returns `true` if all inputs
      * are valid.
      */
-    @JvmStatic
     fun validate(layouts: List<ValidatingTextInputLayout>): Boolean {
         return layouts.all { it.validate() }
     }

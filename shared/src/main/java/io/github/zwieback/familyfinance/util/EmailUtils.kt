@@ -11,7 +11,6 @@ object EmailUtils {
 
     private const val MAIL_TO_SCHEME = "mailto:"
 
-    @JvmStatic
     fun sendEmail(context: Context, sendTo: String) {
         val intent = Intent(Intent.ACTION_SENDTO, Uri.parse(MAIL_TO_SCHEME + sendTo))
         val title = context.resources.getString(R.string.send_email)

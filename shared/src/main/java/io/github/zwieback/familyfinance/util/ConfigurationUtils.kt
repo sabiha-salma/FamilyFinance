@@ -26,7 +26,6 @@ object ConfigurationUtils {
      *
      * @return [Configuration.ORIENTATION_LANDSCAPE] or [Configuration.ORIENTATION_PORTRAIT]
      */
-    @JvmStatic
     val orientation: Int
         get() = Resources.getSystem().configuration.orientation
 }

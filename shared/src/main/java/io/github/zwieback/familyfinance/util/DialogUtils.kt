@@ -13,13 +13,11 @@ import java.util.*
 
 object DialogUtils {
 
-    @JvmStatic
     fun showDatePickerDialog(fragmentManager: FragmentManager, date: LocalDate) {
         val datePickerFragment = DatePickerFragmentDialog.newInstance(date)
         datePickerFragment.show(fragmentManager, "datePickerDialog")
     }
 
-    @JvmStatic
     fun showDatePickerDialog(
         context: Context,
         date: LocalDate,
@@ -32,7 +30,6 @@ object DialogUtils {
         DatePickerDialog(context, dateSetListener, year, month, day).show()
     }
 
-    @JvmStatic
     fun showCalculatorDialog(
         context: Context,
         listener: OnCalculationResultListener,

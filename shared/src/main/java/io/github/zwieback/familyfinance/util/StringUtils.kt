@@ -6,7 +6,6 @@ object StringUtils {
     const val UNDEFINED = "undefined"
     const val QUESTION = "?"
 
-    @JvmStatic
     fun deleteLastChar(text: String?): String {
         return if (text?.isNotEmpty() == true) {
             text.substring(0, text.length - 1)
@@ -15,7 +14,6 @@ object StringUtils {
         }
     }
 
-    @JvmStatic
     fun addChar(text: String?, character: String): String {
         return if (text?.isNotEmpty() == true) {
             text + character
@@ -24,7 +22,6 @@ object StringUtils {
         }
     }
 
-    @JvmStatic
     fun addUniqueChar(text: String?, character: String): String {
         return if (text?.isNotEmpty() == true) {
             if (text.contains(character)) {

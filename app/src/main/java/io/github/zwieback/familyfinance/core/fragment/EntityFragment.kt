@@ -102,7 +102,6 @@ abstract class EntityFragment<
     }
 
     companion object {
-
         fun <FILTER : EntityFilter> createArguments(filterName: String, filter: FILTER): Bundle {
             return Bundle().apply {
                 putParcelable(filterName, filter)

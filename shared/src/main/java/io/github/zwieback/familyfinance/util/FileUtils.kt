@@ -15,7 +15,6 @@ object FileUtils {
      * @param sourceFile      file to copy from
      * @param destinationFile file to copy to
      */
-    @JvmStatic
     @Throws(IOException::class)
     fun copyFile(sourceFile: File, destinationFile: File) {
         sourceFile.copyTo(destinationFile, overwrite = true)

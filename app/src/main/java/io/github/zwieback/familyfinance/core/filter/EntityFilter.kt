@@ -2,6 +2,7 @@ package io.github.zwieback.familyfinance.core.filter
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.CallSuper
 
 abstract class EntityFilter : Parcelable {
 
@@ -15,6 +16,7 @@ abstract class EntityFilter : Parcelable {
         readFromParcel(`in`)
     }
 
+    @CallSuper
     protected open fun init() {
         // stub
     }

@@ -31,7 +31,6 @@ object TransliterationUtils {
      * @param text source text
      * @return transliterated text
      */
-    @JvmStatic
     fun transliterate(text: String?): String {
         return text
             ?.map { transliterate(it) }
