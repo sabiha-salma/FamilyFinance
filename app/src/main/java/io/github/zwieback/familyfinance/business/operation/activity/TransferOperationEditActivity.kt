@@ -18,7 +18,6 @@ import io.github.zwieback.familyfinance.core.model.type.OperationType
 import io.github.zwieback.familyfinance.databinding.ActivityEditTransferOperationBinding
 import io.github.zwieback.familyfinance.util.NumberUtils.isNullId
 import io.github.zwieback.familyfinance.widget.ClearableEditText
-import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
@@ -239,11 +238,7 @@ class TransferOperationEditActivity :
         binding.icon.setOnClickListener { onSelectIconClick() }
         binding.owner.setOnClickListener { onOwnerClick() }
         binding.expenseAccount.setOnClickListener { onExpenseAccountClick() }
-        binding.expenseAccount.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setAccount(null)
-            }
-        })
+        binding.expenseAccount.setOnClearTextListener { entity.setAccount(null) }
         binding.date.setOnClickListener { onDateClick() }
         binding.currency.setOnClickListener { onCurrencyClick() }
         binding.exchangeRate.setOnClickListener { onExchangeRateClick() }
@@ -252,11 +247,7 @@ class TransferOperationEditActivity :
 
     private fun setupIncomeOperationBindings() {
         binding.incomeAccount.setOnClickListener { onIncomeAccountClick() }
-        binding.incomeAccount.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                incomeOperation.setAccount(null)
-            }
-        })
+        binding.incomeAccount.setOnClearTextListener { incomeOperation.setAccount(null) }
     }
 
     override fun updateEntityProperties(operation: Operation) {

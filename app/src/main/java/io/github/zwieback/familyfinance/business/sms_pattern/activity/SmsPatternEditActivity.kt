@@ -15,7 +15,6 @@ import io.github.zwieback.familyfinance.core.model.SmsPattern
 import io.github.zwieback.familyfinance.core.model.Template
 import io.github.zwieback.familyfinance.databinding.ActivityEditSmsPatternBinding
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToInteger
-import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.reactivex.functions.Consumer
 
 class SmsPatternEditActivity : EntityEditActivity<SmsPattern, ActivityEditSmsPatternBinding>() {
@@ -109,11 +108,7 @@ class SmsPatternEditActivity : EntityEditActivity<SmsPattern, ActivityEditSmsPat
     override fun setupBindings() {
         binding.icon.setOnClickListener { onSelectIconClick() }
         binding.templateName.setOnClickListener { this.onTemplateClick() }
-        binding.templateName.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setTemplate(null)
-            }
-        })
+        binding.templateName.setOnClearTextListener { entity.setTemplate(null) }
         binding.common.setOnCheckedChangeListener { _, isChecked -> onCommonChange(isChecked) }
     }
 

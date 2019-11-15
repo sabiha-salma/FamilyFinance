@@ -42,7 +42,6 @@ import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
 import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
 import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
-import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
 
@@ -284,53 +283,21 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
     override fun setupBindings() {
         binding.icon.setOnClickListener { onSelectIconClick() }
         binding.articleName.setOnClickListener { onArticleClick() }
-        binding.articleName.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setArticle(null)
-            }
-        })
+        binding.articleName.setOnClearTextListener { entity.setArticle(null) }
         binding.articleCategory.setOnClickListener { onArticleClick() }
-        binding.articleCategory.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setArticle(null)
-            }
-        })
+        binding.articleCategory.setOnClearTextListener { entity.setArticle(null) }
         binding.account.setOnClickListener { onAccountClick() }
-        binding.account.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setAccount(null)
-            }
-        })
+        binding.account.setOnClearTextListener { entity.setAccount(null) }
         binding.transferAccount.setOnClickListener { onTransferAccountClick() }
-        binding.transferAccount.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setTransferAccount(null)
-            }
-        })
+        binding.transferAccount.setOnClearTextListener { entity.setTransferAccount(null) }
         binding.owner.setOnClickListener { onOwnerClick() }
-        binding.owner.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setOwner(null)
-            }
-        })
+        binding.owner.setOnClearTextListener { entity.setOwner(null) }
         binding.currency.setOnClickListener { onCurrencyClick() }
-        binding.currency.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setExchangeRate(null)
-            }
-        })
+        binding.currency.setOnClearTextListener { entity.setExchangeRate(null) }
         binding.exchangeRate.setOnClickListener { onExchangeRateClick() }
-        binding.exchangeRate.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setExchangeRate(null)
-            }
-        })
+        binding.exchangeRate.setOnClearTextListener { entity.setExchangeRate(null) }
         binding.date.setOnClickListener { onDateClick() }
-        binding.date.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setDate(null)
-            }
-        })
+        binding.date.setOnClearTextListener { entity.setDate(null) }
 
         if (TemplateType.TRANSFER_OPERATION === entity.type) {
             loadArticle(databasePrefs.transferArticleId)

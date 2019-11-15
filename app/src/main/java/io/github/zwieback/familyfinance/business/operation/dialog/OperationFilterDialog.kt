@@ -28,7 +28,6 @@ import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
 import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.widget.ClearableEditText
-import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
@@ -99,23 +98,11 @@ abstract class OperationFilterDialog<F, B> :
 
     override fun bind(filter: F) {
         accountEdit.setOnClickListener { onAccountClick() }
-        accountEdit.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                onAccountRemoved()
-            }
-        })
+        accountEdit.setOnClearTextListener { onAccountRemoved() }
         ownerEdit.setOnClickListener { onOwnerClick() }
-        ownerEdit.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                onOwnerRemoved()
-            }
-        })
+        ownerEdit.setOnClearTextListener { onOwnerRemoved() }
         currencyEdit.setOnClickListener { onCurrencyClick() }
-        currencyEdit.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                onCurrencyRemoved()
-            }
-        })
+        currencyEdit.setOnClearTextListener { onCurrencyRemoved() }
         startDateEdit.setOnClickListener { onStartDateClick() }
         endDateEdit.setOnClickListener { onEndDateClick() }
 

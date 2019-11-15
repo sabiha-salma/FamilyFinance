@@ -28,7 +28,6 @@ import io.github.zwieback.familyfinance.databinding.ActivityEditAccountBinding
 import io.github.zwieback.familyfinance.util.NumberUtils.nonNullId
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToInt
-import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.reactivex.functions.Consumer
 import java.math.BigDecimal
 
@@ -179,16 +178,8 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
 
     override fun setupBindings() {
         if (!entity.isFolder) {
-            binding.currency.setOnClearTextListener(object : OnClearTextListener {
-                override fun onTextCleared() {
-                    entity.setCurrency(null)
-                }
-            })
-            binding.owner.setOnClearTextListener(object : OnClearTextListener {
-                override fun onTextCleared() {
-                    entity.setOwner(null)
-                }
-            })
+            binding.currency.setOnClearTextListener { entity.setCurrency(null) }
+            binding.owner.setOnClearTextListener { entity.setOwner(null) }
         } else {
             disableLayout(binding.ownerLayout, R.string.hint_owner_disabled)
             disableLayout(binding.currencyLayout, R.string.hint_currency_disabled)
@@ -200,11 +191,7 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
         }
         binding.icon.setOnClickListener { onSelectIconClick() }
         binding.parent.setOnClickListener { onParentClick() }
-        binding.parent.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                onParentRemoved()
-            }
-        })
+        binding.parent.setOnClearTextListener { onParentRemoved() }
         binding.currency.setOnClickListener { onCurrencyClick() }
         binding.owner.setOnClickListener { onOwnerClick() }
         binding.parentLayout.setValidator(object : Validator {

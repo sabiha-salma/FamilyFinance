@@ -19,7 +19,6 @@ import io.github.zwieback.familyfinance.databinding.ActivityEditArticleBinding
 import io.github.zwieback.familyfinance.util.NumberUtils.nonNullId
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.util.TransliterationUtils.transliterate
-import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.reactivex.functions.Consumer
 
 abstract class ArticleEditActivity :
@@ -114,11 +113,7 @@ abstract class ArticleEditActivity :
     override fun setupBindings() {
         binding.icon.setOnClickListener { onSelectIconClick() }
         binding.parent.setOnClickListener { onParentClick() }
-        binding.parent.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                onParentRemoved()
-            }
-        })
+        binding.parent.setOnClearTextListener { onParentRemoved() }
         binding.parentLayout.setValidator(object : Validator {
             override fun isValid(input: String): Boolean {
                 return isParentValid(input)

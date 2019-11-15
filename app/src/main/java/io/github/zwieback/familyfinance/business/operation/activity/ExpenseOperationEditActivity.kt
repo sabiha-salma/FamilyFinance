@@ -23,7 +23,6 @@ import io.github.zwieback.familyfinance.databinding.ActivityEditExpenseOperation
 import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
 import io.github.zwieback.familyfinance.util.NumberUtils.isNullId
 import io.github.zwieback.familyfinance.widget.ClearableEditText
-import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
@@ -218,23 +217,11 @@ class ExpenseOperationEditActivity : OperationEditActivity<ActivityEditExpenseOp
     override fun setupBindings() {
         binding.icon.setOnClickListener { onSelectIconClick() }
         binding.articleName.setOnClickListener { onArticleClick() }
-        binding.articleName.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setArticle(null)
-            }
-        })
+        binding.articleName.setOnClearTextListener { entity.setArticle(null) }
         binding.articleCategory.setOnClickListener { onArticleCategoryClick() }
-        binding.articleCategory.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setArticle(null)
-            }
-        })
+        binding.articleCategory.setOnClearTextListener { entity.setArticle(null) }
         binding.account.setOnClickListener { onAccountClick() }
-        binding.account.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setAccount(null)
-            }
-        })
+        binding.account.setOnClearTextListener { entity.setAccount(null) }
         binding.owner.setOnClickListener { onOwnerClick() }
         binding.date.setOnClickListener { onDateClick() }
         binding.currency.setOnClickListener { onCurrencyClick() }

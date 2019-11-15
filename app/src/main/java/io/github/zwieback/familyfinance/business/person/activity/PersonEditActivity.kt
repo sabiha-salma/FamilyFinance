@@ -17,7 +17,6 @@ import io.github.zwieback.familyfinance.core.model.Person
 import io.github.zwieback.familyfinance.databinding.ActivityEditPersonBinding
 import io.github.zwieback.familyfinance.util.NumberUtils.nonNullId
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToInt
-import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.reactivex.functions.Consumer
 
 class PersonEditActivity : EntityFolderEditActivity<Person, ActivityEditPersonBinding>() {
@@ -105,11 +104,7 @@ class PersonEditActivity : EntityFolderEditActivity<Person, ActivityEditPersonBi
     override fun setupBindings() {
         binding.icon.setOnClickListener { onSelectIconClick() }
         binding.parent.setOnClickListener { onParentClick() }
-        binding.parent.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                onParentRemoved()
-            }
-        })
+        binding.parent.setOnClearTextListener { onParentRemoved() }
         binding.parentLayout.setValidator(object : Validator {
             override fun isValid(input: String): Boolean {
                 return isParentValid(input)

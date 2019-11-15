@@ -24,7 +24,6 @@ import io.github.zwieback.familyfinance.util.DateUtils.stringToLocalDate
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
 import io.github.zwieback.familyfinance.util.NumberUtils.nonNullId
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
-import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
 
@@ -127,11 +126,7 @@ class ExchangeRateEditActivity :
     override fun setupBindings() {
         binding.icon.setOnClickListener { onSelectIconClick() }
         binding.currency.setOnClickListener { onCurrencyClick() }
-        binding.currency.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setCurrency(null)
-            }
-        })
+        binding.currency.setOnClearTextListener { entity.setCurrency(null) }
         binding.date.setOnClickListener { onDateClick() }
     }
 

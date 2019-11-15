@@ -7,7 +7,6 @@ import io.github.zwieback.familyfinance.business.article.activity.ArticleActivit
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.ARTICLE_CODE
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_ARTICLE_ID
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter
-import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 
 abstract class OperationWithArticleFilterDialog<F, B, AA> :
     OperationFilterDialog<F, B>()
@@ -32,11 +31,7 @@ abstract class OperationWithArticleFilterDialog<F, B, AA> :
 
     override fun bind(filter: F) {
         articleEdit.setOnClickListener { onArticleClick() }
-        articleEdit.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                onArticleRemoved()
-            }
-        })
+        articleEdit.setOnClearTextListener { onArticleRemoved() }
 
         loadArticle(filter.getArticleId())
 

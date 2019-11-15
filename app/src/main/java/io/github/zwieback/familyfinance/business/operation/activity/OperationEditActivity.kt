@@ -34,7 +34,6 @@ import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
 import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.widget.ClearableEditText
-import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
 
@@ -182,21 +181,9 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
 
     @CallSuper
     override fun setupBindings() {
-        ownerEdit.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setOwner(null)
-            }
-        })
-        currencyEdit.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setExchangeRate(null)
-            }
-        })
-        exchangeRateEdit.setOnClearTextListener(object : OnClearTextListener {
-            override fun onTextCleared() {
-                entity.setExchangeRate(null)
-            }
-        })
+        ownerEdit.setOnClearTextListener { entity.setOwner(null) }
+        currencyEdit.setOnClearTextListener { entity.setExchangeRate(null) }
+        exchangeRateEdit.setOnClearTextListener { entity.setExchangeRate(null) }
     }
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
