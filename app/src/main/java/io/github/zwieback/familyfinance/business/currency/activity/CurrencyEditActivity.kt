@@ -49,7 +49,7 @@ class CurrencyEditActivity : EntityEditActivity<Currency, ActivityEditCurrencyBi
     }
 
     override fun setupBindings() {
-        binding.icon.setOnClickListener { onSelectIconClick(it) }
+        binding.icon.setOnClickListener { onSelectIconClick() }
     }
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")

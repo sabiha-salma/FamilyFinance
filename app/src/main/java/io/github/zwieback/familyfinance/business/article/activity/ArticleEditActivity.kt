@@ -112,7 +112,7 @@ abstract class ArticleEditActivity :
     }
 
     override fun setupBindings() {
-        binding.icon.setOnClickListener { onSelectIconClick(it) }
+        binding.icon.setOnClickListener { onSelectIconClick() }
         binding.parent.setOnClickListener { onParentClick() }
         binding.parent.setOnClearTextListener(object : OnClearTextListener {
             override fun onTextCleared() {

@@ -198,7 +198,7 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
             disableLayout(binding.paymentSystemLayout, R.string.hint_payment_system_disabled)
             disableLayout(binding.cardNumberLayout, R.string.hint_card_number_disabled)
         }
-        binding.icon.setOnClickListener { onSelectIconClick(it) }
+        binding.icon.setOnClickListener { onSelectIconClick() }
         binding.parent.setOnClickListener { onParentClick() }
         binding.parent.setOnClearTextListener(object : OnClearTextListener {
             override fun onTextCleared() {

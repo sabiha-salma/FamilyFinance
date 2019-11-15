@@ -125,7 +125,7 @@ class ExchangeRateEditActivity :
     }
 
     override fun setupBindings() {
-        binding.icon.setOnClickListener { onSelectIconClick(it) }
+        binding.icon.setOnClickListener { onSelectIconClick() }
         binding.currency.setOnClickListener { onCurrencyClick() }
         binding.currency.setOnClearTextListener(object : OnClearTextListener {
             override fun onTextCleared() {

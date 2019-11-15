@@ -282,7 +282,7 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
     }
 
     override fun setupBindings() {
-        binding.icon.setOnClickListener { onSelectIconClick(it) }
+        binding.icon.setOnClickListener { onSelectIconClick() }
         binding.articleName.setOnClickListener { onArticleClick() }
         binding.articleName.setOnClearTextListener(object : OnClearTextListener {
             override fun onTextCleared() {

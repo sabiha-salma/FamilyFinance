@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.CallSuper
@@ -99,7 +98,7 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
         }
     }
 
-    fun onSelectIconClick(view: View) {
+    protected fun onSelectIconClick() {
         val intent = Intent(this, IconicsActivity::class.java)
         startActivityForResult(intent, ICONICS_CODE)
     }

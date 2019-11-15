@@ -236,7 +236,7 @@ class TransferOperationEditActivity :
     }
 
     override fun setupBindings() {
-        binding.icon.setOnClickListener { onSelectIconClick(it) }
+        binding.icon.setOnClickListener { onSelectIconClick() }
         binding.owner.setOnClickListener { onOwnerClick() }
         binding.expenseAccount.setOnClickListener { onExpenseAccountClick() }
         binding.expenseAccount.setOnClearTextListener(object : OnClearTextListener {

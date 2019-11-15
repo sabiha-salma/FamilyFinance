@@ -107,7 +107,7 @@ class SmsPatternEditActivity : EntityEditActivity<SmsPattern, ActivityEditSmsPat
     }
 
     override fun setupBindings() {
-        binding.icon.setOnClickListener { onSelectIconClick(it) }
+        binding.icon.setOnClickListener { onSelectIconClick() }
         binding.templateName.setOnClickListener { this.onTemplateClick() }
         binding.templateName.setOnClearTextListener(object : OnClearTextListener {
             override fun onTextCleared() {
