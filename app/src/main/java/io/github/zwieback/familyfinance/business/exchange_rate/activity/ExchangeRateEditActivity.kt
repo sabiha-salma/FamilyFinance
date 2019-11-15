@@ -65,11 +65,9 @@ class ExchangeRateEditActivity :
             return
         }
         when (requestCode) {
-            CURRENCY_CODE -> {
-                resultIntent?.let {
-                    val currencyId = extractOutputId(resultIntent, RESULT_CURRENCY_ID)
-                    loadCurrency(currencyId)
-                }
+            CURRENCY_CODE -> resultIntent?.let {
+                val currencyId = extractOutputId(resultIntent, RESULT_CURRENCY_ID)
+                loadCurrency(currencyId)
             }
         }
     }

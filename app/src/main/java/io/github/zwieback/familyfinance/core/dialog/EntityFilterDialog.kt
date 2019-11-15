@@ -162,14 +162,14 @@ abstract class EntityFilterDialog<F : EntityFilter, B : ViewDataBinding> : Dialo
 
         fun determineDate(dateEdit: EditText, defaultDate: LocalDate?): LocalDate {
             return if (isCorrectDate(dateEdit)) {
-                stringToLocalDate(dateEdit.text.toString())!!
+                stringToLocalDate(dateEdit.text?.toString()) ?: error("Date is not correct")
             } else {
                 defaultDate ?: DateUtils.now()
             }
         }
 
         private fun isCorrectDate(dateEdit: EditText): Boolean {
-            return isTextAnLocalDate(dateEdit.text.toString())
+            return isTextAnLocalDate(dateEdit.text?.toString())
         }
     }
 }

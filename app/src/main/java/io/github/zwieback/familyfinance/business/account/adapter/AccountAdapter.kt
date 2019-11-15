@@ -58,9 +58,11 @@ class AccountAdapter(
         holder: BindingHolder<ItemAccountBinding>,
         position: Int
     ) {
-        holder.binding.account = account
-        provider.setupIcon(holder.binding.icon.icon, account!!)
-        calculateAndShowBalance(account, holder)
+        account?.let {
+            holder.binding.account = account
+            provider.setupIcon(holder.binding.icon.icon, account)
+            calculateAndShowBalance(account, holder)
+        }
     }
 
     private fun calculateAndShowBalance(

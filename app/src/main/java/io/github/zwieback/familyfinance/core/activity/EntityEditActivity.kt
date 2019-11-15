@@ -92,8 +92,8 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
             return
         }
         when (requestCode) {
-            ICONICS_CODE -> {
-                val iconName = resultIntent?.getStringExtra(IconicsActivity.OUTPUT_ICON_NAME)
+            ICONICS_CODE -> resultIntent?.let {
+                val iconName = resultIntent.getStringExtra(IconicsActivity.OUTPUT_ICON_NAME)
                 setupIcon(iconName)
             }
         }

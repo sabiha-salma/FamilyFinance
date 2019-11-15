@@ -39,8 +39,9 @@ abstract class EntityQueryBuilder<E : IBaseEntity> protected constructor(
     fun build(): Result<E> {
         val select = buildSelect()
         val where = if (isJoinRequired) {
-            val joinAndOr = buildJoin(select)
-            buildWhere(joinAndOr!!)
+            buildJoin(select)
+                ?.let { joinAndOr -> buildWhere(joinAndOr) }
+                ?: error("Did you forget to override the buildJoin() method?")
         } else {
             buildWhere(select)
         }

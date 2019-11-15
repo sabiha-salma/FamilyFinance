@@ -82,16 +82,16 @@ abstract class OperationFilterDialog<F, B> :
             return
         }
         when (requestCode) {
-            ACCOUNT_CODE -> {
-                val accountId = extractId(resultIntent!!, RESULT_ACCOUNT_ID)
+            ACCOUNT_CODE -> resultIntent?.let {
+                val accountId = extractId(resultIntent, RESULT_ACCOUNT_ID)
                 loadAccount(accountId)
             }
-            PERSON_CODE -> {
-                val ownerId = extractId(resultIntent!!, RESULT_PERSON_ID)
+            PERSON_CODE -> resultIntent?.let {
+                val ownerId = extractId(resultIntent, RESULT_PERSON_ID)
                 loadOwner(ownerId)
             }
-            CURRENCY_CODE -> {
-                val currencyId = extractId(resultIntent!!, RESULT_CURRENCY_ID)
+            CURRENCY_CODE -> resultIntent?.let {
+                val currencyId = extractId(resultIntent, RESULT_CURRENCY_ID)
                 loadCurrency(currencyId)
             }
         }

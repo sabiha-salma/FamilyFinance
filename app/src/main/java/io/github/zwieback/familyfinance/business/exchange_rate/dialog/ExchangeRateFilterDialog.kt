@@ -87,11 +87,9 @@ class ExchangeRateFilterDialog :
             return
         }
         when (requestCode) {
-            CURRENCY_CODE -> {
-                resultIntent?.let {
-                    val currencyId = extractId(resultIntent, RESULT_CURRENCY_ID)
-                    loadCurrency(currencyId)
-                }
+            CURRENCY_CODE -> resultIntent?.let {
+                val currencyId = extractId(resultIntent, RESULT_CURRENCY_ID)
+                loadCurrency(currencyId)
             }
         }
     }

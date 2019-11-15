@@ -13,7 +13,7 @@ import io.github.zwieback.familyfinance.widget.filter.DecimalNumberInputFilter
 import java.math.BigDecimal
 
 /**
- * View to input decimal numbers
+ * View to input decimal numbers and (optional) only one delimiter
  */
 class DecimalNumberTextEdit @JvmOverloads constructor(
     context: Context,
@@ -41,8 +41,9 @@ class DecimalNumberTextEdit @JvmOverloads constructor(
 
     override fun onIconClick() {
         DialogUtils.showCalculatorDialog(
-            context, this,
-            NumberUtils.stringToBigDecimal(this.text!!.toString())
+            context,
+            this,
+            NumberUtils.stringToBigDecimal(this.text?.toString())
         )
     }
 

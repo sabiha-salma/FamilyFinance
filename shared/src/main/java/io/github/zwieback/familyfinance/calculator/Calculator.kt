@@ -12,11 +12,10 @@ class Calculator {
         if (operator == null || rightOperand == null) {
             return leftOperand
         }
-        if (leftOperand == null) {
-            leftOperand = BigDecimal.ZERO
-        }
+        val rightValue = rightOperand ?: BigDecimal.ZERO
+        val leftValue = leftOperand ?: BigDecimal.ZERO
         return try {
-            operator?.calc(leftOperand!!, rightOperand!!)
+            operator?.calc(leftValue, rightValue)
         } catch (ignored: ArithmeticException) {
             null
         }

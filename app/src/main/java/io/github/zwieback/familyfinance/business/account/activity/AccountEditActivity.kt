@@ -86,23 +86,17 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
             return
         }
         when (requestCode) {
-            ACCOUNT_CODE -> {
-                resultIntent?.let {
-                    val parentId = extractOutputId(resultIntent, RESULT_ACCOUNT_ID)
-                    loadParent(parentId)
-                }
+            ACCOUNT_CODE -> resultIntent?.let {
+                val parentId = extractOutputId(resultIntent, RESULT_ACCOUNT_ID)
+                loadParent(parentId)
             }
-            CURRENCY_CODE -> {
-                resultIntent?.let {
-                    val currencyId = extractOutputId(resultIntent, RESULT_CURRENCY_ID)
-                    loadCurrency(currencyId)
-                }
+            CURRENCY_CODE -> resultIntent?.let {
+                val currencyId = extractOutputId(resultIntent, RESULT_CURRENCY_ID)
+                loadCurrency(currencyId)
             }
-            PERSON_CODE -> {
-                resultIntent?.let {
-                    val ownerId = extractOutputId(resultIntent, RESULT_PERSON_ID)
-                    loadOwner(ownerId)
-                }
+            PERSON_CODE -> resultIntent?.let {
+                val ownerId = extractOutputId(resultIntent, RESULT_PERSON_ID)
+                loadOwner(ownerId)
             }
         }
     }
