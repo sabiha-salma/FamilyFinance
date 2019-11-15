@@ -71,19 +71,17 @@ abstract class EntityFolderEditActivity<ENTITY, BINDING> :
         newParentId: Int,
         tableName: String
     ): Boolean {
-        var query = "with recursive subtree" +
+        val query = "with recursive subtree" +
                 " as (select id" +
-                "       from :tableName" +
-                "      where id = :parentId" +
+                "       from $tableName" +
+                "      where id = $parentId" +
                 "      union all" +
                 "     select child.id" +
-                "       from :tableName as child" +
+                "       from $tableName as child" +
                 "       join subtree on child.parent_id = subtree.id)" +
                 " select id" +
                 " from subtree" +
-                " where id <> :parentId"
-        query = query.replace(":parentId".toRegex(), parentId.toString())
-        query = query.replace(":tableName".toRegex(), tableName)
+                " where id <> $parentId"
 
         return data
             .raw(query)
