@@ -3,7 +3,6 @@ package io.github.zwieback.familyfinance.business.article.activity
 import android.app.Activity
 import android.content.Intent
 import com.johnpetitto.validator.ValidatingTextInputLayout
-import com.johnpetitto.validator.Validator
 import com.mikepenz.iconics.view.IconicsImageView
 import io.github.zwieback.familyfinance.R
 import io.github.zwieback.familyfinance.business.article.adapter.ArticleProvider
@@ -114,11 +113,7 @@ abstract class ArticleEditActivity :
         binding.icon.setOnClickListener { onSelectIconClick() }
         binding.parent.setOnClickListener { onParentClick() }
         binding.parent.setOnClearTextListener { onParentRemoved() }
-        binding.parentLayout.setValidator(object : Validator {
-            override fun isValid(input: String): Boolean {
-                return isParentValid(input)
-            }
-        })
+        binding.parentLayout.setValidator { isParentValid(it) }
         if (!entity.isFolder) {
             return
         }

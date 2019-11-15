@@ -120,8 +120,9 @@ class ValidatingTextInputLayout @JvmOverloads constructor(
     }
 
     /**
-     * Invoke this when you want to validate the contained [EditText] input text against the
-     * provided [Validator].
+     * Validate the contained [EditText]'s input text against the provided
+     * [Validator].
+     *
      * For validating multiple [ValidatingTextInputLayout] objects at once,
      * call [Validators.validate].
      *
@@ -130,7 +131,7 @@ class ValidatingTextInputLayout @JvmOverloads constructor(
      */
     fun validate(): Boolean {
         val input = editText?.text?.toString() ?: error("EditText or its text is empty")
-        val valid = validator?.isValid(input)
+        val valid = validator?.invoke(input)
             ?: error("A Validator must be set; call setValidator first.")
 
         error = if (valid) {

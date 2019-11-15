@@ -6,84 +6,65 @@ import io.github.zwieback.familyfinance.util.NumberUtils
 
 /**
  * Validates input for [ValidatingTextInputLayout] to meet some requirement.
+ *
+ * Returns `true` if the input is considered valid for some requirement.
  */
-interface Validator {
-    /**
-     * Returns `true` if the input is considered valid for some requirement.
-     */
-    fun isValid(input: String): Boolean
-}
+typealias Validator = (input: String) -> Boolean
 
 /**
  * Validates input for email formatting.
  */
-object EmailValidator : Validator {
-    override fun isValid(input: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(input).matches()
-    }
+val EmailValidator: Validator = { input ->
+    Patterns.EMAIL_ADDRESS.matcher(input).matches()
 }
 
 /**
  * Validates input for phone number formatting.
  */
-object PhoneValidator : Validator {
-    override fun isValid(input: String): Boolean {
-        return Patterns.PHONE.matcher(input).matches()
-    }
+val PhoneValidator: Validator = { input ->
+    Patterns.PHONE.matcher(input).matches()
 }
 
 /**
  * Validates input for Integer number formatting.
  */
-object IntegerValidator : Validator {
-    override fun isValid(input: String): Boolean {
-        return NumberUtils.isTextAnInteger(input)
-    }
+val IntegerValidator: Validator = { input ->
+    NumberUtils.isTextAnInteger(input)
 }
 
 /**
  * Validates input for BigDecimal number formatting.
  */
-object BigDecimalValidator : Validator {
-    override fun isValid(input: String): Boolean {
-        return NumberUtils.isTextABigDecimal(input)
-    }
+val BigDecimalValidator: Validator = { input ->
+    NumberUtils.isTextABigDecimal(input)
 }
 
 /**
  * Validates input for LocalDate date formatting.
  */
-object DateValidator : Validator {
-    override fun isValid(input: String): Boolean {
-        return DateUtils.isTextAnLocalDate(input)
-    }
+val DateValidator: Validator = { input ->
+    DateUtils.isTextAnLocalDate(input)
 }
 
 /**
  * Validates input for not empty String.
  */
-object NotEmptyValidator : Validator {
-    override fun isValid(input: String): Boolean {
-        return input.isNotEmpty()
-    }
+val NotEmptyValidator: Validator = { input ->
+    input.isNotEmpty()
 }
 
 /**
  * Validates input for number formatting.
  */
-object SignedNumberValidator : Validator {
-    override fun isValid(input: String): Boolean {
-        return NumberUtils.isTextASignedNumber(input)
-    }
+val SignedNumberValidator: Validator = { input ->
+    NumberUtils.isTextASignedNumber(input)
 }
 
 /**
  * Validates input for account number formatting.
  */
-object AccountNumberValidator : Validator {
-    override fun isValid(input: String): Boolean {
-        return NumberUtils.isTextAnAccountNumber(input)
-    }
+val AccountNumberValidator: Validator = { input ->
+    NumberUtils.isTextAnAccountNumber(input)
 }
 
 /**
