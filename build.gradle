@@ -11,7 +11,7 @@ buildscript {
         versions = [
                 // replace with the latest (stable) version:
                 // https://github.com/JetBrains/kotlin/releases/latest
-                kotlinLib: '1.3.60',
+                kotlinLib: '1.3.61',
                 supportLib: '1.0.0',
                 materialLib: '1.0.0',
                 appcompatLib: '1.1.0',
