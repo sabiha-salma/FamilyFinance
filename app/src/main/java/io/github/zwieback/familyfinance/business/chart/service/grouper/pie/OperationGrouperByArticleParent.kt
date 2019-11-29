@@ -13,8 +13,7 @@ class OperationGrouperByArticleParent : PieOperationGrouper() {
     override fun collectGroupIds(operations: List<OperationView>): Set<Int> {
         return operations
             .asSequence()
-            .filter { operation -> operation.articleParentId != null }
-            .map { it.articleParentId ?: error("Nullable articleParentId doesn't filtered?") }
+            .mapNotNull { operation -> operation.articleParentId }
             .toSet()
     }
 

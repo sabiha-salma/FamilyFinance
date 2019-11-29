@@ -2,8 +2,6 @@ package io.github.zwieback.familyfinance.business.article.lifecycle.creator
 
 import android.content.Context
 import androidx.annotation.StringRes
-import com.annimon.stream.ComparatorCompat
-import com.annimon.stream.function.Function
 import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityCreator
 import io.github.zwieback.familyfinance.core.model.Article
 import io.github.zwieback.familyfinance.core.model.type.ArticleType
@@ -17,13 +15,8 @@ abstract class ArticleCreator(
     data: ReactiveEntityStore<Persistable>
 ) : EntityCreator<Article>(context, data) {
 
-    /**
-     * See [Gradle compile error when using ComparatorCompat](https://github.com/aNNiMON/Lightweight-Stream-API/issues/148)
-     */
     override fun compare(left: Article, right: Article): Int {
-        return ComparatorCompat.comparing(Function<Article, ArticleType> { it.type })
-            .thenComparing(Function<Article, String> { it.name })
-            .compare(left, right)
+        return compareBy(Article::type, Article::name).compare(left, right)
     }
 
     fun findRoot(@StringRes nameId: Int): Article {
