@@ -90,8 +90,6 @@ dependencies {
     }
     // java.time
     implementation "com.jakewharton.threetenabp:threetenabp:${versions.timeLib}"
-    // java 8 streams
-    implementation "com.annimon:stream:${versions.streamLib}"
     // crash report
     releaseImplementation "ch.acra:acra-mail:${versions.acraLib}"
     releaseImplementation "ch.acra:acra-dialog:${versions.acraLib}"

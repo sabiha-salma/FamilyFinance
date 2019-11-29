@@ -31,7 +31,6 @@ buildscript {
                 materializeLib: '1.2.1',
                 fastAdapterLib: '4.1.0',
                 materialDrawerLib: '7.0.0-rc08',
-                streamLib: '1.2.1',
                 timeLib: '1.2.1',
                 acraLib: '5.4.0',
                 gendalfLib: '1.3.1',

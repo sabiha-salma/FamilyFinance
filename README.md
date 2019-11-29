@@ -46,7 +46,6 @@ Checklist for creating issues:
 - [FastAdapter](https://github.com/mikepenz/FastAdapter)
 - [MaterialDrawer](https://github.com/mikepenz/MaterialDrawer)
 - [ThreeTenABP](https://github.com/JakeWharton/ThreeTenABP)
-- [Lightweight-Stream-API](https://github.com/aNNiMON/Lightweight-Stream-API)
 - [ACRA](https://github.com/ACRA/acra)
 - [Android-Support-Preference-V7-Fix](https://github.com/Gericop/Android-Support-Preference-V7-Fix/)
 - [Gendalf](https://github.com/deviant-studio/Gendalf)
