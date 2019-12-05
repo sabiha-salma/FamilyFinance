@@ -73,10 +73,12 @@
     <string name="select_sms_patterns">Sms Patterns</string>
     <string name="select_charts">Reports</string>
     <!-- Backup -->
-    <string name="backup_database">Make a backup of DB</string>
-    <string name="restore_database">Restore the backup of DB</string>
-    <string name="backup_shared_prefs">Make a backup of shared preferences</string>
-    <string name="restore_shared_prefs">Restore the backup of shared preferences</string>
+    <string name="backup_database_title">Database</string>
+    <string name="backup_database">Backup the DB</string>
+    <string name="restore_database">Restore the DB</string>
+    <string name="backup_shared_prefs_title">Shared preferences</string>
+    <string name="backup_shared_prefs">Backup the shared preferences</string>
+    <string name="restore_shared_prefs">Restore the shared preferences</string>
     <!-- Preferences -->
     <!-- Interface preferences -->
     <string name="interface_preferences_title">Interface</string>

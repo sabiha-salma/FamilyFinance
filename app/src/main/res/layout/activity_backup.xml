@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -8,47 +7,87 @@
     <include
         layout="@layout/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:id="@+id/dashboard_layout"
+    <TextView
+        android:id="@+id/backup_database_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:orientation="vertical">
+        android:layout_margin="@dimen/default_margin"
+        android:text="@string/backup_database_title"
+        android:textSize="@dimen/backup_title_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <com.mikepenz.iconics.view.IconicsButton
-            android:id="@+id/backup_database_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/backup_database"
-            app:iiv_start_icon="faw_download"
-            app:iiv_start_size="@dimen/button_icon_size"/>
+    <com.mikepenz.iconics.view.IconicsButton
+        android:id="@+id/backup_database_button"
+        android:layout_width="@dimen/zero_weight"
+        android:layout_height="@dimen/backup_button_height"
+        android:layout_margin="@dimen/default_margin"
+        android:padding="@dimen/backup_button_padding"
+        android:text="@string/backup_database"
+        app:iiv_bottom_icon="faw_download"
+        app:iiv_bottom_size="@dimen/button_icon_size"
+        app:layout_constraintEnd_toStartOf="@+id/restore_database_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/backup_database_title" />
 
-        <com.mikepenz.iconics.view.IconicsButton
-            android:id="@+id/restore_database_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/restore_database"
-            app:iiv_start_icon="cmd_backup_restore"
-            app:iiv_start_size="@dimen/button_icon_size"/>
+    <com.mikepenz.iconics.view.IconicsButton
+        android:id="@+id/restore_database_button"
+        android:layout_width="@dimen/zero_weight"
+        android:layout_height="@dimen/backup_button_height"
+        android:layout_margin="@dimen/default_margin"
+        android:padding="@dimen/backup_button_padding"
+        android:text="@string/restore_database"
+        app:iiv_bottom_icon="cmd_backup_restore"
+        app:iiv_bottom_size="@dimen/button_icon_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/backup_database_button"
+        app:layout_constraintTop_toBottomOf="@id/backup_database_title" />
 
-        <com.mikepenz.iconics.view.IconicsButton
-            android:id="@+id/backup_shared_prefs_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/backup_shared_prefs"
-            app:iiv_start_icon="faw_download"
-            app:iiv_start_size="@dimen/button_icon_size"/>
+    <View
+        android:id="@+id/central_divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginTop="@dimen/default_margin"
+        android:background="?android:attr/dividerHorizontal"
+        app:layout_constraintBottom_toTopOf="@+id/backup_shared_prefs_title"
+        app:layout_constraintTop_toBottomOf="@id/backup_database_button" />
 
-        <com.mikepenz.iconics.view.IconicsButton
-            android:id="@+id/restore_shared_prefs_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/restore_shared_prefs"
-            app:iiv_start_icon="cmd_backup_restore"
-            app:iiv_start_size="@dimen/button_icon_size"/>
+    <TextView
+        android:id="@+id/backup_shared_prefs_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:text="@string/backup_shared_prefs_title"
+        android:textSize="@dimen/backup_title_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/central_divider" />
 
-    </LinearLayout>
+    <com.mikepenz.iconics.view.IconicsButton
+        android:id="@+id/backup_shared_prefs_button"
+        android:layout_width="@dimen/zero_weight"
+        android:layout_height="@dimen/backup_button_height"
+        android:layout_margin="@dimen/default_margin"
+        android:padding="@dimen/backup_button_padding"
+        android:text="@string/backup_shared_prefs"
+        app:iiv_bottom_icon="faw_download"
+        app:iiv_bottom_size="@dimen/button_icon_size"
+        app:layout_constraintEnd_toStartOf="@+id/restore_shared_prefs_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/backup_shared_prefs_title" />
 
-</RelativeLayout>
+    <com.mikepenz.iconics.view.IconicsButton
+        android:id="@+id/restore_shared_prefs_button"
+        android:layout_width="@dimen/zero_weight"
+        android:layout_height="@dimen/backup_button_height"
+        android:layout_margin="@dimen/default_margin"
+        android:padding="@dimen/backup_button_padding"
+        android:text="@string/restore_shared_prefs"
+        app:iiv_bottom_icon="cmd_backup_restore"
+        app:iiv_bottom_size="@dimen/button_icon_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/backup_shared_prefs_button"
+        app:layout_constraintTop_toBottomOf="@id/backup_shared_prefs_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Backup -->
+    <dimen name="backup_button_height">100dp</dimen>
+    <dimen name="backup_button_padding">16dp</dimen>
+</resources>

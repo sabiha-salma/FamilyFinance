@@ -73,8 +73,10 @@
     <string name="select_sms_patterns">Смс паттерны</string>
     <string name="select_charts">Отчеты</string>
     <!-- Backup -->
+    <string name="backup_database_title">База данных</string>
     <string name="backup_database">Сделать резервную копию БД</string>
     <string name="restore_database">Восстановить резервную копию БД</string>
+    <string name="backup_shared_prefs_title">Настройки</string>
     <string name="backup_shared_prefs">Сделать резервную копию настроек</string>
     <string name="restore_shared_prefs">Восстановить резервную копию настроек</string>
     <!-- Preferences -->
