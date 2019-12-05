@@ -31,7 +31,7 @@
             android:layout_height="@dimen/operation_icon_size"
             app:ico_size="@dimen/operation_icon_size"
             app:iiv_icon="faw_dot_circle"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_divider"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_barrier"
             app:layout_constraintEnd_toStartOf="@+id/article_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,8 +44,10 @@
             android:layout_marginLeft="@dimen/default_margin"
             android:text="@{operation.articleName}"
             android:textSize="@dimen/operation_first_line_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/article_category"
             app:layout_constraintStart_toEndOf="@id/icon"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/article_category"
@@ -53,6 +55,7 @@
             android:layout_height="wrap_content"
             android:text="@{operation.articleParentName}"
             android:textSize="@dimen/operation_second_line_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_barrier"
             app:layout_constraintEnd_toEndOf="@id/article_name"
             app:layout_constraintStart_toStartOf="@id/article_name"
             app:layout_constraintTop_toBottomOf="@id/article_name" />
@@ -67,7 +70,7 @@
             android:layout_marginRight="@dimen/default_margin"
             android:text="@{operation.description}"
             android:textSize="@dimen/operation_first_line_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_divider"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_barrier"
             app:layout_constraintEnd_toStartOf="@+id/value"
             app:layout_constraintStart_toEndOf="@id/article_name"
             app:layout_constraintTop_toTopOf="parent" />
@@ -82,7 +85,7 @@
             android:text="@{NumberUtils.bigDecimalToString(operation.value)}"
             android:textSize="@dimen/operation_first_line_text_size"
             app:layout_constraintEnd_toStartOf="@+id/currency"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/article_name" />
 
         <TextView
             android:id="@+id/currency"
@@ -91,7 +94,7 @@
             android:text="@{operation.currencyName}"
             android:textSize="@dimen/operation_first_line_text_size"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/article_name" />
 
         <TextView
             android:id="@+id/date"
@@ -107,7 +110,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="icon,article_category,description" />
+            app:constraint_referenced_ids="icon,article_category,description"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <View
             android:id="@+id/bottom_divider"
