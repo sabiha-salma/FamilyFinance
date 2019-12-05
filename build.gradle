@@ -15,6 +15,7 @@ buildscript {
                 supportLib: '1.0.0',
                 materialLib: '1.0.0',
                 appcompatLib: '1.1.0',
+                constraintLayoutLib: '2.0.0-beta3',
                 multidexLib: '2.0.1',
                 espressoLib: '3.1.0',
                 androidxJunitLib: '1.1.1',

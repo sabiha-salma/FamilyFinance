@@ -62,6 +62,7 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:${versions.supportLib}"
     implementation "androidx.multidex:multidex:${versions.multidexLib}"
     implementation "androidx.recyclerview:recyclerview:${versions.supportLib}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintLayoutLib}"
     implementation "com.google.android.material:material:${versions.materialLib}"
     // JPA
     implementation "androidx.sqlite:sqlite:${versions.sqliteAndroidXLib}"
