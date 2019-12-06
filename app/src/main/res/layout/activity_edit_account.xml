@@ -47,16 +47,13 @@
                     android:id="@+id/parent_layout"
                     android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/entity_edit_margin"
-                    android:layout_marginLeft="@dimen/entity_edit_margin"
-                    android:layout_marginEnd="@dimen/entity_edit_margin"
-                    android:layout_marginRight="@dimen/entity_edit_margin"
+                    android:layout_margin="@dimen/entity_edit_margin"
                     android:hint="@string/hint_parent"
                     app:errorEnabled="true"
                     app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/icon"
-                    app:layout_constraintTop_toTopOf="@id/icon">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <io.github.zwieback.familyfinance.widget.ClearableEditText
                         android:id="@+id/parent"
