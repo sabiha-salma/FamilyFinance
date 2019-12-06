@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.CallSuper
@@ -234,6 +235,10 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
 
     protected fun disableLayout(layout: LinearLayout) {
         layout.isEnabled = false
+    }
+
+    protected fun disableView(view: View) {
+        view.isEnabled = false
     }
 
     companion object {

@@ -183,7 +183,7 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
             disableLayout(binding.ownerLayout, R.string.hint_owner_disabled)
             disableLayout(binding.currencyLayout, R.string.hint_currency_disabled)
             disableLayout(binding.initialBalanceLayout, R.string.hint_initial_balance_disabled)
-            disableLayout(binding.accountTypeLayout)
+            disableView(binding.accountType)
             disableLayout(binding.numberLayout, R.string.hint_account_number_disabled)
             disableLayout(binding.paymentSystemLayout, R.string.hint_payment_system_disabled)
             disableLayout(binding.cardNumberLayout, R.string.hint_card_number_disabled)
