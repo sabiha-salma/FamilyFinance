@@ -53,7 +53,12 @@
 
     <!-- Button -->
     <dimen name="button_icon_size">16dp</dimen>
+
+    <!-- Dashboard -->
     <dimen name="dashboard_add_button_width">56dp</dimen>
+    <dimen name="dashboard_add_button_margin_fix">1dp</dimen>
+    <dimen name="dashboard_button_height">120dp</dimen>
+    <dimen name="dashboard_button_padding">20dp</dimen>
 
     <!-- Backup -->
     <dimen name="backup_title_text_size">16sp</dimen>
