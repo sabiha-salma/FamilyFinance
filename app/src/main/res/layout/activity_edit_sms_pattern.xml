@@ -1,148 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <import type="io.github.zwieback.familyfinance.core.model.restriction.SmsPatternRestriction"/>
+        <import type="io.github.zwieback.familyfinance.core.model.restriction.SmsPatternRestriction" />
 
-        <import type="io.github.zwieback.familyfinance.core.model.restriction.TemplateRestriction"/>
+        <import type="io.github.zwieback.familyfinance.core.model.restriction.TemplateRestriction" />
 
-        <import type="io.github.zwieback.familyfinance.util.NumberUtils"/>
+        <import type="io.github.zwieback.familyfinance.util.NumberUtils" />
 
         <variable
             name="smsPattern"
-            type="io.github.zwieback.familyfinance.core.model.ISmsPattern"/>
+            type="io.github.zwieback.familyfinance.core.model.ISmsPattern" />
 
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
-            android:fillViewport="true"
-            android:padding="@dimen/entity_edit_padding">
+            android:fillViewport="true">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.mikepenz.iconics.view.IconicsImageView
+                    android:id="@+id/icon"
+                    android:layout_width="@dimen/entity_edit_icon_size"
+                    android:layout_height="@dimen/entity_edit_icon_size"
+                    android:layout_margin="@dimen/entity_edit_margin"
+                    app:ico_size="@dimen/entity_edit_icon_size"
+                    app:iiv_icon="faw_comment1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/name_layout"
+                    android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_margin="@dimen/entity_edit_margin"
+                    android:hint="@string/hint_name_required"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/name_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:validateAfterTextChanged="true"
+                    app:validator="not_empty">
 
-                    <com.mikepenz.iconics.view.IconicsImageView
-                        android:id="@+id/icon"
-                        android:layout_width="@dimen/entity_edit_icon_size"
-                        android:layout_height="@dimen/entity_edit_icon_size"
-                        app:ico_size="@dimen/entity_edit_icon_size"
-                        app:iiv_icon="faw_comment1"/>
-
-                    <com.johnpetitto.validator.ValidatingTextInputLayout
-                        android:id="@+id/name_layout"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/entity_edit_margin"
-                        android:layout_marginStart="@dimen/entity_edit_margin"
-                        android:hint="@string/hint_name_required"
-                        app:errorEnabled="true"
-                        app:errorLabel="@string/name_error"
-                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                        app:validateAfterTextChanged="true"
-                        app:validator="not_empty">
+                        android:inputType="text|textMultiLine"
+                        android:maxLength="@{SmsPatternRestriction.NAME_MAX_LENGTH}"
+                        android:text="@{smsPattern.name}" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="text|textMultiLine"
-                            android:maxLength="@{SmsPatternRestriction.NAME_MAX_LENGTH}"
-                            android:text="@{smsPattern.name}"/>
-
-                    </com.johnpetitto.validator.ValidatingTextInputLayout>
-
-                </LinearLayout>
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
 
                 <Switch
                     android:id="@+id/common"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/entity_edit_margin"
                     android:checked="@{smsPattern.common}"
-                    android:text="@string/hint_common"/>
+                    android:text="@string/hint_common"
+                    app:layout_constraintEnd_toEndOf="@id/name_layout"
+                    app:layout_constraintStart_toStartOf="@id/name_layout"
+                    app:layout_constraintTop_toBottomOf="@id/name_layout" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/template_name_layout"
+                    android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/entity_edit_margin"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:weightSum="@integer/full_weight">
+                    android:hint="@string/hint_template_name"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/template_is_not_set_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toStartOf="@+id/sender_layout"
+                    app:layout_constraintStart_toStartOf="@id/icon"
+                    app:layout_constraintTop_toBottomOf="@id/common"
+                    app:validator="not_empty">
 
-                    <com.johnpetitto.validator.ValidatingTextInputLayout
-                        android:id="@+id/template_name_layout"
-                        android:layout_width="@dimen/zero_weight"
+                    <io.github.zwieback.familyfinance.widget.ClearableEditText
+                        android:id="@+id/template_name"
+                        style="@style/AppTheme.EditText.Clearable"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="@integer/half_of_weight"
-                        android:hint="@string/hint_template_name"
-                        app:errorEnabled="true"
-                        app:errorLabel="@string/template_is_not_set_error"
-                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                        app:validator="not_empty">
+                        android:text="@{smsPattern.template.name}"
+                        app:readOnly="@{true}" />
 
-                        <io.github.zwieback.familyfinance.widget.ClearableEditText
-                            android:id="@+id/template_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@{smsPattern.template.name}"
-                            app:readOnly="@{true}"
-                            style="@style/AppTheme.EditText.Clearable"/>
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                    </com.johnpetitto.validator.ValidatingTextInputLayout>
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/sender_layout"
+                    android:layout_width="@dimen/zero_weight"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_sender"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/sender_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toEndOf="@id/common"
+                    app:layout_constraintStart_toEndOf="@id/template_name_layout"
+                    app:layout_constraintTop_toTopOf="@id/template_name_layout"
+                    app:validateAfterTextChanged="true"
+                    app:validator="not_empty">
 
-                    <com.johnpetitto.validator.ValidatingTextInputLayout
-                        android:id="@+id/sender_layout"
-                        android:layout_width="@dimen/zero_weight"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/sender"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="@integer/half_of_weight"
-                        android:hint="@string/hint_sender"
-                        app:errorEnabled="true"
-                        app:errorLabel="@string/sender_error"
-                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                        app:validateAfterTextChanged="true"
-                        app:validator="not_empty">
+                        android:maxLength="@{SmsPatternRestriction.SENDER_MAX_LENGTH}"
+                        android:text="@{smsPattern.sender}" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/sender"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:maxLength="@{SmsPatternRestriction.SENDER_MAX_LENGTH}"
-                            android:text="@{smsPattern.sender}"/>
-
-                    </com.johnpetitto.validator.ValidatingTextInputLayout>
-
-                </LinearLayout>
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
 
                 <com.johnpetitto.validator.ValidatingTextInputLayout
                     android:id="@+id/regex_layout"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_regex"
                     app:errorEnabled="true"
                     app:errorLabel="@string/regex_error"
                     app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toEndOf="@id/sender_layout"
+                    app:layout_constraintStart_toStartOf="@id/template_name_layout"
+                    app:layout_constraintTop_toBottomOf="@id/template_name_layout"
                     app:validateAfterTextChanged="true"
                     app:validator="not_empty">
 
@@ -151,63 +146,58 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLength="@{SmsPatternRestriction.REGEX_MAX_LENGTH}"
-                        android:text="@{smsPattern.regex}"/>
+                        android:text="@{smsPattern.regex}" />
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/date_group_layout"
+                    android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:weightSum="@integer/full_weight">
+                    android:hint="@string/hint_date_group"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/date_group_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toStartOf="@+id/value_group_layout"
+                    app:layout_constraintStart_toStartOf="@id/regex_layout"
+                    app:layout_constraintTop_toBottomOf="@id/regex_layout"
+                    app:validator="signed_number">
 
-                    <com.johnpetitto.validator.ValidatingTextInputLayout
-                        android:id="@+id/date_group_layout"
-                        android:layout_width="@dimen/zero_weight"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/date_group"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="@integer/half_of_weight"
-                        android:hint="@string/hint_date_group"
-                        app:errorEnabled="true"
-                        app:errorLabel="@string/date_group_error"
-                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                        app:validator="signed_number">
+                        android:inputType="number|numberSigned"
+                        android:text="@{NumberUtils.integerToString(smsPattern.dateGroup)}" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/date_group"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number|numberSigned"
-                            android:text="@{NumberUtils.integerToString(smsPattern.dateGroup)}"/>
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                    </com.johnpetitto.validator.ValidatingTextInputLayout>
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/value_group_layout"
+                    android:layout_width="@dimen/zero_weight"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_value_group"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/value_group_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toEndOf="@id/regex_layout"
+                    app:layout_constraintStart_toEndOf="@id/date_group_layout"
+                    app:layout_constraintTop_toTopOf="@id/date_group_layout"
+                    app:validator="signed_number">
 
-                    <com.johnpetitto.validator.ValidatingTextInputLayout
-                        android:id="@+id/value_group_layout"
-                        android:layout_width="@dimen/zero_weight"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/value_group"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="@integer/half_of_weight"
-                        android:hint="@string/hint_value_group"
-                        app:errorEnabled="true"
-                        app:errorLabel="@string/value_group_error"
-                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                        app:validator="signed_number">
+                        android:inputType="number|numberSigned"
+                        android:text="@{NumberUtils.integerToString(smsPattern.valueGroup)}" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/value_group"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number|numberSigned"
-                            android:text="@{NumberUtils.integerToString(smsPattern.valueGroup)}"/>
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                    </com.johnpetitto.validator.ValidatingTextInputLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </layout>
