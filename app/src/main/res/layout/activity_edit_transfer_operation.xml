@@ -1,247 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <import type="io.github.zwieback.familyfinance.core.model.restriction.OperationRestriction"/>
+        <import type="io.github.zwieback.familyfinance.core.model.restriction.OperationRestriction" />
 
-        <import type="io.github.zwieback.familyfinance.util.DateUtils"/>
+        <import type="io.github.zwieback.familyfinance.util.DateUtils" />
 
-        <import type="io.github.zwieback.familyfinance.util.NumberUtils"/>
+        <import type="io.github.zwieback.familyfinance.util.NumberUtils" />
 
         <variable
             name="expenseOperation"
-            type="io.github.zwieback.familyfinance.core.model.IOperation"/>
+            type="io.github.zwieback.familyfinance.core.model.IOperation" />
 
         <variable
             name="incomeOperation"
-            type="io.github.zwieback.familyfinance.core.model.IOperation"/>
+            type="io.github.zwieback.familyfinance.core.model.IOperation" />
 
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
-            android:fillViewport="true"
-            android:padding="@dimen/entity_edit_padding">
+            android:fillViewport="true">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.mikepenz.iconics.view.IconicsImageView
+                    android:id="@+id/icon"
+                    android:layout_width="@dimen/entity_edit_icon_size"
+                    android:layout_height="@dimen/entity_edit_icon_size"
+                    android:layout_margin="@dimen/entity_edit_margin"
+                    app:ico_size="@dimen/entity_edit_icon_size"
+                    app:iiv_icon="faw_exchange_alt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/owner_layout"
+                    android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_margin="@dimen/entity_edit_margin"
+                    android:hint="@string/hint_owner"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/owner_is_not_set_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:validateAfterTextChanged="true"
+                    app:validator="not_empty">
 
-                    <com.mikepenz.iconics.view.IconicsImageView
-                        android:id="@+id/icon"
-                        android:layout_width="@dimen/entity_edit_icon_size"
-                        android:layout_height="@dimen/entity_edit_icon_size"
-                        app:ico_size="@dimen/entity_edit_icon_size"
-                        app:iiv_icon="faw_exchange_alt"/>
-
-                    <com.johnpetitto.validator.ValidatingTextInputLayout
-                        android:id="@+id/owner_layout"
+                    <io.github.zwieback.familyfinance.widget.ClearableEditText
+                        android:id="@+id/owner"
+                        style="@style/AppTheme.EditText.Clearable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/entity_edit_margin"
-                        android:layout_marginStart="@dimen/entity_edit_margin"
-                        android:hint="@string/hint_owner"
-                        app:errorEnabled="true"
-                        app:errorLabel="@string/owner_is_not_set_error"
-                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                        app:validateAfterTextChanged="true"
-                        app:validator="not_empty">
+                        android:text="@{expenseOperation.owner.name}"
+                        app:readOnly="@{true}" />
 
-                        <io.github.zwieback.familyfinance.widget.ClearableEditText
-                            android:id="@+id/owner"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@{expenseOperation.owner.name}"
-                            app:readOnly="@{true}"
-                            style="@style/AppTheme.EditText.Clearable"/>
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                    </com.johnpetitto.validator.ValidatingTextInputLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/expense_account_layout"
+                    android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/entity_edit_margin"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:weightSum="@integer/full_weight">
+                    android:hint="@string/hint_expense_account"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/expense_account_is_not_set_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toStartOf="@+id/income_account_layout"
+                    app:layout_constraintStart_toStartOf="@id/icon"
+                    app:layout_constraintTop_toBottomOf="@id/icon"
+                    app:validateAfterTextChanged="true"
+                    app:validator="not_empty">
 
-                    <com.johnpetitto.validator.ValidatingTextInputLayout
-                        android:id="@+id/expense_account_layout"
-                        android:layout_width="@dimen/zero_weight"
+                    <io.github.zwieback.familyfinance.widget.ClearableEditText
+                        android:id="@+id/expense_account"
+                        style="@style/AppTheme.EditText.Clearable"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="@integer/half_of_weight"
-                        android:hint="@string/hint_expense_account"
-                        app:errorEnabled="true"
-                        app:errorLabel="@string/expense_account_is_not_set_error"
-                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                        app:validateAfterTextChanged="true"
-                        app:validator="not_empty">
+                        android:text="@{expenseOperation.account.name}"
+                        app:readOnly="@{true}" />
 
-                        <io.github.zwieback.familyfinance.widget.ClearableEditText
-                            android:id="@+id/expense_account"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@{expenseOperation.account.name}"
-                            app:readOnly="@{true}"
-                            style="@style/AppTheme.EditText.Clearable"/>
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                    </com.johnpetitto.validator.ValidatingTextInputLayout>
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/income_account_layout"
+                    android:layout_width="@dimen/zero_weight"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_income_account"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/income_account_is_not_set_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toEndOf="@id/owner_layout"
+                    app:layout_constraintStart_toEndOf="@id/expense_account_layout"
+                    app:layout_constraintTop_toTopOf="@id/expense_account_layout"
+                    app:validateAfterTextChanged="true"
+                    app:validator="not_empty">
 
-                    <com.johnpetitto.validator.ValidatingTextInputLayout
-                        android:id="@+id/income_account_layout"
-                        android:layout_width="@dimen/zero_weight"
+                    <io.github.zwieback.familyfinance.widget.ClearableEditText
+                        android:id="@+id/income_account"
+                        style="@style/AppTheme.EditText.Clearable"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="@integer/half_of_weight"
-                        android:hint="@string/hint_income_account"
-                        app:errorEnabled="true"
-                        app:errorLabel="@string/income_account_is_not_set_error"
-                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                        app:validateAfterTextChanged="true"
-                        app:validator="not_empty">
+                        android:text="@{incomeOperation.account.name}"
+                        app:readOnly="@{true}" />
 
-                        <io.github.zwieback.familyfinance.widget.ClearableEditText
-                            android:id="@+id/income_account"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@{incomeOperation.account.name}"
-                            app:readOnly="@{true}"
-                            style="@style/AppTheme.EditText.Clearable"/>
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                    </com.johnpetitto.validator.ValidatingTextInputLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/accounts_barrier"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:weightSum="@integer/full_weight">
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="expense_account_layout,income_account_layout"
+                    app:layout_constraintTop_toBottomOf="@id/expense_account_layout" />
 
-                    <com.johnpetitto.validator.ValidatingTextInputLayout
-                        android:id="@+id/value_layout"
-                        android:layout_width="@dimen/zero_weight"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="@integer/half_of_weight"
-                        android:hint="@string/hint_value"
-                        app:errorEnabled="true"
-                        app:errorLabel="@string/value_error"
-                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                        app:validateAfterTextChanged="true"
-                        app:validator="big_decimal">
-
-                        <io.github.zwieback.familyfinance.widget.DecimalNumberTextEdit
-                            android:id="@+id/value"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@{NumberUtils.bigDecimalToString(expenseOperation.value)}"/>
-
-                    </com.johnpetitto.validator.ValidatingTextInputLayout>
-
-                    <com.johnpetitto.validator.ValidatingTextInputLayout
-                        android:id="@+id/date_layout"
-                        android:layout_width="@dimen/zero_weight"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="@integer/half_of_weight"
-                        android:hint="@string/hint_date"
-                        app:errorEnabled="true"
-                        app:errorLabel="@string/date_error"
-                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                        app:validateAfterTextChanged="true"
-                        app:validator="date">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/date"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="date"
-                            android:text="@{DateUtils.localDateToString(expenseOperation.date)}"
-                            app:readOnly="@{true}"/>
-
-                    </com.johnpetitto.validator.ValidatingTextInputLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/value_layout"
+                    android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:weightSum="@integer/full_weight">
+                    android:hint="@string/hint_value"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/value_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toStartOf="@+id/date_layout"
+                    app:layout_constraintStart_toStartOf="@id/expense_account_layout"
+                    app:layout_constraintTop_toBottomOf="@id/accounts_barrier"
+                    app:validateAfterTextChanged="true"
+                    app:validator="big_decimal">
 
-                    <com.johnpetitto.validator.ValidatingTextInputLayout
-                        android:id="@+id/currency_layout"
-                        android:layout_width="@dimen/zero_weight"
+                    <io.github.zwieback.familyfinance.widget.DecimalNumberTextEdit
+                        android:id="@+id/value"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="@integer/half_of_weight"
-                        android:hint="@string/hint_currency"
-                        app:errorEnabled="true"
-                        app:errorLabel="@string/currency_is_not_set_error"
-                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                        app:validateAfterTextChanged="true"
-                        app:validator="not_empty">
+                        android:text="@{NumberUtils.bigDecimalToString(expenseOperation.value)}" />
 
-                        <io.github.zwieback.familyfinance.widget.ClearableEditText
-                            android:id="@+id/currency"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@{expenseOperation.exchangeRate.currency.name}"
-                            app:readOnly="@{true}"
-                            style="@style/AppTheme.EditText.Clearable"/>
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                    </com.johnpetitto.validator.ValidatingTextInputLayout>
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/date_layout"
+                    android:layout_width="@dimen/zero_weight"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_date"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/date_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toEndOf="@id/income_account_layout"
+                    app:layout_constraintStart_toEndOf="@id/value_layout"
+                    app:layout_constraintTop_toTopOf="@id/value_layout"
+                    app:validateAfterTextChanged="true"
+                    app:validator="date">
 
-                    <com.johnpetitto.validator.ValidatingTextInputLayout
-                        android:id="@+id/exchange_rate_layout"
-                        android:layout_width="@dimen/zero_weight"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/date"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="@integer/half_of_weight"
-                        android:hint="@string/hint_exchange_rate"
-                        app:errorEnabled="true"
-                        app:errorLabel="@string/exchange_rate_is_not_set_error"
-                        app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                        app:validateAfterTextChanged="true"
-                        app:validator="not_empty">
+                        android:inputType="date"
+                        android:text="@{DateUtils.localDateToString(expenseOperation.date)}"
+                        app:readOnly="@{true}" />
 
-                        <io.github.zwieback.familyfinance.widget.ClearableEditText
-                            android:id="@+id/exchange_rate"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@{NumberUtils.bigDecimalToString(expenseOperation.exchangeRate.value)}"
-                            app:readOnly="@{true}"
-                            style="@style/AppTheme.EditText.Clearable"/>
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                    </com.johnpetitto.validator.ValidatingTextInputLayout>
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/currency_layout"
+                    android:layout_width="@dimen/zero_weight"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_currency"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/currency_is_not_set_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toStartOf="@+id/exchange_rate_layout"
+                    app:layout_constraintStart_toStartOf="@id/value_layout"
+                    app:layout_constraintTop_toBottomOf="@id/value_layout"
+                    app:validateAfterTextChanged="true"
+                    app:validator="not_empty">
 
-                </LinearLayout>
+                    <io.github.zwieback.familyfinance.widget.ClearableEditText
+                        android:id="@+id/currency"
+                        style="@style/AppTheme.EditText.Clearable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{expenseOperation.exchangeRate.currency.name}"
+                        app:readOnly="@{true}" />
+
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
+
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/exchange_rate_layout"
+                    android:layout_width="@dimen/zero_weight"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_exchange_rate"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/exchange_rate_is_not_set_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toEndOf="@id/date_layout"
+                    app:layout_constraintStart_toEndOf="@id/currency_layout"
+                    app:layout_constraintTop_toTopOf="@id/currency_layout"
+                    app:validateAfterTextChanged="true"
+                    app:validator="not_empty">
+
+                    <io.github.zwieback.familyfinance.widget.ClearableEditText
+                        android:id="@+id/exchange_rate"
+                        style="@style/AppTheme.EditText.Clearable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{NumberUtils.bigDecimalToString(expenseOperation.exchangeRate.value)}"
+                        app:readOnly="@{true}" />
+
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/description_layout"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_description_optional">
+                    android:hint="@string/hint_description_optional"
+                    app:layout_constraintEnd_toEndOf="@id/exchange_rate_layout"
+                    app:layout_constraintStart_toStartOf="@id/currency_layout"
+                    app:layout_constraintTop_toBottomOf="@id/currency_layout">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/description"
@@ -249,15 +240,18 @@
                         android:layout_height="wrap_content"
                         android:inputType="text|textMultiLine"
                         android:maxLength="@{OperationRestriction.DESCRIPTION_MAX_LENGTH}"
-                        android:text="@{expenseOperation.description}"/>
+                        android:text="@{expenseOperation.description}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/url_layout"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/zero_weight"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_url_optional">
+                    android:hint="@string/hint_url_optional"
+                    app:layout_constraintEnd_toEndOf="@id/description_layout"
+                    app:layout_constraintStart_toStartOf="@id/description_layout"
+                    app:layout_constraintTop_toBottomOf="@id/description_layout">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/url"
@@ -265,14 +259,14 @@
                         android:layout_height="wrap_content"
                         android:inputType="text|textMultiLine"
                         android:maxLength="@{OperationRestriction.URL_MAX_LENGTH}"
-                        android:text="@{expenseOperation.url}"/>
+                        android:text="@{expenseOperation.url}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </layout>
