@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <import type="io.github.zwieback.familyfinance.util.DateUtils"/>
+        <import type="io.github.zwieback.familyfinance.util.DateUtils" />
 
-        <import type="io.github.zwieback.familyfinance.util.NumberUtils"/>
+        <import type="io.github.zwieback.familyfinance.util.NumberUtils" />
 
         <variable
             name="filter"
-            type="io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter"/>
+            type="io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter" />
 
     </data>
 
@@ -20,201 +19,199 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/entity_edit_padding">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/article_layout"
+                android:layout_width="@dimen/zero_weight"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/filter_margin"
+                android:layout_marginLeft="@dimen/filter_margin"
+                android:layout_marginTop="@dimen/filter_margin"
+                android:hint="@string/hint_article"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toStartOf="@+id/currency_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <io.github.zwieback.familyfinance.widget.ClearableEditText
+                    android:id="@+id/article"
+                    style="@style/AppTheme.EditText.Clearable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    app:readOnly="@{true}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/currency_layout"
+                android:layout_width="@dimen/zero_weight"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/filter_margin"
+                android:layout_marginRight="@dimen/filter_margin"
+                android:hint="@string/hint_currency"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/article_layout"
+                app:layout_constraintTop_toTopOf="@id/article_layout">
+
+                <io.github.zwieback.familyfinance.widget.ClearableEditText
+                    android:id="@+id/currency"
+                    style="@style/AppTheme.EditText.Clearable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:readOnly="@{true}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/article_and_currency_barrier"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                android:weightSum="@integer/full_weight">
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="article_layout,currency_layout"
+                app:layout_constraintTop_toBottomOf="@id/article_layout" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/article_layout"
-                    android:layout_width="@dimen/zero_weight"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/account_layout"
+                android:layout_width="@dimen/zero_weight"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_account"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toStartOf="@+id/owner_layout"
+                app:layout_constraintStart_toStartOf="@id/article_layout"
+                app:layout_constraintTop_toBottomOf="@id/article_and_currency_barrier">
+
+                <io.github.zwieback.familyfinance.widget.ClearableEditText
+                    android:id="@+id/account"
+                    style="@style/AppTheme.EditText.Clearable"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@integer/half_of_weight"
-                    android:hint="@string/hint_article"
-                    app:errorEnabled="true">
+                    app:readOnly="@{true}" />
 
-                    <io.github.zwieback.familyfinance.widget.ClearableEditText
-                        android:id="@+id/article"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        app:readOnly="@{true}"
-                        style="@style/AppTheme.EditText.Clearable"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-                </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/owner_layout"
+                android:layout_width="@dimen/zero_weight"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_owner"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/currency_layout"
+                app:layout_constraintStart_toEndOf="@id/account_layout"
+                app:layout_constraintTop_toTopOf="@id/account_layout">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/currency_layout"
-                    android:layout_width="@dimen/zero_weight"
+                <io.github.zwieback.familyfinance.widget.ClearableEditText
+                    android:id="@+id/owner"
+                    style="@style/AppTheme.EditText.Clearable"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@integer/half_of_weight"
-                    android:hint="@string/hint_currency"
-                    app:errorEnabled="true">
+                    app:readOnly="@{true}" />
 
-                    <io.github.zwieback.familyfinance.widget.ClearableEditText
-                        android:id="@+id/currency"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:readOnly="@{true}"
-                        style="@style/AppTheme.EditText.Clearable"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/account_and_owner_barrier"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                android:weightSum="@integer/full_weight">
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="account_layout,owner_layout"
+                app:layout_constraintTop_toBottomOf="@id/account_layout" />
 
-                <com.johnpetitto.validator.ValidatingTextInputLayout
-                    android:id="@+id/account_layout"
-                    android:layout_width="@dimen/zero_weight"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="@integer/half_of_weight"
-                    android:hint="@string/hint_account"
-                    app:errorEnabled="true"
-                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance">
-
-                    <io.github.zwieback.familyfinance.widget.ClearableEditText
-                        android:id="@+id/account"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:readOnly="@{true}"
-                        style="@style/AppTheme.EditText.Clearable"/>
-
-                </com.johnpetitto.validator.ValidatingTextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/owner_layout"
-                    android:layout_width="@dimen/zero_weight"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="@integer/half_of_weight"
-                    android:hint="@string/hint_owner"
-                    app:errorEnabled="true">
-
-                    <io.github.zwieback.familyfinance.widget.ClearableEditText
-                        android:id="@+id/owner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:readOnly="@{true}"
-                        style="@style/AppTheme.EditText.Clearable"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <com.johnpetitto.validator.ValidatingTextInputLayout
+                android:id="@+id/start_date_layout"
+                android:layout_width="@dimen/zero_weight"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                android:weightSum="@integer/full_weight">
+                android:hint="@string/hint_start_date"
+                app:errorEnabled="true"
+                app:errorLabel="@string/date_error"
+                app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                app:layout_constraintEnd_toStartOf="@+id/end_date_layout"
+                app:layout_constraintStart_toStartOf="@id/account_layout"
+                app:layout_constraintTop_toBottomOf="@id/account_and_owner_barrier"
+                app:validateAfterTextChanged="true"
+                app:validator="date">
 
-                <com.johnpetitto.validator.ValidatingTextInputLayout
-                    android:id="@+id/start_date_layout"
-                    android:layout_width="@dimen/zero_weight"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/start_date"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@integer/half_of_weight"
-                    android:hint="@string/hint_start_date"
-                    app:errorEnabled="true"
-                    app:errorLabel="@string/date_error"
-                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                    app:validateAfterTextChanged="true"
-                    app:validator="date">
+                    android:inputType="date"
+                    android:text="@{DateUtils.localDateToString(filter.startDate)}"
+                    app:readOnly="@{true}" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/start_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="date"
-                        android:text="@{DateUtils.localDateToString(filter.startDate)}"
-                        app:readOnly="@{true}"/>
+            </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                </com.johnpetitto.validator.ValidatingTextInputLayout>
-
-                <com.johnpetitto.validator.ValidatingTextInputLayout
-                    android:id="@+id/end_date_layout"
-                    android:layout_width="@dimen/zero_weight"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="@integer/half_of_weight"
-                    android:hint="@string/hint_end_date"
-                    app:errorEnabled="true"
-                    app:errorLabel="@string/date_error"
-                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                    app:validateAfterTextChanged="true"
-                    app:validator="date">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/end_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="date"
-                        android:text="@{DateUtils.localDateToString(filter.endDate)}"
-                        app:readOnly="@{true}"/>
-
-                </com.johnpetitto.validator.ValidatingTextInputLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <com.johnpetitto.validator.ValidatingTextInputLayout
+                android:id="@+id/end_date_layout"
+                android:layout_width="@dimen/zero_weight"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                android:weightSum="@integer/full_weight">
+                android:hint="@string/hint_end_date"
+                app:errorEnabled="true"
+                app:errorLabel="@string/date_error"
+                app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                app:layout_constraintEnd_toEndOf="@id/owner_layout"
+                app:layout_constraintStart_toEndOf="@id/start_date_layout"
+                app:layout_constraintTop_toTopOf="@id/start_date_layout"
+                app:validateAfterTextChanged="true"
+                app:validator="date">
 
-                <com.johnpetitto.validator.ValidatingTextInputLayout
-                    android:id="@+id/start_value_layout"
-                    android:layout_width="@dimen/zero_weight"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/end_date"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@integer/half_of_weight"
-                    android:hint="@string/hint_start_value"
-                    app:errorEnabled="true"
-                    app:errorLabel="@string/value_error"
-                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                    app:validator="big_decimal">
+                    android:inputType="date"
+                    android:text="@{DateUtils.localDateToString(filter.endDate)}"
+                    app:readOnly="@{true}" />
 
-                    <io.github.zwieback.familyfinance.widget.DecimalNumberTextEdit
-                        android:id="@+id/start_value"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{NumberUtils.bigDecimalToString(filter.startValue)}"/>
+            </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                </com.johnpetitto.validator.ValidatingTextInputLayout>
+            <com.johnpetitto.validator.ValidatingTextInputLayout
+                android:id="@+id/start_value_layout"
+                android:layout_width="@dimen/zero_weight"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_start_value"
+                app:errorEnabled="true"
+                app:errorLabel="@string/value_error"
+                app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                app:layout_constraintEnd_toStartOf="@+id/end_value_layout"
+                app:layout_constraintStart_toStartOf="@id/start_date_layout"
+                app:layout_constraintTop_toBottomOf="@id/start_date_layout"
+                app:validator="big_decimal">
 
-                <com.johnpetitto.validator.ValidatingTextInputLayout
-                    android:id="@+id/end_value_layout"
-                    android:layout_width="@dimen/zero_weight"
+                <io.github.zwieback.familyfinance.widget.DecimalNumberTextEdit
+                    android:id="@+id/start_value"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@integer/half_of_weight"
-                    android:hint="@string/hint_end_value"
-                    app:errorEnabled="true"
-                    app:errorLabel="@string/value_error"
-                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                    app:validator="big_decimal">
+                    android:text="@{NumberUtils.bigDecimalToString(filter.startValue)}" />
 
-                    <io.github.zwieback.familyfinance.widget.DecimalNumberTextEdit
-                        android:id="@+id/end_value"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{NumberUtils.bigDecimalToString(filter.endValue)}"/>
+            </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                </com.johnpetitto.validator.ValidatingTextInputLayout>
+            <com.johnpetitto.validator.ValidatingTextInputLayout
+                android:id="@+id/end_value_layout"
+                android:layout_width="@dimen/zero_weight"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_end_value"
+                app:errorEnabled="true"
+                app:errorLabel="@string/value_error"
+                app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                app:layout_constraintEnd_toEndOf="@id/end_date_layout"
+                app:layout_constraintStart_toEndOf="@id/start_value_layout"
+                app:layout_constraintTop_toTopOf="@id/start_value_layout"
+                app:validator="big_decimal">
 
-            </LinearLayout>
+                <io.github.zwieback.familyfinance.widget.DecimalNumberTextEdit
+                    android:id="@+id/end_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{NumberUtils.bigDecimalToString(filter.endValue)}" />
 
-        </LinearLayout>
+            </com.johnpetitto.validator.ValidatingTextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
