@@ -145,6 +145,14 @@
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/account_and_owner_barrier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="income_account_layout,owner_layout"
+                    app:layout_constraintTop_toBottomOf="@id/income_account_layout" />
+
                 <com.johnpetitto.validator.ValidatingTextInputLayout
                     android:id="@+id/value_layout"
                     android:layout_width="@dimen/zero_weight"
@@ -155,7 +163,7 @@
                     app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                     app:layout_constraintEnd_toStartOf="@+id/date_layout"
                     app:layout_constraintStart_toStartOf="@id/income_account_layout"
-                    app:layout_constraintTop_toBottomOf="@id/income_account_layout"
+                    app:layout_constraintTop_toBottomOf="@id/account_and_owner_barrier"
                     app:validateAfterTextChanged="true"
                     app:validator="big_decimal">
 

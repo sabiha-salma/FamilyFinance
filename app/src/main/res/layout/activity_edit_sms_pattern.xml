@@ -127,6 +127,14 @@
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/template_name_and_sender_barrier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="template_name_layout,sender_layout"
+                    app:layout_constraintTop_toBottomOf="@id/template_name_layout" />
+
                 <com.johnpetitto.validator.ValidatingTextInputLayout
                     android:id="@+id/regex_layout"
                     android:layout_width="@dimen/zero_weight"
@@ -137,7 +145,7 @@
                     app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                     app:layout_constraintEnd_toEndOf="@id/sender_layout"
                     app:layout_constraintStart_toStartOf="@id/template_name_layout"
-                    app:layout_constraintTop_toBottomOf="@id/template_name_layout"
+                    app:layout_constraintTop_toBottomOf="@id/template_name_and_sender_barrier"
                     app:validateAfterTextChanged="true"
                     app:validator="not_empty">
 
