@@ -100,6 +100,9 @@
     <dimen name="pie_marker_height">70dp</dimen>
     <dimen name="pie_value_text_size">6sp</dimen>
 
+    <!-- Filter -->
+    <dimen name="filter_margin">8dp</dimen>
+
     <!-- Display -->
     <dimen name="display_margin">8dp</dimen>
 
