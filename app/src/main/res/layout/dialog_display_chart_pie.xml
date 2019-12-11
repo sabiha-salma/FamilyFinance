@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-        <import
-            type="io.github.zwieback.familyfinance.business.chart.display.type.PieChartGroupByType"/>
+        <import type="io.github.zwieback.familyfinance.business.chart.display.type.PieChartGroupByType" />
 
-        <import
-            type="io.github.zwieback.familyfinance.business.chart.display.type.PieChartGroupingType"/>
+        <import type="io.github.zwieback.familyfinance.business.chart.display.type.PieChartGroupingType" />
 
         <variable
             name="display"
-            type="io.github.zwieback.familyfinance.business.chart.display.PieChartDisplay"/>
+            type="io.github.zwieback.familyfinance.business.chart.display.PieChartDisplay" />
 
     </data>
 
@@ -21,101 +19,112 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/entity_edit_padding"
-            android:weightSum="@integer/full_weight">
-
-            <LinearLayout
-                android:layout_width="@dimen/zero_weight"
-                android:layout_height="wrap_content"
-                android:layout_weight="@integer/half_of_weight"
-                android:orientation="vertical">
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/pie_chart_display_group_by"/>
-
-                    <RadioButton
-                        android:id="@+id/group_by_article"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:checked="@{display.groupByType == PieChartGroupByType.ARTICLE}"
-                        android:text="@string/pie_chart_display_group_by_article"/>
-
-                    <RadioButton
-                        android:id="@+id/group_by_article_parent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:checked="@{display.groupByType == PieChartGroupByType.ARTICLE_PARENT}"
-                        android:text="@string/pie_chart_display_group_by_article_parent"/>
-
-                </RadioGroup>
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/pie_chart_display_grouping"/>
-
-                    <RadioButton
-                        android:id="@+id/grouping_simple"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:checked="@{display.groupingType == PieChartGroupingType.SIMPLE}"
-                        android:text="@string/pie_chart_display_grouping_simple"/>
-
-                    <RadioButton
-                        android:id="@+id/grouping_limit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:checked="@{display.groupingType == PieChartGroupingType.LIMIT}"
-                        android:text="@string/pie_chart_display_grouping_limit"/>
-
-                </RadioGroup>
-
-            </LinearLayout>
+            android:layout_height="wrap_content">
 
             <RadioGroup
+                android:id="@+id/group_by_layout"
                 android:layout_width="@dimen/zero_weight"
                 android:layout_height="wrap_content"
-                android:layout_weight="@integer/half_of_weight"
-                android:orientation="vertical">
+                android:layout_margin="@dimen/display_margin"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/view_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/pie_chart_display_view"/>
+                    android:text="@string/pie_chart_display_group_by" />
+
+                <RadioButton
+                    android:id="@+id/group_by_article"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{display.groupByType == PieChartGroupByType.ARTICLE}"
+                    android:text="@string/pie_chart_display_group_by_article" />
+
+                <RadioButton
+                    android:id="@+id/group_by_article_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{display.groupByType == PieChartGroupByType.ARTICLE_PARENT}"
+                    android:text="@string/pie_chart_display_group_by_article_parent" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/view_layout"
+                android:layout_width="@dimen/zero_weight"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/display_margin"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/group_by_layout"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pie_chart_display_view" />
 
                 <CheckBox
                     android:id="@+id/view_values"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="@={display.viewValues}"
-                    android:text="@string/pie_chart_display_view_values"/>
+                    android:text="@string/pie_chart_display_view_values" />
 
                 <CheckBox
                     android:id="@+id/use_percent_values"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="@={display.usePercentValues}"
-                    android:text="@string/pie_chart_display_use_percent_values"/>
+                    android:text="@string/pie_chart_display_use_percent_values" />
 
             </RadioGroup>
 
-        </LinearLayout>
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/group_by_and_view_barrier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="group_by_layout,view_layout"
+                app:layout_constraintTop_toBottomOf="@id/group_by_layout" />
+
+            <RadioGroup
+                android:id="@+id/grouping_layout"
+                android:layout_width="@dimen/zero_weight"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/display_margin"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/group_by_layout"
+                app:layout_constraintStart_toStartOf="@id/group_by_layout"
+                app:layout_constraintTop_toBottomOf="@id/group_by_and_view_barrier">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pie_chart_display_grouping" />
+
+                <RadioButton
+                    android:id="@+id/grouping_simple"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{display.groupingType == PieChartGroupingType.SIMPLE}"
+                    android:text="@string/pie_chart_display_grouping_simple" />
+
+                <RadioButton
+                    android:id="@+id/grouping_limit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@{display.groupingType == PieChartGroupingType.LIMIT}"
+                    android:text="@string/pie_chart_display_grouping_limit" />
+
+            </RadioGroup>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
