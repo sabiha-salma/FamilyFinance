@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!-- Account colors -->
+    <color name="colorInactiveAccount">@android:color/darker_gray</color>
+
     <!-- Operation colors -->
     <color name="colorIncome">#1AB611</color>
     <color name="colorExpense">#C1393D</color>

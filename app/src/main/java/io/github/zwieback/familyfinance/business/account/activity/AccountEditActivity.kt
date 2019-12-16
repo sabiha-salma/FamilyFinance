@@ -121,6 +121,12 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
         startActivityForResult(intent, PERSON_CODE)
     }
 
+    private fun onActiveChange(isChecked: Boolean) {
+        val accountCopy = entity.copy()
+        accountCopy.setActive(isChecked)
+        provider.setupIcon(binding.icon.icon, accountCopy)
+    }
+
     private fun loadCurrency(currencyId: Int) {
         loadEntity(
             Currency::class.java,
@@ -195,6 +201,7 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
         binding.owner.setOnClickListener { onOwnerClick() }
         binding.parentLayout.setValidator { isParentValid(it) }
         binding.accountType.setSelection(AccountTypeHelper.getAccountTypeIndex(entity))
+        binding.active.setOnCheckedChangeListener { _, isChecked -> onActiveChange(isChecked) }
     }
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")

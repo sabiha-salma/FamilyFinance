@@ -24,6 +24,10 @@ class AccountViewProvider(context: Context) : EntityProvider<AccountView>(contex
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun provideDefaultIconColor(account: AccountView): Int {
-        return R.color.colorPrimaryDark
+        return if (account.isActive) {
+            R.color.colorPrimaryDark
+        } else {
+            R.color.colorInactiveAccount
+        }
     }
 }

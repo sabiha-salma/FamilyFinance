@@ -7,7 +7,7 @@ import io.github.zwieback.familyfinance.core.model.type.AccountType
 import io.requery.*
 import java.math.BigDecimal
 
-@Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN)
+@Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN, copyable = true)
 @Table(name = "account")
 interface IAccount : IBaseEntityFolder {
 

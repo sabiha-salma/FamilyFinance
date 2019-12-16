@@ -40,25 +40,14 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:layout_marginLeft="@dimen/default_margin"
-            android:layout_marginRight="@dimen/default_margin"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_toEndOf="@+id/icon"
-            android:layout_toLeftOf="@+id/active"
-            android:layout_toRightOf="@+id/icon"
-            android:layout_toStartOf="@+id/active"
-            android:text="@{account.name}"
-            android:textSize="@dimen/account_text_size"/>
-
-        <Switch
-            android:id="@+id/active"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:checked="@{account.active}"
-            android:enabled="false"/>
+            android:layout_marginLeft="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_toEndOf="@+id/icon"
+            android:layout_toRightOf="@+id/icon"
+            android:text="@{account.name}"
+            android:textSize="@dimen/account_text_size"/>
 
         <TextView
             android:id="@+id/balance"
