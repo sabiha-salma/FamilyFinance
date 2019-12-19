@@ -8,13 +8,14 @@ try {
 }
 
 android {
-    compileSdkVersion setup.compileSdk
-    buildToolsVersion setup.buildTools
+    // Declared in dependencies.gradle in the root of the project.
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
 
     defaultConfig {
         applicationId "io.github.zwieback.familyfinance"
-        minSdkVersion setup.minSdk
-        targetSdkVersion setup.targetSdk
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
         versionCode 10507
         versionName "1.5.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -49,70 +50,69 @@ android {
     }
 }
 
+// Libraries declared in dependencies.gradle in the root of the project
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation("androidx.test.espresso:espresso-core:${versions.espressoLib}", {
+    androidTestImplementation(libraries.espressoCore, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlinLib}"
+    implementation libraries.kotlin
     // support libs
-    implementation "androidx.appcompat:appcompat:${versions.appcompatLib}"
-    implementation "androidx.cardview:cardview:${versions.supportLib}"
-    implementation "androidx.legacy:legacy-support-v4:${versions.supportLib}"
-    implementation "androidx.multidex:multidex:${versions.multidexLib}"
-    implementation "androidx.recyclerview:recyclerview:${versions.supportLib}"
-    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintLayoutLib}"
-    implementation "com.google.android.material:material:${versions.materialLib}"
+    implementation libraries.appcompat
+    implementation libraries.cardview
+    implementation libraries.legacySupport
+    implementation libraries.multidex
+    implementation libraries.recyclerView
+    implementation libraries.constraintLayout
+    implementation libraries.material
     // JPA
-    implementation "androidx.sqlite:sqlite:${versions.sqliteAndroidXLib}"
-    implementation "io.requery:requery:${versions.requeryLib}"
-    implementation "io.requery:requery-android:${versions.requeryLib}"
-    implementation "io.requery:sqlite-android:${versions.sqliteAndroidLib}"
-    kapt "io.requery:requery-processor:${versions.requeryLib}"
+    implementation libraries.sqliteAndroidX
+    implementation libraries.sqliteAndroid
+    implementation libraries.requery
+    implementation libraries.requeryAndroid
+    kapt libraries.requeryProcessor
     // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:${versions.rxJavaLib}"
-    implementation "io.reactivex.rxjava2:rxandroid:${versions.rxAndroidLib}"
+    implementation libraries.rxJava
+    implementation libraries.rxAndroid
+    implementation libraries.rxBinding
     // icons
-    implementation "com.mikepenz:iconics-core:${versions.iconicsLib}"
-    implementation "com.mikepenz:iconics-views:${versions.iconicsLib}"
-    implementation "com.mikepenz:material-design-iconic-typeface:${versions.materialDesignTypeface}"
-    implementation "com.mikepenz:fontawesome-typeface:${versions.fontawesomeTypeface}"
-    implementation "com.mikepenz:community-material-typeface:${versions.communityMaterialTypeface}"
+    implementation libraries.iconicsCore
+    implementation libraries.iconicsViews
+    implementation libraries.materialDesignTypeface
+    implementation libraries.fontawesomeTypeface
+    implementation libraries.communityMaterialTypeface
     // materialize
-    implementation "com.mikepenz:materialize:${versions.materializeLib}"
+    implementation libraries.materialize
     // fast adapter
-    implementation "com.mikepenz:fastadapter:${versions.fastAdapterLib}"
-    implementation "com.mikepenz:fastadapter-extensions-utils:${versions.fastAdapterLib}"
+    implementation libraries.fastAdapter
+    implementation libraries.fastAdapterExtensionsUtils
     // material drawer
-    implementation("com.mikepenz:materialdrawer:${versions.materialDrawerLib}") {
+    implementation(libraries.materialDrawer) {
         transitive = true
         exclude group: "com.mikepenz"
     }
     // java.time
-    implementation "com.jakewharton.threetenabp:threetenabp:${versions.timeLib}"
+    implementation libraries.time
     // crash report
-    releaseImplementation "ch.acra:acra-mail:${versions.acraLib}"
-    releaseImplementation "ch.acra:acra-dialog:${versions.acraLib}"
+    implementation libraries.acraMail
+    implementation libraries.acraDialog
     // preferences
-    implementation "com.takisoft.preferencex:preferencex:${versions.preferenceCompatLib}"
+    implementation libraries.preferenceCompat
     // shared preferences
-    implementation "ds.gendalf:gendalf:${versions.gendalfLib}"
+    implementation libraries.gendalf
+    kapt libraries.gendalfProcessor
     // file/directory picker
-    implementation "com.nononsenseapps:filepicker:${versions.filepickerLib}"
+    implementation libraries.filepicker
     // permissions dispatcher
-    implementation "org.permissionsdispatcher:permissionsdispatcher:${versions.permissionsDispatcherLib}"
-    kapt "org.permissionsdispatcher:permissionsdispatcher-processor:${versions.permissionsDispatcherLib}"
-    // RxBinding
-    implementation "com.jakewharton.rxbinding3:rxbinding-appcompat:${versions.rxBinding3Lib}"
+    implementation libraries.permissionsDispatcher
+    kapt libraries.permissionsDispatcherProcessor
     // chart
-    implementation "com.github.PhilJay:MPAndroidChart:${versions.mpAndroidChartLib}"
-    // shared preferences
-    kapt "ds.gendalf:compiler:${versions.gendalfLib}"
-    // project libs
+    implementation libraries.mpAndroidChart
+    // project
     implementation project(':shared')
     implementation project(':validator')
     // tests
-    androidTestImplementation "androidx.test.ext:junit:${versions.androidxJunitLib}"
-    testImplementation "junit:junit:${versions.junitLib}"
+    androidTestImplementation libraries.androidxJunit
+    testImplementation libraries.junit
 }
