@@ -156,12 +156,9 @@ abstract class EntityFolderActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
     }
 
     private fun determineValidParentId(): Int {
-        val fragment = findFragment()
-        return if (fragment != null) {
-            integerToIntId(fragment.parentId)
-        } else {
-            ID_AS_NULL
-        }
+        return findFragment()
+            ?.let { fragment -> integerToIntId(fragment.parentId) }
+            ?: ID_AS_NULL
     }
 
     @CallSuper

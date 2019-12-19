@@ -56,10 +56,7 @@ abstract class ArticleActivity<FRAGMENT, FILTER> :
     }
 
     private fun setupSearchItem(searchItem: MenuItem?, menu: Menu) {
-        if (searchItem == null) {
-            return
-        }
-        searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+        searchItem?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionExpand(item: MenuItem): Boolean {
                 showMenuGroupOfAddEntries(menu, false)
                 return true

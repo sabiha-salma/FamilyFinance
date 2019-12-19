@@ -217,13 +217,12 @@ class BarChartFragment :
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight) {
-        if (e == null) {
-            return
+        (e as? BarEntry)?.let { barEntry ->
+            val bounds = onValueSelectedRectF
+            chart.getBarBounds(barEntry, bounds)
+            val position = chart.getPosition(barEntry, YAxis.AxisDependency.LEFT)
+            MPPointF.recycleInstance(position)
         }
-        val bounds = onValueSelectedRectF
-        chart.getBarBounds(e as BarEntry, bounds)
-        val position = chart.getPosition(e, YAxis.AxisDependency.LEFT)
-        MPPointF.recycleInstance(position)
     }
 
     override fun onNothingSelected() {

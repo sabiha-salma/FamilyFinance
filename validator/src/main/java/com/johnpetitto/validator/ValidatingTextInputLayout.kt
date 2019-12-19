@@ -107,15 +107,16 @@ class ValidatingTextInputLayout @JvmOverloads constructor(
      */
     private fun setValidateAfterTextChanged(validate: Boolean) {
         validateAfterTextChanged = validate
-        if (editText == null) {
-            return
-        }
-        if (validateAfterTextChanged) {
-            textWatcher?.let { editText?.removeTextChangedListener(textWatcher) }
-            textWatcher = TextWatcherValidator(this)
-            editText?.addTextChangedListener(textWatcher)
-        } else {
-            editText?.removeTextChangedListener(textWatcher)
+        editText?.let { editText ->
+            if (validateAfterTextChanged) {
+                textWatcher?.let { textWatcher ->
+                    editText.removeTextChangedListener(textWatcher)
+                }
+                textWatcher = TextWatcherValidator(this)
+                editText.addTextChangedListener(textWatcher)
+            } else {
+                editText.removeTextChangedListener(textWatcher)
+            }
         }
     }
 

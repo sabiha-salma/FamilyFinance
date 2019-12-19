@@ -28,12 +28,11 @@ abstract class EntityProvider<E : IBaseEntity> protected constructor(
     }
 
     fun setupIcon(drawable: IconicsDrawable?, entity: E) {
-        if (drawable == null) {
-            return
+        drawable?.let {
+            val icon = provideIcon(entity) ?: provideDefaultIcon(entity)
+            drawable.icon(icon)
+            drawable.color(IconicsColor.colorRes(provideDefaultIconColor(entity)))
         }
-        val icon = provideIcon(entity) ?: provideDefaultIcon(entity)
-        drawable.icon(icon)
-        drawable.color(IconicsColor.colorRes(provideDefaultIconColor(entity)))
     }
 
     /**

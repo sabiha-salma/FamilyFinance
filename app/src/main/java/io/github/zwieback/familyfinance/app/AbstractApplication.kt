@@ -15,23 +15,17 @@ import java.sql.SQLException
 
 abstract class AbstractApplication : MultiDexApplication() {
 
-    private var dataStore: ReactiveEntityStore<Persistable>? = null
-
     /**
      * Note if you're using Dagger you can make this part of your application
      * level module returning `@Provides @Singleton`.
      *
      * @return [EntityDataStore] single instance for the application.
      */
-    val data: ReactiveEntityStore<Persistable>
-        get() {
-            if (dataStore == null) {
-                val databaseProvider = buildDatabaseProvider()
-                val configuration = databaseProvider.configuration
-                dataStore = ReactiveSupport.toReactiveStore(EntityDataStore(configuration))
-            }
-            return dataStore ?: error("DataStore can't be null")
-        }
+    val data: ReactiveEntityStore<Persistable> by lazy {
+        val databaseProvider = buildDatabaseProvider()
+        val configuration = databaseProvider.configuration
+        ReactiveSupport.toReactiveStore(EntityDataStore<Persistable>(configuration))
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -45,7 +39,7 @@ abstract class AbstractApplication : MultiDexApplication() {
      * Workaround for creating views, while requery does not support
      * creating views.
      *
-     * Note: This method must be called before the creation of the [dataStore],
+     * Note: This method must be called before the creation of the [data],
      * otherwise [SQLException] will be thrown.
      *
      * See [Using SQLite views](https://github.com/requery/requery/issues/721.issuecomment-344153774)
@@ -61,7 +55,7 @@ abstract class AbstractApplication : MultiDexApplication() {
      * Workaround for destroying views, while requery does not support
      * destroying views.
      *
-     * Note: This method must be called before the creation of the [dataStore],
+     * Note: This method must be called before the creation of the [data],
      * otherwise [SQLException] will be thrown.
      *
      * See [Using SQLite views](https://github.com/requery/requery/issues/721.issuecomment-344153774)

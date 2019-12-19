@@ -127,8 +127,10 @@ class IncomeOperationEditActivity : OperationEditActivity<ActivityEditIncomeOper
     private fun onSuccessfulArticleFound(): Consumer<Article> {
         return Consumer { foundArticle ->
             entity.setArticle(foundArticle)
-            if (binding.value.text?.toString().isNullOrEmpty() && foundArticle.defaultValue != null) {
-                binding.value.setText(bigDecimalToString(foundArticle.defaultValue))
+            if (binding.value.text?.toString().isNullOrEmpty()) {
+                foundArticle.defaultValue?.let { defaultValue ->
+                    binding.value.setText(bigDecimalToString(defaultValue))
+                }
             }
         }
     }

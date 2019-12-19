@@ -207,16 +207,15 @@ abstract class HorizontalBarChartFragment<F : OperationFilter> :
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight) {
-        if (e == null) {
-            return
+        (e as? BarEntry)?.let { barEntry ->
+            val bounds = onValueSelectedRectF
+            chart.getBarBounds(barEntry, bounds)
+            val position = chart.getPosition(
+                barEntry,
+                chart.data.getDataSetByIndex(h.dataSetIndex).axisDependency
+            )
+            MPPointF.recycleInstance(position)
         }
-        val bounds = onValueSelectedRectF
-        chart.getBarBounds(e as BarEntry, bounds)
-        val position = chart.getPosition(
-            e,
-            chart.data.getDataSetByIndex(h.dataSetIndex).axisDependency
-        )
-        MPPointF.recycleInstance(position)
     }
 
     override fun onNothingSelected() {
