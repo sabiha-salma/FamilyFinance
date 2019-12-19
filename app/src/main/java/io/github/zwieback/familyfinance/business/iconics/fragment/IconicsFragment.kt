@@ -28,13 +28,13 @@ import kotlin.collections.ArrayList
 
 class IconicsFragment : Fragment() {
 
-    private lateinit var mIconSelectListener: OnIconSelectListener
-    private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mOnScrollListener: RecyclerView.OnScrollListener
-    private var mIcons: List<IconItem> = ArrayList()
-    private var mSearch: String? = null
-    private var mPopup: PopupWindow? = null
-    private var mAdapter: FastItemAdapter<IconItem>? = null
+    private lateinit var iconSelectListener: OnIconSelectListener
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var onScrollListener: RecyclerView.OnScrollListener
+    private var icons: List<IconItem> = ArrayList()
+    private var popup: PopupWindow? = null
+    private var adapter: FastItemAdapter<IconItem>? = null
+    private var searchSuggestion: String? = null
 
     private val popupIconSize: Int
         get() = context?.resources?.getDimension(R.dimen.popup_icon_size)?.toInt() ?: 144
@@ -42,7 +42,7 @@ class IconicsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnIconSelectListener) {
-            this.mIconSelectListener = context
+            this.iconSelectListener = context
         } else {
             throw ClassCastException("$context must implement OnIconSelectListener")
         }
@@ -59,27 +59,28 @@ class IconicsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mAdapter = createAdapter()
-        mOnScrollListener = createOnScrollListener()
+        adapter = createAdapter()
+        onScrollListener = createOnScrollListener()
 
-        mRecyclerView = view.findViewById(R.id.icon_recycler_view)
-        mRecyclerView.layoutManager = GridLayoutManager(context, 2)
-        mRecyclerView.addItemDecoration(SpaceItemDecoration())
-        mRecyclerView.itemAnimator = DefaultItemAnimator()
-        mRecyclerView.adapter = mAdapter
-        mRecyclerView.addOnScrollListener(mOnScrollListener)
+        recyclerView = view.findViewById(R.id.icon_recycler_view)
+        recyclerView
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.addItemDecoration(SpaceItemDecoration())
+        recyclerView.itemAnimator = DefaultItemAnimator()
+        recyclerView.adapter = adapter
+        recyclerView.addOnScrollListener(onScrollListener)
 
         val fontName = requireArguments().getString(FONT_NAME) as String
         val foundFont = Iconics.getRegisteredFonts(context)
             .single { font -> font.fontName.equals(fontName, ignoreCase = true) }
-        mIcons = foundFont.icons.map { icon -> IconItem(icon) }
-        mAdapter?.set(mIcons)
+        icons = foundFont.icons.map { icon -> IconItem(icon) }
+        adapter?.set(icons)
 
-        onSearch(mSearch)
+        onSearch(searchSuggestion)
     }
 
     override fun onDetach() {
-        mRecyclerView.removeOnScrollListener(mOnScrollListener)
+        recyclerView.removeOnScrollListener(onScrollListener)
         super.onDetach()
     }
 
@@ -98,7 +99,7 @@ class IconicsFragment : Fragment() {
         val fastAdapter = FastItemAdapter<IconItem>()
 
         fastAdapter.onClickListener = { _, _, item, _ ->
-            mIconSelectListener.onIconSelected(item.icon)
+            iconSelectListener.onIconSelected(item.icon)
             true
         }
 
@@ -115,8 +116,8 @@ class IconicsFragment : Fragment() {
             val imageView = ImageView(v.context)
             imageView.setImageDrawable(icon)
             val size = IconicsUtils.convertDpToPx(v.context, popupIconSize)
-            mPopup = PopupWindow(imageView, size, size)
-            mPopup?.showAsDropDown(v)
+            popup = PopupWindow(imageView, size, size)
+            popup?.showAsDropDown(v)
             true
         }
 
@@ -127,8 +128,7 @@ class IconicsFragment : Fragment() {
                 payloads: MutableList<Any>
             ) {
                 val holder = viewHolder as ItemViewHolder
-                val item = fastAdapter.getItem(position)
-                item?.let {
+                fastAdapter.getItem(position)?.let { item ->
                     // set the R.id.fastadapter_item tag of this item
                     // to the item object (can be used when retrieving the view)
                     viewHolder.itemView.setTag(R.id.fastadapter_item, item)
@@ -173,19 +173,19 @@ class IconicsFragment : Fragment() {
     }
 
     private fun closePopup() {
-        if (mPopup?.isShowing == true) {
-            mPopup?.dismiss()
+        if (popup?.isShowing == true) {
+            popup?.dismiss()
         }
     }
 
     fun onSearch(searchName: String?) {
-        mSearch = searchName
-        mAdapter?.let { adapter ->
-            if (mSearch.isNullOrEmpty()) {
+        searchSuggestion = searchName
+        adapter?.let { adapter ->
+            if (searchSuggestion.isNullOrEmpty()) {
                 adapter.clear()
-                adapter.setNewList(mIcons, false)
+                adapter.setNewList(icons, false)
             } else {
-                val searchInLowerCase = mSearch?.toLowerCase(Locale.getDefault()).orEmpty()
+                val searchInLowerCase = searchSuggestion?.toLowerCase(Locale.getDefault()).orEmpty()
                 val filteredIcons = filterIcons(searchInLowerCase)
                 adapter.setNewList(filteredIcons, false)
             }
@@ -193,7 +193,7 @@ class IconicsFragment : Fragment() {
     }
 
     private fun filterIcons(searchInLowerCase: String): List<IconItem> {
-        return mIcons.filter { icon ->
+        return icons.filter { icon ->
             icon.icon.toLowerCase(Locale.getDefault()).contains(searchInLowerCase)
         }
     }

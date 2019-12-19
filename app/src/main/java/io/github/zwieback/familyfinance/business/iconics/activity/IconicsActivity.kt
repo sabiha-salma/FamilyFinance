@@ -34,9 +34,9 @@ import kotlin.random.Random
 
 class IconicsActivity : ActivityWrapper(), OnIconSelectListener {
 
-    private lateinit var mFonts: List<ITypeface>
-    private lateinit var mDrawer: Drawer
-    private var mCurrentSearch: String? = null
+    private lateinit var fonts: List<ITypeface>
+    private lateinit var drawer: Drawer
+    private var currentSearch: String? = null
 
     override val titleStringId: Int
         get() = 0
@@ -53,10 +53,10 @@ class IconicsActivity : ActivityWrapper(), OnIconSelectListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        mFonts = registeredSortedFonts
-        val items = buildDrawerItems(mFonts)
-        val mIdentifierCmd = determineIdentifierOfCommunityMaterial(mFonts)
-        mDrawer = buildDrawer(toolbar, mFonts, items, mIdentifierCmd)
+        fonts = registeredSortedFonts
+        val items = buildDrawerItems(fonts)
+        val identifierCmd = determineIdentifierOfCommunityMaterial(fonts)
+        drawer = buildDrawer(toolbar, fonts, items, identifierCmd)
     }
 
     override fun setupContentView() {
@@ -79,15 +79,15 @@ class IconicsActivity : ActivityWrapper(), OnIconSelectListener {
                     AndroidSchedulers.mainThread()
                 )
                 .subscribe { searchName ->
-                    mCurrentSearch = searchName.toString()
-                    mCurrentSearch?.let { currentSearch ->
-                        mFonts
+                    currentSearch = searchName.toString()
+                    currentSearch?.let { currentSearch ->
+                        fonts
                             .forEachIndexed { index, font ->
                                 val foundCount = findMatchedIconCount(currentSearch, font)
-                                mDrawer.updateBadge(index.toLong(), StringHolder("$foundCount"))
+                                drawer.updateBadge(index.toLong(), StringHolder("$foundCount"))
                             }
                     }
-                    searchInFragment(mCurrentSearch)
+                    searchInFragment(currentSearch)
                 }
         )
     }
@@ -175,7 +175,7 @@ class IconicsActivity : ActivityWrapper(), OnIconSelectListener {
 
     private fun loadIcons(fontName: String) {
         val iconicsFragment = IconicsFragment.newInstance(fontName)
-        iconicsFragment.onSearch(mCurrentSearch)
+        iconicsFragment.onSearch(currentSearch)
         supportFragmentManager.beginTransaction()
             .replace(R.id.iconics_fragment, iconicsFragment)
             .commit()
