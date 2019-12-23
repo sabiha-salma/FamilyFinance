@@ -100,8 +100,7 @@ dependencies {
     // preferences
     implementation libraries.preferenceCompat
     // shared preferences
-    implementation libraries.gendalf
-    kapt libraries.gendalfProcessor
+    implementation libraries.rxkPrefsCore
     // file/directory picker
     implementation libraries.filepicker
     // permissions dispatcher

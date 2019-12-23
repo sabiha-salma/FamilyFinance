@@ -9,6 +9,9 @@ import com.mikepenz.iconics.typeface.library.community.material.CommunityMateria
 import com.mikepenz.iconics.typeface.library.fontawesome.FontAwesome
 import com.takisoft.preferencex.PreferenceFragmentCompat
 import io.github.zwieback.familyfinance.R
+import io.github.zwieback.familyfinance.core.preference.config.BackupPrefs
+import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs
+import io.github.zwieback.familyfinance.core.preference.config.InterfacePrefs
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -46,9 +49,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     companion object {
-        private const val INTERFACE_PREFERENCES_NAME = "interface_prefs"
-        private const val DATABASE_PREFERENCES_NAME = "database_prefs"
-        private const val BACKUP_PREFERENCES_NAME = "backup_prefs"
+        private const val INTERFACE_PREFERENCES_NAME = InterfacePrefs.FILE_NAME
+        private const val DATABASE_PREFERENCES_NAME = DatabasePrefs.FILE_NAME
+        private const val BACKUP_PREFERENCES_NAME = BackupPrefs.FILE_NAME
         private const val ACRA_PREFERENCES_NAME = "acra_prefs"
     }
 }

@@ -25,10 +25,10 @@ class BackupActivity : ActivityWrapper() {
         get() = R.string.backup_activity_title
 
     private val backupSharedPreferencesName: String
-        get() = backupPrefs.fileName + XML_EXTENSION
+        get() = BackupPrefs.FILE_NAME + XML_EXTENSION
 
     private val databaseSharedPreferencesName: String
-        get() = databasePrefs.fileName + XML_EXTENSION
+        get() = DatabasePrefs.FILE_NAME + XML_EXTENSION
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

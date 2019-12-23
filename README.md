@@ -48,7 +48,7 @@ Checklist for creating issues:
 - [ThreeTenABP](https://github.com/JakeWharton/ThreeTenABP)
 - [ACRA](https://github.com/ACRA/acra)
 - [Android-Support-Preference-V7-Fix](https://github.com/Gericop/Android-Support-Preference-V7-Fix/)
-- [Gendalf](https://github.com/deviant-studio/Gendalf)
+- [RxkPrefs](https://github.com/afollestad/rxkprefs)
 - [NoNonsense-FilePicker](https://github.com/spacecowboy/NoNonsense-FilePicker/)
 - [PermissionsDispatcher](https://github.com/permissions-dispatcher/PermissionsDispatcher)
 - [Validator](https://github.com/jpetitto/validator)
