@@ -37,6 +37,8 @@ Checklist for creating issues:
 
 *Family Finance* relies on several of open source libraries:
 
+- [Kotlin](https://github.com/JetBrains/kotlin/)
+- [Kotlin Coroutines](https://github.com/Kotlin/kotlinx.coroutines/)
 - [requery](https://github.com/requery/requery)
 - [RxJava](https://github.com/ReactiveX/RxJava)
 - [RxAndroid](https://github.com/ReactiveX/RxAndroid)
