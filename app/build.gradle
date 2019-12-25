@@ -58,6 +58,8 @@ dependencies {
     })
     // Kotlin
     implementation libraries.kotlin
+    implementation libraries.kotlinCoroutinesCore
+    implementation libraries.kotlinCoroutinesAndroid
     // support libs
     implementation libraries.appcompat
     implementation libraries.cardview

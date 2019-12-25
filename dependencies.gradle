@@ -7,6 +7,8 @@ ext.versions = [
         // replace with the latest (stable) version:
         // https://github.com/JetBrains/kotlin/releases/latest
         kotlin                   : '1.3.61',
+        // https://github.com/Kotlin/kotlinx.coroutines/releases/latest
+        kotlinCoroutines         : '1.3.3',
 
         androidGradlePlugin      : '3.5.3',
 
@@ -53,6 +55,8 @@ ext.gradlePlugins = [
 ext.libraries = [
         // Kotlin
         kotlin                        : "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin",
+        kotlinCoroutinesCore          : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinCoroutines",
+        kotlinCoroutinesAndroid       : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlinCoroutines",
 
         // support libs
         appcompat                     : "androidx.appcompat:appcompat:$versions.appcompat",
