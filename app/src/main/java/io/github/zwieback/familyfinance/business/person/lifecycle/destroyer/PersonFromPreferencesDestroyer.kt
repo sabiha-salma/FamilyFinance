@@ -7,6 +7,8 @@ import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityFromPrefe
 import io.github.zwieback.familyfinance.core.model.Person
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 internal class PersonFromPreferencesDestroyer(
     context: Context,
@@ -22,7 +24,9 @@ internal class PersonFromPreferencesDestroyer(
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun preferencesContainsEntity(person: Person): Boolean {
-        val defaultPersonId = databasePrefs.personId
+        val defaultPersonId = runBlocking(Dispatchers.IO) {
+            databasePrefs.personId
+        }
         return defaultPersonId == person.id
     }
 }

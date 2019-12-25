@@ -20,14 +20,15 @@ class ExpensesArticlePreference @JvmOverloads constructor(
     override val requestCode: Int
         get() = EXPENSE_ARTICLE_CODE
 
-    override val savedEntityId: Int
-        get() = databasePrefs.expensesArticleId
-
     override val preferenceTitleRes: Int
         get() = R.string.expenses_article_id_preference_title
 
+    override suspend fun getSavedEntityId(): Int {
+        return databasePrefs.expensesArticleId
+    }
+
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-    override fun saveEntityId(expensesArticleId: Int) {
+    override suspend fun saveEntityId(expensesArticleId: Int) {
         databasePrefs.expensesArticleId = expensesArticleId
     }
 }

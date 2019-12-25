@@ -2,11 +2,14 @@ package io.github.zwieback.familyfinance.core.preference.custom
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.annotation.CallSuper
 import androidx.core.content.res.TypedArrayUtils
 import androidx.preference.CheckBoxPreference
 import androidx.preference.Preference
 import io.github.zwieback.familyfinance.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlin.coroutines.CoroutineContext
 
 abstract class BooleanPreference @JvmOverloads constructor(
     context: Context,
@@ -18,14 +21,22 @@ abstract class BooleanPreference @JvmOverloads constructor(
     ),
     defStyleRes: Int = 0
 ) : CheckBoxPreference(context, attrs, defStyleAttr, defStyleRes),
-    Preference.OnPreferenceChangeListener {
+    Preference.OnPreferenceChangeListener,
+    CoroutineScope {
 
-    init {
-        init(context)
+    private lateinit var rootJob: Job
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + rootJob
+
+    override fun onAttached() {
+        super.onAttached()
+        rootJob = Job()
+        onPreferenceChangeListener = this
     }
 
-    @CallSuper
-    protected open fun init(context: Context) {
-        onPreferenceChangeListener = this
+    override fun onDetached() {
+        rootJob.cancel()
+        super.onDetached()
     }
 }

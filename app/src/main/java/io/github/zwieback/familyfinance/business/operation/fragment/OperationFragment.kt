@@ -12,6 +12,10 @@ import io.github.zwieback.familyfinance.core.fragment.EntityFragment
 import io.github.zwieback.familyfinance.core.model.OperationView
 import io.github.zwieback.familyfinance.core.preference.config.InterfacePrefs
 import io.github.zwieback.familyfinance.databinding.ItemOperationBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 abstract class OperationFragment<FILTER : OperationFilter> :
     EntityFragment<OperationView, FILTER, ItemOperationBinding, OnOperationClickListener, OperationAdapter<FILTER>>() {
@@ -26,17 +30,23 @@ abstract class OperationFragment<FILTER : OperationFilter> :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        interfacePrefs = InterfacePrefs.with(requireContext())
+        interfacePrefs = runBlocking(Dispatchers.IO) {
+            InterfacePrefs.with(requireContext())
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (interfacePrefs.isShowBalanceOnOperationScreens) {
-            val balanceView = view.findViewById<TextView>(R.id.balance)
-            adapter.setBalanceView(balanceView)
-        } else {
-            val balanceViewGroup = view.findViewById<ViewGroup>(R.id.balance_group)
-            balanceViewGroup.visibility = View.GONE
+        launch {
+            val isShowBalanceOnOperationScreens = withContext(Dispatchers.IO) {
+                interfacePrefs.isShowBalanceOnOperationScreens
+            }
+            if (isShowBalanceOnOperationScreens) {
+                val balanceViewGroup = view.findViewById<ViewGroup>(R.id.balance_group)
+                val balanceView = balanceViewGroup.findViewById<TextView>(R.id.balance)
+                adapter.setBalanceView(balanceView)
+                balanceViewGroup.visibility = View.VISIBLE
+            }
         }
     }
 }

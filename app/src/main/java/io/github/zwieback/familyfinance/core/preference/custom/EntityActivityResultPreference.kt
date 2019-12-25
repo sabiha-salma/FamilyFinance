@@ -11,6 +11,9 @@ import io.github.zwieback.familyfinance.core.model.IBaseEntity
 import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
 import io.github.zwieback.familyfinance.util.StringUtils
 import io.reactivex.functions.Consumer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 abstract class EntityActivityResultPreference<E : IBaseEntity> @JvmOverloads constructor(
     context: Context,
@@ -25,25 +28,34 @@ abstract class EntityActivityResultPreference<E : IBaseEntity> @JvmOverloads con
 
     protected abstract val resultName: String
 
-    protected abstract val savedEntityId: Int
-
     protected abstract val entityClass: Class<E>
 
     @get:StringRes
     protected abstract val preferenceTitleRes: Int
 
-    override fun init(context: Context) {
-        super.init(context)
-        callChangeListener(savedEntityId)
+    override fun onAttached() {
+        super.onAttached()
+        launch {
+            val savedEntityId = withContext(Dispatchers.IO) {
+                getSavedEntityId()
+            }
+            callChangeListener(savedEntityId)
+        }
     }
 
     override fun onSuccessResult(resultIntent: Intent) {
         val entityId = extractOutputId(resultIntent, resultName)
-        saveEntityId(entityId)
-        callChangeListener(entityId)
+        launch {
+            withContext(Dispatchers.IO) {
+                saveEntityId(entityId)
+            }
+            callChangeListener(entityId)
+        }
     }
 
-    protected abstract fun saveEntityId(entityId: Int)
+    protected abstract suspend fun getSavedEntityId(): Int
+
+    protected abstract suspend fun saveEntityId(entityId: Int)
 
     protected abstract fun getEntityName(entity: E): String
 

@@ -7,6 +7,8 @@ import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityFromPrefe
 import io.github.zwieback.familyfinance.core.model.Article
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 internal class ArticleFromPreferencesDestroyer(
     context: Context,
@@ -22,11 +24,13 @@ internal class ArticleFromPreferencesDestroyer(
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun preferencesContainsEntity(article: Article): Boolean {
-        val articleIds = listOf(
-            databasePrefs.incomesArticleId,
-            databasePrefs.expensesArticleId,
-            databasePrefs.transferArticleId
-        )
-        return articleIds.contains(article.id)
+        val articleIds = runBlocking(Dispatchers.IO) {
+            listOf(
+                databasePrefs.incomesArticleId,
+                databasePrefs.expensesArticleId,
+                databasePrefs.transferArticleId
+            )
+        }
+        return article.id in articleIds
     }
 }

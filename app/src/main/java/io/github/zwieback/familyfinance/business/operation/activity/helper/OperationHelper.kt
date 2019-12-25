@@ -13,6 +13,8 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
 
@@ -20,7 +22,9 @@ abstract class OperationHelper<FILTER : OperationFilter>(
     protected val context: Context,
     protected val data: ReactiveEntityStore<Persistable>
 ) {
-    protected val databasePrefs: DatabasePrefs = DatabasePrefs.with(context)
+    protected val databasePrefs: DatabasePrefs = runBlocking(Dispatchers.IO) {
+        DatabasePrefs.with(context)
+    }
 
     abstract fun getIntentToAdd(): Intent
 

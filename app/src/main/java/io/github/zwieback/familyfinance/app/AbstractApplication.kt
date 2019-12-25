@@ -11,6 +11,8 @@ import io.requery.reactivex.ReactiveEntityStore
 import io.requery.reactivex.ReactiveSupport
 import io.requery.sql.Configuration
 import io.requery.sql.EntityDataStore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import java.sql.SQLException
 
 abstract class AbstractApplication : MultiDexApplication() {
@@ -45,7 +47,7 @@ abstract class AbstractApplication : MultiDexApplication() {
      * See [Using SQLite views](https://github.com/requery/requery/issues/721.issuecomment-344153774)
      */
     @Throws(SQLException::class)
-    protected fun createViews(configuration: Configuration) {
+    protected fun createViews(configuration: Configuration) = runBlocking(Dispatchers.IO) {
         configuration.connectionProvider.connection.use { connection ->
             DatabaseViewCreator(connection).createViews()
         }
@@ -61,7 +63,7 @@ abstract class AbstractApplication : MultiDexApplication() {
      * See [Using SQLite views](https://github.com/requery/requery/issues/721.issuecomment-344153774)
      */
     @Throws(SQLException::class)
-    protected fun destroyViews(configuration: Configuration) {
+    protected fun destroyViews(configuration: Configuration) = runBlocking(Dispatchers.IO) {
         configuration.connectionProvider.connection.use { connection ->
             DatabaseViewDestroyer(connection).destroyViews()
         }

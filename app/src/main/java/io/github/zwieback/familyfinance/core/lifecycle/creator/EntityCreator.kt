@@ -7,14 +7,19 @@ import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs
 import io.reactivex.Single
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import java.util.concurrent.Callable
 
 abstract class EntityCreator<E : IBaseEntity> protected constructor(
     protected val context: Context,
     protected val data: ReactiveEntityStore<Persistable>
-) : Callable<Single<Iterable<E>>>, Comparator<E> {
+) : Callable<Single<Iterable<E>>>,
+    Comparator<E> {
 
-    protected val databasePrefs: DatabasePrefs = DatabasePrefs.with(context)
+    protected val databasePrefs: DatabasePrefs = runBlocking(Dispatchers.IO) {
+        DatabasePrefs.with(context)
+    }
 
     protected abstract fun buildEntities(): Iterable<E>
 

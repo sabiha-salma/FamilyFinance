@@ -7,6 +7,8 @@ import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityFromPrefe
 import io.github.zwieback.familyfinance.core.model.Currency
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 internal class CurrencyFromPreferencesDestroyer(
     context: Context,
@@ -22,7 +24,9 @@ internal class CurrencyFromPreferencesDestroyer(
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun preferencesContainsEntity(currency: Currency): Boolean {
-        val defaultCurrencyId = databasePrefs.currencyId
+        val defaultCurrencyId = runBlocking(Dispatchers.IO) {
+            databasePrefs.currencyId
+        }
         return defaultCurrencyId == currency.id
     }
 }

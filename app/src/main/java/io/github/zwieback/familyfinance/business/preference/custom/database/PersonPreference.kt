@@ -33,17 +33,18 @@ class PersonPreference @JvmOverloads constructor(
     override val resultName: String
         get() = RESULT_PERSON_ID
 
-    override val savedEntityId: Int
-        get() = databasePrefs.personId
-
     override val entityClass: Class<Person>
         get() = Person::class.java
 
     override val preferenceTitleRes: Int
         get() = R.string.person_id_preference_title
 
+    override suspend fun getSavedEntityId(): Int {
+        return databasePrefs.personId
+    }
+
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-    override fun saveEntityId(personId: Int) {
+    override suspend fun saveEntityId(personId: Int) {
         databasePrefs.personId = personId
     }
 

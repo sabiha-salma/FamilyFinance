@@ -19,8 +19,12 @@ import io.github.zwieback.familyfinance.core.listener.EntityClickListener
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.coroutines.CoroutineContext
 
 abstract class EntityFragment<
         ENTITY : IBaseEntity,
@@ -28,12 +32,14 @@ abstract class EntityFragment<
         BINDING : ViewDataBinding,
         LISTENER : EntityClickListener<ENTITY>,
         ADAPTER : EntityAdapter<ENTITY, FILTER, BINDING, LISTENER>> :
-    Fragment() {
+    Fragment(),
+    CoroutineScope {
 
     protected lateinit var clickListener: LISTENER
     protected lateinit var data: ReactiveEntityStore<Persistable>
     protected lateinit var adapter: ADAPTER
     private lateinit var executor: ExecutorService
+    private lateinit var rootJob: Job
 
     protected open val fragmentLayoutId: Int
         @LayoutRes
@@ -42,6 +48,9 @@ abstract class EntityFragment<
     protected open val recyclerViewId: Int
         @IdRes
         get() = R.id.recycler_view
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + rootJob
 
     @Suppress("UNCHECKED_CAST")
     override fun onAttach(context: Context) {
@@ -55,6 +64,7 @@ abstract class EntityFragment<
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        rootJob = Job()
         data = ((requireContext() as Activity).application as FamilyFinanceApplication).data
         executor = Executors.newSingleThreadExecutor()
         adapter = createEntityAdapter()
@@ -82,6 +92,7 @@ abstract class EntityFragment<
     override fun onDestroy() {
         executor.shutdown()
         adapter.close()
+        rootJob.cancel()
         super.onDestroy()
     }
 

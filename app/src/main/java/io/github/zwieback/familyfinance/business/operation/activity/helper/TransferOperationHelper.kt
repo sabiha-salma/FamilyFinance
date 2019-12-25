@@ -28,6 +28,8 @@ import io.reactivex.functions.Function4
 import io.reactivex.schedulers.Schedulers
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
 
@@ -210,9 +212,11 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
         intent: Intent,
         onSuccess: Consumer<Operation>
     ): Disposable {
+        val transferArticleId = runBlocking(Dispatchers.IO) {
+            databasePrefs.transferArticleId
+        }
         val expenseAccountId = intent.getIntExtra(INPUT_EXPENSE_ACCOUNT_ID, 0)
         val incomeAccountId = intent.getIntExtra(INPUT_INCOME_ACCOUNT_ID, 0)
-        val articleId = databasePrefs.transferArticleId
         val ownerId = intent.getIntExtra(INPUT_EXPENSE_OWNER_ID, 0)
         val exchangeRateId = intent.getIntExtra(INPUT_EXPENSE_EXCHANGE_RATE_ID, 0)
         val date = DateUtils.readLocalDateFromIntent(intent, INPUT_EXPENSE_DATE)
@@ -221,7 +225,7 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
         val url = intent.getStringExtra(INPUT_EXPENSE_URL)
         return Maybe.zip<Account, Article, Person, ExchangeRate, Operation>(
             data.findByKey(Account::class.java, expenseAccountId),
-            data.findByKey(Article::class.java, articleId),
+            data.findByKey(Article::class.java, transferArticleId),
             data.findByKey(Person::class.java, ownerId),
             data.findByKey(ExchangeRate::class.java, exchangeRateId),
             Function4 { expenseAccount, article, owner, exchangeRate ->

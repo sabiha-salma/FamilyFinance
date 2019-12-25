@@ -11,6 +11,9 @@ import com.nononsenseapps.filepicker.FilePickerActivity
 import com.nononsenseapps.filepicker.Utils
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.BACKUP_PATH_CODE
 import io.github.zwieback.familyfinance.core.preference.custom.ActivityResultPreference
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class BackupPathPreference @JvmOverloads constructor(
     context: Context,
@@ -22,12 +25,6 @@ class BackupPathPreference @JvmOverloads constructor(
     ),
     defStyleRes: Int = 0
 ) : ActivityResultPreference(context, attrs, defStyleAttr, defStyleRes) {
-
-    private var backupPath: String
-        get() = backupPrefs.backupPath
-        set(absolutePath) {
-            backupPrefs.backupPath = absolutePath
-        }
 
     override val requestCode: Int
         get() = BACKUP_PATH_CODE
@@ -41,16 +38,23 @@ class BackupPathPreference @JvmOverloads constructor(
                 Environment.getExternalStorageDirectory().path
             )
 
-    override fun init(context: Context) {
-        super.init(context)
-        callChangeListener(backupPath)
+    override fun onAttached() {
+        super.onAttached()
+        launch {
+            val backupPath = withContext(Dispatchers.IO) {
+                backupPrefs.backupPath
+            }
+            callChangeListener(backupPath)
+        }
     }
 
     override fun onSuccessResult(resultIntent: Intent) {
         val files = Utils.getSelectedFilesFromResult(resultIntent)
         if (files.isNotEmpty()) {
             val file = Utils.getFileForUri(files.iterator().next())
-            backupPath = file.absolutePath
+            launch(Dispatchers.IO) {
+                backupPrefs.backupPath = file.absolutePath
+            }
             callChangeListener(file.absolutePath)
         }
     }

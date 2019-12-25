@@ -13,6 +13,8 @@ import io.github.zwieback.familyfinance.core.activity.ActivityWrapper
 import io.github.zwieback.familyfinance.core.preference.config.BackupPrefs
 import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs
 import io.github.zwieback.familyfinance.core.storage.helper.ExternalStorageHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import permissions.dispatcher.*
 
 @RuntimePermissions
@@ -24,24 +26,20 @@ class BackupActivity : ActivityWrapper() {
     override val titleStringId: Int
         get() = R.string.backup_activity_title
 
-    private val backupSharedPreferencesName: String
-        get() = BackupPrefs.FILE_NAME + XML_EXTENSION
-
-    private val databaseSharedPreferencesName: String
-        get() = DatabasePrefs.FILE_NAME + XML_EXTENSION
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        init()
+        init(this)
     }
 
     override fun setupContentView() {
         setContentView(R.layout.activity_backup)
     }
 
-    private fun init() {
-        backupPrefs = BackupPrefs.with(this)
-        databasePrefs = DatabasePrefs.with(this)
+    private fun init(context: Context) {
+        runBlocking(Dispatchers.IO) {
+            databasePrefs = DatabasePrefs.with(context)
+            backupPrefs = BackupPrefs.with(context)
+        }
 
         findViewById<View>(R.id.backup_database_button).setOnClickListener {
             onBackupDatabaseClickWithPermissionCheck()
@@ -72,7 +70,10 @@ class BackupActivity : ActivityWrapper() {
             showWriteExternalStoragePermissionIsMissingMsg()
             return
         }
-        val backupCompletedSuccessfully = BackupHelper.backupDatabase(this, backupPrefs.backupPath)
+        val backupPath = getBackupPath()
+        val backupCompletedSuccessfully = runBlocking(Dispatchers.IO) {
+            BackupHelper.backupDatabase(this@BackupActivity, backupPath)
+        }
         val resultMessage = getBackupResultMessage(backupCompletedSuccessfully)
         Toast.makeText(this, resultMessage, Toast.LENGTH_SHORT).show()
     }
@@ -83,8 +84,10 @@ class BackupActivity : ActivityWrapper() {
             showReadExternalStoragePermissionIsMissingMsg()
             return
         }
-        val restoreCompletedSuccessfully =
-            BackupHelper.restoreDatabase(this, backupPrefs.backupPath)
+        val backupPath = getBackupPath()
+        val restoreCompletedSuccessfully = runBlocking(Dispatchers.IO) {
+            BackupHelper.restoreDatabase(this@BackupActivity, backupPath)
+        }
         val resultMessage = getRestoreResultMessage(restoreCompletedSuccessfully)
         Toast.makeText(this, resultMessage, Toast.LENGTH_SHORT).show()
     }
@@ -95,23 +98,28 @@ class BackupActivity : ActivityWrapper() {
             showWriteExternalStoragePermissionIsMissingMsg()
             return
         }
-        var backupCompletedSuccessfully = BackupHelper.backupSharedPreferences(
-            this,
-            backupSharedPreferencesName,
-            backupPrefs.backupPath
-        )
-        backupCompletedSuccessfully =
-            backupCompletedSuccessfully or BackupHelper.backupSharedPreferences(
-                this,
-                databaseSharedPreferencesName,
-                backupPrefs.backupPath
+        val backupPath = getBackupPath()
+        var backupCompletedSuccessfully = runBlocking(Dispatchers.IO) {
+            BackupHelper.backupSharedPreferences(
+                this@BackupActivity,
+                BACKUP_SHARED_PREFERENCES_NAME,
+                backupPath
             )
-        backupCompletedSuccessfully =
-            backupCompletedSuccessfully or BackupHelper.backupSharedPreferences(
-                this,
-                getDefaultSharedPreferencesName(this),
-                backupPrefs.backupPath
+        }
+        backupCompletedSuccessfully = backupCompletedSuccessfully or runBlocking(Dispatchers.IO) {
+            BackupHelper.backupSharedPreferences(
+                this@BackupActivity,
+                DATABASE_SHARED_PREFERENCES_NAME,
+                backupPath
             )
+        }
+        backupCompletedSuccessfully = backupCompletedSuccessfully or runBlocking(Dispatchers.IO) {
+            BackupHelper.backupSharedPreferences(
+                this@BackupActivity,
+                getDefaultSharedPreferencesName(this@BackupActivity),
+                backupPath
+            )
+        }
         val resultMessage = getBackupResultMessage(backupCompletedSuccessfully)
         Toast.makeText(this, resultMessage, Toast.LENGTH_SHORT).show()
     }
@@ -122,23 +130,28 @@ class BackupActivity : ActivityWrapper() {
             showReadExternalStoragePermissionIsMissingMsg()
             return
         }
-        var restoreCompletedSuccessfully = BackupHelper.restoreSharedPreferences(
-            this,
-            backupSharedPreferencesName,
-            backupPrefs.backupPath
-        )
-        restoreCompletedSuccessfully =
-            restoreCompletedSuccessfully or BackupHelper.restoreSharedPreferences(
-                this,
-                databaseSharedPreferencesName,
-                backupPrefs.backupPath
+        val backupPath = getBackupPath()
+        var restoreCompletedSuccessfully = runBlocking(Dispatchers.IO) {
+            BackupHelper.restoreSharedPreferences(
+                this@BackupActivity,
+                BACKUP_SHARED_PREFERENCES_NAME,
+                backupPath
             )
-        restoreCompletedSuccessfully =
-            restoreCompletedSuccessfully or BackupHelper.restoreSharedPreferences(
-                this,
-                getDefaultSharedPreferencesName(this),
-                backupPrefs.backupPath
+        }
+        restoreCompletedSuccessfully = restoreCompletedSuccessfully or runBlocking(Dispatchers.IO) {
+            BackupHelper.restoreSharedPreferences(
+                this@BackupActivity,
+                DATABASE_SHARED_PREFERENCES_NAME,
+                backupPath
             )
+        }
+        restoreCompletedSuccessfully = restoreCompletedSuccessfully or runBlocking(Dispatchers.IO) {
+            BackupHelper.restoreSharedPreferences(
+                this@BackupActivity,
+                getDefaultSharedPreferencesName(this@BackupActivity),
+                backupPath
+            )
+        }
         // todo refresh shared preferences after a successful restore
         val resultMessage = getRestoreResultMessage(restoreCompletedSuccessfully)
         Toast.makeText(this, resultMessage, Toast.LENGTH_SHORT).show()
@@ -205,8 +218,14 @@ class BackupActivity : ActivityWrapper() {
         }
     }
 
+    private fun getBackupPath(): String = runBlocking(Dispatchers.IO) {
+        backupPrefs.backupPath
+    }
+
     companion object {
         private const val XML_EXTENSION = ".xml"
+        private const val BACKUP_SHARED_PREFERENCES_NAME = BackupPrefs.FILE_NAME + XML_EXTENSION
+        private const val DATABASE_SHARED_PREFERENCES_NAME = DatabasePrefs.FILE_NAME + XML_EXTENSION
 
         private fun getDefaultSharedPreferencesName(context: Context): String {
             return "${context.packageName}_preferences$XML_EXTENSION"

@@ -34,17 +34,18 @@ class AccountPreference @JvmOverloads constructor(
     override val resultName: String
         get() = RESULT_ACCOUNT_ID
 
-    override val savedEntityId: Int
-        get() = databasePrefs.accountId
-
     override val entityClass: Class<Account>
         get() = Account::class.java
 
     override val preferenceTitleRes: Int
         get() = R.string.account_id_preference_title
 
+    override suspend fun getSavedEntityId(): Int {
+        return databasePrefs.accountId
+    }
+
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-    override fun saveEntityId(accountId: Int) {
+    override suspend fun saveEntityId(accountId: Int) {
         databasePrefs.accountId = accountId
     }
 

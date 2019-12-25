@@ -7,6 +7,9 @@ import io.github.zwieback.familyfinance.business.operation.filter.TransferOperat
 import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter.Companion.TRANSFER_OPERATION_FILTER
 import io.github.zwieback.familyfinance.databinding.DialogFilterTransferOperationBinding
 import io.github.zwieback.familyfinance.widget.ClearableEditText
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TransferOperationFilterDialog :
     OperationFilterDialog<TransferOperationFilter, DialogFilterTransferOperationBinding>() {
@@ -62,7 +65,12 @@ class TransferOperationFilterDialog :
 
     override fun bind(filter: TransferOperationFilter) {
         binding.filter = filter
-        loadArticle(databasePrefs.transferArticleId)
+        launch {
+            val transferArticleId = withContext(Dispatchers.IO) {
+                databasePrefs.transferArticleId
+            }
+            loadArticle(transferArticleId)
+        }
         super.bind(filter)
     }
 

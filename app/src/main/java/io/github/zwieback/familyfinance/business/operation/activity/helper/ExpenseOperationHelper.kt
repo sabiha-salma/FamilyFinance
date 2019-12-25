@@ -26,6 +26,8 @@ import io.reactivex.functions.Function4
 import io.reactivex.schedulers.Schedulers
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
 
@@ -73,7 +75,10 @@ class ExpenseOperationHelper(context: Context, data: ReactiveEntityStore<Persist
         description: String?,
         url: String?
     ): Intent {
-        if (articleId != databasePrefs.expensesArticleId) {
+        val expensesArticleId = runBlocking(Dispatchers.IO) {
+            databasePrefs.expensesArticleId
+        }
+        if (articleId != expensesArticleId) {
             preparedIntent.putExtra(INPUT_EXPENSE_ARTICLE_ID, articleId)
         }
         accountId?.let {

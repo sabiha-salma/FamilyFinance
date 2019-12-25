@@ -7,6 +7,10 @@ import androidx.preference.Preference
 import io.github.zwieback.familyfinance.R
 import io.github.zwieback.familyfinance.core.preference.config.InterfacePrefs
 import io.github.zwieback.familyfinance.core.preference.custom.BooleanPreference
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class ShowBalanceOnOperationScreensPreference @JvmOverloads constructor(
     context: Context,
@@ -27,15 +31,24 @@ class ShowBalanceOnOperationScreensPreference @JvmOverloads constructor(
             interfacePrefs.isShowBalanceOnOperationScreens = showBalance
         }
 
-    override fun init(context: Context) {
-        super.init(context)
-        interfacePrefs = InterfacePrefs.with(context)
-        callChangeListener(isShowBalance)
+    override fun onAttached() {
+        super.onAttached()
+        runBlocking(Dispatchers.IO) {
+            interfacePrefs = InterfacePrefs.with(context)
+        }
+        launch {
+            val showBalance = withContext(Dispatchers.IO) {
+                isShowBalance
+            }
+            callChangeListener(showBalance)
+        }
     }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         if (newValue is Boolean) {
-            isShowBalance = newValue
+            launch(Dispatchers.IO) {
+                isShowBalance = newValue
+            }
             return true
         }
         return false

@@ -31,17 +31,18 @@ class CurrencyPreference @JvmOverloads constructor(
     override val resultName: String
         get() = RESULT_CURRENCY_ID
 
-    override val savedEntityId: Int
-        get() = databasePrefs.currencyId
-
     override val entityClass: Class<Currency>
         get() = Currency::class.java
 
     override val preferenceTitleRes: Int
         get() = R.string.currency_id_preference_title
 
+    override suspend fun getSavedEntityId(): Int {
+        return databasePrefs.currencyId
+    }
+
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-    override fun saveEntityId(currencyId: Int) {
+    override suspend fun saveEntityId(currencyId: Int) {
         databasePrefs.currencyId = currencyId
     }
 

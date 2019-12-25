@@ -21,12 +21,16 @@ import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 class DatabaseTableCreator(
     private val context: Context,
     private val data: ReactiveEntityStore<Persistable>
 ) {
-    private val databasePrefs: DatabasePrefs = DatabasePrefs.with(context)
+    private val databasePrefs: DatabasePrefs = runBlocking(Dispatchers.IO) {
+        DatabasePrefs.with(context)
+    }
 
     fun createTables() {
         val currencyCreator = CurrencyCreator(context, data)

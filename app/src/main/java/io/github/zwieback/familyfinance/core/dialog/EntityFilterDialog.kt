@@ -31,15 +31,23 @@ import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.runBlocking
 import org.threeten.bp.LocalDate
+import kotlin.coroutines.CoroutineContext
 
-abstract class EntityFilterDialog<F : EntityFilter, B : ViewDataBinding> : DialogFragment() {
+abstract class EntityFilterDialog<F : EntityFilter, B : ViewDataBinding> :
+    DialogFragment(),
+    CoroutineScope {
 
     protected lateinit var binding: B
     protected lateinit var filter: F
     protected lateinit var databasePrefs: DatabasePrefs
     private lateinit var data: ReactiveEntityStore<Persistable>
     private lateinit var listener: EntityFilterListener<F>
+    private lateinit var rootJob: Job
     private val disposables: CompositeDisposable = CompositeDisposable()
 
     protected abstract val inputFilterName: String
@@ -49,6 +57,9 @@ abstract class EntityFilterDialog<F : EntityFilter, B : ViewDataBinding> : Dialo
 
     @get:LayoutRes
     protected abstract val dialogLayoutId: Int
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + rootJob
 
     protected open val layoutsForValidation: List<ValidatingTextInputLayout>
         get() = emptyList()
@@ -62,7 +73,10 @@ abstract class EntityFilterDialog<F : EntityFilter, B : ViewDataBinding> : Dialo
         } else {
             throw ClassCastException("$context must implement EntityFilterListener")
         }
-        databasePrefs = DatabasePrefs.with(context)
+        rootJob = Job()
+        databasePrefs = runBlocking(Dispatchers.IO) {
+            DatabasePrefs.with(context)
+        }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -96,6 +110,7 @@ abstract class EntityFilterDialog<F : EntityFilter, B : ViewDataBinding> : Dialo
     }
 
     override fun onDestroy() {
+        rootJob.cancel()
         disposables.clear()
         super.onDestroy()
     }

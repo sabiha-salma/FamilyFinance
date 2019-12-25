@@ -10,7 +10,8 @@ import io.github.zwieback.familyfinance.core.activity.DataActivityWrapper
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
 import io.reactivex.functions.Consumer
 
-class SettingsActivity : DataActivityWrapper(),
+class SettingsActivity :
+    DataActivityWrapper(),
     PreferenceFragmentCompat.OnPreferenceStartScreenCallback {
 
     override val titleStringId: Int

@@ -20,14 +20,15 @@ class TransferArticlePreference @JvmOverloads constructor(
     override val requestCode: Int
         get() = ARTICLE_CODE
 
-    override val savedEntityId: Int
-        get() = databasePrefs.transferArticleId
-
     override val preferenceTitleRes: Int
         get() = R.string.transfer_article_id_preference_title
 
+    override suspend fun getSavedEntityId(): Int {
+        return databasePrefs.transferArticleId
+    }
+
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-    override fun saveEntityId(transferArticleId: Int) {
+    override suspend fun saveEntityId(transferArticleId: Int) {
         databasePrefs.transferArticleId = transferArticleId
     }
 }

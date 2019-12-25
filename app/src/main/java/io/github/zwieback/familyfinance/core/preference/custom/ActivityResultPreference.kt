@@ -8,13 +8,16 @@ import android.util.AttributeSet
 import androidx.core.content.res.TypedArrayUtils
 import androidx.preference.Preference
 import androidx.preference.R
-
 import com.takisoft.preferencex.PreferenceActivityResultListener
 import com.takisoft.preferencex.PreferenceFragmentCompat
-
 import io.github.zwieback.familyfinance.business.preference.activity.SettingsActivity
 import io.github.zwieback.familyfinance.core.preference.config.BackupPrefs
 import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.runBlocking
+import kotlin.coroutines.CoroutineContext
 
 abstract class ActivityResultPreference @JvmOverloads constructor(
     context: Context,
@@ -28,24 +31,30 @@ abstract class ActivityResultPreference @JvmOverloads constructor(
 ) : Preference(context, attrs, defStyleAttr, defStyleRes),
     PreferenceActivityResultListener,
     OnSuccessPreferenceActivityResultListener,
-    Preference.OnPreferenceChangeListener {
+    Preference.OnPreferenceChangeListener,
+    CoroutineScope {
 
     protected lateinit var activity: SettingsActivity
+
     protected lateinit var databasePrefs: DatabasePrefs
     protected lateinit var backupPrefs: BackupPrefs
+    private lateinit var rootJob: Job
 
     protected abstract val requestCode: Int
 
     protected abstract val requestIntent: Intent
 
-    init {
-        init(context)
-    }
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + rootJob
 
-    protected open fun init(context: Context) {
+    override fun onAttached() {
+        super.onAttached()
+        rootJob = Job()
         activity = determineActivity(context)
-        databasePrefs = DatabasePrefs.with(activity)
-        backupPrefs = BackupPrefs.with(activity)
+        runBlocking(Dispatchers.IO) {
+            databasePrefs = DatabasePrefs.with(activity)
+            backupPrefs = BackupPrefs.with(activity)
+        }
         onPreferenceChangeListener = this
     }
 
@@ -59,6 +68,11 @@ abstract class ActivityResultPreference @JvmOverloads constructor(
             }
         }
         throw ClassCastException("$context must implement SettingsActivity")
+    }
+
+    override fun onDetached() {
+        rootJob.cancel()
+        super.onDetached()
     }
 
     override fun onPreferenceClick(fragment: PreferenceFragmentCompat, preference: Preference) {
