@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!-- Adaptive icon -->
+    <color name="ic_launcher_background">@android:color/white</color>
+
     <!-- Account colors -->
     <color name="colorInactiveAccount">@android:color/darker_gray</color>
 
