@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2019-12-25
+### Added
+- Indexes to entities with parents (optimized CTE queries).
+- ConstraintLayout dependency.
+- [RxkPrefs](https://github.com/afollestad/rxkprefs) dependency.
+
+### Changed
+- Increased minimum SDK version to 16.
+- Migration to AndroidX.
+- All code is converted to Kotlin (with coroutines).
+- Interface of the main and backup screens.
+- Display of inactive accounts.
+
+### Removed
+- [Lightweight-Stream-API](https://github.com/aNNiMON/Lightweight-Stream-API) dependency.
+- [Gendalf](https://github.com/deviant-studio/Gendalf) dependency.
+
 ## [1.5.7] - 2019-10-01
 ### Added
 - Ability to open articles in the specified folder when click on the article category (parent) view.
