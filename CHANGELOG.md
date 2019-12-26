@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2019-12-26
+### Fixed
+- Changing the icon of any entity.
+
 ## [1.6.0] - 2019-12-25
 ### Added
 - Indexes to entities with parents (optimized CTE queries).
