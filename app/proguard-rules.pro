@@ -36,7 +36,7 @@
 -dontwarn javax.transaction.**
 -dontwarn java.sql.**
 -dontwarn javax.sql.**
--dontwarn android.support.**
+-dontwarn androidx.**
 -dontwarn io.requery.cache.**
 -dontwarn io.requery.rx.**
 -dontwarn io.requery.reactivex.**
@@ -53,7 +53,7 @@
 -keep class * extends java.lang.Enum {
 }
 -dontwarn rx.internal.**
--dontwarn android.support.**
+-dontwarn androidx.**
 
 # sqlite-android: https://github.com/requery/sqlite-android/blob/master/sqlite-android/proguard-rules.pro
 -keepclasseswithmembers class io.requery.android.database.** {
@@ -81,8 +81,8 @@
 # Proguard causing RuntimeException (Unmarshalling unknown type code)
 # in Parcelable class
 # https://stackoverflow.com/q/21342700/8035065
--keep class android.support.** { *; }
--dontwarn android.support.**
+-keep class androidx.** { *; }
+-dontwarn androidx.**
 
 # https://stackoverflow.com/a/21380449/8035065
 -keepclassmembers class * implements android.os.Parcelable {
