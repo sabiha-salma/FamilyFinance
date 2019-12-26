@@ -108,3 +108,9 @@
 -keepclassmembernames class kotlin.coroutines.SafeContinuation {
     volatile <fields>;
 }
+
+# keep setIconName in the generated models so that changing an icon can still work.
+# see example: http://proguard.sourceforge.net/manual/examples.html#beans
+-keepclassmembers class * implements io.github.zwieback.familyfinance.core.model.IBaseEntity {
+    public * setIconName(java.lang.String);
+}
