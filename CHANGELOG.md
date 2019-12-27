@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.6.2] - 2019-12-27
+### Fixed
+- An empty value is returned if it is not specified, not zero.
+
 ## [1.6.1] - 2019-12-26
 ### Fixed
 - Changing the icon of any entity.
