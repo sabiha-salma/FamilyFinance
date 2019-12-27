@@ -27,6 +27,10 @@ class BigDecimalToWorthConverter : Converter<BigDecimal, Long> {
     }
 
     override fun convertToMapped(type: Class<out BigDecimal>, value: Long?): BigDecimal? {
-        return worthToBigDecimal(value)
+        return if (value == 0L) {
+            null
+        } else {
+            worthToBigDecimal(value)
+        }
     }
 }
