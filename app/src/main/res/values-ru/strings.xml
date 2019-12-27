@@ -198,8 +198,6 @@
     <string name="action_search">Поиск</string>
     <string name="action_display">Отображение</string>
     <!-- Drawer -->
-    <string name="drawer_open">Открыть панель навигации</string>
-    <string name="drawer_close">Закрыть панель навигации</string>
     <string name="drawer_item_currencies">Валюты</string>
     <string name="drawer_item_exchange_rates">Курсы обмена</string>
     <string name="drawer_item_people">Люди</string>
@@ -275,7 +273,6 @@
 
     <string name="data_set_incomes">Доходы</string>
     <string name="data_set_expenses">Расходы</string>
-    <string name="data_set_transfers">Переводы</string>
     <string name="data_set_net_profit">Прибыль</string>
 
     <string name="pie_group_other">Другое (объединенная группа)</string>

@@ -198,8 +198,6 @@
     <string name="action_search">Search</string>
     <string name="action_display">Display</string>
     <!-- Drawer -->
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
     <string name="drawer_item_currencies">Currencies</string>
     <string name="drawer_item_exchange_rates">Exchange Rates</string>
     <string name="drawer_item_people">People</string>
@@ -275,7 +273,6 @@
 
     <string name="data_set_incomes">Incomes</string>
     <string name="data_set_expenses">Expenses</string>
-    <string name="data_set_transfers">Transfers</string>
     <string name="data_set_net_profit">Net Profit</string>
 
     <string name="pie_group_other">Other (combined group)</string>

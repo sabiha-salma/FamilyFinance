@@ -24,11 +24,9 @@
 
     <!-- Iconics -->
     <!-- general colors for drawer -->
-    <color name="list_background">#F2F2F2</color>
     <!-- primary colors for drawer -->
     <color name="list_background_normal">#FCFCFC</color>
     <!-- secondary colors for drawer -->
-    <color name="list_background_secondary_normal">#F2F2F2</color>
     <!-- popup icon -->
     <color name="popup_icon_background">#DDFFFFFF</color>
 </resources>
