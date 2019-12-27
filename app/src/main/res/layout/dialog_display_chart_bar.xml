@@ -99,6 +99,13 @@
                     android:text="@string/bar_chart_display_view_expense_values"/>
 
                 <CheckBox
+                    android:id="@+id/view_profit_values"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@={display.viewProfitValues}"
+                    android:text="@string/bar_chart_display_view_profit_values"/>
+
+                <CheckBox
                     android:id="@+id/view_incomes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -111,6 +118,13 @@
                     android:layout_height="wrap_content"
                     android:checked="@={display.viewExpenses}"
                     android:text="@string/bar_chart_display_view_expenses"/>
+
+                <CheckBox
+                    android:id="@+id/view_profitss"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="@={display.viewProfits}"
+                    android:text="@string/bar_chart_display_view_profits"/>
 
                 <CheckBox
                     android:id="@+id/consider_transfers"

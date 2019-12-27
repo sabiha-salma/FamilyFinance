@@ -23,8 +23,10 @@ import io.github.zwieback.familyfinance.business.chart.dialog.BarChartDisplayDia
 import io.github.zwieback.familyfinance.business.chart.display.BarChartDisplay
 import io.github.zwieback.familyfinance.business.chart.display.type.BarChartGroupType
 import io.github.zwieback.familyfinance.business.chart.marker.BarChartMarkerView
+import io.github.zwieback.familyfinance.business.chart.service.calculator.OperationProfitCalculator
 import io.github.zwieback.familyfinance.business.chart.service.converter.OperationConverter
 import io.github.zwieback.familyfinance.business.chart.service.converter.bar.OperationBarConverter
+import io.github.zwieback.familyfinance.business.chart.service.converter.bar.OperationProfitBarConverter
 import io.github.zwieback.familyfinance.business.chart.service.formatter.*
 import io.github.zwieback.familyfinance.business.chart.service.grouper.OperationGrouper
 import io.github.zwieback.familyfinance.business.chart.service.grouper.bar.*
@@ -149,17 +151,24 @@ class BarChartFragment :
             clearData(R.string.chart_no_data)
             return
         }
+        val incomeOperations = filterOperations(groupedOperations, OperationType.incomeTypes)
         val incomeSet = buildBarDataSet(
-            groupedOperations, OperationType.incomeTypes,
-            R.string.data_set_incomes, R.color.colorIncome, display.isViewIncomeValues,
+            incomeOperations,
+            R.string.data_set_incomes,
+            R.color.colorIncome,
+            display.isViewIncomeValues,
             display.isViewIncomes
         )
+        val expenseOperations = filterOperations(groupedOperations, OperationType.expenseTypes)
         val expenseSet = buildBarDataSet(
-            groupedOperations, OperationType.expenseTypes,
-            R.string.data_set_expenses, R.color.colorExpense, display.isViewExpenseValues,
+            expenseOperations,
+            R.string.data_set_expenses,
+            R.color.colorExpense,
+            display.isViewExpenseValues,
             display.isViewExpenses
         )
-        val barData = BarData(incomeSet, expenseSet).apply {
+        val profitSet = buildProfitBarDataSet(incomeOperations, expenseOperations)
+        val barData = BarData(incomeSet, expenseSet, profitSet).apply {
             setValueTextSize(barValueTextSize)
             setValueFormatter(LargeValueFormatter())
         }
@@ -177,20 +186,35 @@ class BarChartFragment :
     }
 
     private fun buildBarDataSet(
-        groupedOperations: Map<Float, List<OperationView>>,
-        types: List<OperationType>,
+        filteredOperations: Map<Float, List<OperationView>>,
         @StringRes dataSetLabel: Int,
         @ColorRes dataSetColor: Int,
         drawValuesEnabled: Boolean,
         visible: Boolean
     ): BarDataSet {
-        val operations = filterOperations(groupedOperations, types)
-        val barEntries = convertOperations(operations)
+        val barEntries = convertOperations(filteredOperations)
         return BarDataSet(barEntries, getString(dataSetLabel)).apply {
             setDrawIcons(false)
             setColors(ContextCompat.getColor(requireContext(), dataSetColor))
             setDrawValues(drawValuesEnabled)
             isVisible = visible
+        }
+    }
+
+    private fun buildProfitBarDataSet(
+        incomeOperations: Map<Float, List<OperationView>>,
+        expenseOperations: Map<Float, List<OperationView>>
+    ): BarDataSet {
+        val operationProfitCalculator = OperationProfitCalculator(requireContext())
+        val profitOperations =
+            operationProfitCalculator.calculateProfitMap(incomeOperations, expenseOperations)
+        val operationProfitBarConverter = OperationProfitBarConverter()
+        val barEntries = operationProfitBarConverter.convertToEntries(profitOperations)
+        return BarDataSet(barEntries, getString(R.string.data_set_profit)).apply {
+            setDrawIcons(false)
+            setColors(ContextCompat.getColor(requireContext(), R.color.colorProfit))
+            setDrawValues(display.isViewProfitValues)
+            isVisible = display.isViewProfits
         }
     }
 
@@ -241,6 +265,14 @@ class BarChartFragment :
             val xAxisFormatter = determineXAxisFormatter()
             setupXAxisValueFormatter(xAxisFormatter)
             setupMarker(xAxisFormatter)
+            if (display.isViewProfits) {
+                chart.axisLeft.resetAxisMinimum()
+                chart.axisRight.resetAxisMinimum()
+            } else {
+                val yAxisMinimum = resources.getInteger(R.integer.y_axis_minimum).toFloat()
+                chart.axisLeft.axisMinimum = yAxisMinimum
+                chart.axisRight.axisMinimum = yAxisMinimum
+            }
             refreshData()
         } else {
             this.display = display
@@ -305,10 +337,10 @@ class BarChartFragment :
         private const val NORMAL_GRANULARITY = 1f
         private const val X_AXIS_MAXIMUM_FIX = 1f
 
-        // (barWidth + barSpace) * 2 + groupSpace = 1.00 -> interval per "group"
-        private const val GROUP_SPACE = 0.08f
-        private const val BAR_SPACE = 0.06f // x2 DataSet
-        private const val BAR_WIDTH = 0.4f // x2 DataSet
+        // (barWidth + barSpace) * 3 + groupSpace = 1.00 -> interval per "group"
+        private const val GROUP_SPACE = 0.082f
+        private const val BAR_SPACE = 0.066f // x3 DataSet
+        private const val BAR_WIDTH = 0.24f // x3 DataSet
 
         private const val INCOME_BAR_SET = 0
         private const val EXPENSE_BAR_SET = 1

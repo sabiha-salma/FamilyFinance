@@ -13,6 +13,7 @@
     <!-- Operation colors -->
     <color name="colorIncome">#1AB611</color>
     <color name="colorExpense">#C1393D</color>
+    <color name="colorProfit">@color/colorPrimaryDark</color>
     <color name="colorDollar">#2E991E</color>
 
     <!-- Balance colors -->

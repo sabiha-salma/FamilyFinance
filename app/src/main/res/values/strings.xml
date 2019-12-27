@@ -273,7 +273,7 @@
 
     <string name="data_set_incomes">Incomes</string>
     <string name="data_set_expenses">Expenses</string>
-    <string name="data_set_net_profit">Net Profit</string>
+    <string name="data_set_profit">Profit</string>
 
     <string name="pie_group_other">Other (combined group)</string>
 
@@ -287,8 +287,10 @@
     <string name="bar_chart_display_view">View:</string>
     <string name="bar_chart_display_view_income_values">View income values</string>
     <string name="bar_chart_display_view_expense_values">View expense values</string>
+    <string name="bar_chart_display_view_profit_values">View profit values</string>
     <string name="bar_chart_display_view_incomes">View incomes</string>
     <string name="bar_chart_display_view_expenses">View expenses</string>
+    <string name="bar_chart_display_view_profits">View profits</string>
     <string name="bar_chart_display_include_transfers">Include transfers</string>
     <!-- Horizontal Bar Chart Display -->
     <string name="horizontal_bar_chart_display_group">Group by:</string>

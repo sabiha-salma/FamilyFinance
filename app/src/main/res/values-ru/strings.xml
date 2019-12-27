@@ -273,7 +273,7 @@
 
     <string name="data_set_incomes">Доходы</string>
     <string name="data_set_expenses">Расходы</string>
-    <string name="data_set_net_profit">Прибыль</string>
+    <string name="data_set_profit">Прибыль</string>
 
     <string name="pie_group_other">Другое (объединенная группа)</string>
 
@@ -287,8 +287,10 @@
     <string name="bar_chart_display_view">Просмотр:</string>
     <string name="bar_chart_display_view_income_values">Отображать значения доходов</string>
     <string name="bar_chart_display_view_expense_values">Отображать значения расходов</string>
+    <string name="bar_chart_display_view_profit_values">Отображать значения прибыли</string>
     <string name="bar_chart_display_view_incomes">Отображать доходы</string>
     <string name="bar_chart_display_view_expenses">Отображать расходы</string>
+    <string name="bar_chart_display_view_profits">Отображать прибыль</string>
     <string name="bar_chart_display_include_transfers">Учитывать переводы</string>
     <!-- Horizontal Bar Chart Display -->
     <string name="horizontal_bar_chart_display_group">Группировать по:</string>

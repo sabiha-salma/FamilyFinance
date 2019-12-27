@@ -13,8 +13,10 @@ class BarChartDisplay : ChartDisplay<BarChartDisplay> {
     lateinit var groupType: BarChartGroupType
     var isViewIncomeValues: Boolean = false
     var isViewExpenseValues: Boolean = false
+    var isViewProfitValues: Boolean = false
     var isViewIncomes: Boolean = false
     var isViewExpenses: Boolean = false
+    var isViewProfits: Boolean = false
     var isIncludeTransfers: Boolean = false
 
     constructor() : super()
@@ -23,8 +25,10 @@ class BarChartDisplay : ChartDisplay<BarChartDisplay> {
         groupType = display.groupType
         isViewIncomeValues = display.isViewIncomeValues
         isViewExpenseValues = display.isViewExpenseValues
+        isViewProfitValues = display.isViewProfitValues
         isViewIncomes = display.isViewIncomes
         isViewExpenses = display.isViewExpenses
+        isViewProfits = display.isViewProfits
         isIncludeTransfers = display.isIncludeTransfers
     }
 
@@ -35,8 +39,10 @@ class BarChartDisplay : ChartDisplay<BarChartDisplay> {
         groupType = BarChartGroupType.DAYS
         isViewIncomeValues = true
         isViewExpenseValues = true
+        isViewProfitValues = false
         isViewIncomes = true
         isViewExpenses = true
+        isViewProfits = false
         isIncludeTransfers = false
     }
 
@@ -44,8 +50,10 @@ class BarChartDisplay : ChartDisplay<BarChartDisplay> {
         groupType = BarChartGroupType.values()[`in`.readInt()]
         isViewIncomeValues = BooleanUtils.readBooleanFromParcel(`in`)
         isViewExpenseValues = BooleanUtils.readBooleanFromParcel(`in`)
+        isViewProfitValues = BooleanUtils.readBooleanFromParcel(`in`)
         isViewIncomes = BooleanUtils.readBooleanFromParcel(`in`)
         isViewExpenses = BooleanUtils.readBooleanFromParcel(`in`)
+        isViewProfits = BooleanUtils.readBooleanFromParcel(`in`)
         isIncludeTransfers = BooleanUtils.readBooleanFromParcel(`in`)
     }
 
@@ -53,8 +61,10 @@ class BarChartDisplay : ChartDisplay<BarChartDisplay> {
         out.writeInt(groupType.ordinal)
         BooleanUtils.writeBooleanToParcel(out, isViewIncomeValues)
         BooleanUtils.writeBooleanToParcel(out, isViewExpenseValues)
+        BooleanUtils.writeBooleanToParcel(out, isViewProfitValues)
         BooleanUtils.writeBooleanToParcel(out, isViewIncomes)
         BooleanUtils.writeBooleanToParcel(out, isViewExpenses)
+        BooleanUtils.writeBooleanToParcel(out, isViewProfits)
         BooleanUtils.writeBooleanToParcel(out, isIncludeTransfers)
     }
 
@@ -62,6 +72,7 @@ class BarChartDisplay : ChartDisplay<BarChartDisplay> {
         return groupType !== newDisplay.groupType
                 || isViewIncomes != newDisplay.isViewIncomes
                 || isViewExpenses != newDisplay.isViewExpenses
+                || isViewProfits != newDisplay.isViewProfits
                 || isIncludeTransfers != newDisplay.isIncludeTransfers
     }
 
@@ -74,8 +85,10 @@ class BarChartDisplay : ChartDisplay<BarChartDisplay> {
         if (groupType != other.groupType) return false
         if (isViewIncomeValues != other.isViewIncomeValues) return false
         if (isViewExpenseValues != other.isViewExpenseValues) return false
+        if (isViewProfitValues != other.isViewProfitValues) return false
         if (isViewIncomes != other.isViewIncomes) return false
         if (isViewExpenses != other.isViewExpenses) return false
+        if (isViewProfits != other.isViewProfits) return false
         if (isIncludeTransfers != other.isIncludeTransfers) return false
 
         return true
@@ -85,8 +98,10 @@ class BarChartDisplay : ChartDisplay<BarChartDisplay> {
         var result = groupType.hashCode()
         result = 31 * result + isViewIncomeValues.hashCode()
         result = 31 * result + isViewExpenseValues.hashCode()
+        result = 31 * result + isViewProfitValues.hashCode()
         result = 31 * result + isViewIncomes.hashCode()
         result = 31 * result + isViewExpenses.hashCode()
+        result = 31 * result + isViewProfits.hashCode()
         result = 31 * result + isIncludeTransfers.hashCode()
         return result
     }
