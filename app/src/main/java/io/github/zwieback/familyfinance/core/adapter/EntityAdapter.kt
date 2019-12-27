@@ -29,10 +29,8 @@ protected constructor(
     View.OnClickListener,
     View.OnLongClickListener {
 
-    protected val provider: EntityProvider<ENTITY>
-
-    init {
-        this.provider = createProvider(context)
+    protected val provider: EntityProvider<ENTITY> by lazy {
+        createProvider(context)
     }
 
     protected abstract fun createProvider(context: Context): EntityProvider<ENTITY>
