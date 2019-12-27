@@ -38,6 +38,7 @@ class ArticleEntriesCreator(
         val entertainment = findFolder(R.string.article_entertainment)
         return setOf(
             createExpenseEntry(auto, R.string.article_fuel),
+            createExpenseEntry(auto, R.string.article_repair),
             createExpenseEntry(auto, R.string.article_maintenance),
             createExpenseEntry(home, R.string.article_rent),
             createExpenseEntry(clothes, R.string.article_jacket),
