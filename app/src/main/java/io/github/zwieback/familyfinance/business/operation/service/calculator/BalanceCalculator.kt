@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.business.operation.service.calculator
 
 import io.github.zwieback.familyfinance.core.model.OperationView
+import io.github.zwieback.familyfinance.core.model.converter.BigDecimalToWorthConverter
 import io.github.zwieback.familyfinance.core.model.type.OperationType
 import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
 import io.requery.query.Result
@@ -33,6 +34,11 @@ object BalanceCalculator {
         return incomeBalance.subtract(expenseBalance)
     }
 
+    /**
+     * Don't remove "`?: BigDecimal.ZERO`" expression, because for zero value
+     * returns `null` in the [BigDecimalToWorthConverter].
+     */
+    @Suppress("USELESS_ELVIS")
     private fun calculateBalanceByType(
         operations: List<OperationView>,
         typePredicate: (OperationView) -> Boolean
@@ -40,7 +46,7 @@ object BalanceCalculator {
         return operations
             .asSequence()
             .filter { operation -> typePredicate(operation) }
-            .map { operation -> operation.value }
+            .map { operation -> operation.value ?: BigDecimal.ZERO }
             .fold(BigDecimal.ZERO, { result, value -> result.add(value) })
     }
 

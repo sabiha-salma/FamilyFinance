@@ -2,6 +2,7 @@ package io.github.zwieback.familyfinance.business.chart.service.calculator
 
 import android.content.Context
 import io.github.zwieback.familyfinance.core.model.OperationView
+import io.github.zwieback.familyfinance.core.model.converter.BigDecimalToWorthConverter
 import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -22,6 +23,11 @@ class OperationCalculator(context: Context) {
         return nativeSum.add(foreignSum)
     }
 
+    /**
+     * Don't remove "`?: BigDecimal.ZERO`" expression, because for zero value
+     * returns `null` in the [BigDecimalToWorthConverter].
+     */
+    @Suppress("USELESS_ELVIS")
     private fun calculateSumInNativeCurrency(
         nativeCurrencyId: Int,
         operations: List<OperationView>
@@ -29,7 +35,7 @@ class OperationCalculator(context: Context) {
         return operations
             .asSequence()
             .filter { operation -> nativeCurrencyId == operation.currencyId }
-            .map { operation -> operation.value }
+            .map { operation -> operation.value ?: BigDecimal.ZERO }
             .fold(BigDecimal.ZERO, { result, value -> result.add(value) })
     }
 
