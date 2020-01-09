@@ -69,6 +69,7 @@ class BarChartFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        updateCharAxisMinimum(display)
         refreshData()
     }
 
@@ -265,18 +266,22 @@ class BarChartFragment :
             val xAxisFormatter = determineXAxisFormatter()
             setupXAxisValueFormatter(xAxisFormatter)
             setupMarker(xAxisFormatter)
-            if (display.isViewProfits) {
-                chart.axisLeft.resetAxisMinimum()
-                chart.axisRight.resetAxisMinimum()
-            } else {
-                val yAxisMinimum = resources.getInteger(R.integer.y_axis_minimum).toFloat()
-                chart.axisLeft.axisMinimum = yAxisMinimum
-                chart.axisRight.axisMinimum = yAxisMinimum
-            }
+            updateCharAxisMinimum(display)
             refreshData()
         } else {
             this.display = display
             updateDrawValues()
+        }
+    }
+
+    private fun updateCharAxisMinimum(display: BarChartDisplay) {
+        if (display.isViewProfits) {
+            chart.axisLeft.resetAxisMinimum()
+            chart.axisRight.resetAxisMinimum()
+        } else {
+            val yAxisMinimum = resources.getInteger(R.integer.y_axis_minimum).toFloat()
+            chart.axisLeft.axisMinimum = yAxisMinimum
+            chart.axisRight.axisMinimum = yAxisMinimum
         }
     }
 
