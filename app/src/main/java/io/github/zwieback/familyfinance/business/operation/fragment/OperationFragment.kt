@@ -13,7 +13,6 @@ import io.github.zwieback.familyfinance.core.model.OperationView
 import io.github.zwieback.familyfinance.core.preference.config.InterfacePrefs
 import io.github.zwieback.familyfinance.databinding.ItemOperationBinding
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
@@ -37,7 +36,7 @@ abstract class OperationFragment<FILTER : OperationFilter> :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        launch {
+        runBlocking {
             val isShowBalanceOnOperationScreens = withContext(Dispatchers.IO) {
                 interfacePrefs.isShowBalanceOnOperationScreens
             }
