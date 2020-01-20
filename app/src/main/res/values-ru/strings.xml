@@ -86,6 +86,13 @@
     <string name="show_balance_on_operation_screens_preference_title">Баланс на страницах с операциями</string>
     <string name="show_balance_on_operation_screens_enabled_preference_summary">Показывать баланс</string>
     <string name="show_balance_on_operation_screens_disabled_preference_summary">Скрывать баланс</string>
+    <!-- Filter preferences -->
+    <string name="filter_preferences_title">Фильтры</string>
+    <string name="filter_preferences_summary">Настройки фильтров</string>
+    <string name="include_last_days_of_previous_month_on_start_date_preference_title">Включать последние дни предыдущего месяца в начальную дату</string>
+    <string name="include_last_days_of_previous_month_on_start_date_enabled_preference_summary">Включать последние дни предыдущего месяца</string>
+    <string name="include_last_days_of_previous_month_on_start_date_disabled_preference_summary">Начинать с первого дня</string>
+    <string name="number_of_included_last_days_preference_title">Количество включаемых последних дней</string>
     <!-- Database preferences -->
     <string name="database_preferences_title">База данных</string>
     <string name="database_preferences_summary">Первоначальные и значения по умолчанию</string>

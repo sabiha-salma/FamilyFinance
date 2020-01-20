@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceScreen
         android:key="interface_prefs"
@@ -57,6 +57,29 @@
             android:key="transferArticleId"
             android:summary="@string/transfer_article_id_preference_summary"
             android:title="@string/transfer_article_id_preference_title"/>
+
+    </PreferenceScreen>
+
+    <PreferenceScreen
+        android:key="filter_prefs"
+        android:summary="@string/filter_preferences_summary"
+        android:title="@string/filter_preferences_title">
+
+        <io.github.zwieback.familyfinance.business.preference.custom.filter.IncludeLastDaysOfPreviousMonthOnStartDatePreference
+            android:defaultValue="false"
+            android:key="includeLastDaysOfPreviousMonthOnStartDate"
+            android:summaryOff="@string/include_last_days_of_previous_month_on_start_date_disabled_preference_summary"
+            android:summaryOn="@string/include_last_days_of_previous_month_on_start_date_enabled_preference_summary"
+            android:title="@string/include_last_days_of_previous_month_on_start_date_preference_title"/>
+
+        <io.github.zwieback.familyfinance.business.preference.custom.filter.NumberOfIncludedLastDaysPreference
+            android:defaultValue="3"
+            android:key="numberOfIncludedLastDays"
+            android:max="7"
+            android:title="@string/number_of_included_last_days_preference_title"
+            app:min="1"
+            app:seekBarIncrement="1"
+            app:showSeekBarValue="true"/>
 
     </PreferenceScreen>
 

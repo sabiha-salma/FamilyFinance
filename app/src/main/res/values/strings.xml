@@ -86,6 +86,13 @@
     <string name="show_balance_on_operation_screens_preference_title">Balance on operation screens</string>
     <string name="show_balance_on_operation_screens_enabled_preference_summary">Show balance</string>
     <string name="show_balance_on_operation_screens_disabled_preference_summary">Hide balance</string>
+    <!-- Filter preferences -->
+    <string name="filter_preferences_title">Filter</string>
+    <string name="filter_preferences_summary">Filter preferences</string>
+    <string name="include_last_days_of_previous_month_on_start_date_preference_title">Include last days of the previous month in the start date</string>
+    <string name="include_last_days_of_previous_month_on_start_date_enabled_preference_summary">Include last days of the previous month</string>
+    <string name="include_last_days_of_previous_month_on_start_date_disabled_preference_summary">Start from the first day</string>
+    <string name="number_of_included_last_days_preference_title">Number of last days included</string>
     <!-- Database preferences -->
     <string name="database_preferences_title">Database</string>
     <string name="database_preferences_summary">Initial and default values</string>
