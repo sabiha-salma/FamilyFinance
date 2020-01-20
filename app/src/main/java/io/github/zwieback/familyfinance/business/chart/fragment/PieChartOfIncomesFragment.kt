@@ -17,7 +17,7 @@ class PieChartOfIncomesFragment : PieChartFragment<IncomeOperationFilter>() {
         get() = R.string.data_set_incomes
 
     override fun createDefaultFilter(): IncomeOperationFilter {
-        return IncomeOperationFilter()
+        return IncomeOperationFilter(requireContext())
     }
 
     override fun buildOperations(): Result<OperationView> {

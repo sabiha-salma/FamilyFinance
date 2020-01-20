@@ -74,7 +74,7 @@ class BarChartFragment :
     }
 
     override fun createDefaultFilter(): FlowOfFundsOperationFilter {
-        return FlowOfFundsOperationFilter()
+        return FlowOfFundsOperationFilter(requireContext())
     }
 
     override fun createDefaultDisplay(): BarChartDisplay {

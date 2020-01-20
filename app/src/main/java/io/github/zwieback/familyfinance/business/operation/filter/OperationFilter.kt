@@ -1,7 +1,9 @@
 package io.github.zwieback.familyfinance.business.operation.filter
 
+import android.content.Context
 import android.os.Parcel
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
+import io.github.zwieback.familyfinance.core.preference.config.FilterPrefs
 import io.github.zwieback.familyfinance.util.DateUtils
 import io.github.zwieback.familyfinance.util.DateUtils.readLocalDateFromParcel
 import io.github.zwieback.familyfinance.util.DateUtils.writeLocalDateToParcel
@@ -10,6 +12,8 @@ import io.github.zwieback.familyfinance.util.NumberUtils.intToIntegerId
 import io.github.zwieback.familyfinance.util.NumberUtils.integerToIntId
 import io.github.zwieback.familyfinance.util.NumberUtils.readBigDecimalFromParcel
 import io.github.zwieback.familyfinance.util.NumberUtils.writeBigDecimalToParcel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
 
@@ -24,7 +28,7 @@ abstract class OperationFilter : EntityFilter {
     private var ownerId: Int = 0
     private var currencyId: Int = 0
 
-    constructor() : super()
+    constructor(context: Context) : super(context)
 
     constructor(filter: OperationFilter) : super(filter) {
         startDate = filter.startDate
@@ -37,11 +41,21 @@ abstract class OperationFilter : EntityFilter {
         setCurrencyId(filter.getCurrencyId())
     }
 
-    internal constructor(`in`: Parcel) : super(`in`)
+    protected constructor(`in`: Parcel) : super(`in`)
 
-    override fun init() {
-        super.init()
+    override fun init(context: Context) {
+        super.init(context)
         startDate = DateUtils.startOfMonth()
+        runBlocking(Dispatchers.IO) {
+            val filterPrefs = FilterPrefs.with(context)
+            if (filterPrefs.includeLastDaysOfPreviousMonthOnStartDate) {
+                val numberOfIncludedLastDays = filterPrefs.numberOfIncludedLastDays
+                val currentDate = DateUtils.now()
+                if (currentDate.dayOfMonth <= numberOfIncludedLastDays) {
+                    startDate = startDate.minusDays(numberOfIncludedLastDays.toLong())
+                }
+            }
+        }
         endDate = DateUtils.endOfMonth()
         articleId = ID_AS_NULL
         accountId = ID_AS_NULL

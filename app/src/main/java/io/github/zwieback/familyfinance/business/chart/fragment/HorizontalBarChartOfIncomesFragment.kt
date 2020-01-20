@@ -24,7 +24,7 @@ class HorizontalBarChartOfIncomesFragment : HorizontalBarChartFragment<IncomeOpe
         get() = R.color.colorIncome
 
     override fun createDefaultFilter(): IncomeOperationFilter {
-        return IncomeOperationFilter()
+        return IncomeOperationFilter(requireContext())
     }
 
     override fun buildOperations(): Result<OperationView> {

@@ -1,11 +1,12 @@
 package io.github.zwieback.familyfinance.business.operation.filter
 
+import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
 
 class FlowOfFundsOperationFilter : OperationFilter {
 
-    constructor() : super()
+    constructor(context: Context) : super(context)
 
     constructor(filter: FlowOfFundsOperationFilter) : super(filter)
 

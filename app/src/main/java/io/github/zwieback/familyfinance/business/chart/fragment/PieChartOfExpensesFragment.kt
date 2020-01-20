@@ -17,7 +17,7 @@ class PieChartOfExpensesFragment : PieChartFragment<ExpenseOperationFilter>() {
         get() = R.string.data_set_expenses
 
     override fun createDefaultFilter(): ExpenseOperationFilter {
-        return ExpenseOperationFilter()
+        return ExpenseOperationFilter(requireContext())
     }
 
     override fun buildOperations(): Result<OperationView> {

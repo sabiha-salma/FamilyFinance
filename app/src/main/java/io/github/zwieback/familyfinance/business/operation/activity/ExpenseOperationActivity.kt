@@ -27,7 +27,7 @@ class ExpenseOperationActivity :
         operationHelper = ExpenseOperationHelper(this, data)
     }
 
-    override fun createDefaultFilter() = ExpenseOperationFilter().apply {
+    override fun createDefaultFilter() = ExpenseOperationFilter(this).apply {
         setArticleId(databasePrefs.expensesArticleId)
     }
 

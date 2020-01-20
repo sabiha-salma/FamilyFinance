@@ -24,7 +24,7 @@ class HorizontalBarChartOfExpensesFragment : HorizontalBarChartFragment<ExpenseO
         get() = R.color.colorExpense
 
     override fun createDefaultFilter(): ExpenseOperationFilter {
-        return ExpenseOperationFilter()
+        return ExpenseOperationFilter(requireContext())
     }
 
     override fun buildOperations(): Result<OperationView> {

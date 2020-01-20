@@ -28,7 +28,7 @@ class TransferOperationActivity :
         operationHelper = TransferOperationHelper(this, data)
     }
 
-    override fun createDefaultFilter() = TransferOperationFilter().apply {
+    override fun createDefaultFilter() = TransferOperationFilter(this).apply {
         setArticleId(databasePrefs.transferArticleId)
     }
 

@@ -27,7 +27,7 @@ class IncomeOperationActivity :
         operationHelper = IncomeOperationHelper(this, data)
     }
 
-    override fun createDefaultFilter() = IncomeOperationFilter().apply {
+    override fun createDefaultFilter() = IncomeOperationFilter(this).apply {
         setArticleId(databasePrefs.incomesArticleId)
     }
 

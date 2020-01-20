@@ -63,7 +63,7 @@ class FlowOfFundsOperationActivity :
     }
 
     override fun createDefaultFilter(): FlowOfFundsOperationFilter {
-        return FlowOfFundsOperationFilter()
+        return FlowOfFundsOperationFilter(this)
     }
 
     override fun createFragment(): FlowOfFundsOperationFragment {
