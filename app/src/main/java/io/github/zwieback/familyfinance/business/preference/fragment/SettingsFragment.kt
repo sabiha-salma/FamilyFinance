@@ -23,8 +23,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun setupSharedPreferences(rootKey: String?) {
-        if (DATABASE_PREFERENCES_NAME == rootKey) {
-            preferenceManager.sharedPreferencesName = DATABASE_PREFERENCES_NAME
+        val preferencesName = when (rootKey) {
+            INTERFACE_PREFERENCES_NAME,
+            DATABASE_PREFERENCES_NAME,
+            FILTER_PREFERENCES_NAME,
+            BACKUP_PREFERENCES_NAME,
+            ACRA_PREFERENCES_NAME -> rootKey
+            else -> null
+        }
+        preferencesName?.let {
+            preferenceManager.sharedPreferencesName = preferencesName
         }
     }
 

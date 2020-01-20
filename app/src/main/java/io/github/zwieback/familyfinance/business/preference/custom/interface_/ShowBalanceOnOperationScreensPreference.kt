@@ -25,12 +25,6 @@ class ShowBalanceOnOperationScreensPreference @JvmOverloads constructor(
 
     private lateinit var interfacePrefs: InterfacePrefs
 
-    private var isShowBalance: Boolean
-        get() = interfacePrefs.isShowBalanceOnOperationScreens
-        set(showBalance) {
-            interfacePrefs.isShowBalanceOnOperationScreens = showBalance
-        }
-
     override fun onAttached() {
         super.onAttached()
         runBlocking(Dispatchers.IO) {
@@ -38,7 +32,7 @@ class ShowBalanceOnOperationScreensPreference @JvmOverloads constructor(
         }
         launch {
             val showBalance = withContext(Dispatchers.IO) {
-                isShowBalance
+                interfacePrefs.isShowBalanceOnOperationScreens
             }
             callChangeListener(showBalance)
         }
@@ -47,7 +41,7 @@ class ShowBalanceOnOperationScreensPreference @JvmOverloads constructor(
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         if (newValue is Boolean) {
             launch(Dispatchers.IO) {
-                isShowBalance = newValue
+                interfacePrefs.isShowBalanceOnOperationScreens = newValue
             }
             return true
         }
