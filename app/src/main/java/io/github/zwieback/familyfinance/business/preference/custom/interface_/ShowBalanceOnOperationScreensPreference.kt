@@ -40,7 +40,7 @@ class ShowBalanceOnOperationScreensPreference @JvmOverloads constructor(
 
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         if (newValue is Boolean) {
-            launch(Dispatchers.IO) {
+            runBlocking(Dispatchers.IO) {
                 interfacePrefs.isShowBalanceOnOperationScreens = newValue
             }
             return true

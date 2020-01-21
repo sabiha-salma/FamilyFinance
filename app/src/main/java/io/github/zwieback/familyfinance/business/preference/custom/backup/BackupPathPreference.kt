@@ -13,6 +13,7 @@ import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardAct
 import io.github.zwieback.familyfinance.core.preference.custom.ActivityResultPreference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class BackupPathPreference @JvmOverloads constructor(
@@ -52,7 +53,7 @@ class BackupPathPreference @JvmOverloads constructor(
         val files = Utils.getSelectedFilesFromResult(resultIntent)
         if (files.isNotEmpty()) {
             val file = Utils.getFileForUri(files.iterator().next())
-            launch(Dispatchers.IO) {
+            runBlocking(Dispatchers.IO) {
                 backupPrefs.backupPath = file.absolutePath
             }
             callChangeListener(file.absolutePath)

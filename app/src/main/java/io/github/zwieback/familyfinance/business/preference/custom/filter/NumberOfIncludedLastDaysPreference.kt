@@ -40,7 +40,7 @@ class NumberOfIncludedLastDaysPreference @JvmOverloads constructor(
 
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         if (newValue is Int) {
-            launch(Dispatchers.IO) {
+            runBlocking(Dispatchers.IO) {
                 filterPrefs.numberOfIncludedLastDays = newValue
             }
             return true
