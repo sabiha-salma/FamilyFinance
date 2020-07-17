@@ -45,8 +45,8 @@ android {
         abortOnError false
         disable 'InvalidPackage'
     }
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
 }
 
