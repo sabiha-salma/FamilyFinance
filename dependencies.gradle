@@ -46,7 +46,7 @@ ext.versions = [
         permissionsDispatcher    : '4.5.0',
         mpAndroidChart           : 'v3.1.0',
 
-        espresso                 : '3.1.0',
+        espresso                 : '3.2.0',
         junit                    : '4.12',
         androidxJunit            : '1.1.1',
 ]
