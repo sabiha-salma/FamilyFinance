@@ -1,9 +1,9 @@
 package io.github.zwieback.familyfinance.core.filter
 
 import android.os.Parcel
-import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
-import io.github.zwieback.familyfinance.util.NumberUtils.intToIntegerId
-import io.github.zwieback.familyfinance.util.NumberUtils.integerToIntId
+import io.github.zwieback.familyfinance.extension.EMPTY_ID
+import io.github.zwieback.familyfinance.extension.toEmptyId
+import io.github.zwieback.familyfinance.extension.toNullableId
 
 abstract class EntityFolderFilter : EntityFilter {
 
@@ -19,7 +19,7 @@ abstract class EntityFolderFilter : EntityFilter {
 
     override fun init() {
         super.init()
-        parentId = ID_AS_NULL
+        parentId = EMPTY_ID
     }
 
     override fun readFromParcel(`in`: Parcel) {
@@ -46,10 +46,10 @@ abstract class EntityFolderFilter : EntityFilter {
     }
 
     fun getParentId(): Int? {
-        return intToIntegerId(parentId)
+        return parentId.toNullableId()
     }
 
     fun setParentId(parentId: Int?) {
-        this.parentId = integerToIntId(parentId)
+        this.parentId = parentId.toEmptyId()
     }
 }

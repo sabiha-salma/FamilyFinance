@@ -3,11 +3,11 @@ package io.github.zwieback.familyfinance.business.account.filter
 import android.os.Parcel
 import android.os.Parcelable
 import io.github.zwieback.familyfinance.core.filter.EntityFolderFilter
+import io.github.zwieback.familyfinance.extension.EMPTY_ID
+import io.github.zwieback.familyfinance.extension.toEmptyId
+import io.github.zwieback.familyfinance.extension.toNullableId
 import io.github.zwieback.familyfinance.util.BooleanUtils.readBooleanFromParcel
 import io.github.zwieback.familyfinance.util.BooleanUtils.writeBooleanToParcel
-import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
-import io.github.zwieback.familyfinance.util.NumberUtils.intToIntegerId
-import io.github.zwieback.familyfinance.util.NumberUtils.integerToIntId
 
 class AccountFilter : EntityFolderFilter {
 
@@ -25,7 +25,7 @@ class AccountFilter : EntityFolderFilter {
 
     override fun init() {
         super.init()
-        ownerId = ID_AS_NULL
+        ownerId = EMPTY_ID
         isOnlyActive = false
     }
 
@@ -62,11 +62,11 @@ class AccountFilter : EntityFolderFilter {
     }
 
     fun getOwnerId(): Int? {
-        return intToIntegerId(ownerId)
+        return ownerId.toNullableId()
     }
 
     fun setOwnerId(ownerId: Int?) {
-        this.ownerId = integerToIntId(ownerId)
+        this.ownerId = ownerId.toEmptyId()
     }
 
     companion object {

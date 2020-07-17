@@ -16,7 +16,6 @@ import java.util.regex.Pattern
  */
 object NumberUtils {
 
-    const val ID_AS_NULL = -1
     const val ACCOUNT_PLACES = 2
 
     const val UI_DEBOUNCE_TIMEOUT = 500L
@@ -50,26 +49,6 @@ object NumberUtils {
         bankDotFormat = DecimalFormat("0.00", bankDotSymbols)
         val bankCommaSymbols = DecimalFormatSymbols(Locale.GERMAN)
         bankCommaFormat = DecimalFormat("0.00", bankCommaSymbols)
-    }
-
-    @JvmStatic
-    fun isNullId(id: Int): Boolean {
-        return id == ID_AS_NULL
-    }
-
-    @JvmStatic
-    fun nonNullId(id: Int): Boolean {
-        return !isNullId(id)
-    }
-
-    @JvmStatic
-    fun intToIntegerId(id: Int): Int? {
-        return if (isNullId(id)) null else id
-    }
-
-    @JvmStatic
-    fun integerToIntId(id: Int?): Int {
-        return id ?: ID_AS_NULL
     }
 
     @JvmStatic

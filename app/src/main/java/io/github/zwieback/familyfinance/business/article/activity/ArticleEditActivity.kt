@@ -15,7 +15,7 @@ import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.Article
 import io.github.zwieback.familyfinance.core.model.type.ArticleType
 import io.github.zwieback.familyfinance.databinding.ActivityEditArticleBinding
-import io.github.zwieback.familyfinance.util.NumberUtils.nonNullId
+import io.github.zwieback.familyfinance.extension.isNotEmptyId
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.util.TransliterationUtils.transliterate
 import io.reactivex.functions.Consumer
@@ -83,7 +83,7 @@ abstract class ArticleEditActivity :
     }
 
     private fun loadParent(parentId: Int) {
-        if (nonNullId(parentId)) {
+        if (parentId.isNotEmptyId()) {
             loadEntity(Article::class.java, parentId, Consumer { foundArticle ->
                 entity.setParent(foundArticle)
                 binding.parentLayout.error = null

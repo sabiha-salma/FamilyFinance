@@ -4,12 +4,12 @@ import android.content.Context
 import android.os.Parcel
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
 import io.github.zwieback.familyfinance.core.preference.config.FilterPrefs
+import io.github.zwieback.familyfinance.extension.EMPTY_ID
+import io.github.zwieback.familyfinance.extension.toEmptyId
+import io.github.zwieback.familyfinance.extension.toNullableId
 import io.github.zwieback.familyfinance.util.DateUtils
 import io.github.zwieback.familyfinance.util.DateUtils.readLocalDateFromParcel
 import io.github.zwieback.familyfinance.util.DateUtils.writeLocalDateToParcel
-import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
-import io.github.zwieback.familyfinance.util.NumberUtils.intToIntegerId
-import io.github.zwieback.familyfinance.util.NumberUtils.integerToIntId
 import io.github.zwieback.familyfinance.util.NumberUtils.readBigDecimalFromParcel
 import io.github.zwieback.familyfinance.util.NumberUtils.writeBigDecimalToParcel
 import kotlinx.coroutines.Dispatchers
@@ -57,10 +57,10 @@ abstract class OperationFilter : EntityFilter {
             }
         }
         endDate = DateUtils.endOfMonth()
-        articleId = ID_AS_NULL
-        accountId = ID_AS_NULL
-        ownerId = ID_AS_NULL
-        currencyId = ID_AS_NULL
+        articleId = EMPTY_ID
+        accountId = EMPTY_ID
+        ownerId = EMPTY_ID
+        currencyId = EMPTY_ID
     }
 
     override fun readFromParcel(`in`: Parcel) {
@@ -116,34 +116,34 @@ abstract class OperationFilter : EntityFilter {
     }
 
     fun getArticleId(): Int? {
-        return intToIntegerId(articleId)
+        return articleId.toNullableId()
     }
 
     fun setArticleId(articleId: Int?) {
-        this.articleId = integerToIntId(articleId)
+        this.articleId = articleId.toEmptyId()
     }
 
     fun getAccountId(): Int? {
-        return intToIntegerId(accountId)
+        return accountId.toNullableId()
     }
 
     fun setAccountId(accountId: Int?) {
-        this.accountId = integerToIntId(accountId)
+        this.accountId = accountId.toEmptyId()
     }
 
     fun getOwnerId(): Int? {
-        return intToIntegerId(ownerId)
+        return ownerId.toNullableId()
     }
 
     fun setOwnerId(ownerId: Int?) {
-        this.ownerId = integerToIntId(ownerId)
+        this.ownerId = ownerId.toEmptyId()
     }
 
     fun getCurrencyId(): Int? {
-        return intToIntegerId(currencyId)
+        return currencyId.toNullableId()
     }
 
     fun setCurrencyId(currencyId: Int?) {
-        this.currencyId = integerToIntId(currencyId)
+        this.currencyId = currencyId.toEmptyId()
     }
 }

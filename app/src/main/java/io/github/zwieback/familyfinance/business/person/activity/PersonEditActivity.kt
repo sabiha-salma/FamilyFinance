@@ -14,7 +14,7 @@ import io.github.zwieback.familyfinance.core.activity.EntityFolderEditActivity
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.Person
 import io.github.zwieback.familyfinance.databinding.ActivityEditPersonBinding
-import io.github.zwieback.familyfinance.util.NumberUtils.nonNullId
+import io.github.zwieback.familyfinance.extension.isNotEmptyId
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToInt
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDateTime
@@ -75,7 +75,7 @@ class PersonEditActivity : EntityFolderEditActivity<Person, ActivityEditPersonBi
     }
 
     private fun loadParent(parentId: Int) {
-        if (nonNullId(parentId)) {
+        if (parentId.isNotEmptyId()) {
             loadEntity(Person::class.java, parentId, Consumer { foundPerson ->
                 entity.setParent(foundPerson)
                 binding.parentLayout.error = null

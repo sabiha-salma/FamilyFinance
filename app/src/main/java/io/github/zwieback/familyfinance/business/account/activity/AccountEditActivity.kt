@@ -24,7 +24,7 @@ import io.github.zwieback.familyfinance.core.model.Currency
 import io.github.zwieback.familyfinance.core.model.Person
 import io.github.zwieback.familyfinance.core.model.type.AccountType
 import io.github.zwieback.familyfinance.databinding.ActivityEditAccountBinding
-import io.github.zwieback.familyfinance.util.NumberUtils.nonNullId
+import io.github.zwieback.familyfinance.extension.isNotEmptyId
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToInt
 import io.reactivex.functions.Consumer
@@ -145,7 +145,7 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
     }
 
     private fun loadParent(parentId: Int) {
-        if (nonNullId(parentId)) {
+        if (parentId.isNotEmptyId()) {
             loadEntity(
                 Account::class.java,
                 parentId,

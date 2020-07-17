@@ -4,7 +4,7 @@ import android.content.Context
 import com.afollestad.rxkprefs.Pref
 import com.afollestad.rxkprefs.RxkPrefs
 import com.afollestad.rxkprefs.rxkPrefs
-import io.github.zwieback.familyfinance.util.NumberUtils
+import io.github.zwieback.familyfinance.extension.EMPTY_ID
 
 class DatabasePrefs private constructor(context: Context) {
 
@@ -46,6 +46,7 @@ class DatabasePrefs private constructor(context: Context) {
 
     companion object {
         const val FILE_NAME = "database_prefs"
+
         // region preferences
         private const val CURRENCY_ID = "currencyId"
         private const val ACCOUNT_ID = "accountId"
@@ -55,7 +56,7 @@ class DatabasePrefs private constructor(context: Context) {
         private const val EXPENSES_ARTICLE_ID = "expensesArticleId"
         private const val TRANSFER_ARTICLE_ID = "transferArticleId"
 
-        private const val DEFAULT_VALUE = NumberUtils.ID_AS_NULL
+        private const val DEFAULT_VALUE = EMPTY_ID
         // endregion preferences
 
         fun with(context: Context) = DatabasePrefs(context)

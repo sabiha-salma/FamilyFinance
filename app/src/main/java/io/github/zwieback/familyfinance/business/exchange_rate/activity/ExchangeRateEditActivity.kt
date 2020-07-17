@@ -16,13 +16,13 @@ import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.Currency
 import io.github.zwieback.familyfinance.core.model.ExchangeRate
 import io.github.zwieback.familyfinance.databinding.ActivityEditExchangeRateBinding
+import io.github.zwieback.familyfinance.extension.isNotEmptyId
 import io.github.zwieback.familyfinance.util.DateUtils.calendarDateToLocalDate
 import io.github.zwieback.familyfinance.util.DateUtils.isTextAnLocalDate
 import io.github.zwieback.familyfinance.util.DateUtils.localDateToString
 import io.github.zwieback.familyfinance.util.DateUtils.now
 import io.github.zwieback.familyfinance.util.DateUtils.stringToLocalDate
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
-import io.github.zwieback.familyfinance.util.NumberUtils.nonNullId
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
@@ -112,7 +112,7 @@ class ExchangeRateEditActivity :
             .setCreateDate(LocalDateTime.now())
             .setDate(now())
         bind(exchangeRate)
-        if (nonNullId(currencyId)) {
+        if (currencyId.isNotEmptyId()) {
             loadCurrency(currencyId)
         }
     }

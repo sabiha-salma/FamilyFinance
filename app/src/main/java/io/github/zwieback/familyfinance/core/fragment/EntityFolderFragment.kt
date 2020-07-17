@@ -6,9 +6,9 @@ import io.github.zwieback.familyfinance.core.adapter.EntityFolderAdapter
 import io.github.zwieback.familyfinance.core.filter.EntityFolderFilter
 import io.github.zwieback.familyfinance.core.listener.EntityFolderClickListener
 import io.github.zwieback.familyfinance.core.model.IBaseEntityFolder
-import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
-import io.github.zwieback.familyfinance.util.NumberUtils.intToIntegerId
-import io.github.zwieback.familyfinance.util.NumberUtils.integerToIntId
+import io.github.zwieback.familyfinance.extension.EMPTY_ID
+import io.github.zwieback.familyfinance.extension.toEmptyId
+import io.github.zwieback.familyfinance.extension.toNullableId
 
 abstract class EntityFolderFragment<
         ENTITY : IBaseEntityFolder,
@@ -23,8 +23,8 @@ abstract class EntityFolderFragment<
      */
     val parentId: Int?
         get() {
-            val id = arguments?.getInt(PARENT_ID_ARG, ID_AS_NULL) ?: ID_AS_NULL
-            return intToIntegerId(id)
+            val id = arguments?.getInt(PARENT_ID_ARG, EMPTY_ID) ?: EMPTY_ID
+            return id.toNullableId()
         }
 
     companion object {
@@ -39,7 +39,7 @@ abstract class EntityFolderFragment<
         ): Bundle {
             return Bundle().apply {
                 putParcelable(filterName, filter)
-                putInt(PARENT_ID_ARG, integerToIntId(filter.getParentId()))
+                putInt(PARENT_ID_ARG, filter.getParentId().toEmptyId())
             }
         }
     }

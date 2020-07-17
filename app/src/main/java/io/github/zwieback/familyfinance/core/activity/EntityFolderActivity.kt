@@ -11,8 +11,8 @@ import io.github.zwieback.familyfinance.core.filter.EntityFolderFilter
 import io.github.zwieback.familyfinance.core.fragment.EntityFolderFragment
 import io.github.zwieback.familyfinance.core.listener.EntityFolderClickListener
 import io.github.zwieback.familyfinance.core.model.IBaseEntityFolder
-import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
-import io.github.zwieback.familyfinance.util.NumberUtils.integerToIntId
+import io.github.zwieback.familyfinance.extension.EMPTY_ID
+import io.github.zwieback.familyfinance.extension.toEmptyId
 
 abstract class EntityFolderActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
     EntityActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT>(),
@@ -156,9 +156,7 @@ abstract class EntityFolderActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
     }
 
     private fun determineValidParentId(): Int {
-        return findFragment()
-            ?.let { fragment -> integerToIntId(fragment.parentId) }
-            ?: ID_AS_NULL
+        return findFragment()?.parentId?.toEmptyId() ?: EMPTY_ID
     }
 
     @CallSuper
@@ -179,10 +177,12 @@ abstract class EntityFolderActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
          * Flag indicating that the folder with the specified id should be opened
          */
         const val INPUT_PARENT_FOLDER_ID = "inputParentFolderId"
+
         /**
          * Flag indicating that the folder with the specified id cannot be selected
          */
         const val INPUT_PROHIBITED_FOLDER_ID = "inputProhibitedFolderId"
+
         /**
          * Flag indicating that the folder can be selected
          */

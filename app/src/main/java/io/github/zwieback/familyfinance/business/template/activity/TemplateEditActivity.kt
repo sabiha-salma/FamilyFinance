@@ -33,13 +33,13 @@ import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.*
 import io.github.zwieback.familyfinance.core.model.type.TemplateType
 import io.github.zwieback.familyfinance.databinding.ActivityEditTemplateBinding
+import io.github.zwieback.familyfinance.extension.EMPTY_ID
 import io.github.zwieback.familyfinance.util.DateUtils
 import io.github.zwieback.familyfinance.util.DateUtils.calendarDateToLocalDate
 import io.github.zwieback.familyfinance.util.DateUtils.isTextAnLocalDate
 import io.github.zwieback.familyfinance.util.DateUtils.localDateToString
 import io.github.zwieback.familyfinance.util.DateUtils.stringToLocalDate
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
-import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
 import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.reactivex.functions.Consumer
@@ -184,7 +184,7 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
     }
 
     private fun determineCurrencyId(): Int {
-        return entity.exchangeRate?.currency?.id ?: ID_AS_NULL
+        return entity.exchangeRate?.currency?.id ?: EMPTY_ID
     }
 
     private fun findLastExchangeRate(currencyId: Int): ExchangeRate? {

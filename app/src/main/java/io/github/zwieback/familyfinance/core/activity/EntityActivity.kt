@@ -21,8 +21,8 @@ import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer
 import io.github.zwieback.familyfinance.core.listener.EntityClickListener
 import io.github.zwieback.familyfinance.core.listener.EntityFilterListener
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
-import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
-import io.github.zwieback.familyfinance.util.NumberUtils.intToIntegerId
+import io.github.zwieback.familyfinance.extension.EMPTY_ID
+import io.github.zwieback.familyfinance.extension.toNullableId
 import io.reactivex.functions.Consumer
 
 abstract class EntityActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
@@ -315,6 +315,7 @@ abstract class EntityActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
          * without editing
          */
         const val INPUT_READ_ONLY = "inputReadOnly"
+
         /**
          * Flag indicating that the entity can be selected
          */
@@ -326,8 +327,8 @@ abstract class EntityActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
 
         fun extractId(bundle: Bundle?, key: String): Int? {
             return bundle?.let {
-                val id = bundle.getInt(key, ID_AS_NULL)
-                intToIntegerId(id)
+                val id = bundle.getInt(key, EMPTY_ID)
+                id.toNullableId()
             }
         }
 

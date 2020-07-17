@@ -3,11 +3,11 @@ package io.github.zwieback.familyfinance.business.exchange_rate.filter
 import android.os.Parcel
 import android.os.Parcelable
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
+import io.github.zwieback.familyfinance.extension.EMPTY_ID
+import io.github.zwieback.familyfinance.extension.toEmptyId
+import io.github.zwieback.familyfinance.extension.toNullableId
 import io.github.zwieback.familyfinance.util.DateUtils.readLocalDateFromParcel
 import io.github.zwieback.familyfinance.util.DateUtils.writeLocalDateToParcel
-import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
-import io.github.zwieback.familyfinance.util.NumberUtils.intToIntegerId
-import io.github.zwieback.familyfinance.util.NumberUtils.integerToIntId
 import io.github.zwieback.familyfinance.util.NumberUtils.readBigDecimalFromParcel
 import io.github.zwieback.familyfinance.util.NumberUtils.writeBigDecimalToParcel
 import org.threeten.bp.LocalDate
@@ -35,7 +35,7 @@ class ExchangeRateFilter : EntityFilter {
 
     override fun init() {
         super.init()
-        currencyId = ID_AS_NULL
+        currencyId = EMPTY_ID
     }
 
     override fun readFromParcel(`in`: Parcel) {
@@ -81,11 +81,11 @@ class ExchangeRateFilter : EntityFilter {
     }
 
     fun getCurrencyId(): Int? {
-        return intToIntegerId(currencyId)
+        return currencyId.toNullableId()
     }
 
     fun setCurrencyId(currencyId: Int?) {
-        this.currencyId = integerToIntId(currencyId)
+        this.currencyId = currencyId.toEmptyId()
     }
 
     companion object {

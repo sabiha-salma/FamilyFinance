@@ -23,10 +23,10 @@ import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardAct
 import io.github.zwieback.familyfinance.business.iconics.activity.IconicsActivity
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
+import io.github.zwieback.familyfinance.extension.EMPTY_ID
+import io.github.zwieback.familyfinance.extension.isEmptyId
 import io.github.zwieback.familyfinance.util.DateUtils
 import io.github.zwieback.familyfinance.util.NumberUtils
-import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
-import io.github.zwieback.familyfinance.util.NumberUtils.isNullId
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.internal.functions.Functions
@@ -60,7 +60,7 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
         provider = createProvider()
 
         val id = extractInputId(extraInputId)
-        if (isNullId(id)) {
+        if (id.isEmptyId()) {
             createEntity()
         } else {
             loadEntity(id)
@@ -220,7 +220,7 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
     }
 
     @JvmOverloads
-    protected fun extractInputId(name: String, defaultValue: Int = ID_AS_NULL): Int {
+    protected fun extractInputId(name: String, defaultValue: Int = EMPTY_ID): Int {
         return intent.getIntExtra(name, defaultValue)
     }
 
@@ -253,7 +253,7 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
         private const val TAG = "EntityEditActivity"
 
         fun extractOutputId(resultIntent: Intent, name: String): Int {
-            return resultIntent.getIntExtra(name, ID_AS_NULL)
+            return resultIntent.getIntExtra(name, EMPTY_ID)
         }
     }
 }

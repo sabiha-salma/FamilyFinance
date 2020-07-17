@@ -20,8 +20,8 @@ import io.github.zwieback.familyfinance.core.model.Article
 import io.github.zwieback.familyfinance.core.model.Operation
 import io.github.zwieback.familyfinance.core.model.type.OperationType
 import io.github.zwieback.familyfinance.databinding.ActivityEditExpenseOperationBinding
+import io.github.zwieback.familyfinance.extension.isEmptyId
 import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
-import io.github.zwieback.familyfinance.util.NumberUtils.isNullId
 import io.github.zwieback.familyfinance.widget.ClearableEditText
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
@@ -192,7 +192,7 @@ class ExpenseOperationEditActivity : OperationEditActivity<ActivityEditExpenseOp
         loadArticle(extractExpenseArticleId())
         loadOwner(extractExpenseOwnerId())
         val exchangeRateId = extractExpenseExchangeRateId()
-        if (isNullId(exchangeRateId)) {
+        if (exchangeRateId.isEmptyId()) {
             loadCurrency(extractExpenseCurrencyId())
         } else {
             loadExchangeRate(exchangeRateId)

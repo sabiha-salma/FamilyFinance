@@ -21,10 +21,10 @@ import io.github.zwieback.familyfinance.core.filter.EntityFilter
 import io.github.zwieback.familyfinance.core.listener.EntityFilterListener
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
 import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs
+import io.github.zwieback.familyfinance.extension.EMPTY_ID
 import io.github.zwieback.familyfinance.util.DateUtils
 import io.github.zwieback.familyfinance.util.DateUtils.isTextAnLocalDate
 import io.github.zwieback.familyfinance.util.DateUtils.stringToLocalDate
-import io.github.zwieback.familyfinance.util.NumberUtils.ID_AS_NULL
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
@@ -172,7 +172,7 @@ abstract class EntityFilterDialog<F : EntityFilter, B : ViewDataBinding> :
         }
 
         fun extractId(resultIntent: Intent, name: String): Int {
-            return resultIntent.getIntExtra(name, ID_AS_NULL)
+            return resultIntent.getIntExtra(name, EMPTY_ID)
         }
 
         fun determineDate(dateEdit: EditText, defaultDate: LocalDate?): LocalDate {
