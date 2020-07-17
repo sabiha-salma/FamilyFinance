@@ -47,7 +47,7 @@ dependencies {
     // support
     implementation libraries.appcompat
     implementation libraries.legacySupport
-    implementation libraries.gridLayout
+    implementation libraries.constraintLayout
     implementation libraries.material
     // java.time
     implementation libraries.time

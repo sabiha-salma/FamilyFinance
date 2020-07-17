@@ -65,7 +65,6 @@ ext.libraries = [
         multidex                      : "androidx.multidex:multidex:$versions.multidex",
         recyclerView                  : "androidx.recyclerview:recyclerview:$versions.support",
         constraintLayout              : "androidx.constraintlayout:constraintlayout:$versions.constraintLayout",
-        gridLayout                    : "androidx.gridlayout:gridlayout:$versions.support",
         material                      : "com.google.android.material:material:$versions.material",
 
         // JPA
