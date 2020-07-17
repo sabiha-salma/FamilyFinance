@@ -11,6 +11,8 @@ class PersonViewCreator(connection: Connection) : EntityViewCreator(connection) 
     override val viewBody: String
         get() = " SELECT pe.id        AS id," +
                 "       pe.icon_name  AS icon_name," +
+                "       pe.create_date      AS create_date," +
+                "       pe.last_change_date AS last_change_date," +
                 "       pe.is_folder  AS is_folder," +
                 "       pe.name       AS name," +
                 "       pe.order_code AS order_code," +

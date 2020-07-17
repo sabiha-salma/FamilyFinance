@@ -11,6 +11,8 @@ class TemplateViewCreator(connection: Connection) : EntityViewCreator(connection
     override val viewBody: String
         get() = " SELECT te.id         AS id," +
                 "       te.icon_name   AS icon_name," +
+                "       te.create_date AS create_date," +
+                "       te.last_change_date AS last_change_date," +
                 "       te.name        AS name," +
                 "       ac.id          AS account_id," +
                 "       ac.name        AS account_name," +

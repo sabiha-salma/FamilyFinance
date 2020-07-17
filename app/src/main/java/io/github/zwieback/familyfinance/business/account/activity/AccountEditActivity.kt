@@ -28,6 +28,7 @@ import io.github.zwieback.familyfinance.util.NumberUtils.nonNullId
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToInt
 import io.reactivex.functions.Consumer
+import org.threeten.bp.LocalDateTime
 import java.math.BigDecimal
 
 class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccountBinding>() {
@@ -160,6 +161,7 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
         val parentId = extractInputId(INPUT_PARENT_ID)
         val folder = extractInputBoolean(INPUT_IS_FOLDER)
         val account = Account()
+            .setCreateDate(LocalDateTime.now())
             .setActive(true)
             .setFolder(folder)
             .setType(AccountType.UNDEFINED_ACCOUNT)
@@ -206,6 +208,7 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun updateEntityProperties(account: Account) {
+        account.setLastChangeDate(LocalDateTime.now())
         account.setActive(binding.active.isChecked)
         account.setName(binding.name.text?.toString())
         binding.orderCode.text?.toString()?.let { orderCode ->

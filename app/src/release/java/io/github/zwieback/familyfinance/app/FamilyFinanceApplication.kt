@@ -6,8 +6,6 @@ import io.github.zwieback.familyfinance.R
 import io.github.zwieback.familyfinance.app.info.DeveloperInfo
 import io.github.zwieback.familyfinance.app.lifecycle.creator.DatabaseTableCreator
 import io.github.zwieback.familyfinance.core.model.Models
-import io.requery.android.sqlite.DatabaseProvider
-import io.requery.android.sqlitex.SqlitexDatabaseSource
 import org.acra.ACRA
 import org.acra.ReportField.*
 import org.acra.annotation.AcraCore
@@ -56,14 +54,6 @@ class FamilyFinanceApplication : AbstractApplication() {
         super.attachBaseContext(base)
         // The following line triggers the initialization of ACRA
         ACRA.init(this)
-    }
-
-    override fun buildDatabaseProvider(): DatabaseProvider<*> {
-        // override onUpgrade to handle migrating to a new version
-        val source = SqlitexDatabaseSource(this, Models.DEFAULT, DB_VERSION)
-        destroyViews(source.configuration)
-        createViews(source.configuration)
-        return source
     }
 
     private fun createDatabase() {

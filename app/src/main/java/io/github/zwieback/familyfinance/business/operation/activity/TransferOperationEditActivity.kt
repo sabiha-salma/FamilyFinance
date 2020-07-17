@@ -20,6 +20,7 @@ import io.github.zwieback.familyfinance.util.NumberUtils.isNullId
 import io.github.zwieback.familyfinance.widget.ClearableEditText
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 import java.math.BigDecimal
 
 class TransferOperationEditActivity :
@@ -198,7 +199,8 @@ class TransferOperationEditActivity :
 
     private fun createIncomeOperation() {
         incomeOperation = Operation()
-        incomeOperation.setType(OperationType.TRANSFER_INCOME_OPERATION)
+            .setCreateDate(LocalDateTime.now())
+            .setType(OperationType.TRANSFER_INCOME_OPERATION)
         bindIncomeOperation(incomeOperation)
     }
 
@@ -252,6 +254,7 @@ class TransferOperationEditActivity :
 
     override fun updateEntityProperties(operation: Operation) {
         super.updateEntityProperties(operation)
+        incomeOperation.setLastChangeDate(LocalDateTime.now())
         incomeOperation.setArticle(operation.article)
         incomeOperation.setOwner(operation.owner)
         incomeOperation.setExchangeRate(operation.exchangeRate)

@@ -11,6 +11,8 @@ class ExchangeRateViewCreator(connection: Connection) : EntityViewCreator(connec
     override val viewBody: String
         get() = " SELECT er.id       AS id," +
                 "       er.icon_name AS icon_name," +
+                "       er.create_date      AS create_date," +
+                "       er.last_change_date AS last_change_date," +
                 "       er._value    AS _value," +
                 "       er._date     AS _date," +
                 "       cu.id        AS currency_id," +

@@ -19,6 +19,7 @@ import io.github.zwieback.familyfinance.util.NumberUtils.nonNullId
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.util.TransliterationUtils.transliterate
 import io.reactivex.functions.Consumer
+import org.threeten.bp.LocalDateTime
 
 abstract class ArticleEditActivity :
     EntityFolderEditActivity<Article, ActivityEditArticleBinding>() {
@@ -94,8 +95,9 @@ abstract class ArticleEditActivity :
         val parentId = extractInputId(INPUT_PARENT_ID)
         val folder = extractInputBoolean(INPUT_IS_FOLDER)
         val article = Article()
-        article.setType(articleType)
-        article.setFolder(folder)
+            .setCreateDate(LocalDateTime.now())
+            .setType(articleType)
+            .setFolder(folder)
         bind(article)
         loadParent(parentId)
         disableLayout(binding.parentLayout, R.string.hint_parent_disabled)
@@ -122,6 +124,7 @@ abstract class ArticleEditActivity :
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun updateEntityProperties(article: Article) {
+        article.setLastChangeDate(LocalDateTime.now())
         article.setName(binding.name.text?.toString())
         article.setNameAscii(transliterate(article.name))
         if (!entity.isFolder) {

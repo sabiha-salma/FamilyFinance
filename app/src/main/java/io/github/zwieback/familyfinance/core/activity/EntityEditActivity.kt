@@ -106,6 +106,10 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
 
     protected abstract fun createProvider(): EntityProvider<ENTITY>
 
+    /**
+     * Warning: for each inherited entity, the [IBaseEntity.createDate] field
+     * must be filled in here
+     */
     protected abstract fun createEntity()
 
     protected open fun loadEntity(entityId: Int) {
@@ -184,6 +188,10 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
         return !Validators.validate(layoutsForValidation)
     }
 
+    /**
+     * Warning: for each inherited entity, the [IBaseEntity.lastChangeDate]
+     * field must be filled in here
+     */
     protected abstract fun updateEntityProperties(entity: ENTITY)
 
     protected fun saveEntity(entity: ENTITY, onSuccessfulSaving: Consumer<ENTITY>) {

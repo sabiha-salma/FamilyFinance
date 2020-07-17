@@ -11,6 +11,8 @@ class AccountViewCreator(connection: Connection) : EntityViewCreator(connection)
     override val viewBody: String
         get() = " SELECT ac.id             AS id," +
                 "       ac.icon_name       AS icon_name," +
+                "       ac.create_date     AS create_date," +
+                "       ac.last_change_date AS last_change_date," +
                 "       ac.is_folder       AS is_folder," +
                 "       ac.active          AS active," +
                 "       ac.name            AS name," +

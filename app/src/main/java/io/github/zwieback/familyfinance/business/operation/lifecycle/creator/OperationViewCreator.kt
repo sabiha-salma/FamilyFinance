@@ -12,6 +12,8 @@ class OperationViewCreator(connection: Connection) : EntityViewCreator(connectio
         get() = " SELECT op.id                          AS id," +
                 "       COALESCE(op.icon_name, ac.icon_name)" +
                 "                                       AS icon_name," +
+                "       op.create_date                  AS create_date," +
+                "       op.last_change_date             AS last_change_date," +
                 "       op.linked_transfer_operation_id AS linked_transfer_operation_id," +
                 "       ac.id                           AS account_id," +
                 "       ac.name                         AS account_name," +

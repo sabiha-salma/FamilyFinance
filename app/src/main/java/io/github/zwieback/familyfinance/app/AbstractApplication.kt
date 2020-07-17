@@ -5,8 +5,10 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import com.mikepenz.iconics.Iconics
 import io.github.zwieback.familyfinance.app.lifecycle.creator.DatabaseViewCreator
 import io.github.zwieback.familyfinance.app.lifecycle.destroyer.DatabaseViewDestroyer
+import io.github.zwieback.familyfinance.core.model.Models
 import io.requery.Persistable
 import io.requery.android.sqlite.DatabaseProvider
+import io.requery.android.sqlitex.SqlitexDatabaseSource
 import io.requery.reactivex.ReactiveEntityStore
 import io.requery.reactivex.ReactiveSupport
 import io.requery.sql.Configuration
@@ -24,8 +26,11 @@ abstract class AbstractApplication : MultiDexApplication() {
      * @return [EntityDataStore] single instance for the application.
      */
     val data: ReactiveEntityStore<Persistable> by lazy {
-        val databaseProvider = buildDatabaseProvider()
+        val databaseProvider = createDatabaseProvider()
+        setupDatabaseProvider(databaseProvider)
         val configuration = databaseProvider.configuration
+        destroyViews(configuration)
+        createViews(configuration)
         ReactiveSupport.toReactiveStore(EntityDataStore<Persistable>(configuration))
     }
 
@@ -35,7 +40,13 @@ abstract class AbstractApplication : MultiDexApplication() {
         Iconics.init(this)
     }
 
-    protected abstract fun buildDatabaseProvider(): DatabaseProvider<*>
+    private fun createDatabaseProvider(): DatabaseProvider<*> {
+        return SqlitexDatabaseSource(this, Models.DEFAULT, DB_VERSION)
+    }
+
+    protected open fun setupDatabaseProvider(source: DatabaseProvider<*>) {
+        // do nothing
+    }
 
     /**
      * Workaround for creating views, while requery does not support
@@ -47,7 +58,7 @@ abstract class AbstractApplication : MultiDexApplication() {
      * See [Using SQLite views](https://github.com/requery/requery/issues/721.issuecomment-344153774)
      */
     @Throws(SQLException::class)
-    protected fun createViews(configuration: Configuration) = runBlocking(Dispatchers.IO) {
+    private fun createViews(configuration: Configuration) = runBlocking(Dispatchers.IO) {
         configuration.connectionProvider.connection.use { connection ->
             DatabaseViewCreator(connection).createViews()
         }
@@ -63,13 +74,13 @@ abstract class AbstractApplication : MultiDexApplication() {
      * See [Using SQLite views](https://github.com/requery/requery/issues/721.issuecomment-344153774)
      */
     @Throws(SQLException::class)
-    protected fun destroyViews(configuration: Configuration) = runBlocking(Dispatchers.IO) {
+    private fun destroyViews(configuration: Configuration) = runBlocking(Dispatchers.IO) {
         configuration.connectionProvider.connection.use { connection ->
             DatabaseViewDestroyer(connection).destroyViews()
         }
     }
 
     companion object {
-        const val DB_VERSION = 8
+        const val DB_VERSION = 9
     }
 }

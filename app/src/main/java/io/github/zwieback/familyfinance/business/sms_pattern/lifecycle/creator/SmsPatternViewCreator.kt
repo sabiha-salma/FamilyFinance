@@ -11,6 +11,8 @@ class SmsPatternViewCreator(connection: Connection) : EntityViewCreator(connecti
     override val viewBody: String
         get() = " SELECT sp.id           AS id," +
                 "       sp.icon_name     AS icon_name," +
+                "       sp.create_date   AS create_date," +
+                "       sp.last_change_date AS last_change_date," +
                 "       sp.name          AS name," +
                 "       sp.regex         AS regex," +
                 "       sp.sender        AS sender," +

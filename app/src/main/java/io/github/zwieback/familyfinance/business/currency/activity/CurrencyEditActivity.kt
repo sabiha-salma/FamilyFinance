@@ -8,6 +8,7 @@ import io.github.zwieback.familyfinance.core.activity.EntityEditActivity
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.Currency
 import io.github.zwieback.familyfinance.databinding.ActivityEditCurrencyBinding
+import org.threeten.bp.LocalDateTime
 
 class CurrencyEditActivity : EntityEditActivity<Currency, ActivityEditCurrencyBinding>() {
 
@@ -37,7 +38,9 @@ class CurrencyEditActivity : EntityEditActivity<Currency, ActivityEditCurrencyBi
     }
 
     override fun createEntity() {
-        bind(Currency())
+        val currency = Currency()
+            .setCreateDate(LocalDateTime.now())
+        bind(currency)
     }
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
@@ -54,6 +57,7 @@ class CurrencyEditActivity : EntityEditActivity<Currency, ActivityEditCurrencyBi
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun updateEntityProperties(currency: Currency) {
+        currency.setLastChangeDate(LocalDateTime.now())
         currency.setName(binding.name.text?.toString())
         currency.setDescription(binding.description.text?.toString())
     }

@@ -26,6 +26,7 @@ import io.github.zwieback.familyfinance.util.NumberUtils.nonNullId
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 
 class ExchangeRateEditActivity :
     EntityEditActivity<ExchangeRate, ActivityEditExchangeRateBinding>(), OnDateSetListener {
@@ -108,7 +109,8 @@ class ExchangeRateEditActivity :
     override fun createEntity() {
         val currencyId = extractInputId(INPUT_CURRENCY_ID)
         val exchangeRate = ExchangeRate()
-        exchangeRate.setDate(now())
+            .setCreateDate(LocalDateTime.now())
+            .setDate(now())
         bind(exchangeRate)
         if (nonNullId(currencyId)) {
             loadCurrency(currencyId)
@@ -132,6 +134,7 @@ class ExchangeRateEditActivity :
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun updateEntityProperties(exchangeRate: ExchangeRate) {
+        exchangeRate.setLastChangeDate(LocalDateTime.now())
         exchangeRate.setValue(stringToBigDecimal(binding.value.text?.toString()))
         exchangeRate.setDate(stringToLocalDate(binding.date.text?.toString()))
     }

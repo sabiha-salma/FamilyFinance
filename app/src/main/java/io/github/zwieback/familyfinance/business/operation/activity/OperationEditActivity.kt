@@ -36,6 +36,7 @@ import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.widget.ClearableEditText
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 
 abstract class OperationEditActivity<B : ViewDataBinding> :
     EntityEditActivity<Operation, B>(),
@@ -175,6 +176,7 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
 
     protected open fun createOperation(): Operation {
         return Operation()
+            .setCreateDate(LocalDateTime.now())
             .setType(operationType)
             .setDate(now())
     }
@@ -188,6 +190,7 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun updateEntityProperties(operation: Operation) {
+        operation.setLastChangeDate(LocalDateTime.now())
         operation.setDate(stringToLocalDate(dateEdit.text?.toString()))
         operation.setValue(stringToBigDecimal(valueEdit.text?.toString()))
         operation.setDescription(descriptionEdit.text?.toString())

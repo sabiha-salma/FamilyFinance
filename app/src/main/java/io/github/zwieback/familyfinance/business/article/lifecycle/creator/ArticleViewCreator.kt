@@ -11,6 +11,8 @@ class ArticleViewCreator(connection: Connection) : EntityViewCreator(connection)
     override val viewBody: String
         get() = " SELECT ar.id           AS id," +
                 "       ar.icon_name     AS icon_name," +
+                "       ar.create_date   AS create_date," +
+                "       ar.last_change_date AS last_change_date," +
                 "       ar.is_folder     AS is_folder," +
                 "       ar._type         AS _type," +
                 "       ar.name          AS name," +

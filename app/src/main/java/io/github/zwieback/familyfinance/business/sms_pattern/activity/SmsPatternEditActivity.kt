@@ -16,6 +16,7 @@ import io.github.zwieback.familyfinance.core.model.Template
 import io.github.zwieback.familyfinance.databinding.ActivityEditSmsPatternBinding
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToInteger
 import io.reactivex.functions.Consumer
+import org.threeten.bp.LocalDateTime
 
 class SmsPatternEditActivity : EntityEditActivity<SmsPattern, ActivityEditSmsPatternBinding>() {
 
@@ -94,6 +95,7 @@ class SmsPatternEditActivity : EntityEditActivity<SmsPattern, ActivityEditSmsPat
 
     override fun createEntity() {
         val smsPattern = SmsPattern()
+            .setCreateDate(LocalDateTime.now())
         bind(smsPattern)
     }
 
@@ -114,6 +116,7 @@ class SmsPatternEditActivity : EntityEditActivity<SmsPattern, ActivityEditSmsPat
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun updateEntityProperties(smsPattern: SmsPattern) {
+        smsPattern.setLastChangeDate(LocalDateTime.now())
         smsPattern.setName(binding.name.text?.toString())
         smsPattern.setSender(binding.sender.text?.toString())
         smsPattern.setRegex(binding.regex.text?.toString())

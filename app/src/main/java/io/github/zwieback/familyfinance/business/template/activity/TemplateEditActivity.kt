@@ -44,6 +44,7 @@ import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 
 class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBinding>(),
     DatePickerDialog.OnDateSetListener {
@@ -267,7 +268,8 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
 
     override fun createEntity() {
         val template = Template()
-        template.setType(extractType())
+            .setCreateDate(LocalDateTime.now())
+            .setType(extractType())
         bind(template)
     }
 
@@ -310,6 +312,7 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun updateEntityProperties(template: Template) {
+        template.setLastChangeDate(LocalDateTime.now())
         template.setName(binding.name.text?.toString())
         template.setDate(stringToLocalDate(binding.date.text?.toString()))
         template.setValue(stringToBigDecimal(binding.value.text?.toString()))

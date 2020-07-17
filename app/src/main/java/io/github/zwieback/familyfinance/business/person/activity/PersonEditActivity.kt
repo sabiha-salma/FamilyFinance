@@ -17,6 +17,7 @@ import io.github.zwieback.familyfinance.databinding.ActivityEditPersonBinding
 import io.github.zwieback.familyfinance.util.NumberUtils.nonNullId
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToInt
 import io.reactivex.functions.Consumer
+import org.threeten.bp.LocalDateTime
 
 class PersonEditActivity : EntityFolderEditActivity<Person, ActivityEditPersonBinding>() {
 
@@ -86,7 +87,8 @@ class PersonEditActivity : EntityFolderEditActivity<Person, ActivityEditPersonBi
         val parentId = extractInputId(INPUT_PARENT_ID)
         val folder = extractInputBoolean(INPUT_IS_FOLDER)
         val person = Person()
-        person.setFolder(folder)
+            .setCreateDate(LocalDateTime.now())
+            .setFolder(folder)
         bind(person)
         loadParent(parentId)
         disableLayout(binding.parentLayout, R.string.hint_parent_disabled)
@@ -109,6 +111,7 @@ class PersonEditActivity : EntityFolderEditActivity<Person, ActivityEditPersonBi
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun updateEntityProperties(person: Person) {
+        person.setLastChangeDate(LocalDateTime.now())
         person.setName(binding.name.text?.toString())
         binding.orderCode.text?.toString()?.let { orderCode ->
             person.setOrderCode(stringToInt(orderCode))
