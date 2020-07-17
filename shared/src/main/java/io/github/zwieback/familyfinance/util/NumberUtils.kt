@@ -147,8 +147,9 @@ object NumberUtils {
             return if (text.isNullOrEmpty()) {
                 null
             } else {
-                val number = bankDotFormat.parse(text)
-                BigDecimal(number.toString())
+                bankDotFormat.parse(text)?.let { number ->
+                    BigDecimal(number.toString())
+                }
             }
         } catch (e: ParseException) {
             throw NumberFormatException(e.message)
@@ -161,8 +162,9 @@ object NumberUtils {
             return if (text.isNullOrEmpty()) {
                 null
             } else {
-                val number = bankCommaFormat.parse(text)
-                BigDecimal(number.toString())
+                bankCommaFormat.parse(text)?.let { number ->
+                    BigDecimal(number.toString())
+                }
             }
         } catch (e: ParseException) {
             throw NumberFormatException(e.message)
