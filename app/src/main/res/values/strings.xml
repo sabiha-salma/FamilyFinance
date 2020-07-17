@@ -271,6 +271,8 @@
     <!-- Backup Messages -->
     <string name="backup_completed_successfully">Backup completed successfully</string>
     <string name="backup_failed">Backup failed</string>
+    <string name="restore_rewrite_current_db">Backup will replace the current database. Continue?</string>
+    <string name="restore_rewrite_current_prefs">Backup will replace the current preferences. Continue?</string>
     <string name="restore_completed_successfully">Restore of backup completed successfully</string>
     <string name="restore_failed">Restore of backup failed</string>
 

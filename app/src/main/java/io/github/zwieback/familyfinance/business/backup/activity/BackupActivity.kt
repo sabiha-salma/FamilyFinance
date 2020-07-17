@@ -84,10 +84,19 @@ class BackupActivity : ActivityWrapper() {
             showReadExternalStoragePermissionIsMissingMsg()
             return
         }
+        AlertDialog.Builder(this)
+            .setMessage(R.string.restore_rewrite_current_db)
+            .setPositiveButton(android.R.string.yes) { _, _ -> restoreDatabase() }
+            .setNegativeButton(android.R.string.no) { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+
+    private fun restoreDatabase() {
         val backupPath = getBackupPath()
         val restoreCompletedSuccessfully = runBlocking(Dispatchers.IO) {
             BackupHelper.restoreDatabase(this@BackupActivity, backupPath)
         }
+        // todo: refresh database after a successful restore
         val resultMessage = getRestoreResultMessage(restoreCompletedSuccessfully)
         Toast.makeText(this, resultMessage, Toast.LENGTH_SHORT).show()
     }
@@ -130,6 +139,14 @@ class BackupActivity : ActivityWrapper() {
             showReadExternalStoragePermissionIsMissingMsg()
             return
         }
+        AlertDialog.Builder(this)
+            .setMessage(R.string.restore_rewrite_current_prefs)
+            .setPositiveButton(android.R.string.yes) { _, _ -> restoreSharedPrefs() }
+            .setNegativeButton(android.R.string.no) { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+
+    private fun restoreSharedPrefs() {
         val backupPath = getBackupPath()
         var restoreCompletedSuccessfully = runBlocking(Dispatchers.IO) {
             BackupHelper.restoreSharedPreferences(

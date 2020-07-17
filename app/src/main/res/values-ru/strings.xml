@@ -271,6 +271,8 @@
     <!-- Backup Messages -->
     <string name="backup_completed_successfully">Резервное копирование успешно завершено</string>
     <string name="backup_failed">Не удалось выполнить резервное копирование</string>
+    <string name="restore_rewrite_current_db">Резервная копия заменит текущую БД. Продолжить?</string>
+    <string name="restore_rewrite_current_prefs">Резервная копия заменит текущие настройки. Продолжить?</string>
     <string name="restore_completed_successfully">Восстановление резервной копии успешно завершено</string>
     <string name="restore_failed">Не удалось восстановить резервную копию</string>
 
