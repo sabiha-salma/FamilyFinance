@@ -37,7 +37,7 @@ ext.versions = [
         time                     : '1.2.1',
         acra                     : '5.4.0',
         rxkPrefs                 : '2.0.3',
-        preferenceCompat         : '1.1.0-alpha05',
+        preferenceCompat         : '1.1.0',
         filepicker               : '4.2.1',
         permissionsDispatcher    : '4.5.0',
         mpAndroidChart           : 'v3.1.0',
