@@ -1,12 +1,13 @@
 package io.github.zwieback.familyfinance.business.operation.lifecycle.creator
 
 import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator
+import io.github.zwieback.familyfinance.core.model.constant.Views
 import java.sql.Connection
 
 class OperationViewCreator(connection: Connection) : EntityViewCreator(connection) {
 
     override val viewName: String
-        get() = "v_operation"
+        get() = Views.OPERATION
 
     override val viewBody: String
         get() = " SELECT op.id                          AS id," +

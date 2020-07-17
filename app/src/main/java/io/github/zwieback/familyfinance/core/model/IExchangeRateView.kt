@@ -1,15 +1,16 @@
 package io.github.zwieback.familyfinance.core.model
 
 import androidx.databinding.Bindable
+import io.github.zwieback.familyfinance.core.model.constant.CurrencyRestriction
+import io.github.zwieback.familyfinance.core.model.constant.Views
 import io.github.zwieback.familyfinance.core.model.converter.BigDecimalToExchangeRateConverter
 import io.github.zwieback.familyfinance.core.model.converter.LocalDateConverter
-import io.github.zwieback.familyfinance.core.model.restriction.CurrencyRestriction
 import io.requery.*
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
 
 @Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN)
-@View(name = "v_exchange_rate")
+@View(name = Views.EXCHANGE_RATE)
 interface IExchangeRateView : IBaseEntity {
 
     @get:Bindable

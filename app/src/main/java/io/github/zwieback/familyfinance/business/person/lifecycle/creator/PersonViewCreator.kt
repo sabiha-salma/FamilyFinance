@@ -1,12 +1,13 @@
 package io.github.zwieback.familyfinance.business.person.lifecycle.creator
 
 import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator
+import io.github.zwieback.familyfinance.core.model.constant.Views
 import java.sql.Connection
 
 class PersonViewCreator(connection: Connection) : EntityViewCreator(connection) {
 
     override val viewName: String
-        get() = "v_person"
+        get() = Views.PERSON
 
     override val viewBody: String
         get() = " SELECT pe.id        AS id," +

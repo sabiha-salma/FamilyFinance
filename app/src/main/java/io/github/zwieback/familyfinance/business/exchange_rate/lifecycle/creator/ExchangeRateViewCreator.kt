@@ -1,12 +1,13 @@
 package io.github.zwieback.familyfinance.business.exchange_rate.lifecycle.creator
 
 import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator
+import io.github.zwieback.familyfinance.core.model.constant.Views
 import java.sql.Connection
 
 class ExchangeRateViewCreator(connection: Connection) : EntityViewCreator(connection) {
 
     override val viewName: String
-        get() = "v_exchange_rate"
+        get() = Views.EXCHANGE_RATE
 
     override val viewBody: String
         get() = " SELECT er.id       AS id," +

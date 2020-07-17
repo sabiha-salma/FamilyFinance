@@ -1,10 +1,11 @@
 package io.github.zwieback.familyfinance.business.account.lifecycle.destroyer
 
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityViewDestroyer
+import io.github.zwieback.familyfinance.core.model.constant.Views
 import java.sql.Connection
 
 class AccountViewDestroyer(connection: Connection) : EntityViewDestroyer(connection) {
 
     override val viewName: String
-        get() = "v_account"
+        get() = Views.ACCOUNT
 }

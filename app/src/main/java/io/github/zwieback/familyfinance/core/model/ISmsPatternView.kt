@@ -1,12 +1,13 @@
 package io.github.zwieback.familyfinance.core.model
 
 import androidx.databinding.Bindable
-import io.github.zwieback.familyfinance.core.model.restriction.SmsPatternRestriction
-import io.github.zwieback.familyfinance.core.model.restriction.TemplateRestriction
+import io.github.zwieback.familyfinance.core.model.constant.SmsPatternRestriction
+import io.github.zwieback.familyfinance.core.model.constant.TemplateRestriction
+import io.github.zwieback.familyfinance.core.model.constant.Views
 import io.requery.*
 
 @Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN)
-@View(name = "v_sms_pattern")
+@View(name = Views.SMS_PATTERN)
 interface ISmsPatternView : IBaseEntity {
 
     @get:Column(name = "template_id")

@@ -1,16 +1,17 @@
 package io.github.zwieback.familyfinance.core.model
 
 import androidx.databinding.Bindable
+import io.github.zwieback.familyfinance.core.model.constant.OperationRestriction
+import io.github.zwieback.familyfinance.core.model.constant.Tables
 import io.github.zwieback.familyfinance.core.model.converter.BigDecimalToWorthConverter
 import io.github.zwieback.familyfinance.core.model.converter.LocalDateConverter
-import io.github.zwieback.familyfinance.core.model.restriction.OperationRestriction
 import io.github.zwieback.familyfinance.core.model.type.OperationType
 import io.requery.*
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
 
 @Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN)
-@Table(name = "operation")
+@Table(name = Tables.OPERATION)
 interface IOperation : IBaseEntity {
 
     /**

@@ -1,16 +1,17 @@
 package io.github.zwieback.familyfinance.core.model
 
 import androidx.databinding.Bindable
+import io.github.zwieback.familyfinance.core.model.constant.AccountRestriction
+import io.github.zwieback.familyfinance.core.model.constant.CurrencyRestriction
+import io.github.zwieback.familyfinance.core.model.constant.PersonRestriction
+import io.github.zwieback.familyfinance.core.model.constant.Views
 import io.github.zwieback.familyfinance.core.model.converter.BigDecimalToWorthConverter
-import io.github.zwieback.familyfinance.core.model.restriction.AccountRestriction
-import io.github.zwieback.familyfinance.core.model.restriction.CurrencyRestriction
-import io.github.zwieback.familyfinance.core.model.restriction.PersonRestriction
 import io.github.zwieback.familyfinance.core.model.type.AccountType
 import io.requery.*
 import java.math.BigDecimal
 
 @Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN)
-@View(name = "v_account")
+@View(name = Views.ACCOUNT)
 interface IAccountView : IBaseEntityFolder {
 
     @get:Column(nullable = false, value = "true")

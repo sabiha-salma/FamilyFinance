@@ -1,12 +1,13 @@
 package io.github.zwieback.familyfinance.business.sms_pattern.lifecycle.creator
 
 import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator
+import io.github.zwieback.familyfinance.core.model.constant.Views
 import java.sql.Connection
 
 class SmsPatternViewCreator(connection: Connection) : EntityViewCreator(connection) {
 
     override val viewName: String
-        get() = "v_sms_pattern"
+        get() = Views.SMS_PATTERN
 
     override val viewBody: String
         get() = " SELECT sp.id           AS id," +

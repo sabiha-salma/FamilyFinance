@@ -1,14 +1,15 @@
 package io.github.zwieback.familyfinance.core.model
 
 import androidx.databinding.Bindable
+import io.github.zwieback.familyfinance.core.model.constant.ArticleRestriction
+import io.github.zwieback.familyfinance.core.model.constant.Tables
 import io.github.zwieback.familyfinance.core.model.converter.BigDecimalToWorthConverter
-import io.github.zwieback.familyfinance.core.model.restriction.ArticleRestriction
 import io.github.zwieback.familyfinance.core.model.type.ArticleType
 import io.requery.*
 import java.math.BigDecimal
 
 @Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN)
-@Table(name = "article")
+@Table(name = Tables.ARTICLE)
 interface IArticle : IBaseEntityFolder {
 
     @get:Bindable

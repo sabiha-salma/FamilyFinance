@@ -2,11 +2,12 @@ package io.github.zwieback.familyfinance.core.model
 
 import androidx.databinding.Bindable
 import io.github.zwieback.familyfinance.business.sms.handler.SmsHandler
-import io.github.zwieback.familyfinance.core.model.restriction.SmsPatternRestriction
+import io.github.zwieback.familyfinance.core.model.constant.SmsPatternRestriction
+import io.github.zwieback.familyfinance.core.model.constant.Tables
 import io.requery.*
 
 @Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN, copyable = true)
-@Table(name = "t_sms_pattern")
+@Table(name = Tables.SMS_PATTERN)
 interface ISmsPattern : IBaseEntity {
 
     @get:Bindable

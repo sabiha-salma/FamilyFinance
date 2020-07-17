@@ -4,7 +4,7 @@
 
     <data>
 
-        <import type="io.github.zwieback.familyfinance.core.model.restriction.CurrencyRestriction" />
+        <import type="io.github.zwieback.familyfinance.core.model.constant.CurrencyRestriction" />
 
         <variable
             name="currency"

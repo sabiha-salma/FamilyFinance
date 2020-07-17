@@ -1,11 +1,12 @@
 package io.github.zwieback.familyfinance.core.model
 
 import androidx.databinding.Bindable
-import io.github.zwieback.familyfinance.core.model.restriction.PersonRestriction
+import io.github.zwieback.familyfinance.core.model.constant.PersonRestriction
+import io.github.zwieback.familyfinance.core.model.constant.Views
 import io.requery.*
 
 @Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN)
-@View(name = "v_person")
+@View(name = Views.PERSON)
 interface IPersonView : IBaseEntityFolder {
 
     @get:Nullable

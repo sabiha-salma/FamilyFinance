@@ -4,8 +4,8 @@ import android.os.Parcelable
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import io.github.zwieback.familyfinance.core.activity.EntityEditActivity
+import io.github.zwieback.familyfinance.core.model.constant.BaseRestriction
 import io.github.zwieback.familyfinance.core.model.converter.LocalDateTimeConverter
-import io.github.zwieback.familyfinance.core.model.restriction.BaseRestriction
 import io.requery.*
 import org.threeten.bp.LocalDateTime
 import java.io.Serializable

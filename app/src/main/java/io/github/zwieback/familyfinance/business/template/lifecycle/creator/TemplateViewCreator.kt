@@ -1,12 +1,13 @@
 package io.github.zwieback.familyfinance.business.template.lifecycle.creator
 
 import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityViewCreator
+import io.github.zwieback.familyfinance.core.model.constant.Views
 import java.sql.Connection
 
 class TemplateViewCreator(connection: Connection) : EntityViewCreator(connection) {
 
     override val viewName: String
-        get() = "v_template"
+        get() = Views.TEMPLATE
 
     override val viewBody: String
         get() = " SELECT te.id         AS id," +

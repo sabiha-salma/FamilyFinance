@@ -1,11 +1,12 @@
 package io.github.zwieback.familyfinance.core.model
 
 import androidx.databinding.Bindable
-import io.github.zwieback.familyfinance.core.model.restriction.PersonRestriction
+import io.github.zwieback.familyfinance.core.model.constant.PersonRestriction
+import io.github.zwieback.familyfinance.core.model.constant.Tables
 import io.requery.*
 
 @Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN)
-@Table(name = "person")
+@Table(name = Tables.PERSON)
 interface IPerson : IBaseEntityFolder {
 
     @get:Bindable

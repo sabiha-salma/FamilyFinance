@@ -1,6 +1,7 @@
 package io.github.zwieback.familyfinance.core.model
 
 import androidx.databinding.Bindable
+import io.github.zwieback.familyfinance.core.model.constant.Tables
 import io.github.zwieback.familyfinance.core.model.converter.BigDecimalToExchangeRateConverter
 import io.github.zwieback.familyfinance.core.model.converter.LocalDateConverter
 import io.requery.*
@@ -8,7 +9,7 @@ import org.threeten.bp.LocalDate
 import java.math.BigDecimal
 
 @Entity(propertyNameStyle = PropertyNameStyle.FLUENT_BEAN)
-@Table(name = "exchange_rate")
+@Table(name = Tables.EXCHANGE_RATE)
 interface IExchangeRate : IBaseEntity {
 
     @get:Bindable

@@ -4,7 +4,7 @@
 
     <data>
 
-        <import type="io.github.zwieback.familyfinance.core.model.restriction.OperationRestriction" />
+        <import type="io.github.zwieback.familyfinance.core.model.constant.OperationRestriction" />
 
         <import type="io.github.zwieback.familyfinance.util.DateUtils" />
 
