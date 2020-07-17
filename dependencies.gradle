@@ -1,8 +1,8 @@
 ext.versions = [
         minSdk                   : 16,
-        targetSdk                : 28,
-        compileSdk               : 28,
-        buildTools               : '28.0.3',
+        targetSdk                : 29,
+        compileSdk               : 29,
+        buildTools               : '29.0.3',
 
         // replace with the latest (stable) version:
         // https://github.com/JetBrains/kotlin/releases/latest
