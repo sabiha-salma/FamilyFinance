@@ -6,6 +6,7 @@ import java.math.BigDecimal
 class IdIndexMapStatefulBuilder {
 
     private lateinit var sumMap: List<Pair<BigDecimal, Float>>
+
     /**
      * key - unique entity id, value - unique bar index (started from 0)
      */

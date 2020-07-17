@@ -12,6 +12,7 @@ class PieChartDisplay : ChartDisplay<PieChartDisplay> {
      * Initialized in the [init] method.
      */
     lateinit var groupingType: PieChartGroupingType
+
     /**
      * Initialized in the [init] method.
      */

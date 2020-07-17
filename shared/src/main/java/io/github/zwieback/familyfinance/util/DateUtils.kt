@@ -19,33 +19,33 @@ object DateUtils {
 
     @JvmStatic
     val ISO_LOCAL_WEEK: DateTimeFormatter =
-            DateTimeFormatterBuilder()
-                    .appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
-                    .appendLiteral('-')
-                    .appendValue(ChronoField.ALIGNED_WEEK_OF_YEAR, 2)
-                    .toFormatter()
-                    .withResolverStyle(ResolverStyle.STRICT)
-                    .withChronology(IsoChronology.INSTANCE)
+        DateTimeFormatterBuilder()
+            .appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
+            .appendLiteral('-')
+            .appendValue(ChronoField.ALIGNED_WEEK_OF_YEAR, 2)
+            .toFormatter()
+            .withResolverStyle(ResolverStyle.STRICT)
+            .withChronology(IsoChronology.INSTANCE)
 
     @JvmStatic
     val ISO_LOCAL_MONTH: DateTimeFormatter =
-            DateTimeFormatterBuilder()
-                    .appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
-                    .appendLiteral('-')
-                    .appendValue(ChronoField.MONTH_OF_YEAR, 2)
-                    .toFormatter()
-                    .withResolverStyle(ResolverStyle.STRICT)
-                    .withChronology(IsoChronology.INSTANCE)
+        DateTimeFormatterBuilder()
+            .appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
+            .appendLiteral('-')
+            .appendValue(ChronoField.MONTH_OF_YEAR, 2)
+            .toFormatter()
+            .withResolverStyle(ResolverStyle.STRICT)
+            .withChronology(IsoChronology.INSTANCE)
 
     @JvmStatic
     val ISO_LOCAL_QUARTER: DateTimeFormatter =
-            DateTimeFormatterBuilder()
-                    .appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
-                    .appendLiteral("-Q")
-                    .appendValue(IsoFields.QUARTER_OF_YEAR, 1)
-                    .toFormatter()
-                    .withResolverStyle(ResolverStyle.STRICT)
-                    .withChronology(IsoChronology.INSTANCE)
+        DateTimeFormatterBuilder()
+            .appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
+            .appendLiteral("-Q")
+            .appendValue(IsoFields.QUARTER_OF_YEAR, 1)
+            .toFormatter()
+            .withResolverStyle(ResolverStyle.STRICT)
+            .withChronology(IsoChronology.INSTANCE)
 
     @JvmStatic
     val BANK_DATE_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yy")
@@ -105,9 +105,9 @@ object DateUtils {
         return localDate?.let {
             Calendar.getInstance().apply {
                 set(
-                        localDate.year,
-                        localDate.monthValue - MONTH_OF_CALENDAR_INCREMENT,
-                        localDate.dayOfMonth
+                    localDate.year,
+                    localDate.monthValue - MONTH_OF_CALENDAR_INCREMENT,
+                    localDate.dayOfMonth
                 )
             }
         } ?: Calendar.getInstance()
@@ -115,9 +115,9 @@ object DateUtils {
 
     @JvmStatic
     fun calendarDateToLocalDate(
-            calendarYear: Int,
-            calendarMonth: Int,
-            calendarDay: Int
+        calendarYear: Int,
+        calendarMonth: Int,
+        calendarDay: Int
     ): LocalDate {
         return LocalDate.of(calendarYear, calendarMonth + MONTH_OF_CALENDAR_INCREMENT, calendarDay)
     }

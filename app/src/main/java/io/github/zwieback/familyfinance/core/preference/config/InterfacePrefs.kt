@@ -21,6 +21,7 @@ class InterfacePrefs private constructor(context: Context) {
 
     companion object {
         const val FILE_NAME = "interface_prefs"
+
         // region preferences
         private const val SHOW_BALANCE_ON_OPERATION_SCREENS = "showBalanceOnOperationScreens"
         private const val SHOW_BALANCE_ON_OPERATION_SCREENS_DEFAULT = true

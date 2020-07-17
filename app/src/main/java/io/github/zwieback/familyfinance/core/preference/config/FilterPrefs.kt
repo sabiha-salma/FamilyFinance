@@ -31,6 +31,7 @@ class FilterPrefs private constructor(context: Context) {
 
     companion object {
         const val FILE_NAME = "filter_prefs"
+
         // region preferences
         private const val INCLUDE_LAST_DAYS_OF_PREVIOUS_MONTH_ON_START_DATE =
             "includeLastDaysOfPreviousMonthOnStartDate"

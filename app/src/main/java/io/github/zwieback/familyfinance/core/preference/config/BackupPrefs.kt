@@ -18,6 +18,7 @@ class BackupPrefs private constructor(context: Context) {
 
     companion object {
         const val FILE_NAME = "backup_prefs"
+
         // region preferences
         private const val BACKUP_PATH = "backupPath"
         // endregion preferences
