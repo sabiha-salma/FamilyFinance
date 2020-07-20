@@ -1,10 +1,10 @@
 package io.github.zwieback.familyfinance.util
 
+import io.github.zwieback.familyfinance.constant.DateConstants.BANK_DATE_FORMATTER
+import io.github.zwieback.familyfinance.constant.DateConstants.EPOCH_DATE
 import org.threeten.bp.LocalDate
-import org.threeten.bp.Month
-import org.threeten.bp.chrono.IsoChronology
-import org.threeten.bp.format.*
-import org.threeten.bp.temporal.ChronoField
+import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.format.DateTimeParseException
 import org.threeten.bp.temporal.ChronoUnit
 import org.threeten.bp.temporal.IsoFields
 import org.threeten.bp.temporal.TemporalAdjusters
@@ -12,46 +12,9 @@ import java.util.*
 
 object DateUtils {
 
-    @JvmStatic
-    val ISO_LOCAL_WEEK: DateTimeFormatter =
-        DateTimeFormatterBuilder()
-            .appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
-            .appendLiteral('-')
-            .appendValue(ChronoField.ALIGNED_WEEK_OF_YEAR, 2)
-            .toFormatter()
-            .withResolverStyle(ResolverStyle.STRICT)
-            .withChronology(IsoChronology.INSTANCE)
-
-    @JvmStatic
-    val ISO_LOCAL_MONTH: DateTimeFormatter =
-        DateTimeFormatterBuilder()
-            .appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
-            .appendLiteral('-')
-            .appendValue(ChronoField.MONTH_OF_YEAR, 2)
-            .toFormatter()
-            .withResolverStyle(ResolverStyle.STRICT)
-            .withChronology(IsoChronology.INSTANCE)
-
-    @JvmStatic
-    val ISO_LOCAL_QUARTER: DateTimeFormatter =
-        DateTimeFormatterBuilder()
-            .appendValue(ChronoField.YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
-            .appendLiteral("-Q")
-            .appendValue(IsoFields.QUARTER_OF_YEAR, 1)
-            .toFormatter()
-            .withResolverStyle(ResolverStyle.STRICT)
-            .withChronology(IsoChronology.INSTANCE)
-
-    @JvmStatic
-    val BANK_DATE_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yy")
-
-    private val EPOCH_DATE: LocalDate = epochDay
-
     // workaround for month of calendar (start with 0)
     private const val MONTH_OF_CALENDAR_INCREMENT = 1
 
-    private val epochDay: LocalDate
-        get() = LocalDate.of(1970, Month.JANUARY, 1)
 
     @JvmStatic
     fun isTextAnLocalDate(text: String?): Boolean {
