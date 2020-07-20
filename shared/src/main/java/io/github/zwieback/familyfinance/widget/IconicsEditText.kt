@@ -9,14 +9,12 @@ import androidx.annotation.CallSuper
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.core.widget.TextViewCompat
-
 import com.google.android.material.textfield.TextInputEditText
 import com.mikepenz.iconics.IconicsColor
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.IconicsSize
-
 import io.github.zwieback.familyfinance.core.R
-import io.github.zwieback.familyfinance.util.ViewUtils
+import io.github.zwieback.familyfinance.extension.isLeftToRightLayoutDirection
 import io.github.zwieback.familyfinance.widget.listener.OnIconClickListener
 
 /**
@@ -80,7 +78,7 @@ abstract class IconicsEditText @JvmOverloads constructor(
         if (event.action != MotionEvent.ACTION_UP) {
             return false
         }
-        val ltr = ViewUtils.isLeftToRightLayoutDirection(this)
+        val ltr = this.isLeftToRightLayoutDirection()
         val x = event.x.toInt()
         val y = event.y.toInt()
         val left = if (ltr) width - paddingRight - icon.intrinsicWidth else 0
