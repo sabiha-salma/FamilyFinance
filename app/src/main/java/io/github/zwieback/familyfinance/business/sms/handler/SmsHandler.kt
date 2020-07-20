@@ -8,7 +8,7 @@ import io.github.zwieback.familyfinance.business.sms_pattern.query.SmsPatternQue
 import io.github.zwieback.familyfinance.business.template.activity.helper.TemplateQualifier
 import io.github.zwieback.familyfinance.core.model.SmsPatternView
 import io.github.zwieback.familyfinance.core.model.TemplateView
-import io.github.zwieback.familyfinance.extension.bankDateToLocalDate
+import io.github.zwieback.familyfinance.extension.bankDateToLocalDateOrNow
 import io.github.zwieback.familyfinance.extension.bankNumberToBigDecimal
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
@@ -51,7 +51,7 @@ class SmsHandler(
         }
         val date = smsPattern.dateGroup?.let { dateGroup -> matcher.group(dateGroup) }
         val value = smsPattern.valueGroup?.let { valueGroup -> matcher.group(valueGroup) }
-        val operationDate = date.bankDateToLocalDate()
+        val operationDate = date.bankDateToLocalDateOrNow()
         val operationValue = value?.bankNumberToBigDecimal()
         findTemplate(smsPattern, buildAndSendNotificationOnSuccess(operationDate, operationValue))
     }

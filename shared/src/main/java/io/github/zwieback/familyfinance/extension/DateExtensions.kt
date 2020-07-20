@@ -25,7 +25,7 @@ fun String?.toLocalDate(): LocalDate? {
     }
 }
 
-fun String?.bankDateToLocalDate(): LocalDate {
+fun String?.bankDateToLocalDateOrNow(): LocalDate {
     return if (!this.isNullOrEmpty()) {
         LocalDate.from(BANK_DATE_FORMATTER.parse(this))
     } else {
