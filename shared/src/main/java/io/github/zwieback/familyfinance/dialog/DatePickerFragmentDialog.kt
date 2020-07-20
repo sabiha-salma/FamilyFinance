@@ -7,9 +7,9 @@ import android.content.Context
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
+import io.github.zwieback.familyfinance.extension.readLocalDate
+import io.github.zwieback.familyfinance.extension.writeLocalDate
 import io.github.zwieback.familyfinance.util.DateUtils.localDateToCalendar
-import io.github.zwieback.familyfinance.util.DateUtils.readLocalDateFromBundle
-import io.github.zwieback.familyfinance.util.DateUtils.writeLocalDateToBundle
 import org.threeten.bp.LocalDate
 import java.util.*
 
@@ -27,7 +27,7 @@ class DatePickerFragmentDialog : DialogFragment(), OnDateSetListener {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val date = readLocalDateFromBundle(requireArguments())
+        val date = requireArguments().readLocalDate()
         val calendar = localDateToCalendar(date)
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
@@ -43,7 +43,7 @@ class DatePickerFragmentDialog : DialogFragment(), OnDateSetListener {
         fun newInstance(date: LocalDate): DatePickerFragmentDialog {
             val fragment = DatePickerFragmentDialog()
             val args = Bundle()
-            writeLocalDateToBundle(args, date)
+            args.writeLocalDate(date)
             fragment.arguments = args
             return fragment
         }

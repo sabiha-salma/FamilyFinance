@@ -1,7 +1,6 @@
 package io.github.zwieback.familyfinance.util
 
 import android.content.Intent
-import android.os.Bundle
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
 import org.threeten.bp.chrono.IsoChronology
@@ -132,21 +131,6 @@ object DateUtils {
     @JvmStatic
     fun endOfMonth(): LocalDate {
         return now().with(TemporalAdjusters.lastDayOfMonth())
-    }
-
-    @JvmStatic
-    fun writeLocalDateToBundle(out: Bundle, date: LocalDate) {
-        out.putInt(KEY_YEAR, date.year)
-        out.putInt(KEY_MONTH, date.monthValue)
-        out.putInt(KEY_DAY_OF_MONTH, date.dayOfMonth)
-    }
-
-    @JvmStatic
-    fun readLocalDateFromBundle(input: Bundle): LocalDate {
-        val year = input.getInt(KEY_YEAR)
-        val month = input.getInt(KEY_MONTH)
-        val dayOfMonth = input.getInt(KEY_DAY_OF_MONTH)
-        return LocalDate.of(year, month, dayOfMonth)
     }
 
     @JvmStatic
