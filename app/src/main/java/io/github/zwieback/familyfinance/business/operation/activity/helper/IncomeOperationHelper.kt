@@ -16,7 +16,7 @@ import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperat
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter
 import io.github.zwieback.familyfinance.core.model.*
 import io.github.zwieback.familyfinance.core.model.type.OperationType
-import io.github.zwieback.familyfinance.util.DateUtils
+import io.github.zwieback.familyfinance.extension.getLocalDateExtra
 import io.github.zwieback.familyfinance.util.NumberUtils
 import io.reactivex.Maybe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -94,7 +94,7 @@ class IncomeOperationHelper(context: Context, data: ReactiveEntityStore<Persista
             preparedIntent.putExtra(INPUT_INCOME_EXCHANGE_RATE_ID, exchangeRateId)
         }
         date?.let {
-            DateUtils.writeLocalDateToIntent(preparedIntent, INPUT_INCOME_DATE, date)
+            preparedIntent.putExtra(INPUT_INCOME_DATE, date)
         }
         value?.let {
             NumberUtils.writeBigDecimalToIntent(preparedIntent, INPUT_INCOME_VALUE, value)
@@ -200,7 +200,7 @@ class IncomeOperationHelper(context: Context, data: ReactiveEntityStore<Persista
         val articleId = intent.getIntExtra(INPUT_INCOME_ARTICLE_ID, 0)
         val ownerId = intent.getIntExtra(INPUT_INCOME_OWNER_ID, 0)
         val exchangeRateId = intent.getIntExtra(INPUT_INCOME_EXCHANGE_RATE_ID, 0)
-        val date = DateUtils.readLocalDateFromIntent(intent, INPUT_INCOME_DATE)
+        val date = intent.getLocalDateExtra(INPUT_INCOME_DATE)
         val value = NumberUtils.readBigDecimalFromIntent(intent, INPUT_INCOME_VALUE)
         val description = intent.getStringExtra(INPUT_INCOME_DESCRIPTION)
         val url = intent.getStringExtra(INPUT_INCOME_URL)

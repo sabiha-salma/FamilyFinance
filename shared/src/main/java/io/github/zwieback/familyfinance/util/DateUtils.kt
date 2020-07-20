@@ -1,6 +1,5 @@
 package io.github.zwieback.familyfinance.util
 
-import android.content.Intent
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
 import org.threeten.bp.chrono.IsoChronology
@@ -47,11 +46,6 @@ object DateUtils {
     val BANK_DATE_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yy")
 
     private val EPOCH_DATE: LocalDate = epochDay
-
-    // bundle keys
-    private const val KEY_YEAR = "keyYear"
-    private const val KEY_MONTH = "keyMonth"
-    private const val KEY_DAY_OF_MONTH = "keyDayOfMonth"
 
     // workaround for month of calendar (start with 0)
     private const val MONTH_OF_CALENDAR_INCREMENT = 1
@@ -131,22 +125,6 @@ object DateUtils {
     @JvmStatic
     fun endOfMonth(): LocalDate {
         return now().with(TemporalAdjusters.lastDayOfMonth())
-    }
-
-    @JvmStatic
-    fun writeLocalDateToIntent(out: Intent, name: String, date: LocalDate) {
-        out.putExtra(name + KEY_YEAR, date.year)
-        out.putExtra(name + KEY_MONTH, date.monthValue)
-        out.putExtra(name + KEY_DAY_OF_MONTH, date.dayOfMonth)
-    }
-
-    @JvmStatic
-    fun readLocalDateFromIntent(input: Intent, name: String): LocalDate {
-        val today = now()
-        val year = input.getIntExtra(name + KEY_YEAR, today.year)
-        val month = input.getIntExtra(name + KEY_MONTH, today.monthValue)
-        val dayOfMonth = input.getIntExtra(name + KEY_DAY_OF_MONTH, today.dayOfMonth)
-        return LocalDate.of(year, month, dayOfMonth)
     }
 
     @JvmStatic
