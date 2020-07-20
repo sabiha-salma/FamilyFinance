@@ -4,7 +4,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import io.github.zwieback.familyfinance.business.chart.display.type.PieChartGroupByType
 import io.github.zwieback.familyfinance.business.chart.display.type.PieChartGroupingType
-import io.github.zwieback.familyfinance.util.BooleanUtils
 
 class PieChartDisplay : ChartDisplay<PieChartDisplay> {
 
@@ -42,15 +41,15 @@ class PieChartDisplay : ChartDisplay<PieChartDisplay> {
     override fun readFromParcel(`in`: Parcel) {
         groupingType = PieChartGroupingType.values()[`in`.readInt()]
         groupByType = PieChartGroupByType.values()[`in`.readInt()]
-        isViewValues = BooleanUtils.readBooleanFromParcel(`in`)
-        isUsePercentValues = BooleanUtils.readBooleanFromParcel(`in`)
+        isViewValues = `in`.readBoolean()
+        isUsePercentValues = `in`.readBoolean()
     }
 
     override fun writeToParcel(out: Parcel, flags: Int) {
         out.writeInt(groupingType.ordinal)
         out.writeInt(groupByType.ordinal)
-        BooleanUtils.writeBooleanToParcel(out, isViewValues)
-        BooleanUtils.writeBooleanToParcel(out, isUsePercentValues)
+        out.writeBoolean(isViewValues)
+        out.writeBoolean(isUsePercentValues)
     }
 
     override fun needRefreshData(newDisplay: PieChartDisplay): Boolean {

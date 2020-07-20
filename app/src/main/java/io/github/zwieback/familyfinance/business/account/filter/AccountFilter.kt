@@ -6,8 +6,6 @@ import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.filter.EntityFolderFilter
 import io.github.zwieback.familyfinance.extension.toEmptyId
 import io.github.zwieback.familyfinance.extension.toNullableId
-import io.github.zwieback.familyfinance.util.BooleanUtils.readBooleanFromParcel
-import io.github.zwieback.familyfinance.util.BooleanUtils.writeBooleanToParcel
 
 class AccountFilter : EntityFolderFilter {
 
@@ -32,13 +30,13 @@ class AccountFilter : EntityFolderFilter {
     override fun readFromParcel(`in`: Parcel) {
         super.readFromParcel(`in`)
         ownerId = `in`.readInt()
-        isOnlyActive = readBooleanFromParcel(`in`)
+        isOnlyActive = `in`.readBoolean()
     }
 
     override fun writeToParcel(out: Parcel, flags: Int) {
         super.writeToParcel(out, flags)
         out.writeInt(ownerId)
-        writeBooleanToParcel(out, isOnlyActive)
+        out.writeBoolean(isOnlyActive)
     }
 
     override fun equals(other: Any?): Boolean {

@@ -3,7 +3,6 @@ package io.github.zwieback.familyfinance.business.chart.display
 import android.os.Parcel
 import android.os.Parcelable
 import io.github.zwieback.familyfinance.business.chart.display.type.HorizontalBarChartGroupByType
-import io.github.zwieback.familyfinance.util.BooleanUtils
 
 class HorizontalBarChartDisplay : ChartDisplay<HorizontalBarChartDisplay> {
 
@@ -33,14 +32,14 @@ class HorizontalBarChartDisplay : ChartDisplay<HorizontalBarChartDisplay> {
 
     override fun readFromParcel(`in`: Parcel) {
         groupByType = HorizontalBarChartGroupByType.values()[`in`.readInt()]
-        isViewValues = BooleanUtils.readBooleanFromParcel(`in`)
-        isUsePercentValues = BooleanUtils.readBooleanFromParcel(`in`)
+        isViewValues = `in`.readBoolean()
+        isUsePercentValues = `in`.readBoolean()
     }
 
     override fun writeToParcel(out: Parcel, flags: Int) {
         out.writeInt(groupByType.ordinal)
-        BooleanUtils.writeBooleanToParcel(out, isViewValues)
-        BooleanUtils.writeBooleanToParcel(out, isUsePercentValues)
+        out.writeBoolean(isViewValues)
+        out.writeBoolean(isUsePercentValues)
     }
 
     override fun needRefreshData(newDisplay: HorizontalBarChartDisplay): Boolean {

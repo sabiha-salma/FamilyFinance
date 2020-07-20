@@ -3,7 +3,6 @@ package io.github.zwieback.familyfinance.business.chart.display
 import android.os.Parcel
 import android.os.Parcelable
 import io.github.zwieback.familyfinance.business.chart.display.type.BarChartGroupType
-import io.github.zwieback.familyfinance.util.BooleanUtils
 
 class BarChartDisplay : ChartDisplay<BarChartDisplay> {
 
@@ -48,24 +47,24 @@ class BarChartDisplay : ChartDisplay<BarChartDisplay> {
 
     override fun readFromParcel(`in`: Parcel) {
         groupType = BarChartGroupType.values()[`in`.readInt()]
-        isViewIncomeValues = BooleanUtils.readBooleanFromParcel(`in`)
-        isViewExpenseValues = BooleanUtils.readBooleanFromParcel(`in`)
-        isViewProfitValues = BooleanUtils.readBooleanFromParcel(`in`)
-        isViewIncomes = BooleanUtils.readBooleanFromParcel(`in`)
-        isViewExpenses = BooleanUtils.readBooleanFromParcel(`in`)
-        isViewProfits = BooleanUtils.readBooleanFromParcel(`in`)
-        isIncludeTransfers = BooleanUtils.readBooleanFromParcel(`in`)
+        isViewIncomeValues = `in`.readBoolean()
+        isViewExpenseValues = `in`.readBoolean()
+        isViewProfitValues = `in`.readBoolean()
+        isViewIncomes = `in`.readBoolean()
+        isViewExpenses = `in`.readBoolean()
+        isViewProfits = `in`.readBoolean()
+        isIncludeTransfers = `in`.readBoolean()
     }
 
     override fun writeToParcel(out: Parcel, flags: Int) {
         out.writeInt(groupType.ordinal)
-        BooleanUtils.writeBooleanToParcel(out, isViewIncomeValues)
-        BooleanUtils.writeBooleanToParcel(out, isViewExpenseValues)
-        BooleanUtils.writeBooleanToParcel(out, isViewProfitValues)
-        BooleanUtils.writeBooleanToParcel(out, isViewIncomes)
-        BooleanUtils.writeBooleanToParcel(out, isViewExpenses)
-        BooleanUtils.writeBooleanToParcel(out, isViewProfits)
-        BooleanUtils.writeBooleanToParcel(out, isIncludeTransfers)
+        out.writeBoolean(isViewIncomeValues)
+        out.writeBoolean(isViewExpenseValues)
+        out.writeBoolean(isViewProfitValues)
+        out.writeBoolean(isViewIncomes)
+        out.writeBoolean(isViewExpenses)
+        out.writeBoolean(isViewProfits)
+        out.writeBoolean(isIncludeTransfers)
     }
 
     override fun needRefreshData(newDisplay: BarChartDisplay): Boolean {
