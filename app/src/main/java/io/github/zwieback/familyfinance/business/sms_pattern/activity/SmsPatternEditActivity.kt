@@ -14,7 +14,6 @@ import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.SmsPattern
 import io.github.zwieback.familyfinance.core.model.Template
 import io.github.zwieback.familyfinance.databinding.ActivityEditSmsPatternBinding
-import io.github.zwieback.familyfinance.util.NumberUtils.stringToInteger
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDateTime
 
@@ -120,8 +119,8 @@ class SmsPatternEditActivity : EntityEditActivity<SmsPattern, ActivityEditSmsPat
         smsPattern.setName(binding.name.text?.toString())
         smsPattern.setSender(binding.sender.text?.toString())
         smsPattern.setRegex(binding.regex.text?.toString())
-        smsPattern.setDateGroup(stringToInteger(binding.dateGroup.text?.toString()))
-        smsPattern.setValueGroup(stringToInteger(binding.valueGroup.text?.toString()))
+        smsPattern.setDateGroup(binding.dateGroup.text?.toString()?.toIntOrNull())
+        smsPattern.setValueGroup(binding.valueGroup.text?.toString()?.toIntOrNull())
         smsPattern.setCommon(binding.common.isChecked)
     }
 

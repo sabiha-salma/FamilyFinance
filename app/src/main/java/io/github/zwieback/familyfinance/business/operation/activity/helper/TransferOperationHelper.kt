@@ -18,8 +18,9 @@ import io.github.zwieback.familyfinance.business.operation.lifecycle.destroyer.T
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer
 import io.github.zwieback.familyfinance.core.model.*
 import io.github.zwieback.familyfinance.core.model.type.OperationType
+import io.github.zwieback.familyfinance.extension.getBigDecimalExtra
 import io.github.zwieback.familyfinance.extension.getLocalDateExtra
-import io.github.zwieback.familyfinance.util.NumberUtils
+import io.github.zwieback.familyfinance.extension.putBigDecimalExtra
 import io.reactivex.Maybe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -96,7 +97,7 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
             preparedIntent.putExtra(INPUT_EXPENSE_DATE, date)
         }
         value?.let {
-            NumberUtils.writeBigDecimalToIntent(preparedIntent, INPUT_EXPENSE_VALUE, value)
+            preparedIntent.putBigDecimalExtra(INPUT_EXPENSE_VALUE, value)
         }
         if (!description.isNullOrEmpty()) {
             preparedIntent.putExtra(INPUT_EXPENSE_DESCRIPTION, description)
@@ -220,7 +221,7 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
         val ownerId = intent.getIntExtra(INPUT_EXPENSE_OWNER_ID, 0)
         val exchangeRateId = intent.getIntExtra(INPUT_EXPENSE_EXCHANGE_RATE_ID, 0)
         val date = intent.getLocalDateExtra(INPUT_EXPENSE_DATE)
-        val value = NumberUtils.readBigDecimalFromIntent(intent, INPUT_EXPENSE_VALUE)
+        val value = intent.getBigDecimalExtra(INPUT_EXPENSE_VALUE)
         val description = intent.getStringExtra(INPUT_EXPENSE_DESCRIPTION)
         val url = intent.getStringExtra(INPUT_EXPENSE_URL)
         return Maybe.zip<Account, Article, Person, ExchangeRate, Operation>(

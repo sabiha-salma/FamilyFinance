@@ -21,13 +21,8 @@ import io.github.zwieback.familyfinance.core.model.Account
 import io.github.zwieback.familyfinance.core.model.Article
 import io.github.zwieback.familyfinance.core.model.Currency
 import io.github.zwieback.familyfinance.core.model.Person
-import io.github.zwieback.familyfinance.extension.CalendarDate
-import io.github.zwieback.familyfinance.extension.toLocalDate
-import io.github.zwieback.familyfinance.extension.toLocalDateWithMonthFix
-import io.github.zwieback.familyfinance.extension.toStringOrEmpty
+import io.github.zwieback.familyfinance.extension.*
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
-import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
-import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.widget.ClearableEditText
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
@@ -232,11 +227,11 @@ abstract class OperationFilterDialog<F, B> :
     }
 
     private fun loadStartValue(value: BigDecimal?) {
-        startValueEdit.setText(bigDecimalToString(value))
+        startValueEdit.setText(value.toStringOrEmpty())
     }
 
     private fun loadEndValue(value: BigDecimal?) {
-        endValueEdit.setText(bigDecimalToString(value))
+        endValueEdit.setText(value.toStringOrEmpty())
     }
 
     /**
@@ -248,7 +243,7 @@ abstract class OperationFilterDialog<F, B> :
             ?: error("Are you check the noneErrorFound() method?")
         filter.endDate = endDateEdit.text?.toString().toLocalDate()
             ?: error("Are you check the noneErrorFound() method?")
-        filter.startValue = stringToBigDecimal(startValueEdit.text?.toString())
-        filter.endValue = stringToBigDecimal(endValueEdit.text?.toString())
+        filter.startValue = startValueEdit.text?.toString()?.parseAsBigDecimal()
+        filter.endValue = endValueEdit.text?.toString()?.parseAsBigDecimal()
     }
 }

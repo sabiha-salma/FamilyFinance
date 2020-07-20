@@ -6,7 +6,9 @@
 
         <import type="io.github.zwieback.familyfinance.core.model.constant.AccountRestriction" />
 
-        <import type="io.github.zwieback.familyfinance.util.NumberUtils" />
+        <import type="io.github.zwieback.familyfinance.extension.BigDecimalExtensionsKt" />
+
+        <import type="io.github.zwieback.familyfinance.extension.IntExtensionsKt" />
 
         <variable
             name="account"
@@ -258,7 +260,7 @@
                         android:id="@+id/initial_balance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{NumberUtils.bigDecimalToString(account.initialBalance)}" />
+                        android:text="@{BigDecimalExtensionsKt.toStringOrEmpty(account.initialBalance)}" />
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -281,7 +283,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number|numberSigned"
-                        android:text="@{NumberUtils.intToString(account.orderCode)}" />
+                        android:text="@{IntExtensionsKt.toStringOrEmpty(account.orderCode)}" />
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 

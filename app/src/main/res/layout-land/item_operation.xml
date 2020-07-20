@@ -8,7 +8,7 @@
 
         <import type="io.github.zwieback.familyfinance.extension.DateExtensionsKt" />
 
-        <import type="io.github.zwieback.familyfinance.util.NumberUtils" />
+        <import type="io.github.zwieback.familyfinance.extension.BigDecimalExtensionsKt" />
 
         <variable
             name="operation"
@@ -82,7 +82,7 @@
             android:layout_marginEnd="@dimen/half_of_default_margin"
             android:layout_marginRight="@dimen/half_of_default_margin"
             android:gravity="end"
-            android:text="@{NumberUtils.bigDecimalToString(operation.value)}"
+            android:text="@{BigDecimalExtensionsKt.toStringOrEmpty(operation.value)}"
             android:textSize="@dimen/operation_first_line_text_size"
             app:layout_constraintEnd_toStartOf="@+id/currency"
             app:layout_constraintTop_toTopOf="@id/article_name" />

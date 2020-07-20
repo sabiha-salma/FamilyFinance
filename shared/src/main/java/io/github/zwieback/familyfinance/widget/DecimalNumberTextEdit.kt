@@ -7,8 +7,9 @@ import android.util.AttributeSet
 import android.view.inputmethod.EditorInfo
 import io.github.zwieback.familyfinance.calculator.dialog.OnCalculationResultListener
 import io.github.zwieback.familyfinance.core.R
+import io.github.zwieback.familyfinance.extension.parseAsBigDecimal
+import io.github.zwieback.familyfinance.extension.toStringOrEmpty
 import io.github.zwieback.familyfinance.util.DialogUtils
-import io.github.zwieback.familyfinance.util.NumberUtils
 import io.github.zwieback.familyfinance.widget.filter.DecimalNumberInputFilter
 import java.math.BigDecimal
 
@@ -43,11 +44,11 @@ class DecimalNumberTextEdit @JvmOverloads constructor(
         DialogUtils.showCalculatorDialog(
             context,
             this,
-            NumberUtils.stringToBigDecimal(this.text?.toString())
+            this.text?.toString()?.parseAsBigDecimal()
         )
     }
 
     override fun onCalculationResult(result: BigDecimal?) {
-        setText(NumberUtils.bigDecimalToString(result))
+        setText(result.toStringOrEmpty())
     }
 }

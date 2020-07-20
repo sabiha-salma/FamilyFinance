@@ -8,7 +8,7 @@
 
         <import type="io.github.zwieback.familyfinance.extension.DateExtensionsKt" />
 
-        <import type="io.github.zwieback.familyfinance.util.NumberUtils" />
+        <import type="io.github.zwieback.familyfinance.extension.BigDecimalExtensionsKt" />
 
         <variable
             name="operation"
@@ -171,7 +171,7 @@
                         android:id="@+id/value"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{NumberUtils.bigDecimalToString(operation.value)}" />
+                        android:text="@{BigDecimalExtensionsKt.toStringOrEmpty(operation.value)}" />
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -242,7 +242,7 @@
                         style="@style/AppTheme.EditText.Clearable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{NumberUtils.bigDecimalToString(operation.exchangeRate.value)}"
+                        android:text="@{BigDecimalExtensionsKt.toStringOrEmpty(operation.exchangeRate.value)}"
                         app:readOnly="@{true}" />
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>

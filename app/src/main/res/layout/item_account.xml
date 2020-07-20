@@ -7,7 +7,9 @@
 
         <import type="android.view.View"/>
 
-        <import type="io.github.zwieback.familyfinance.util.NumberUtils"/>
+        <import type="io.github.zwieback.familyfinance.constant.AccountNumberConstants"/>
+
+        <import type="io.github.zwieback.familyfinance.extension.BigDecimalExtensionsKt"/>
 
         <variable
             name="account"
@@ -62,7 +64,7 @@
             android:layout_toLeftOf="@+id/currency"
             android:layout_toStartOf="@+id/currency"
             android:gravity="end"
-            android:text="@{NumberUtils.bigDecimalToString(balanceValue, NumberUtils.ACCOUNT_PLACES)}"
+            android:text="@{BigDecimalExtensionsKt.toStringWithPlaces(balanceValue, AccountNumberConstants.ACCOUNT_PLACES)}"
             android:textSize="@dimen/account_text_size"
             android:textStyle="bold"/>
 

@@ -6,7 +6,9 @@
 
         <import type="io.github.zwieback.familyfinance.core.model.constant.PersonRestriction" />
 
-        <import type="io.github.zwieback.familyfinance.util.NumberUtils" />
+        <import type="io.github.zwieback.familyfinance.extension.BigDecimalExtensionsKt" />
+
+        <import type="io.github.zwieback.familyfinance.extension.IntExtensionsKt" />
 
         <variable
             name="person"
@@ -101,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number|numberSigned"
-                android:text="@{NumberUtils.intToString(person.orderCode)}" />
+                android:text="@{IntExtensionsKt.toStringOrEmpty(person.orderCode)}" />
 
         </com.johnpetitto.validator.ValidatingTextInputLayout>
 

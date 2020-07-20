@@ -21,9 +21,9 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import io.github.zwieback.familyfinance.R
 import io.github.zwieback.familyfinance.business.iconics.fragment.IconicsFragment
 import io.github.zwieback.familyfinance.business.iconics.listener.OnIconSelectListener
+import io.github.zwieback.familyfinance.constant.UiConstants
 import io.github.zwieback.familyfinance.core.activity.ActivityWrapper
 import io.github.zwieback.familyfinance.core.drawer.DrawerListener
-import io.github.zwieback.familyfinance.util.NumberUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.Locale
 import java.util.concurrent.TimeUnit
@@ -74,7 +74,7 @@ class IconicsActivity : ActivityWrapper(), OnIconSelectListener {
         addDisposable(
             searchView.queryTextChanges()
                 .debounce(
-                    NumberUtils.UI_DEBOUNCE_TIMEOUT,
+                    UiConstants.UI_DEBOUNCE_TIMEOUT,
                     TimeUnit.MILLISECONDS,
                     AndroidSchedulers.mainThread()
                 )

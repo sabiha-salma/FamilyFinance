@@ -14,12 +14,8 @@ import io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRa
 import io.github.zwieback.familyfinance.core.dialog.EntityFilterDialog
 import io.github.zwieback.familyfinance.core.model.Currency
 import io.github.zwieback.familyfinance.databinding.DialogFilterExchangeRateBinding
-import io.github.zwieback.familyfinance.extension.CalendarDate
-import io.github.zwieback.familyfinance.extension.toLocalDate
-import io.github.zwieback.familyfinance.extension.toLocalDateWithMonthFix
-import io.github.zwieback.familyfinance.extension.toStringOrEmpty
+import io.github.zwieback.familyfinance.extension.*
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
-import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.widget.ClearableEditText
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
@@ -172,8 +168,8 @@ class ExchangeRateFilterDialog :
     override fun updateFilterProperties() {
         filter.startDate = startDateEdit.text?.toString().toLocalDate()
         filter.endDate = endDateEdit.text?.toString().toLocalDate()
-        filter.startValue = stringToBigDecimal(startValueEdit.text?.toString())
-        filter.endValue = stringToBigDecimal(endValueEdit.text?.toString())
+        filter.startValue = startValueEdit.text?.toString()?.parseAsBigDecimal()
+        filter.endValue = endValueEdit.text?.toString()?.parseAsBigDecimal()
     }
 
     companion object {

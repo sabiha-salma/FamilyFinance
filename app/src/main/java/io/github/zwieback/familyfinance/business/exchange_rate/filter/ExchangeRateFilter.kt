@@ -4,12 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
-import io.github.zwieback.familyfinance.extension.readLocalDate
-import io.github.zwieback.familyfinance.extension.toEmptyId
-import io.github.zwieback.familyfinance.extension.toNullableId
-import io.github.zwieback.familyfinance.extension.writeLocalDate
-import io.github.zwieback.familyfinance.util.NumberUtils.readBigDecimalFromParcel
-import io.github.zwieback.familyfinance.util.NumberUtils.writeBigDecimalToParcel
+import io.github.zwieback.familyfinance.extension.*
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
 
@@ -43,8 +38,8 @@ class ExchangeRateFilter : EntityFilter {
         currencyId = `in`.readInt()
         startDate = `in`.readLocalDate()
         endDate = `in`.readLocalDate()
-        startValue = readBigDecimalFromParcel(`in`)
-        endValue = readBigDecimalFromParcel(`in`)
+        startValue = `in`.readBigDecimal()
+        endValue = `in`.readBigDecimal()
     }
 
     override fun writeToParcel(out: Parcel, flags: Int) {
@@ -52,8 +47,8 @@ class ExchangeRateFilter : EntityFilter {
         out.writeInt(currencyId)
         out.writeLocalDate(startDate)
         out.writeLocalDate(endDate)
-        writeBigDecimalToParcel(out, startValue)
-        writeBigDecimalToParcel(out, endValue)
+        out.writeBigDecimal(startValue)
+        out.writeBigDecimal(endValue)
     }
 
     override fun equals(other: Any?): Boolean {

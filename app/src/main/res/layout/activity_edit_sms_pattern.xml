@@ -8,7 +8,9 @@
 
         <import type="io.github.zwieback.familyfinance.core.model.constant.TemplateRestriction" />
 
-        <import type="io.github.zwieback.familyfinance.util.NumberUtils" />
+        <import type="io.github.zwieback.familyfinance.extension.BigDecimalExtensionsKt" />
+
+        <import type="io.github.zwieback.familyfinance.extension.IntExtensionsKt" />
 
         <variable
             name="smsPattern"
@@ -176,7 +178,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number|numberSigned"
-                        android:text="@{NumberUtils.integerToString(smsPattern.dateGroup)}" />
+                        android:text="@{IntExtensionsKt.toStringOrEmpty(smsPattern.dateGroup)}" />
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -198,7 +200,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number|numberSigned"
-                        android:text="@{NumberUtils.integerToString(smsPattern.valueGroup)}" />
+                        android:text="@{IntExtensionsKt.toStringOrEmpty(smsPattern.valueGroup)}" />
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 

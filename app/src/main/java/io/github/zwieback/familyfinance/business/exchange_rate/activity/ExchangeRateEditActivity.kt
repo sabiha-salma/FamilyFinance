@@ -18,7 +18,6 @@ import io.github.zwieback.familyfinance.core.model.ExchangeRate
 import io.github.zwieback.familyfinance.databinding.ActivityEditExchangeRateBinding
 import io.github.zwieback.familyfinance.extension.*
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
-import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
@@ -130,7 +129,7 @@ class ExchangeRateEditActivity :
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun updateEntityProperties(exchangeRate: ExchangeRate) {
         exchangeRate.setLastChangeDate(LocalDateTime.now())
-        exchangeRate.setValue(stringToBigDecimal(binding.value.text?.toString()))
+        exchangeRate.setValue(binding.value.text?.toString()?.parseAsBigDecimal())
         exchangeRate.setDate(binding.date.text?.toString().toLocalDate())
     }
 

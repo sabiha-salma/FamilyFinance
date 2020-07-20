@@ -1,8 +1,7 @@
 package com.johnpetitto.validator
 
 import android.util.Patterns
-import io.github.zwieback.familyfinance.extension.isLocalDate
-import io.github.zwieback.familyfinance.util.NumberUtils
+import io.github.zwieback.familyfinance.extension.*
 
 /**
  * Validates input for [ValidatingTextInputLayout] to meet some requirement.
@@ -29,14 +28,14 @@ val PhoneValidator: Validator = { input ->
  * Validates input for Integer number formatting.
  */
 val IntegerValidator: Validator = { input ->
-    NumberUtils.isTextAnInteger(input)
+    input.isInt()
 }
 
 /**
  * Validates input for BigDecimal number formatting.
  */
 val BigDecimalValidator: Validator = { input ->
-    NumberUtils.isTextABigDecimal(input)
+    input.isBigDecimal()
 }
 
 /**
@@ -57,14 +56,14 @@ val NotEmptyValidator: Validator = { input ->
  * Validates input for number formatting.
  */
 val SignedNumberValidator: Validator = { input ->
-    NumberUtils.isTextASignedNumber(input)
+    input.isSignedNumber()
 }
 
 /**
  * Validates input for account number formatting.
  */
 val AccountNumberValidator: Validator = { input ->
-    NumberUtils.isTextAnAccountNumber(input)
+    input.isAccountNumber()
 }
 
 /**

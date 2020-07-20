@@ -11,13 +11,13 @@ import io.github.zwieback.familyfinance.business.article.lifecycle.destroyer.Art
 import io.github.zwieback.familyfinance.business.article.lifecycle.destroyer.ArticleFromExpenseOperationsDestroyer
 import io.github.zwieback.familyfinance.business.article.listener.OnArticleClickListener
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_ARTICLE_ID
+import io.github.zwieback.familyfinance.constant.UiConstants.UI_DEBOUNCE_TIMEOUT
 import io.github.zwieback.familyfinance.core.activity.EntityFolderActivity
 import io.github.zwieback.familyfinance.core.fragment.EntityFolderFragment
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer
 import io.github.zwieback.familyfinance.core.model.Article
 import io.github.zwieback.familyfinance.core.model.ArticleView
 import io.github.zwieback.familyfinance.databinding.ItemArticleBinding
-import io.github.zwieback.familyfinance.util.NumberUtils.UI_DEBOUNCE_TIMEOUT
 import java.util.concurrent.TimeUnit
 
 abstract class ArticleActivity<FRAGMENT, FILTER> :

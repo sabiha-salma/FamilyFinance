@@ -6,7 +6,7 @@
 
         <import type="io.github.zwieback.familyfinance.extension.DateExtensionsKt" />
 
-        <import type="io.github.zwieback.familyfinance.util.NumberUtils" />
+        <import type="io.github.zwieback.familyfinance.extension.BigDecimalExtensionsKt" />
 
         <variable
             name="filter"
@@ -185,7 +185,7 @@
                     android:id="@+id/start_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{NumberUtils.bigDecimalToString(filter.startValue)}" />
+                    android:text="@{BigDecimalExtensionsKt.toStringOrEmpty(filter.startValue)}" />
 
             </com.johnpetitto.validator.ValidatingTextInputLayout>
 
@@ -206,7 +206,7 @@
                     android:id="@+id/end_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{NumberUtils.bigDecimalToString(filter.endValue)}" />
+                    android:text="@{BigDecimalExtensionsKt.toStringOrEmpty(filter.endValue)}" />
 
             </com.johnpetitto.validator.ValidatingTextInputLayout>
 

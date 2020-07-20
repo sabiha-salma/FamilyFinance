@@ -2,8 +2,9 @@ package io.github.zwieback.familyfinance.widget.filter
 
 import android.text.InputFilter
 import android.text.Spanned
+import io.github.zwieback.familyfinance.constant.BigDecimalConstants
 import io.github.zwieback.familyfinance.constant.StringConstants.EMPTY
-import io.github.zwieback.familyfinance.util.NumberUtils
+import io.github.zwieback.familyfinance.extension.isBigDecimal
 
 /**
  * Got an idea from [this answer](https://stackoverflow.com/a/20884556/8035065)
@@ -36,7 +37,7 @@ class DecimalNumberInputFilter : InputFilter {
         return if (needReplaceToDecimalSeparator(source)) {
             if (before.contains(DECIMAL_SEPARATOR)) EMPTY else DECIMAL_SEPARATOR
         } else {
-            if (!NumberUtils.isTextABigDecimal(after)) EMPTY else null
+            if (!after.isBigDecimal()) EMPTY else null
         }
     }
 
@@ -45,7 +46,7 @@ class DecimalNumberInputFilter : InputFilter {
     }
 
     companion object {
-        private val DECIMAL_SEPARATOR: String = NumberUtils.decimalSeparator
+        private val DECIMAL_SEPARATOR: String = BigDecimalConstants.decimalSeparator
         private const val SEPARATORS_TO_REPLACE = ", ., ,"
     }
 }

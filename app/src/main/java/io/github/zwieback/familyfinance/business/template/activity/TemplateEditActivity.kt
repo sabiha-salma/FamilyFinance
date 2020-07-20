@@ -34,14 +34,8 @@ import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.*
 import io.github.zwieback.familyfinance.core.model.type.TemplateType
 import io.github.zwieback.familyfinance.databinding.ActivityEditTemplateBinding
-import io.github.zwieback.familyfinance.extension.CalendarDate
-import io.github.zwieback.familyfinance.extension.isLocalDate
-import io.github.zwieback.familyfinance.extension.toLocalDate
-import io.github.zwieback.familyfinance.extension.toLocalDateWithMonthFix
-import io.github.zwieback.familyfinance.extension.toStringOrEmpty
+import io.github.zwieback.familyfinance.extension.*
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
-import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
-import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
@@ -196,7 +190,7 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
             entity.setArticle(foundArticle)
             if (binding.value.text?.toString().isNullOrEmpty()) {
                 foundArticle.defaultValue?.let { defaultValue ->
-                    binding.value.setText(bigDecimalToString(defaultValue))
+                    binding.value.setText(defaultValue.toStringOrEmpty())
                 }
             }
         }
@@ -315,7 +309,7 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
         template.setLastChangeDate(LocalDateTime.now())
         template.setName(binding.name.text?.toString())
         template.setDate(binding.date.text?.toString().toLocalDate())
-        template.setValue(stringToBigDecimal(binding.value.text?.toString()))
+        template.setValue(binding.value.text?.toString()?.parseAsBigDecimal())
         template.setDescription(binding.description.text?.toString())
         template.setUrl(binding.url.text?.toString())
     }

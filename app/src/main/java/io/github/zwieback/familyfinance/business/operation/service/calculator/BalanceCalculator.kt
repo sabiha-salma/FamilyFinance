@@ -3,7 +3,7 @@ package io.github.zwieback.familyfinance.business.operation.service.calculator
 import io.github.zwieback.familyfinance.core.model.OperationView
 import io.github.zwieback.familyfinance.core.model.converter.BigDecimalToWorthConverter
 import io.github.zwieback.familyfinance.core.model.type.OperationType
-import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
+import io.github.zwieback.familyfinance.extension.toStringOrEmpty
 import io.requery.query.Result
 import java.math.BigDecimal
 
@@ -60,7 +60,7 @@ object BalanceCalculator {
 
     private fun formatBalance(groupedBalance: Map<CurrencyEntry, BigDecimal>): List<String> {
         return groupedBalance.map { balance ->
-            "${bigDecimalToString(balance.value)} ${balance.key.name}"
+            "${balance.value.toStringOrEmpty()} ${balance.key.name}"
         }
     }
 

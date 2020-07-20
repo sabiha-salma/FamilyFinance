@@ -20,8 +20,8 @@ import io.github.zwieback.familyfinance.core.model.Article
 import io.github.zwieback.familyfinance.core.model.Operation
 import io.github.zwieback.familyfinance.core.model.type.OperationType
 import io.github.zwieback.familyfinance.databinding.ActivityEditIncomeOperationBinding
+import io.github.zwieback.familyfinance.extension.toStringOrEmpty
 import io.github.zwieback.familyfinance.extension.isEmptyId
-import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
 import io.github.zwieback.familyfinance.widget.ClearableEditText
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
@@ -129,7 +129,7 @@ class IncomeOperationEditActivity : OperationEditActivity<ActivityEditIncomeOper
             entity.setArticle(foundArticle)
             if (binding.value.text?.toString().isNullOrEmpty()) {
                 foundArticle.defaultValue?.let { defaultValue ->
-                    binding.value.setText(bigDecimalToString(defaultValue))
+                    binding.value.setText(defaultValue.toStringOrEmpty())
                 }
             }
         }

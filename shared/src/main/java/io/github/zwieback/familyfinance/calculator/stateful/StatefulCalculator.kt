@@ -2,11 +2,9 @@ package io.github.zwieback.familyfinance.calculator.stateful
 
 import io.github.zwieback.familyfinance.calculator.Calculator
 import io.github.zwieback.familyfinance.calculator.Operator
+import io.github.zwieback.familyfinance.constant.BigDecimalConstants
 import io.github.zwieback.familyfinance.constant.StringConstants.EMPTY
-import io.github.zwieback.familyfinance.extension.addChar
-import io.github.zwieback.familyfinance.extension.addUniqueChar
-import io.github.zwieback.familyfinance.extension.deleteLastChar
-import io.github.zwieback.familyfinance.util.NumberUtils
+import io.github.zwieback.familyfinance.extension.*
 import java.math.BigDecimal
 
 class StatefulCalculator(
@@ -14,7 +12,7 @@ class StatefulCalculator(
     defaultValue: BigDecimal?
 ) {
 
-    private val decimalSeparator: String = NumberUtils.decimalSeparator
+    private val decimalSeparator: String = BigDecimalConstants.decimalSeparator
     private var leftOperand: String
     private lateinit var rightOperand: String
     private var operator: Operator? = null
@@ -23,7 +21,7 @@ class StatefulCalculator(
 
     init {
         reset()
-        leftOperand = NumberUtils.bigDecimalToString(defaultValue)
+        leftOperand = defaultValue.toStringOrEmpty()
     }
 
     fun clear() {
@@ -50,7 +48,7 @@ class StatefulCalculator(
     fun eq() {
         updateCalculator()
         reset()
-        leftOperand = NumberUtils.bigDecimalToString(calculator.calc())
+        leftOperand = calculator.calc().toStringOrEmpty()
         invalidate()
     }
 
@@ -85,8 +83,8 @@ class StatefulCalculator(
     }
 
     fun updateCalculator() {
-        calculator.setLeftOperand(NumberUtils.stringToBigDecimal(leftOperand))
-        calculator.setRightOperand(NumberUtils.stringToBigDecimal(rightOperand))
+        calculator.setLeftOperand(leftOperand.parseAsBigDecimal())
+        calculator.setRightOperand(rightOperand.parseAsBigDecimal())
         calculator.setOperator(operator)
     }
 

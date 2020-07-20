@@ -26,13 +26,8 @@ import io.github.zwieback.familyfinance.core.model.ExchangeRate
 import io.github.zwieback.familyfinance.core.model.Operation
 import io.github.zwieback.familyfinance.core.model.Person
 import io.github.zwieback.familyfinance.core.model.type.OperationType
-import io.github.zwieback.familyfinance.extension.CalendarDate
-import io.github.zwieback.familyfinance.extension.isLocalDate
-import io.github.zwieback.familyfinance.extension.toLocalDate
-import io.github.zwieback.familyfinance.extension.toLocalDateWithMonthFix
-import io.github.zwieback.familyfinance.extension.toStringOrEmpty
+import io.github.zwieback.familyfinance.extension.*
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
-import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.widget.ClearableEditText
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
@@ -192,7 +187,7 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
     override fun updateEntityProperties(operation: Operation) {
         operation.setLastChangeDate(LocalDateTime.now())
         operation.setDate(dateEdit.text?.toString().toLocalDate())
-        operation.setValue(stringToBigDecimal(valueEdit.text?.toString()))
+        operation.setValue(valueEdit.text?.toString()?.parseAsBigDecimal())
         operation.setDescription(descriptionEdit.text?.toString())
         operation.setUrl(urlEdit.text?.toString())
     }

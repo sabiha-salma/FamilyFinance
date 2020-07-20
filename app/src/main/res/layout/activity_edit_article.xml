@@ -6,7 +6,7 @@
 
         <import type="io.github.zwieback.familyfinance.core.model.constant.ArticleRestriction" />
 
-        <import type="io.github.zwieback.familyfinance.util.NumberUtils" />
+        <import type="io.github.zwieback.familyfinance.extension.BigDecimalExtensionsKt" />
 
         <variable
             name="article"
@@ -98,7 +98,7 @@
                 android:id="@+id/default_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{NumberUtils.bigDecimalToString(article.defaultValue)}" />
+                android:text="@{BigDecimalExtensionsKt.toStringOrEmpty(article.defaultValue)}" />
 
         </com.johnpetitto.validator.ValidatingTextInputLayout>
 

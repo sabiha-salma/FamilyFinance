@@ -25,8 +25,7 @@ import io.github.zwieback.familyfinance.core.model.Person
 import io.github.zwieback.familyfinance.core.model.type.AccountType
 import io.github.zwieback.familyfinance.databinding.ActivityEditAccountBinding
 import io.github.zwieback.familyfinance.extension.isNotEmptyId
-import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
-import io.github.zwieback.familyfinance.util.NumberUtils.stringToInt
+import io.github.zwieback.familyfinance.extension.parseAsBigDecimal
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDateTime
 import java.math.BigDecimal
@@ -212,10 +211,10 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
         account.setActive(binding.active.isChecked)
         account.setName(binding.name.text?.toString())
         binding.orderCode.text?.toString()?.let { orderCode ->
-            account.setOrderCode(stringToInt(orderCode))
+            account.setOrderCode(orderCode.toInt())
         }
         if (!account.isFolder) {
-            account.setInitialBalance(stringToBigDecimal(binding.initialBalance.text?.toString()))
+            account.setInitialBalance(binding.initialBalance.text?.toString()?.parseAsBigDecimal())
             account.setType(AccountTypeHelper.getAccountType(binding.accountType))
             account.setNumber(binding.number.text?.toString())
             account.setPaymentSystem(binding.paymentSystem.text?.toString())

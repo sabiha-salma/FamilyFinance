@@ -24,9 +24,9 @@ import io.github.zwieback.familyfinance.business.iconics.activity.IconicsActivit
 import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
-import io.github.zwieback.familyfinance.extension.isEmptyId
+import io.github.zwieback.familyfinance.extension.getBigDecimalExtra
 import io.github.zwieback.familyfinance.extension.getLocalDateExtra
-import io.github.zwieback.familyfinance.util.NumberUtils
+import io.github.zwieback.familyfinance.extension.isEmptyId
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.internal.functions.Functions
@@ -229,7 +229,7 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
     }
 
     protected fun extractInputBigDecimal(name: String): BigDecimal? {
-        return NumberUtils.readBigDecimalFromIntent(intent, name)
+        return intent.getBigDecimalExtra(name)
     }
 
     protected fun extractInputString(name: String): String? {

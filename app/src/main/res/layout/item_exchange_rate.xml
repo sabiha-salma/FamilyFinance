@@ -5,9 +5,9 @@
 
     <data>
 
-        <import type="io.github.zwieback.familyfinance.extension.DateExtensionsKt"/>
+        <import type="io.github.zwieback.familyfinance.extension.BigDecimalExtensionsKt"/>
 
-        <import type="io.github.zwieback.familyfinance.util.NumberUtils"/>
+        <import type="io.github.zwieback.familyfinance.extension.DateExtensionsKt"/>
 
         <variable
             name="exchangeRate"
@@ -62,7 +62,7 @@
             android:layout_toEndOf="@+id/date"
             android:layout_toRightOf="@+id/date"
             android:gravity="end"
-            android:text="@{NumberUtils.bigDecimalToString(exchangeRate.value)}"
+            android:text="@{BigDecimalExtensionsKt.toStringOrEmpty(exchangeRate.value)}"
             android:textSize="@dimen/exchange_rate_text_size"/>
 
     </RelativeLayout>
