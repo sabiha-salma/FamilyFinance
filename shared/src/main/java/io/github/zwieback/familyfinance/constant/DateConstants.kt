@@ -1,7 +1,5 @@
 package io.github.zwieback.familyfinance.constant
 
-import org.threeten.bp.LocalDate
-import org.threeten.bp.Month
 import org.threeten.bp.chrono.IsoChronology
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.DateTimeFormatterBuilder
@@ -39,6 +37,4 @@ object DateConstants {
             .withChronology(IsoChronology.INSTANCE)
 
     val BANK_DATE_FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yy")
-
-    val EPOCH_DATE: LocalDate = LocalDate.of(1970, Month.JANUARY, 1)
 }

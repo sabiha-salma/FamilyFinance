@@ -8,7 +8,7 @@
 
         <import type="io.github.zwieback.familyfinance.core.model.constant.TemplateRestriction" />
 
-        <import type="io.github.zwieback.familyfinance.util.DateUtils" />
+        <import type="io.github.zwieback.familyfinance.extension.DateExtensionsKt" />
 
         <import type="io.github.zwieback.familyfinance.util.NumberUtils" />
 
@@ -245,7 +245,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="date"
-                        android:text="@{DateUtils.localDateToString(template.date)}"
+                        android:text="@{DateExtensionsKt.toStringOrEmpty(template.date)}"
                         app:readOnly="@{true}" />
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>

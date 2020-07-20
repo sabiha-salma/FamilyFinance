@@ -1,7 +1,7 @@
 package com.johnpetitto.validator
 
 import android.util.Patterns
-import io.github.zwieback.familyfinance.util.DateUtils
+import io.github.zwieback.familyfinance.extension.isLocalDate
 import io.github.zwieback.familyfinance.util.NumberUtils
 
 /**
@@ -43,7 +43,7 @@ val BigDecimalValidator: Validator = { input ->
  * Validates input for LocalDate date formatting.
  */
 val DateValidator: Validator = { input ->
-    DateUtils.isTextAnLocalDate(input)
+    input.isLocalDate()
 }
 
 /**

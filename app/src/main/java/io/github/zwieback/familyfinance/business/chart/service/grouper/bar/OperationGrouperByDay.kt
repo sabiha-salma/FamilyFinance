@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.business.chart.service.grouper.bar
 
 import io.github.zwieback.familyfinance.core.model.OperationView
-import io.github.zwieback.familyfinance.util.DateUtils
+import io.github.zwieback.familyfinance.extension.toDaysFromEpoch
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
 import org.threeten.bp.temporal.TemporalUnit
@@ -28,7 +28,7 @@ class OperationGrouperByDay : BarOperationGrouper() {
         val daysBetween = calculatePeriodBetween(startDate, endDate)
         for (i in 0 until daysBetween) {
             val currentDay = startDate.plusDays(i)
-            val daysFromEpoch = DateUtils.localDateToEpochDay(currentDay).toFloat()
+            val daysFromEpoch = currentDay.toDaysFromEpoch().toFloat()
             val dailyOperations = filterByDay(currentDay, operations)
             result[daysFromEpoch] = dailyOperations
         }

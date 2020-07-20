@@ -5,11 +5,7 @@ import android.os.Parcel
 import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
 import io.github.zwieback.familyfinance.core.preference.config.FilterPrefs
-import io.github.zwieback.familyfinance.extension.readLocalDate
-import io.github.zwieback.familyfinance.extension.toEmptyId
-import io.github.zwieback.familyfinance.extension.toNullableId
-import io.github.zwieback.familyfinance.extension.writeLocalDate
-import io.github.zwieback.familyfinance.util.DateUtils
+import io.github.zwieback.familyfinance.extension.*
 import io.github.zwieback.familyfinance.util.NumberUtils.readBigDecimalFromParcel
 import io.github.zwieback.familyfinance.util.NumberUtils.writeBigDecimalToParcel
 import kotlinx.coroutines.Dispatchers
@@ -45,18 +41,18 @@ abstract class OperationFilter : EntityFilter {
 
     override fun init(context: Context) {
         super.init(context)
-        startDate = DateUtils.startOfMonth()
+        startDate = LocalDate.now().startOfMonth()
         runBlocking(Dispatchers.IO) {
             val filterPrefs = FilterPrefs.with(context)
             if (filterPrefs.includeLastDaysOfPreviousMonthOnStartDate) {
                 val numberOfIncludedLastDays = filterPrefs.numberOfIncludedLastDays
-                val currentDate = DateUtils.now()
+                val currentDate = LocalDate.now()
                 if (currentDate.dayOfMonth <= numberOfIncludedLastDays) {
                     startDate = startDate.minusDays(numberOfIncludedLastDays.toLong())
                 }
             }
         }
-        endDate = DateUtils.endOfMonth()
+        endDate = LocalDate.now().endOfMonth()
         articleId = EMPTY_ID
         accountId = EMPTY_ID
         ownerId = EMPTY_ID

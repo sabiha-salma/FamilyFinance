@@ -14,9 +14,10 @@ import io.github.zwieback.familyfinance.business.exchange_rate.filter.ExchangeRa
 import io.github.zwieback.familyfinance.core.dialog.EntityFilterDialog
 import io.github.zwieback.familyfinance.core.model.Currency
 import io.github.zwieback.familyfinance.databinding.DialogFilterExchangeRateBinding
-import io.github.zwieback.familyfinance.util.DateUtils.calendarDateToLocalDate
-import io.github.zwieback.familyfinance.util.DateUtils.localDateToString
-import io.github.zwieback.familyfinance.util.DateUtils.stringToLocalDate
+import io.github.zwieback.familyfinance.extension.CalendarDate
+import io.github.zwieback.familyfinance.extension.toLocalDate
+import io.github.zwieback.familyfinance.extension.toLocalDateWithMonthFix
+import io.github.zwieback.familyfinance.extension.toStringOrEmpty
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.widget.ClearableEditText
@@ -121,7 +122,7 @@ class ExchangeRateFilterDialog :
             requireContext(),
             startDate,
             DatePickerDialog.OnDateSetListener { _, year, month, day ->
-                val date = calendarDateToLocalDate(year, month, day)
+                val date = CalendarDate(year, month, day).toLocalDateWithMonthFix()
                 loadStartDate(date)
             })
     }
@@ -132,7 +133,7 @@ class ExchangeRateFilterDialog :
             requireContext(),
             endDate,
             DatePickerDialog.OnDateSetListener { _, year, month, day ->
-                val date = calendarDateToLocalDate(year, month, day)
+                val date = CalendarDate(year, month, day).toLocalDateWithMonthFix()
                 loadEndDate(date)
             })
     }
@@ -156,12 +157,12 @@ class ExchangeRateFilterDialog :
 
     private fun loadStartDate(date: LocalDate?) {
         filter.startDate = date
-        startDateEdit.setText(localDateToString(date))
+        startDateEdit.setText(date.toStringOrEmpty())
     }
 
     private fun loadEndDate(date: LocalDate?) {
         filter.endDate = date
-        endDateEdit.setText(localDateToString(date))
+        endDateEdit.setText(date.toStringOrEmpty())
     }
 
     /**
@@ -169,8 +170,8 @@ class ExchangeRateFilterDialog :
      * Don't check for `null` because the check was completed in [noneErrorFound].
      */
     override fun updateFilterProperties() {
-        filter.startDate = stringToLocalDate(startDateEdit.text?.toString())
-        filter.endDate = stringToLocalDate(endDateEdit.text?.toString())
+        filter.startDate = startDateEdit.text?.toString().toLocalDate()
+        filter.endDate = endDateEdit.text?.toString().toLocalDate()
         filter.startValue = stringToBigDecimal(startValueEdit.text?.toString())
         filter.endValue = stringToBigDecimal(endValueEdit.text?.toString())
     }

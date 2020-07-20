@@ -1,18 +1,12 @@
 package io.github.zwieback.familyfinance.business.chart.service.formatter
 
-import com.github.mikephil.charting.formatter.ValueFormatter
 import io.github.zwieback.familyfinance.constant.DateConstants
-import io.github.zwieback.familyfinance.util.DateUtils
-import org.threeten.bp.LocalDate
+import io.github.zwieback.familyfinance.extension.MonthsFromEpoch
+import org.threeten.bp.format.DateTimeFormatter
 
-class MonthValueFormatter : ValueFormatter() {
+class MonthValueFormatter : SpecificPeriodFormatter() {
 
-    override fun getFormattedValue(monthsFromEpoch: Float): String {
-        val month = determineCorrectMonth(monthsFromEpoch)
-        return DateUtils.localDateToString(month, DateConstants.ISO_LOCAL_MONTH)
-    }
+    override fun getFormatter(): DateTimeFormatter = DateConstants.ISO_LOCAL_MONTH
 
-    private fun determineCorrectMonth(monthsFromEpoch: Float): LocalDate {
-        return DateUtils.epochMonthToLocalDate(monthsFromEpoch.toLong())
-    }
+    override fun getSpecificPeriod(value: Long) = MonthsFromEpoch(value)
 }

@@ -34,11 +34,11 @@ import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.*
 import io.github.zwieback.familyfinance.core.model.type.TemplateType
 import io.github.zwieback.familyfinance.databinding.ActivityEditTemplateBinding
-import io.github.zwieback.familyfinance.util.DateUtils
-import io.github.zwieback.familyfinance.util.DateUtils.calendarDateToLocalDate
-import io.github.zwieback.familyfinance.util.DateUtils.isTextAnLocalDate
-import io.github.zwieback.familyfinance.util.DateUtils.localDateToString
-import io.github.zwieback.familyfinance.util.DateUtils.stringToLocalDate
+import io.github.zwieback.familyfinance.extension.CalendarDate
+import io.github.zwieback.familyfinance.extension.isLocalDate
+import io.github.zwieback.familyfinance.extension.toLocalDate
+import io.github.zwieback.familyfinance.extension.toLocalDateWithMonthFix
+import io.github.zwieback.familyfinance.extension.toStringOrEmpty
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
 import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
@@ -65,7 +65,7 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
         get() = Template::class.java
 
     private val isCorrectDate: Boolean
-        get() = isTextAnLocalDate(binding.date.text?.toString())
+        get() = binding.date.text?.toString().isLocalDate()
 
     override val layoutsForValidation: List<ValidatingTextInputLayout>
         get() {
@@ -130,15 +130,15 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
      */
     private fun determineDate(): LocalDate {
         return if (isCorrectDate) {
-            stringToLocalDate(binding.date.text?.toString()) ?: error("Date is not correct")
+            binding.date.text?.toString().toLocalDate() ?: error("Date is not correct")
         } else {
-            entity.date ?: DateUtils.now()
+            entity.date ?: LocalDate.now()
         }
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        val date = calendarDateToLocalDate(year, month, day)
-        binding.date.setText(localDateToString(date))
+        val date = CalendarDate(year, month, day).toLocalDateWithMonthFix()
+        binding.date.setText(date.toStringOrEmpty())
     }
 
     private fun onArticleClick() {
@@ -314,7 +314,7 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
     override fun updateEntityProperties(template: Template) {
         template.setLastChangeDate(LocalDateTime.now())
         template.setName(binding.name.text?.toString())
-        template.setDate(stringToLocalDate(binding.date.text?.toString()))
+        template.setDate(binding.date.text?.toString().toLocalDate())
         template.setValue(stringToBigDecimal(binding.value.text?.toString()))
         template.setDescription(binding.description.text?.toString())
         template.setUrl(binding.url.text?.toString())

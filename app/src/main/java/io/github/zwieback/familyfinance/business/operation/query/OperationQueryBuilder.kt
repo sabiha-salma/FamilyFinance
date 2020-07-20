@@ -6,7 +6,8 @@ import io.github.zwieback.familyfinance.core.model.IBaseEntity
 import io.github.zwieback.familyfinance.core.model.OperationView
 import io.github.zwieback.familyfinance.core.model.type.OperationType
 import io.github.zwieback.familyfinance.core.query.EntityQueryBuilder
-import io.github.zwieback.familyfinance.util.DateUtils
+import io.github.zwieback.familyfinance.extension.endOfMonth
+import io.github.zwieback.familyfinance.extension.startOfMonth
 import io.github.zwieback.familyfinance.util.SqliteUtils
 import io.requery.Persistable
 import io.requery.meta.QueryAttribute
@@ -24,8 +25,8 @@ abstract class OperationQueryBuilder<T : OperationQueryBuilder<T>>(
     data: ReactiveEntityStore<Persistable>
 ) : EntityQueryBuilder<OperationView>(data) {
 
-    private var startDate: LocalDate = DateUtils.startOfMonth()
-    private var endDate: LocalDate = DateUtils.endOfMonth()
+    private var startDate: LocalDate = LocalDate.now().startOfMonth()
+    private var endDate: LocalDate = LocalDate.now().endOfMonth()
     private var startValue: BigDecimal? = null
     private var endValue: BigDecimal? = null
     private var types: List<OperationType>? = null

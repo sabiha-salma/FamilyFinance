@@ -1,7 +1,9 @@
 package io.github.zwieback.familyfinance.business.chart.service.grouper.bar
 
 import io.github.zwieback.familyfinance.core.model.OperationView
-import io.github.zwieback.familyfinance.util.DateUtils
+import io.github.zwieback.familyfinance.extension.getQuarterOfYear
+import io.github.zwieback.familyfinance.extension.plusQuarters
+import io.github.zwieback.familyfinance.extension.toQuartersFromEpoch
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.IsoFields
 import org.threeten.bp.temporal.TemporalUnit
@@ -27,10 +29,10 @@ class OperationGrouperByQuarter : BarOperationGrouper() {
         val result = linkedMapOf<Float, List<OperationView>>()
         val quartersBetween = calculatePeriodBetween(startDate, endDate)
         for (i in 0 until quartersBetween) {
-            val currentQuarter = DateUtils.plusQuarters(startDate, i)
-            val quarter = DateUtils.extractQuarterOfYear(currentQuarter)
+            val currentQuarter = startDate.plusQuarters(i)
+            val quarter = currentQuarter.getQuarterOfYear()
             val year = currentQuarter.year
-            val quartersFromEpoch = DateUtils.localDateToEpochQuarter(currentQuarter).toFloat()
+            val quartersFromEpoch = currentQuarter.toQuartersFromEpoch().toFloat()
             val quarterlyOperations = filterByQuarter(year, quarter, operations)
             result[quartersFromEpoch] = quarterlyOperations
         }
@@ -47,7 +49,7 @@ class OperationGrouperByQuarter : BarOperationGrouper() {
 
     private fun operationInQuarter(year: Int, quarter: Int, operation: OperationView): Boolean {
         val operationDate = operation.date
-        val operationQuarter = DateUtils.extractQuarterOfYear(operationDate)
+        val operationQuarter = operationDate.getQuarterOfYear()
         return year == operationDate.year && quarter == operationQuarter
     }
 }

@@ -16,12 +16,7 @@ import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.Currency
 import io.github.zwieback.familyfinance.core.model.ExchangeRate
 import io.github.zwieback.familyfinance.databinding.ActivityEditExchangeRateBinding
-import io.github.zwieback.familyfinance.extension.isNotEmptyId
-import io.github.zwieback.familyfinance.util.DateUtils.calendarDateToLocalDate
-import io.github.zwieback.familyfinance.util.DateUtils.isTextAnLocalDate
-import io.github.zwieback.familyfinance.util.DateUtils.localDateToString
-import io.github.zwieback.familyfinance.util.DateUtils.now
-import io.github.zwieback.familyfinance.util.DateUtils.stringToLocalDate
+import io.github.zwieback.familyfinance.extension.*
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.reactivex.functions.Consumer
@@ -47,7 +42,7 @@ class ExchangeRateEditActivity :
         get() = ExchangeRate::class.java
 
     private val isCorrectDate: Boolean
-        get() = isTextAnLocalDate(binding.date.text?.toString())
+        get() = binding.date.text?.toString().isLocalDate()
 
     override val layoutsForValidation: List<ValidatingTextInputLayout>
         get() = listOf(binding.currencyLayout, binding.valueLayout, binding.dateLayout)
@@ -87,15 +82,15 @@ class ExchangeRateEditActivity :
      */
     private fun determineDate(): LocalDate {
         return if (isCorrectDate) {
-            stringToLocalDate(binding.date.text?.toString()) ?: error("Date is not correct")
+            binding.date.text?.toString().toLocalDate() ?: error("Date is not correct")
         } else {
             entity.date
         }
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        val date = calendarDateToLocalDate(year, month, day)
-        binding.date.setText(localDateToString(date))
+        val date = CalendarDate(year, month, day).toLocalDateWithMonthFix()
+        binding.date.setText(date.toStringOrEmpty())
     }
 
     private fun loadCurrency(currencyId: Int) {
@@ -110,7 +105,7 @@ class ExchangeRateEditActivity :
         val currencyId = extractInputId(INPUT_CURRENCY_ID)
         val exchangeRate = ExchangeRate()
             .setCreateDate(LocalDateTime.now())
-            .setDate(now())
+            .setDate(LocalDate.now())
         bind(exchangeRate)
         if (currencyId.isNotEmptyId()) {
             loadCurrency(currencyId)
@@ -136,7 +131,7 @@ class ExchangeRateEditActivity :
     override fun updateEntityProperties(exchangeRate: ExchangeRate) {
         exchangeRate.setLastChangeDate(LocalDateTime.now())
         exchangeRate.setValue(stringToBigDecimal(binding.value.text?.toString()))
-        exchangeRate.setDate(stringToLocalDate(binding.date.text?.toString()))
+        exchangeRate.setDate(binding.date.text?.toString().toLocalDate())
     }
 
     companion object {

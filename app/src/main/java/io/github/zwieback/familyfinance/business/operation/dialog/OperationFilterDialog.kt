@@ -21,9 +21,10 @@ import io.github.zwieback.familyfinance.core.model.Account
 import io.github.zwieback.familyfinance.core.model.Article
 import io.github.zwieback.familyfinance.core.model.Currency
 import io.github.zwieback.familyfinance.core.model.Person
-import io.github.zwieback.familyfinance.util.DateUtils.calendarDateToLocalDate
-import io.github.zwieback.familyfinance.util.DateUtils.localDateToString
-import io.github.zwieback.familyfinance.util.DateUtils.stringToLocalDate
+import io.github.zwieback.familyfinance.extension.CalendarDate
+import io.github.zwieback.familyfinance.extension.toLocalDate
+import io.github.zwieback.familyfinance.extension.toLocalDateWithMonthFix
+import io.github.zwieback.familyfinance.extension.toStringOrEmpty
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
 import io.github.zwieback.familyfinance.util.NumberUtils.bigDecimalToString
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
@@ -138,7 +139,7 @@ abstract class OperationFilterDialog<F, B> :
             requireContext(),
             startDate,
             DatePickerDialog.OnDateSetListener { _, year, month, day ->
-                val date = calendarDateToLocalDate(year, month, day)
+                val date = CalendarDate(year, month, day).toLocalDateWithMonthFix()
                 loadStartDate(date)
             }
         )
@@ -150,7 +151,7 @@ abstract class OperationFilterDialog<F, B> :
             requireContext(),
             endDate,
             DatePickerDialog.OnDateSetListener { _, year, month, day ->
-                val date = calendarDateToLocalDate(year, month, day)
+                val date = CalendarDate(year, month, day).toLocalDateWithMonthFix()
                 loadEndDate(date)
             }
         )
@@ -222,12 +223,12 @@ abstract class OperationFilterDialog<F, B> :
 
     private fun loadStartDate(date: LocalDate) {
         filter.startDate = date
-        startDateEdit.setText(localDateToString(date))
+        startDateEdit.setText(date.toStringOrEmpty())
     }
 
     private fun loadEndDate(date: LocalDate) {
         filter.endDate = date
-        endDateEdit.setText(localDateToString(date))
+        endDateEdit.setText(date.toStringOrEmpty())
     }
 
     private fun loadStartValue(value: BigDecimal?) {
@@ -243,9 +244,9 @@ abstract class OperationFilterDialog<F, B> :
      * Don't check for `null` because the check was completed in [noneErrorFound].
      */
     override fun updateFilterProperties() {
-        filter.startDate = stringToLocalDate(startDateEdit.text?.toString())
+        filter.startDate = startDateEdit.text?.toString().toLocalDate()
             ?: error("Are you check the noneErrorFound() method?")
-        filter.endDate = stringToLocalDate(endDateEdit.text?.toString())
+        filter.endDate = endDateEdit.text?.toString().toLocalDate()
             ?: error("Are you check the noneErrorFound() method?")
         filter.startValue = stringToBigDecimal(startValueEdit.text?.toString())
         filter.endValue = stringToBigDecimal(endValueEdit.text?.toString())

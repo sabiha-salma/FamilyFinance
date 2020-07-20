@@ -58,3 +58,11 @@ dependencies {
     androidTestImplementation libraries.androidxJunit
     testImplementation libraries.junit
 }
+
+// https://typealias.com/guides/enable-inline-classes-early-access/#gradle-in-android-studio-1
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs = ['-XXLanguage:+InlineClasses']
+    }
+}

@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.business.chart.service.grouper.bar
 
 import io.github.zwieback.familyfinance.core.model.OperationView
-import io.github.zwieback.familyfinance.util.DateUtils
+import io.github.zwieback.familyfinance.extension.toMonthsFromEpoch
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
 import org.threeten.bp.temporal.TemporalUnit
@@ -30,7 +30,7 @@ class OperationGrouperByMonth : BarOperationGrouper() {
             val currentMonth = startDate.plusMonths(i)
             val month = currentMonth.monthValue
             val year = currentMonth.year
-            val monthsFromEpoch = DateUtils.localDateToEpochMonth(currentMonth).toFloat()
+            val monthsFromEpoch = currentMonth.toMonthsFromEpoch().toFloat()
             val monthlyOperations = filterByMonth(year, month, operations)
             result[monthsFromEpoch] = monthlyOperations
         }

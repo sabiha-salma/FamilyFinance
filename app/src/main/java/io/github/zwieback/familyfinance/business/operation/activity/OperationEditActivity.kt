@@ -26,11 +26,11 @@ import io.github.zwieback.familyfinance.core.model.ExchangeRate
 import io.github.zwieback.familyfinance.core.model.Operation
 import io.github.zwieback.familyfinance.core.model.Person
 import io.github.zwieback.familyfinance.core.model.type.OperationType
-import io.github.zwieback.familyfinance.util.DateUtils.calendarDateToLocalDate
-import io.github.zwieback.familyfinance.util.DateUtils.isTextAnLocalDate
-import io.github.zwieback.familyfinance.util.DateUtils.localDateToString
-import io.github.zwieback.familyfinance.util.DateUtils.now
-import io.github.zwieback.familyfinance.util.DateUtils.stringToLocalDate
+import io.github.zwieback.familyfinance.extension.CalendarDate
+import io.github.zwieback.familyfinance.extension.isLocalDate
+import io.github.zwieback.familyfinance.extension.toLocalDate
+import io.github.zwieback.familyfinance.extension.toLocalDateWithMonthFix
+import io.github.zwieback.familyfinance.extension.toStringOrEmpty
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
 import io.github.zwieback.familyfinance.widget.ClearableEditText
@@ -46,7 +46,7 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
         get() = Operation::class.java
 
     private val isCorrectDate: Boolean
-        get() = isTextAnLocalDate(dateEdit.text?.toString())
+        get() = dateEdit.text?.toString().isLocalDate()
 
     protected abstract val operationType: OperationType
 
@@ -95,15 +95,15 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
      */
     private fun determineDate(): LocalDate {
         return if (isCorrectDate) {
-            stringToLocalDate(dateEdit.text?.toString()) ?: error("Date is not correct")
+            dateEdit.text?.toString().toLocalDate() ?: error("Date is not correct")
         } else {
             entity.date
         }
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        val date = calendarDateToLocalDate(year, month, day)
-        dateEdit.setText(localDateToString(date))
+        val date = CalendarDate(year, month, day).toLocalDateWithMonthFix()
+        dateEdit.setText(date.toStringOrEmpty())
     }
 
     protected fun onOwnerClick() {
@@ -178,7 +178,7 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
         return Operation()
             .setCreateDate(LocalDateTime.now())
             .setType(operationType)
-            .setDate(now())
+            .setDate(LocalDate.now())
     }
 
     @CallSuper
@@ -191,7 +191,7 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun updateEntityProperties(operation: Operation) {
         operation.setLastChangeDate(LocalDateTime.now())
-        operation.setDate(stringToLocalDate(dateEdit.text?.toString()))
+        operation.setDate(dateEdit.text?.toString().toLocalDate())
         operation.setValue(stringToBigDecimal(valueEdit.text?.toString()))
         operation.setDescription(descriptionEdit.text?.toString())
         operation.setUrl(urlEdit.text?.toString())

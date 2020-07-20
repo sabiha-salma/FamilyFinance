@@ -4,7 +4,6 @@ import android.content.Context
 import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityCreator
 import io.github.zwieback.familyfinance.core.model.Currency
 import io.github.zwieback.familyfinance.core.model.ExchangeRate
-import io.github.zwieback.familyfinance.util.DateUtils
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
 import org.threeten.bp.LocalDate
@@ -19,7 +18,7 @@ class ExchangeRateCreator(
         val defaultCurrency = findCurrency(databasePrefs.currencyId)
         return sortedSetOf(
             this,
-            createExchangeRate(defaultCurrency, BigDecimal.ONE, DateUtils.now())
+            createExchangeRate(defaultCurrency, BigDecimal.ONE, LocalDate.now())
         )
     }
 

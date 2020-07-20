@@ -13,7 +13,6 @@ import io.github.zwieback.familyfinance.constant.DateConstants
 import io.github.zwieback.familyfinance.constant.StringConstants.QUESTION
 import io.github.zwieback.familyfinance.core.model.TemplateView
 import io.github.zwieback.familyfinance.core.model.type.TemplateType
-import io.github.zwieback.familyfinance.util.DateUtils
 import io.github.zwieback.familyfinance.util.NumberUtils
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
@@ -61,7 +60,7 @@ class SmsNotificationBuilder private constructor() {
         val pendingIntent = buildPendingIntent(template, operationDate, operationValue)
 
         val type = context.getString(determineOperationTypeRes(template))
-        val date = DateUtils.localDateToString(operationDate, DateConstants.BANK_DATE_FORMATTER)
+        val date = operationDate.format(DateConstants.BANK_DATE_FORMATTER)
         val value = NumberUtils.bigDecimalToString(operationValue, QUESTION)
         val contentText =
             context.getString(R.string.sms_received_content, type, value, template.name, date)

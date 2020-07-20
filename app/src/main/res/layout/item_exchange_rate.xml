@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="io.github.zwieback.familyfinance.util.DateUtils"/>
+        <import type="io.github.zwieback.familyfinance.extension.DateExtensionsKt"/>
 
         <import type="io.github.zwieback.familyfinance.util.NumberUtils"/>
 
@@ -49,7 +49,7 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_toEndOf="@+id/name"
             android:layout_toRightOf="@+id/name"
-            android:text="@{DateUtils.localDateToString(exchangeRate.date)}"
+            android:text="@{DateExtensionsKt.toStringOrEmpty(exchangeRate.date)}"
             android:textSize="@dimen/exchange_rate_text_size"/>
 
         <TextView

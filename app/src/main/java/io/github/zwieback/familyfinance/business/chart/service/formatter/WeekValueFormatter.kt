@@ -1,18 +1,12 @@
 package io.github.zwieback.familyfinance.business.chart.service.formatter
 
-import com.github.mikephil.charting.formatter.ValueFormatter
 import io.github.zwieback.familyfinance.constant.DateConstants
-import io.github.zwieback.familyfinance.util.DateUtils
-import org.threeten.bp.LocalDate
+import io.github.zwieback.familyfinance.extension.WeeksFromEpoch
+import org.threeten.bp.format.DateTimeFormatter
 
-class WeekValueFormatter : ValueFormatter() {
+class WeekValueFormatter : SpecificPeriodFormatter() {
 
-    override fun getFormattedValue(weeksFromEpoch: Float): String {
-        val month = determineCorrectWeek(weeksFromEpoch)
-        return DateUtils.localDateToString(month, DateConstants.ISO_LOCAL_WEEK)
-    }
+    override fun getFormatter(): DateTimeFormatter = DateConstants.ISO_LOCAL_WEEK
 
-    private fun determineCorrectWeek(weeksFromEpoch: Float): LocalDate {
-        return DateUtils.epochWeekToLocalDate(weeksFromEpoch.toLong())
-    }
+    override fun getSpecificPeriod(value: Long) = WeeksFromEpoch(value)
 }

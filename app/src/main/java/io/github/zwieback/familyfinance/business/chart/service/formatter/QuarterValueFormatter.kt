@@ -1,18 +1,12 @@
 package io.github.zwieback.familyfinance.business.chart.service.formatter
 
-import com.github.mikephil.charting.formatter.ValueFormatter
 import io.github.zwieback.familyfinance.constant.DateConstants
-import io.github.zwieback.familyfinance.util.DateUtils
-import org.threeten.bp.LocalDate
+import io.github.zwieback.familyfinance.extension.QuartersFromEpoch
+import org.threeten.bp.format.DateTimeFormatter
 
-class QuarterValueFormatter : ValueFormatter() {
+class QuarterValueFormatter : SpecificPeriodFormatter() {
 
-    override fun getFormattedValue(quartersFromEpoch: Float): String {
-        val quarter = determineCorrectQuarter(quartersFromEpoch)
-        return DateUtils.localDateToString(quarter, DateConstants.ISO_LOCAL_QUARTER)
-    }
+    override fun getFormatter(): DateTimeFormatter = DateConstants.ISO_LOCAL_QUARTER
 
-    private fun determineCorrectQuarter(quartersFromEpoch: Float): LocalDate {
-        return DateUtils.epochQuarterToLocalDate(quartersFromEpoch.toLong())
-    }
+    override fun getSpecificPeriod(value: Long) = QuartersFromEpoch(value)
 }

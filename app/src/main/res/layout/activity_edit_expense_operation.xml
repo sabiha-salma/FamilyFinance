@@ -6,7 +6,7 @@
 
         <import type="io.github.zwieback.familyfinance.core.model.constant.OperationRestriction" />
 
-        <import type="io.github.zwieback.familyfinance.util.DateUtils" />
+        <import type="io.github.zwieback.familyfinance.extension.DateExtensionsKt" />
 
         <import type="io.github.zwieback.familyfinance.util.NumberUtils" />
 
@@ -194,7 +194,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="date"
-                        android:text="@{DateUtils.localDateToString(operation.date)}"
+                        android:text="@{DateExtensionsKt.toStringOrEmpty(operation.date)}"
                         app:readOnly="@{true}" />
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>

@@ -22,9 +22,8 @@ import io.github.zwieback.familyfinance.core.filter.EntityFilter
 import io.github.zwieback.familyfinance.core.listener.EntityFilterListener
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
 import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs
-import io.github.zwieback.familyfinance.util.DateUtils
-import io.github.zwieback.familyfinance.util.DateUtils.isTextAnLocalDate
-import io.github.zwieback.familyfinance.util.DateUtils.stringToLocalDate
+import io.github.zwieback.familyfinance.extension.isLocalDate
+import io.github.zwieback.familyfinance.extension.toLocalDate
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
@@ -177,14 +176,14 @@ abstract class EntityFilterDialog<F : EntityFilter, B : ViewDataBinding> :
 
         fun determineDate(dateEdit: EditText, defaultDate: LocalDate?): LocalDate {
             return if (isCorrectDate(dateEdit)) {
-                stringToLocalDate(dateEdit.text?.toString()) ?: error("Date is not correct")
+                dateEdit.text?.toString().toLocalDate() ?: error("Date is not correct")
             } else {
-                defaultDate ?: DateUtils.now()
+                defaultDate ?: LocalDate.now()
             }
         }
 
         private fun isCorrectDate(dateEdit: EditText): Boolean {
-            return isTextAnLocalDate(dateEdit.text?.toString())
+            return dateEdit.text?.toString().isLocalDate()
         }
     }
 }

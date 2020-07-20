@@ -1,7 +1,8 @@
 package io.github.zwieback.familyfinance.business.chart.service.grouper.bar
 
 import io.github.zwieback.familyfinance.core.model.OperationView
-import io.github.zwieback.familyfinance.util.DateUtils
+import io.github.zwieback.familyfinance.extension.getWeekOfYear
+import io.github.zwieback.familyfinance.extension.toWeeksFromEpoch
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
 import org.threeten.bp.temporal.TemporalUnit
@@ -28,9 +29,9 @@ class OperationGrouperByWeek : BarOperationGrouper() {
         val weeksBetween = calculatePeriodBetween(startDate, endDate)
         for (i in 0 until weeksBetween) {
             val currentWeek = startDate.plusWeeks(i)
-            val week = DateUtils.extractWeekOfYear(currentWeek)
+            val week = currentWeek.getWeekOfYear()
             val year = currentWeek.year
-            val weeksFromEpoch = DateUtils.localDateToEpochWeek(currentWeek).toFloat()
+            val weeksFromEpoch = currentWeek.toWeeksFromEpoch().toFloat()
             val weeklyOperations = filterByWeek(year, week, operations)
             result[weeksFromEpoch] = weeklyOperations
         }
@@ -47,7 +48,7 @@ class OperationGrouperByWeek : BarOperationGrouper() {
 
     private fun operationInWeek(year: Int, week: Int, operation: OperationView): Boolean {
         val operationDate = operation.date
-        val operationWeek = DateUtils.extractWeekOfYear(operationDate)
+        val operationWeek = operationDate.getWeekOfYear()
         return year == operationDate.year && week == operationWeek
     }
 }

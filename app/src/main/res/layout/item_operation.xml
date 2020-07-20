@@ -7,7 +7,7 @@
 
         <import type="io.github.zwieback.familyfinance.core.model.type.OperationType"/>
 
-        <import type="io.github.zwieback.familyfinance.util.DateUtils"/>
+        <import type="io.github.zwieback.familyfinance.extension.DateExtensionsKt"/>
 
         <import type="io.github.zwieback.familyfinance.util.NumberUtils"/>
 
@@ -93,7 +93,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/currency"
-            android:text="@{DateUtils.localDateToString(operation.date)}"
+            android:text="@{DateExtensionsKt.toStringOrEmpty(operation.date)}"
             android:textSize="@dimen/operation_second_line_text_size"/>
 
         <View

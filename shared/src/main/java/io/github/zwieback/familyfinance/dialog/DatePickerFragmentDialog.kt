@@ -7,9 +7,8 @@ import android.content.Context
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import io.github.zwieback.familyfinance.util.DateUtils.localDateToCalendar
+import io.github.zwieback.familyfinance.extension.toCalendarDateWithMonthFix
 import org.threeten.bp.LocalDate
-import java.util.*
 
 class DatePickerFragmentDialog : DialogFragment(), OnDateSetListener {
 
@@ -26,10 +25,7 @@ class DatePickerFragmentDialog : DialogFragment(), OnDateSetListener {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val date = requireArguments().getSerializable(DATE_KEY) as LocalDate
-        val calendar = localDateToCalendar(date)
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val (year, month, day) = date.toCalendarDateWithMonthFix()
         return DatePickerDialog(requireContext(), this, year, month, day)
     }
 

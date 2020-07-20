@@ -1,17 +1,11 @@
 package io.github.zwieback.familyfinance.business.chart.service.formatter
 
-import com.github.mikephil.charting.formatter.ValueFormatter
-import io.github.zwieback.familyfinance.util.DateUtils
-import org.threeten.bp.LocalDate
+import io.github.zwieback.familyfinance.extension.DaysFromEpoch
+import org.threeten.bp.format.DateTimeFormatter
 
-class DayValueFormatter : ValueFormatter() {
+class DayValueFormatter : SpecificPeriodFormatter() {
 
-    override fun getFormattedValue(daysFromEpoch: Float): String {
-        val day = determineCorrectDay(daysFromEpoch)
-        return DateUtils.localDateToString(day)
-    }
+    override fun getFormatter(): DateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE
 
-    private fun determineCorrectDay(daysFromEpoch: Float): LocalDate {
-        return DateUtils.epochDayToLocalDate(daysFromEpoch.toLong())
-    }
+    override fun getSpecificPeriod(value: Long) = DaysFromEpoch(value)
 }
