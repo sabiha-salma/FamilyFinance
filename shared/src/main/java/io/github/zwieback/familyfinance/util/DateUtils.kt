@@ -2,9 +2,6 @@ package io.github.zwieback.familyfinance.util
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcel
-import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
-import io.github.zwieback.familyfinance.extension.isEmptyId
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
 import org.threeten.bp.chrono.IsoChronology
@@ -166,31 +163,6 @@ object DateUtils {
         val month = input.getIntExtra(name + KEY_MONTH, today.monthValue)
         val dayOfMonth = input.getIntExtra(name + KEY_DAY_OF_MONTH, today.dayOfMonth)
         return LocalDate.of(year, month, dayOfMonth)
-    }
-
-    @JvmStatic
-    fun writeLocalDateToParcel(out: Parcel, date: LocalDate?) {
-        if (date == null) {
-            out.writeInt(EMPTY_ID)
-            out.writeInt(EMPTY_ID)
-            out.writeInt(EMPTY_ID)
-        } else {
-            out.writeInt(date.year)
-            out.writeInt(date.monthValue)
-            out.writeInt(date.dayOfMonth)
-        }
-    }
-
-    @JvmStatic
-    fun readLocalDateFromParcel(input: Parcel): LocalDate? {
-        val year = input.readInt()
-        val month = input.readInt()
-        val dayOfMonth = input.readInt()
-        return if (year.isEmptyId() || month.isEmptyId() || dayOfMonth.isEmptyId()) {
-            null
-        } else {
-            LocalDate.of(year, month, dayOfMonth)
-        }
     }
 
     @JvmStatic

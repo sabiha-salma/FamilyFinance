@@ -5,11 +5,11 @@ import android.os.Parcel
 import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
 import io.github.zwieback.familyfinance.core.preference.config.FilterPrefs
+import io.github.zwieback.familyfinance.extension.readLocalDate
 import io.github.zwieback.familyfinance.extension.toEmptyId
 import io.github.zwieback.familyfinance.extension.toNullableId
+import io.github.zwieback.familyfinance.extension.writeLocalDate
 import io.github.zwieback.familyfinance.util.DateUtils
-import io.github.zwieback.familyfinance.util.DateUtils.readLocalDateFromParcel
-import io.github.zwieback.familyfinance.util.DateUtils.writeLocalDateToParcel
 import io.github.zwieback.familyfinance.util.NumberUtils.readBigDecimalFromParcel
 import io.github.zwieback.familyfinance.util.NumberUtils.writeBigDecimalToParcel
 import kotlinx.coroutines.Dispatchers
@@ -64,8 +64,8 @@ abstract class OperationFilter : EntityFilter {
     }
 
     override fun readFromParcel(`in`: Parcel) {
-        startDate = readLocalDateFromParcel(`in`) ?: error("Can't read startDate from parcel")
-        endDate = readLocalDateFromParcel(`in`) ?: error("Can't read endDate from parcel")
+        startDate = `in`.readLocalDate() ?: error("Can't read startDate from parcel")
+        endDate = `in`.readLocalDate() ?: error("Can't read endDate from parcel")
         startValue = readBigDecimalFromParcel(`in`)
         endValue = readBigDecimalFromParcel(`in`)
         articleId = `in`.readInt()
@@ -75,8 +75,8 @@ abstract class OperationFilter : EntityFilter {
     }
 
     override fun writeToParcel(out: Parcel, flags: Int) {
-        writeLocalDateToParcel(out, startDate)
-        writeLocalDateToParcel(out, endDate)
+        out.writeLocalDate(startDate)
+        out.writeLocalDate(endDate)
         writeBigDecimalToParcel(out, startValue)
         writeBigDecimalToParcel(out, endValue)
         out.writeInt(articleId)
