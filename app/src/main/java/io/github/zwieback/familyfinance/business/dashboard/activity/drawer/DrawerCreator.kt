@@ -26,7 +26,7 @@ import io.github.zwieback.familyfinance.business.preference.activity.SettingsAct
 import io.github.zwieback.familyfinance.core.activity.EntityActivity.Companion.INPUT_READ_ONLY
 import io.github.zwieback.familyfinance.core.drawer.DrawerListener
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
-import io.github.zwieback.familyfinance.util.EmailUtils
+import io.github.zwieback.familyfinance.extension.sendEmail
 
 class DrawerCreator(private val activity: DashboardActivity) : Drawer.OnDrawerItemClickListener {
 
@@ -56,7 +56,7 @@ class DrawerCreator(private val activity: DashboardActivity) : Drawer.OnDrawerIt
             INCOME_ARTICLES_ID -> startEditableEntityActivity(IncomeArticleActivity::class.java)
             BACKUP_ID -> startActivity(BackupActivity::class.java)
             SETTINGS_ID -> startActivity(SettingsActivity::class.java)
-            CONTACT_ID -> EmailUtils.sendEmail(activity, DeveloperInfo.EMAIL)
+            CONTACT_ID -> activity.sendEmail(DeveloperInfo.EMAIL)
         }
         return false
     }
