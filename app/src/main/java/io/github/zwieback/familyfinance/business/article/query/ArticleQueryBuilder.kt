@@ -3,7 +3,7 @@ package io.github.zwieback.familyfinance.business.article.query
 import io.github.zwieback.familyfinance.core.model.ArticleView
 import io.github.zwieback.familyfinance.core.model.type.ArticleType
 import io.github.zwieback.familyfinance.core.query.EntityFolderQueryBuilder
-import io.github.zwieback.familyfinance.util.TransliterationUtils.transliterate
+import io.github.zwieback.familyfinance.extension.transliterate
 import io.requery.Persistable
 import io.requery.meta.QueryExpression
 import io.requery.query.Limit
@@ -34,7 +34,7 @@ abstract class ArticleQueryBuilder<T : ArticleQueryBuilder<T>> internal construc
 
     @Suppress("UNCHECKED_CAST")
     fun withSearchName(searchName: String?): T {
-        return apply { this.searchName = transliterate(searchName) } as T
+        return apply { this.searchName = searchName.transliterate() } as T
     }
 
     override fun buildWhere(

@@ -6,7 +6,7 @@ import io.github.zwieback.familyfinance.core.lifecycle.creator.EntityCreator
 import io.github.zwieback.familyfinance.core.model.Article
 import io.github.zwieback.familyfinance.core.model.type.ArticleType
 import io.github.zwieback.familyfinance.core.model.type.ArticleType.*
-import io.github.zwieback.familyfinance.util.TransliterationUtils.transliterate
+import io.github.zwieback.familyfinance.extension.transliterate
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
 
@@ -69,7 +69,7 @@ abstract class ArticleCreator(
             .setParent(parent)
             .setType(type)
             .setName(name)
-            .setNameAscii(transliterate(name))
+            .setNameAscii(name.transliterate())
             .setFolder(folder)
     }
 }

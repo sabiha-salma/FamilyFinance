@@ -16,8 +16,8 @@ import io.github.zwieback.familyfinance.core.model.Article
 import io.github.zwieback.familyfinance.core.model.type.ArticleType
 import io.github.zwieback.familyfinance.databinding.ActivityEditArticleBinding
 import io.github.zwieback.familyfinance.extension.isNotEmptyId
+import io.github.zwieback.familyfinance.extension.transliterate
 import io.github.zwieback.familyfinance.util.NumberUtils.stringToBigDecimal
-import io.github.zwieback.familyfinance.util.TransliterationUtils.transliterate
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDateTime
 
@@ -126,7 +126,7 @@ abstract class ArticleEditActivity :
     override fun updateEntityProperties(article: Article) {
         article.setLastChangeDate(LocalDateTime.now())
         article.setName(binding.name.text?.toString())
-        article.setNameAscii(transliterate(article.name))
+        article.setNameAscii(article.name.transliterate())
         if (!entity.isFolder) {
             article.setDefaultValue(stringToBigDecimal(binding.defaultValue.text?.toString()))
         }

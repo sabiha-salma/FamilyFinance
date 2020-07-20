@@ -1,13 +1,13 @@
-package io.github.zwieback.familyfinance.util
+package io.github.zwieback.familyfinance.extension
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class TransliterationUtilsTest {
+class TransliterationExtensionsTest {
 
     @Test
     fun `nullable string should return empty string`() {
-        assertEquals("", TransliterationUtils.transliterate(null))
+        assertEquals("", null.transliterate())
     }
 
     @Test
@@ -16,6 +16,6 @@ class TransliterationUtilsTest {
                 "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
         val expectedText = "abvgdeezhziiklmnoprstufkhtschshshchieyeiuia" +
                 "ABVGDEEZHZIIKLMNOPRSTUFKHTSCHSHSHCHIEYEIUIA"
-        assertEquals(expectedText, TransliterationUtils.transliterate(sourceText))
+        assertEquals(expectedText, sourceText.transliterate())
     }
 }
