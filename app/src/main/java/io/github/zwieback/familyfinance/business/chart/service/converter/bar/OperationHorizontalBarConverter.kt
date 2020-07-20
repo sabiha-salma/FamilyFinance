@@ -6,7 +6,7 @@ import io.github.zwieback.familyfinance.business.chart.service.builder.IdIndexMa
 import io.github.zwieback.familyfinance.business.chart.service.converter.OperationConverter
 import io.github.zwieback.familyfinance.business.chart.service.converter.OperationSumConverter
 import io.github.zwieback.familyfinance.core.model.OperationView
-import io.github.zwieback.familyfinance.util.CollectionUtils
+import io.github.zwieback.familyfinance.extension.swapKeysAndValues
 
 open class OperationHorizontalBarConverter(
     context: Context,
@@ -25,7 +25,7 @@ open class OperationHorizontalBarConverter(
      */
     override fun convertToEntries(operations: Map<Float, List<OperationView>>): List<BarEntry> {
         val sumMap = sumConverter.convertToSumMap(operations)
-        val swappedSumMap = CollectionUtils.swapMap(sumMap)
+        val swappedSumMap = sumMap.swapKeysAndValues()
         val idIndexMap = builder.withSumMap(swappedSumMap).build()
 
         return swappedSumMap

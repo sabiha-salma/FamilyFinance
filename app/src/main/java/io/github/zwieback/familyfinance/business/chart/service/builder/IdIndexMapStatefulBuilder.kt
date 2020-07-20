@@ -1,6 +1,5 @@
 package io.github.zwieback.familyfinance.business.chart.service.builder
 
-import android.util.Pair
 import java.math.BigDecimal
 
 class IdIndexMapStatefulBuilder {
