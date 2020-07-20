@@ -2,9 +2,11 @@ package io.github.zwieback.familyfinance.calculator.stateful
 
 import io.github.zwieback.familyfinance.calculator.Calculator
 import io.github.zwieback.familyfinance.calculator.Operator
+import io.github.zwieback.familyfinance.constant.StringConstants.EMPTY
+import io.github.zwieback.familyfinance.extension.addChar
+import io.github.zwieback.familyfinance.extension.addUniqueChar
+import io.github.zwieback.familyfinance.extension.deleteLastChar
 import io.github.zwieback.familyfinance.util.NumberUtils
-import io.github.zwieback.familyfinance.util.StringUtils
-import io.github.zwieback.familyfinance.util.StringUtils.EMPTY
 import java.math.BigDecimal
 
 class StatefulCalculator(
@@ -32,10 +34,10 @@ class StatefulCalculator(
     fun delete() {
         when (state) {
             InputState.INPUT_LEFT_OPERAND -> {
-                leftOperand = StringUtils.deleteLastChar(leftOperand)
+                leftOperand = leftOperand.deleteLastChar()
             }
             InputState.INPUT_RIGHT_OPERAND -> {
-                rightOperand = StringUtils.deleteLastChar(rightOperand)
+                rightOperand = rightOperand.deleteLastChar()
                 if (rightOperand.isEmpty()) {
                     state = InputState.INPUT_LEFT_OPERAND
                     operator = null
@@ -61,10 +63,10 @@ class StatefulCalculator(
     fun addDecimalSeparator() {
         when (state) {
             InputState.INPUT_LEFT_OPERAND -> {
-                leftOperand = StringUtils.addUniqueChar(leftOperand, decimalSeparator)
+                leftOperand = leftOperand.addUniqueChar(decimalSeparator)
             }
             InputState.INPUT_RIGHT_OPERAND -> {
-                rightOperand = StringUtils.addUniqueChar(rightOperand, decimalSeparator)
+                rightOperand = rightOperand.addUniqueChar(decimalSeparator)
             }
         }
         invalidate()
@@ -73,10 +75,10 @@ class StatefulCalculator(
     fun addDigit(digit: String) {
         when (state) {
             InputState.INPUT_LEFT_OPERAND -> {
-                leftOperand = StringUtils.addChar(leftOperand, digit)
+                leftOperand = leftOperand.addChar(digit)
             }
             InputState.INPUT_RIGHT_OPERAND -> {
-                rightOperand = StringUtils.addChar(rightOperand, digit)
+                rightOperand = rightOperand.addChar(digit)
             }
         }
         invalidate()

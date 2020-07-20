@@ -34,9 +34,9 @@ import io.github.zwieback.familyfinance.business.chart.service.grouper.Operation
 import io.github.zwieback.familyfinance.business.chart.service.grouper.pie.OperationGrouperByArticle
 import io.github.zwieback.familyfinance.business.chart.service.grouper.pie.OperationGrouperByArticleParent
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter
+import io.github.zwieback.familyfinance.constant.StringConstants.EMPTY
 import io.github.zwieback.familyfinance.core.model.Article
 import io.github.zwieback.familyfinance.core.model.OperationView
-import io.github.zwieback.familyfinance.util.StringUtils
 
 abstract class HorizontalBarChartFragment<F : OperationFilter> :
     ChartFragment<HorizontalBarChart, BarEntry, F, HorizontalBarChartDisplay>(),
@@ -164,7 +164,7 @@ abstract class HorizontalBarChartFragment<F : OperationFilter> :
             .where(Article.ID.`in`(articleIds))
             .get()
             .toList()
-        val articleNames = Array(articles.size) { StringUtils.EMPTY }
+        val articleNames = Array(articles.size) { EMPTY }
         articles
             .forEach { article ->
                 val articleId = article.id.toFloat()

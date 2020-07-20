@@ -9,11 +9,11 @@ import androidx.core.app.TaskStackBuilder
 import io.github.zwieback.familyfinance.R
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity
 import io.github.zwieback.familyfinance.business.template.activity.helper.TemplateQualifier
+import io.github.zwieback.familyfinance.constant.StringConstants.QUESTION
 import io.github.zwieback.familyfinance.core.model.TemplateView
 import io.github.zwieback.familyfinance.core.model.type.TemplateType
 import io.github.zwieback.familyfinance.util.DateUtils
 import io.github.zwieback.familyfinance.util.NumberUtils
-import io.github.zwieback.familyfinance.util.StringUtils
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
 
@@ -61,7 +61,7 @@ class SmsNotificationBuilder private constructor() {
 
         val type = context.getString(determineOperationTypeRes(template))
         val date = DateUtils.localDateToString(operationDate, DateUtils.BANK_DATE_FORMATTER)
-        val value = NumberUtils.bigDecimalToString(operationValue, StringUtils.QUESTION)
+        val value = NumberUtils.bigDecimalToString(operationValue, QUESTION)
         val contentText =
             context.getString(R.string.sms_received_content, type, value, template.name, date)
         val contentTitle = context.getString(R.string.sms_received)

@@ -2,8 +2,8 @@ package io.github.zwieback.familyfinance.widget.filter
 
 import android.text.InputFilter
 import android.text.Spanned
+import io.github.zwieback.familyfinance.constant.StringConstants.EMPTY
 import io.github.zwieback.familyfinance.util.NumberUtils
-import io.github.zwieback.familyfinance.util.StringUtils.EMPTY
 
 /**
  * Got an idea from [this answer](https://stackoverflow.com/a/20884556/8035065)

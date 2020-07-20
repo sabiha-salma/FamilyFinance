@@ -3,8 +3,8 @@ package io.github.zwieback.familyfinance.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import io.github.zwieback.familyfinance.constant.StringConstants.EMPTY
 import io.github.zwieback.familyfinance.core.R
-import io.github.zwieback.familyfinance.util.StringUtils.EMPTY
 import io.github.zwieback.familyfinance.widget.adapter.TextWatcherAdapter
 import io.github.zwieback.familyfinance.widget.listener.OnClearTextListener
 import io.github.zwieback.familyfinance.widget.listener.TextWatcherListener

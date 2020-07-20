@@ -2,7 +2,7 @@ package io.github.zwieback.familyfinance.util
 
 import android.content.Intent
 import android.os.Parcel
-import io.github.zwieback.familyfinance.util.StringUtils.EMPTY
+import io.github.zwieback.familyfinance.constant.StringConstants.EMPTY
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat

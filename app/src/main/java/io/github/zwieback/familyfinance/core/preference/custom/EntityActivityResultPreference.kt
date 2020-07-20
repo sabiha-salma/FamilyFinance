@@ -8,8 +8,8 @@ import androidx.core.content.res.TypedArrayUtils
 import androidx.preference.Preference
 import androidx.preference.R
 import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
+import io.github.zwieback.familyfinance.constant.StringConstants.UNDEFINED
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
-import io.github.zwieback.familyfinance.util.StringUtils
 import io.reactivex.functions.Consumer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -67,7 +67,7 @@ abstract class EntityActivityResultPreference<E : IBaseEntity> @JvmOverloads con
                 preference.title = entityTitle
             },
             Consumer {
-                val entityTitle = activity.getString(preferenceTitleRes, StringUtils.UNDEFINED)
+                val entityTitle = activity.getString(preferenceTitleRes, UNDEFINED)
                 preference.title = entityTitle
             }
         )
