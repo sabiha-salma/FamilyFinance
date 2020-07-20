@@ -27,7 +27,7 @@ import io.github.zwieback.familyfinance.business.chart.service.grouper.pie.Opera
 import io.github.zwieback.familyfinance.business.chart.service.grouper.pie.OperationGrouperByArticleParent
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter
 import io.github.zwieback.familyfinance.core.model.OperationView
-import io.github.zwieback.familyfinance.util.ColorUtils
+import io.github.zwieback.familyfinance.extension.collectMaterialDesignColors
 import io.github.zwieback.familyfinance.util.ConfigurationUtils
 
 abstract class PieChartFragment<F : OperationFilter> :
@@ -120,7 +120,7 @@ abstract class PieChartFragment<F : OperationFilter> :
     }
 
     private fun collectDataColors(): List<Int> {
-        return ColorUtils.collectMaterialDesignColors(requireContext()).shuffled()
+        return requireContext().collectMaterialDesignColors().shuffled()
     }
 
     override fun onApplyFilter(filter: F) {
