@@ -1,6 +1,6 @@
 package io.github.zwieback.familyfinance.extension
 
-const val EMPTY_ID = -1
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 
 fun Int.isEmptyId(): Boolean {
     return this == EMPTY_ID

@@ -7,8 +7,8 @@ import androidx.annotation.StringRes
 import androidx.core.content.res.TypedArrayUtils
 import androidx.preference.Preference
 import androidx.preference.R
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
-import io.github.zwieback.familyfinance.extension.EMPTY_ID
 import io.github.zwieback.familyfinance.util.StringUtils
 import io.reactivex.functions.Consumer
 import kotlinx.coroutines.Dispatchers

@@ -21,9 +21,9 @@ import com.mikepenz.iconics.view.IconicsImageView
 import io.github.zwieback.familyfinance.R
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.ICONICS_CODE
 import io.github.zwieback.familyfinance.business.iconics.activity.IconicsActivity
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
-import io.github.zwieback.familyfinance.extension.EMPTY_ID
 import io.github.zwieback.familyfinance.extension.isEmptyId
 import io.github.zwieback.familyfinance.util.DateUtils
 import io.github.zwieback.familyfinance.util.NumberUtils

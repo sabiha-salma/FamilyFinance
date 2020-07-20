@@ -2,9 +2,9 @@ package io.github.zwieback.familyfinance.business.operation.filter
 
 import android.content.Context
 import android.os.Parcel
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
 import io.github.zwieback.familyfinance.core.preference.config.FilterPrefs
-import io.github.zwieback.familyfinance.extension.EMPTY_ID
 import io.github.zwieback.familyfinance.extension.toEmptyId
 import io.github.zwieback.familyfinance.extension.toNullableId
 import io.github.zwieback.familyfinance.util.DateUtils

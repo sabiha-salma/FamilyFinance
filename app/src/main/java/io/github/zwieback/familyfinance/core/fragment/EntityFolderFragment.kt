@@ -2,11 +2,11 @@ package io.github.zwieback.familyfinance.core.fragment
 
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.adapter.EntityFolderAdapter
 import io.github.zwieback.familyfinance.core.filter.EntityFolderFilter
 import io.github.zwieback.familyfinance.core.listener.EntityFolderClickListener
 import io.github.zwieback.familyfinance.core.model.IBaseEntityFolder
-import io.github.zwieback.familyfinance.extension.EMPTY_ID
 import io.github.zwieback.familyfinance.extension.toEmptyId
 import io.github.zwieback.familyfinance.extension.toNullableId
 

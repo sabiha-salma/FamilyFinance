@@ -14,6 +14,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.FragmentTransaction
 import com.mikepenz.iconics.utils.IconicsMenuInflaterUtil
 import io.github.zwieback.familyfinance.R
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.activity.exception.ReadOnlyException
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
 import io.github.zwieback.familyfinance.core.fragment.EntityFragment
@@ -21,7 +22,6 @@ import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer
 import io.github.zwieback.familyfinance.core.listener.EntityClickListener
 import io.github.zwieback.familyfinance.core.listener.EntityFilterListener
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
-import io.github.zwieback.familyfinance.extension.EMPTY_ID
 import io.github.zwieback.familyfinance.extension.toNullableId
 import io.reactivex.functions.Consumer
 

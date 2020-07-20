@@ -27,13 +27,13 @@ import io.github.zwieback.familyfinance.business.exchange_rate.helper.ExchangeRa
 import io.github.zwieback.familyfinance.business.person.activity.PersonActivity
 import io.github.zwieback.familyfinance.business.template.adapter.TemplateProvider
 import io.github.zwieback.familyfinance.business.template.exception.UnsupportedTemplateTypeException
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.activity.EntityActivity
 import io.github.zwieback.familyfinance.core.activity.EntityEditActivity
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.*
 import io.github.zwieback.familyfinance.core.model.type.TemplateType
 import io.github.zwieback.familyfinance.databinding.ActivityEditTemplateBinding
-import io.github.zwieback.familyfinance.extension.EMPTY_ID
 import io.github.zwieback.familyfinance.util.DateUtils
 import io.github.zwieback.familyfinance.util.DateUtils.calendarDateToLocalDate
 import io.github.zwieback.familyfinance.util.DateUtils.isTextAnLocalDate

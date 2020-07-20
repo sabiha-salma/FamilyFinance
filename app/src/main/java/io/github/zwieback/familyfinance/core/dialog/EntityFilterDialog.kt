@@ -17,11 +17,11 @@ import androidx.fragment.app.DialogFragment
 import com.johnpetitto.validator.ValidatingTextInputLayout
 import com.johnpetitto.validator.Validators
 import io.github.zwieback.familyfinance.app.FamilyFinanceApplication
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
 import io.github.zwieback.familyfinance.core.listener.EntityFilterListener
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
 import io.github.zwieback.familyfinance.core.preference.config.DatabasePrefs
-import io.github.zwieback.familyfinance.extension.EMPTY_ID
 import io.github.zwieback.familyfinance.util.DateUtils
 import io.github.zwieback.familyfinance.util.DateUtils.isTextAnLocalDate
 import io.github.zwieback.familyfinance.util.DateUtils.stringToLocalDate

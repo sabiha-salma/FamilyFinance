@@ -4,7 +4,7 @@ import android.content.Context
 import com.afollestad.rxkprefs.Pref
 import com.afollestad.rxkprefs.RxkPrefs
 import com.afollestad.rxkprefs.rxkPrefs
-import io.github.zwieback.familyfinance.extension.EMPTY_ID
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 
 class DatabasePrefs private constructor(context: Context) {
 

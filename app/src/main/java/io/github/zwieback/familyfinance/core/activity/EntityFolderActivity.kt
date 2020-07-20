@@ -7,11 +7,11 @@ import android.widget.Toast
 import androidx.annotation.CallSuper
 import androidx.appcompat.widget.PopupMenu
 import io.github.zwieback.familyfinance.R
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.filter.EntityFolderFilter
 import io.github.zwieback.familyfinance.core.fragment.EntityFolderFragment
 import io.github.zwieback.familyfinance.core.listener.EntityFolderClickListener
 import io.github.zwieback.familyfinance.core.model.IBaseEntityFolder
-import io.github.zwieback.familyfinance.extension.EMPTY_ID
 import io.github.zwieback.familyfinance.extension.toEmptyId
 
 abstract class EntityFolderActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :

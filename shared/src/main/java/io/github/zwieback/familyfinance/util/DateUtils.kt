@@ -3,7 +3,7 @@ package io.github.zwieback.familyfinance.util
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcel
-import io.github.zwieback.familyfinance.extension.EMPTY_ID
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.extension.isEmptyId
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Month

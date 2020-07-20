@@ -2,8 +2,8 @@ package io.github.zwieback.familyfinance.business.account.filter
 
 import android.os.Parcel
 import android.os.Parcelable
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.filter.EntityFolderFilter
-import io.github.zwieback.familyfinance.extension.EMPTY_ID
 import io.github.zwieback.familyfinance.extension.toEmptyId
 import io.github.zwieback.familyfinance.extension.toNullableId
 import io.github.zwieback.familyfinance.util.BooleanUtils.readBooleanFromParcel

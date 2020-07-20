@@ -18,6 +18,7 @@ import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardAct
 import io.github.zwieback.familyfinance.business.exchange_rate.activity.ExchangeRateActivity
 import io.github.zwieback.familyfinance.business.exchange_rate.helper.ExchangeRateFinder
 import io.github.zwieback.familyfinance.business.person.activity.PersonActivity
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.activity.EntityActivity.Companion.INPUT_READ_ONLY
 import io.github.zwieback.familyfinance.core.activity.EntityEditActivity
 import io.github.zwieback.familyfinance.core.model.Currency
@@ -25,7 +26,6 @@ import io.github.zwieback.familyfinance.core.model.ExchangeRate
 import io.github.zwieback.familyfinance.core.model.Operation
 import io.github.zwieback.familyfinance.core.model.Person
 import io.github.zwieback.familyfinance.core.model.type.OperationType
-import io.github.zwieback.familyfinance.extension.EMPTY_ID
 import io.github.zwieback.familyfinance.util.DateUtils.calendarDateToLocalDate
 import io.github.zwieback.familyfinance.util.DateUtils.isTextAnLocalDate
 import io.github.zwieback.familyfinance.util.DateUtils.localDateToString
