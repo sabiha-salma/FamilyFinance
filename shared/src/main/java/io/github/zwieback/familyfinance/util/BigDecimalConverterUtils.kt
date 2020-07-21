@@ -23,14 +23,6 @@ object BigDecimalConverterUtils {
         return bigDecimalToLong(value, EXCHANGE_RATE_POWER)
     }
 
-    fun balanceInNativeCurrencyToBigDecimal(value: Long?): BigDecimal? {
-        return worthToBigDecimal(value)
-    }
-
-    fun balanceInForeignCurrencyToBigDecimal(value: Long?): BigDecimal? {
-        return longToBigDecimal(value, -(WORTH_POWER + EXCHANGE_RATE_POWER))
-    }
-
     private fun longToBigDecimal(value: Long?, power: Int): BigDecimal? {
         return value?.let { BigDecimal(value).scaleByPowerOfTen(power) }
     }
