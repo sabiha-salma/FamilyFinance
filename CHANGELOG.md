@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2020-07-21
+### Added
+- Support for Android 10 (Q, API level 29).
+- Question before restoring the database or preferences.
+- "Creation date" and "last change date" fields for entities.
+- Sorting operations:
+  * By default
+  * By creation date
+  * By last change date
+
 ## [1.6.5] - 2020-01-20
 ### Added
 - Filter preferences (so far only for operations).
