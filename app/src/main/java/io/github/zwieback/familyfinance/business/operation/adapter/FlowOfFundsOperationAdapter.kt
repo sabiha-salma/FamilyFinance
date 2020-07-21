@@ -32,6 +32,7 @@ class FlowOfFundsOperationAdapter(
             .withCurrencyId(filter.getCurrencyId())
             .withArticleId(filter.getArticleId())
             .withAccountId(filter.getAccountId())
+            .withSortType(sortType)
             .build()
     }
 }

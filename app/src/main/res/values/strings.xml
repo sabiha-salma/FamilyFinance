@@ -120,6 +120,14 @@
     <string name="acra_enabled_preference_summary">ACRA is enabled</string>
     <string name="acra_disabled_preference_summary">ACRA is disabled</string>
 
+    <!-- Sort -->
+    <string name="sort">Sort</string>
+    <string-array name="operation_sort_type">
+        <item>By default</item>
+        <item>By creation date</item>
+        <item>By last change date</item>
+    </string-array>
+
     <!-- Types -->
     <string-array name="account_type">
         <item>Undefined</item>
@@ -204,6 +212,7 @@
     <string name="action_select">Select</string>
     <string name="action_search">Search</string>
     <string name="action_display">Display</string>
+    <string name="action_sort">Sort</string>
     <!-- Drawer -->
     <string name="drawer_item_currencies">Currencies</string>
     <string name="drawer_item_exchange_rates">Exchange Rates</string>

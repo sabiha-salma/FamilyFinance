@@ -31,6 +31,7 @@ class TransferOperationAdapter(
             .withOwnerId(filter.getOwnerId())
             .withCurrencyId(filter.getCurrencyId())
             .withAccountId(filter.getAccountId())
+            .withSortType(sortType)
             .build()
     }
 }

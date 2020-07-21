@@ -120,6 +120,14 @@
     <string name="acra_enabled_preference_summary">ACRA включена</string>
     <string name="acra_disabled_preference_summary">ACRA выключена</string>
 
+    <!-- Sort -->
+    <string name="sort">Сортировка</string>
+    <string-array name="operation_sort_type">
+        <item>По умолчанию</item>
+        <item>По дате создания</item>
+        <item>По дате последнего изменения</item>
+    </string-array>
+
     <!-- Types -->
     <string-array name="account_type">
         <item>Неопределен</item>
@@ -204,6 +212,7 @@
     <string name="action_select">Выбрать</string>
     <string name="action_search">Поиск</string>
     <string name="action_display">Отображение</string>
+    <string name="action_sort">Сортировка</string>
     <!-- Drawer -->
     <string name="drawer_item_currencies">Валюты</string>
     <string name="drawer_item_exchange_rates">Курсы обмена</string>

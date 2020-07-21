@@ -1,5 +1,6 @@
 package io.github.zwieback.familyfinance.business.operation.query
 
+import io.github.zwieback.familyfinance.business.operation.type.OperationSortType
 import io.github.zwieback.familyfinance.core.model.AccountView
 import io.github.zwieback.familyfinance.core.model.ArticleView
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
@@ -34,6 +35,7 @@ abstract class OperationQueryBuilder<T : OperationQueryBuilder<T>>(
     private var accountId: Int? = null
     private var ownerId: Int? = null
     private var currencyId: Int? = null
+    private var sortType: OperationSortType = OperationSortType.DEFAULT
 
     override val entityClass: Class<OperationView>
         get() = OperationView::class.java
@@ -83,6 +85,11 @@ abstract class OperationQueryBuilder<T : OperationQueryBuilder<T>>(
         return apply { this.currencyId = currencyId } as T
     }
 
+    @Suppress("UNCHECKED_CAST")
+    fun withSortType(sortType: OperationSortType): T {
+        return apply { this.sortType = sortType } as T
+    }
+
     override fun buildWhere(
         select: Where<ReactiveResult<OperationView>>
     ): WhereAndOr<ReactiveResult<OperationView>> {
@@ -119,7 +126,22 @@ abstract class OperationQueryBuilder<T : OperationQueryBuilder<T>>(
     override fun buildOrderBy(
         where: OrderBy<Limit<ReactiveResult<OperationView>>>
     ): Limit<ReactiveResult<OperationView>> {
-        return where.orderBy(OperationView.DATE.desc(), OperationView.ID.desc())
+        return when (sortType) {
+            OperationSortType.DEFAULT ->
+                where.orderBy(OperationView.DATE.desc(), OperationView.ID.desc())
+            OperationSortType.BY_CREATION_DATE ->
+                where.orderBy(
+                    OperationView.CREATE_DATE.desc(),
+                    OperationView.DATE.desc(),
+                    OperationView.ID.desc()
+                )
+            OperationSortType.BY_LAST_CHANGE_DATE ->
+                where.orderBy(
+                    OperationView.LAST_CHANGE_DATE.desc(),
+                    OperationView.DATE.desc(),
+                    OperationView.ID.desc()
+                )
+        }
     }
 
     /**

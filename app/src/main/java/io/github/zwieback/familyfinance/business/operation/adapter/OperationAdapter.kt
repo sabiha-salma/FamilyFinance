@@ -8,6 +8,7 @@ import io.github.zwieback.familyfinance.R
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter
 import io.github.zwieback.familyfinance.business.operation.listener.OnOperationClickListener
 import io.github.zwieback.familyfinance.business.operation.service.calculator.BalanceCalculator
+import io.github.zwieback.familyfinance.business.operation.type.OperationSortType
 import io.github.zwieback.familyfinance.core.adapter.BindingHolder
 import io.github.zwieback.familyfinance.core.adapter.EntityAdapter
 import io.github.zwieback.familyfinance.core.model.OperationView
@@ -32,6 +33,8 @@ abstract class OperationAdapter<FILTER : OperationFilter> internal constructor(
     data,
     filter
 ) {
+    protected var sortType: OperationSortType = OperationSortType.DEFAULT
+
     private val observable = OperationAdapterDataObserver()
 
     private var balanceView: TextView? = null
@@ -71,6 +74,10 @@ abstract class OperationAdapter<FILTER : OperationFilter> internal constructor(
 
     fun setBalanceView(balanceView: TextView?) {
         this.balanceView = balanceView
+    }
+
+    fun changeSort(sortType: OperationSortType) {
+        this.sortType = sortType
     }
 
     override fun close() {

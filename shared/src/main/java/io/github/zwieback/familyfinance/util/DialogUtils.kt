@@ -2,6 +2,9 @@ package io.github.zwieback.familyfinance.util
 
 import android.app.DatePickerDialog
 import android.content.Context
+import androidx.annotation.ArrayRes
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import io.github.zwieback.familyfinance.calculator.dialog.CalculatorDialog
 import io.github.zwieback.familyfinance.calculator.dialog.OnCalculationResultListener
@@ -32,5 +35,21 @@ object DialogUtils {
         operand: BigDecimal?
     ) {
         CalculatorDialog(context, listener, operand).show()
+    }
+
+    fun showSingleChoiceDialog(
+        context: Context,
+        @StringRes titleId: Int,
+        @ArrayRes itemsId: Int,
+        onSelectItem: (Int) -> Unit
+    ) {
+        AlertDialog.Builder(context)
+            .setTitle(titleId)
+            .setItems(itemsId) { _, which ->
+                // The 'which' argument contains the index position of the selected item
+                onSelectItem(which)
+            }
+            .create()
+            .show()
     }
 }

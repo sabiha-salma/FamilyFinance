@@ -8,9 +8,11 @@ import io.github.zwieback.familyfinance.business.operation.filter.OperationFilte
 import io.github.zwieback.familyfinance.business.operation.fragment.OperationFragment
 import io.github.zwieback.familyfinance.business.operation.listener.OnOperationClickListener
 import io.github.zwieback.familyfinance.business.operation.listener.OperationFilterListener
+import io.github.zwieback.familyfinance.business.operation.type.OperationSortType
 import io.github.zwieback.familyfinance.core.activity.EntityActivity
 import io.github.zwieback.familyfinance.core.model.Operation
 import io.github.zwieback.familyfinance.core.model.OperationView
+import io.github.zwieback.familyfinance.util.DialogUtils
 
 abstract class OperationActivity<FRAGMENT, FILTER> :
     EntityActivity<OperationView, Operation, FILTER, FRAGMENT>(),
@@ -28,8 +30,23 @@ abstract class OperationActivity<FRAGMENT, FILTER> :
     override val classOfRegularEntity: Class<Operation>
         get() = Operation::class.java
 
-    override fun addFilterMenuItem(): Boolean {
-        return true
+    override fun addFilterMenuItem(): Boolean = true
+
+    override fun addSortMenuItem(): Boolean = true
+
+    private fun changeSort(sortType: OperationSortType) {
+        findFragment()?.changeSort(sortType)
+    }
+
+    override fun showSortDialog() {
+        DialogUtils.showSingleChoiceDialog(
+            this,
+            R.string.sort,
+            R.array.operation_sort_type
+        ) { sortIndex ->
+            val sortType = OperationSortType.values()[sortIndex]
+            changeSort(sortType)
+        }
     }
 
     override fun onEntityClick(view: View, entity: OperationView) {

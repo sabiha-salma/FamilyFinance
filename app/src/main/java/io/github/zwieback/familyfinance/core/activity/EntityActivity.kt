@@ -60,15 +60,18 @@ abstract class EntityActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
         if (addFilterMenuItem()) {
             menuIds.add(R.menu.menu_entity_filter)
         }
+        if (addSortMenuItem()) {
+            menuIds.add(R.menu.menu_entity_sort)
+        }
         menuIds.forEach { menuId ->
             IconicsMenuInflaterUtil.inflate(inflater, this, menuId, menu)
         }
         return super.onCreateOptionsMenu(menu)
     }
 
-    protected open fun addFilterMenuItem(): Boolean {
-        return false
-    }
+    protected open fun addFilterMenuItem(): Boolean = false
+
+    protected open fun addSortMenuItem(): Boolean = false
 
     protected open fun collectMenuIds(): List<Int> {
         return if (readOnly)
@@ -81,6 +84,10 @@ abstract class EntityActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
         return when (item.itemId) {
             R.id.action_filter -> {
                 showFilterDialog()
+                true
+            }
+            R.id.action_sort -> {
+                showSortDialog()
                 true
             }
             R.id.action_add_entry -> {
@@ -158,6 +165,14 @@ abstract class EntityActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
     }
 
     protected open fun showFilterDialog() {
+        // stub
+    }
+
+    // -----------------------------------------------------------------------------------------
+    // Sort methods
+    // -----------------------------------------------------------------------------------------
+
+    protected open fun showSortDialog() {
         // stub
     }
 

@@ -8,6 +8,7 @@ import io.github.zwieback.familyfinance.R
 import io.github.zwieback.familyfinance.business.operation.adapter.OperationAdapter
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter
 import io.github.zwieback.familyfinance.business.operation.listener.OnOperationClickListener
+import io.github.zwieback.familyfinance.business.operation.type.OperationSortType
 import io.github.zwieback.familyfinance.core.fragment.EntityFragment
 import io.github.zwieback.familyfinance.core.model.OperationView
 import io.github.zwieback.familyfinance.core.preference.config.InterfacePrefs
@@ -47,5 +48,10 @@ abstract class OperationFragment<FILTER : OperationFilter> :
                 balanceViewGroup.visibility = View.VISIBLE
             }
         }
+    }
+
+    fun changeSort(sortType: OperationSortType) {
+        adapter.changeSort(sortType)
+        adapter.queryAsync()
     }
 }
