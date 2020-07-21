@@ -4,7 +4,8 @@ import io.github.zwieback.familyfinance.core.model.AccountView
 import io.github.zwieback.familyfinance.core.model.ExchangeRate
 import io.github.zwieback.familyfinance.core.model.Operation
 import io.github.zwieback.familyfinance.core.model.type.OperationType
-import io.github.zwieback.familyfinance.util.BigDecimalConverterUtils
+import io.github.zwieback.familyfinance.extension.NormalPrecision
+import io.github.zwieback.familyfinance.extension.toBigDecimal
 import io.reactivex.functions.Consumer
 import io.requery.Persistable
 import io.requery.query.NamedNumericExpression
@@ -90,7 +91,7 @@ class NonOptimizedAccountBalanceCalculator(
             .get().first().get("native_sum")
 
         return sumInNativeCurrency
-            ?.let { BigDecimalConverterUtils.worthToBigDecimal(sumInNativeCurrency) }
+            ?.let { NormalPrecision(sumInNativeCurrency).toBigDecimal() }
             ?: BigDecimal.ZERO
     }
 
@@ -153,7 +154,7 @@ class NonOptimizedAccountBalanceCalculator(
             .get().first().get("foreign_sum")
 
         return sumInForeignCurrency
-            ?.let { BigDecimalConverterUtils.worthToBigDecimal(sumInForeignCurrency) }
+            ?.let { NormalPrecision(sumInForeignCurrency).toBigDecimal() }
             ?: BigDecimal.ZERO
     }
 

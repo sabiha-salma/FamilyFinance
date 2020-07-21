@@ -80,3 +80,37 @@ fun BigDecimal.toStringWithPlaces(places: Int): String {
     val value = this.setScale(places, RoundingMode.HALF_EVEN)
     return BIG_DECIMAL_FORMAT.format(value)
 }
+
+// region Normal and High Precision values
+
+private const val NORMAL_PRECISION_POWER = 2
+private const val HIGH_PRECISION_POWER = 8
+
+inline class NormalPrecision(val value: Long)
+inline class HighPrecision(val value: Long)
+
+fun NormalPrecision.toBigDecimal(): BigDecimal {
+    return value.toBigDecimal(-NORMAL_PRECISION_POWER)
+}
+
+fun BigDecimal.toNormalPrecision(): NormalPrecision {
+    return NormalPrecision(this.toLong(NORMAL_PRECISION_POWER))
+}
+
+fun HighPrecision.toBigDecimal(): BigDecimal {
+    return value.toBigDecimal(-HIGH_PRECISION_POWER)
+}
+
+fun BigDecimal.toHighPrecision(): HighPrecision {
+    return HighPrecision(this.toLong(HIGH_PRECISION_POWER))
+}
+
+private fun Long.toBigDecimal(power: Int): BigDecimal {
+    return BigDecimal(this).scaleByPowerOfTen(power)
+}
+
+private fun BigDecimal.toLong(power: Int): Long {
+    return this.scaleByPowerOfTen(power).toLong()
+}
+
+// endregion Normal and High Precision values

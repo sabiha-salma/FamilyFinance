@@ -1,7 +1,8 @@
 package io.github.zwieback.familyfinance.core.model.converter
 
-import io.github.zwieback.familyfinance.util.BigDecimalConverterUtils.bigDecimalToExchangeRate
-import io.github.zwieback.familyfinance.util.BigDecimalConverterUtils.exchangeRateToBigDecimal
+import io.github.zwieback.familyfinance.extension.HighPrecision
+import io.github.zwieback.familyfinance.extension.toBigDecimal
+import io.github.zwieback.familyfinance.extension.toHighPrecision
 import io.requery.Converter
 import java.math.BigDecimal
 
@@ -23,10 +24,10 @@ class BigDecimalToExchangeRateConverter : Converter<BigDecimal, Long> {
     }
 
     override fun convertToPersisted(value: BigDecimal?): Long? {
-        return bigDecimalToExchangeRate(value)
+        return value?.let { value.toHighPrecision().value }
     }
 
     override fun convertToMapped(type: Class<out BigDecimal>, value: Long?): BigDecimal? {
-        return exchangeRateToBigDecimal(value)
+        return value?.let { HighPrecision(value).toBigDecimal() }
     }
 }

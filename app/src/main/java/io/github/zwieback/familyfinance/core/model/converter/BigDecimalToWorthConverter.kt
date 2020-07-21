@@ -1,7 +1,8 @@
 package io.github.zwieback.familyfinance.core.model.converter
 
-import io.github.zwieback.familyfinance.util.BigDecimalConverterUtils.bigDecimalToWorth
-import io.github.zwieback.familyfinance.util.BigDecimalConverterUtils.worthToBigDecimal
+import io.github.zwieback.familyfinance.extension.NormalPrecision
+import io.github.zwieback.familyfinance.extension.toBigDecimal
+import io.github.zwieback.familyfinance.extension.toNormalPrecision
 import io.requery.Converter
 import java.math.BigDecimal
 
@@ -23,14 +24,14 @@ class BigDecimalToWorthConverter : Converter<BigDecimal, Long> {
     }
 
     override fun convertToPersisted(value: BigDecimal?): Long? {
-        return bigDecimalToWorth(value)
+        return value?.toNormalPrecision()?.value
     }
 
     override fun convertToMapped(type: Class<out BigDecimal>, value: Long?): BigDecimal? {
         return if (value == 0L) {
             null
         } else {
-            worthToBigDecimal(value)
+            value?.let { NormalPrecision(value).toBigDecimal() }
         }
     }
 }
