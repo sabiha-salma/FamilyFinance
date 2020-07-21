@@ -76,9 +76,11 @@ fun BigDecimal?.toStringOrDefault(defaultValue: String): String {
     return this?.let { BIG_DECIMAL_FORMAT.format(this) } ?: defaultValue
 }
 
-fun BigDecimal.toStringWithPlaces(places: Int): String {
-    val value = this.setScale(places, RoundingMode.HALF_EVEN)
-    return BIG_DECIMAL_FORMAT.format(value)
+fun BigDecimal?.toStringWithPlaces(places: Int): String {
+    return this?.let {
+        val value = this.setScale(places, RoundingMode.HALF_EVEN)
+        BIG_DECIMAL_FORMAT.format(value)
+    }.orEmpty()
 }
 
 // region Normal and High Precision values
