@@ -17,8 +17,8 @@ android {
         applicationId "io.github.zwieback.familyfinance"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode 10701
-        versionName "1.7.1"
+        versionCode 10702
+        versionName "1.7.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
