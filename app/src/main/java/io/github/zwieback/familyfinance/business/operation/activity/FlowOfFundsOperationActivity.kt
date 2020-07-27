@@ -15,6 +15,7 @@ import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer
 import io.github.zwieback.familyfinance.core.model.Operation
 import io.github.zwieback.familyfinance.core.model.OperationView
 import io.github.zwieback.familyfinance.core.model.type.OperationType
+import io.github.zwieback.familyfinance.extension.operation.filter.applyPreferences
 
 class FlowOfFundsOperationActivity :
     OperationActivity<FlowOfFundsOperationFragment, FlowOfFundsOperationFilter>() {
@@ -62,8 +63,8 @@ class FlowOfFundsOperationActivity :
         transferOperationHelper = TransferOperationHelper(this, data)
     }
 
-    override fun createDefaultFilter(): FlowOfFundsOperationFilter {
-        return FlowOfFundsOperationFilter(this)
+    override fun createDefaultFilter() = FlowOfFundsOperationFilter().apply {
+        applyPreferences(this@FlowOfFundsOperationActivity)
     }
 
     override fun createFragment(): FlowOfFundsOperationFragment {

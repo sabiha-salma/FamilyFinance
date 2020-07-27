@@ -18,7 +18,7 @@ class AllArticleActivity : ArticleActivity<AllArticleFragment, AllArticleFilter>
 
     override fun createDefaultFilter(): AllArticleFilter {
         return AllArticleFilter().apply {
-            setParentId(initialParentId)
+            putParentId(initialParentId)
         }
     }
 

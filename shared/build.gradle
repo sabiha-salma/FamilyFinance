@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -34,6 +35,10 @@ android {
         abortOnError false
         disable 'InvalidPackage'
     }
+}
+
+androidExtensions {
+    features = ["parcelize"]
 }
 
 // Libraries declared in dependencies.gradle in the root of the project

@@ -10,6 +10,7 @@ import io.github.zwieback.familyfinance.business.operation.fragment.ExpenseOpera
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer
 import io.github.zwieback.familyfinance.core.model.Operation
 import io.github.zwieback.familyfinance.core.model.OperationView
+import io.github.zwieback.familyfinance.extension.operation.filter.applyPreferences
 
 class ExpenseOperationActivity :
     OperationActivity<ExpenseOperationFragment, ExpenseOperationFilter>() {
@@ -27,8 +28,9 @@ class ExpenseOperationActivity :
         operationHelper = ExpenseOperationHelper(this, data)
     }
 
-    override fun createDefaultFilter() = ExpenseOperationFilter(this).apply {
-        setArticleId(databasePrefs.expensesArticleId)
+    override fun createDefaultFilter() = ExpenseOperationFilter().apply {
+        applyPreferences(this@ExpenseOperationActivity)
+        putArticleId(databasePrefs.expensesArticleId)
     }
 
     override fun createFragment(): ExpenseOperationFragment {

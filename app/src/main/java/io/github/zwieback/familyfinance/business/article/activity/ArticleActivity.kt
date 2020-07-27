@@ -37,10 +37,10 @@ abstract class ArticleActivity<FRAGMENT, FILTER> :
         get() = RESULT_ARTICLE_ID
 
     override val isFirstFrame: Boolean
-        get() = filter.getParentId() == initialParentId
+        get() = filter.takeParentId() == initialParentId
 
     override val fragmentTag: String
-        get() = "${localClassName}_${filter.getParentId()}"
+        get() = "${localClassName}_${filter.takeParentId()}"
 
     override val classOfRegularEntity: Class<Article>
         get() = Article::class.java

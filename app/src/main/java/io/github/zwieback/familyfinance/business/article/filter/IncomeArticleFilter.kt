@@ -1,30 +1,15 @@
 package io.github.zwieback.familyfinance.business.article.filter
 
-import android.os.Parcel
-import android.os.Parcelable
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
+import kotlinx.android.parcel.Parcelize
 
-class IncomeArticleFilter : ArticleFilter {
-
-    constructor() : super()
-
-    constructor(filter: IncomeArticleFilter) : super(filter)
-
-    private constructor(`in`: Parcel) : super(`in`)
+@Parcelize
+data class IncomeArticleFilter(
+    override var parentId: Int = EMPTY_ID,
+    override var searchName: String? = null
+) : ArticleFilter() {
 
     companion object {
         const val INCOME_ARTICLE_FILTER = "incomeArticleFilter"
-
-        @JvmField
-        var CREATOR: Parcelable.Creator<IncomeArticleFilter> =
-            object : Parcelable.Creator<IncomeArticleFilter> {
-
-                override fun createFromParcel(parcel: Parcel): IncomeArticleFilter {
-                    return IncomeArticleFilter(parcel)
-                }
-
-                override fun newArray(size: Int): Array<IncomeArticleFilter?> {
-                    return arrayOfNulls(size)
-                }
-            }
     }
 }

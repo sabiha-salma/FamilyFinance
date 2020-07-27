@@ -114,8 +114,8 @@ class ExpenseOperationHelper(context: Context, data: ReactiveEntityStore<Persist
             getEmptyIntent()
         } else {
             getIntentToAdd(
-                filter.getArticleId(), filter.getAccountId(), null,
-                filter.getOwnerId(), filter.getCurrencyId(), null, null, null, null, null
+                filter.takeArticleId(), filter.takeAccountId(), null,
+                filter.takeOwnerId(), filter.takeCurrencyId(), null, null, null, null, null
             )
         }
     }

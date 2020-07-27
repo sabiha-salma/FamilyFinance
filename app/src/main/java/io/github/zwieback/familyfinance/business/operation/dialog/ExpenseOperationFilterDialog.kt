@@ -62,7 +62,7 @@ class ExpenseOperationFilterDialog :
         get() = binding.endValueLayout
 
     override fun createCopyOfFilter(filter: ExpenseOperationFilter): ExpenseOperationFilter {
-        return ExpenseOperationFilter(filter)
+        return filter.copy()
     }
 
     override fun bind(filter: ExpenseOperationFilter) {

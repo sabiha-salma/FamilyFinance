@@ -23,7 +23,7 @@ class ExpenseArticleActivity : ArticleActivity<ExpenseArticleFragment, ExpenseAr
 
     override fun createDefaultFilter(): ExpenseArticleFilter {
         return ExpenseArticleFilter().apply {
-            setParentId(initialParentId)
+            putParentId(initialParentId)
         }
     }
 

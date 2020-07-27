@@ -102,9 +102,9 @@ abstract class OperationFilterDialog<F, B> :
         startDateEdit.setOnClickListener { onStartDateClick() }
         endDateEdit.setOnClickListener { onEndDateClick() }
 
-        loadAccount(filter.getAccountId())
-        loadOwner(filter.getOwnerId())
-        loadCurrency(filter.getCurrencyId())
+        loadAccount(filter.takeAccountId())
+        loadOwner(filter.takeOwnerId())
+        loadCurrency(filter.takeCurrencyId())
         loadStartDate(filter.startDate)
         loadEndDate(filter.endDate)
         loadStartValue(filter.startValue)
@@ -153,41 +153,41 @@ abstract class OperationFilterDialog<F, B> :
     }
 
     private fun onAccountRemoved() {
-        filter.setAccountId(null)
+        filter.putAccountId(null)
     }
 
     private fun onOwnerRemoved() {
-        filter.setOwnerId(null)
+        filter.putOwnerId(null)
     }
 
     private fun onCurrencyRemoved() {
-        filter.setCurrencyId(null)
+        filter.putCurrencyId(null)
     }
 
     private fun onSuccessfulArticleFound(): Consumer<Article> {
         return Consumer { foundArticle ->
-            filter.setArticleId(foundArticle.id)
+            filter.putArticleId(foundArticle.id)
             articleEdit.setText(foundArticle.name)
         }
     }
 
     private fun onSuccessfulAccountFound(): Consumer<Account> {
         return Consumer { foundAccount ->
-            filter.setAccountId(foundAccount.id)
+            filter.putAccountId(foundAccount.id)
             accountEdit.setText(foundAccount.name)
         }
     }
 
     private fun onSuccessfulOwnerFound(): Consumer<Person> {
         return Consumer { foundOwner ->
-            filter.setOwnerId(foundOwner.id)
+            filter.putOwnerId(foundOwner.id)
             ownerEdit.setText(foundOwner.name)
         }
     }
 
     private fun onSuccessfulCurrencyFound(): Consumer<Currency> {
         return Consumer { foundCurrency ->
-            filter.setCurrencyId(foundCurrency.id)
+            filter.putCurrencyId(foundCurrency.id)
             currencyEdit.setText(foundCurrency.name)
         }
     }

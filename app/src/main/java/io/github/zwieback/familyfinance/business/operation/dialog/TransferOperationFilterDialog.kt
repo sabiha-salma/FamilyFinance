@@ -60,7 +60,7 @@ class TransferOperationFilterDialog :
         get() = binding.endValueLayout
 
     override fun createCopyOfFilter(filter: TransferOperationFilter): TransferOperationFilter {
-        return TransferOperationFilter(filter)
+        return filter.copy()
     }
 
     override fun bind(filter: TransferOperationFilter) {

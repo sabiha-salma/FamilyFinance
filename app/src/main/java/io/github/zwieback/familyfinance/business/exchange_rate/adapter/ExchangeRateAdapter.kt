@@ -41,7 +41,7 @@ class ExchangeRateAdapter(
 
     override fun performQuery(): Result<ExchangeRateView> {
         return ExchangeRateQueryBuilder.create(data)
-            .withCurrencyId(filter.getCurrencyId())
+            .withCurrencyId(filter.takeCurrencyId())
             .withStartDate(filter.startDate)
             .withEndDate(filter.endDate)
             .withStartValue(filter.startValue)

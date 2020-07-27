@@ -62,7 +62,7 @@ class FlowOfFundsOperationFilterDialog :
         get() = binding.endValueLayout
 
     override fun createCopyOfFilter(filter: FlowOfFundsOperationFilter): FlowOfFundsOperationFilter {
-        return FlowOfFundsOperationFilter(filter)
+        return filter.copy()
     }
 
     override fun bind(filter: FlowOfFundsOperationFilter) {

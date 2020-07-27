@@ -38,7 +38,7 @@ class ExchangeRateActivity :
         super.init(savedInstanceState)
         val currencyId = extractId(intent.extras, INPUT_CURRENCY_ID)
         currencyId?.let {
-            filter.setCurrencyId(currencyId)
+            filter.putCurrencyId(currencyId)
         }
     }
 
@@ -48,7 +48,7 @@ class ExchangeRateActivity :
 
     override fun createDefaultFilter(): ExchangeRateFilter {
         return ExchangeRateFilter().apply {
-            setCurrencyId(databasePrefs.currencyId)
+            putCurrencyId(databasePrefs.currencyId)
         }
     }
 
@@ -59,7 +59,7 @@ class ExchangeRateActivity :
     override fun addEntity() {
         super.addEntity()
         val intent = Intent(this, ExchangeRateEditActivity::class.java)
-            .putExtra(ExchangeRateEditActivity.INPUT_CURRENCY_ID, filter.getCurrencyId())
+            .putExtra(ExchangeRateEditActivity.INPUT_CURRENCY_ID, filter.takeCurrencyId())
         startActivity(intent)
     }
 

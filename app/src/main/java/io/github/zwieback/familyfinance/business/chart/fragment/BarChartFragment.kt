@@ -36,6 +36,7 @@ import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOpe
 import io.github.zwieback.familyfinance.business.operation.query.FlowOfFundsOperationQueryBuilder
 import io.github.zwieback.familyfinance.core.model.OperationView
 import io.github.zwieback.familyfinance.core.model.type.OperationType
+import io.github.zwieback.familyfinance.extension.operation.filter.applyPreferences
 import io.requery.query.Result
 
 class BarChartFragment :
@@ -73,8 +74,8 @@ class BarChartFragment :
         refreshData()
     }
 
-    override fun createDefaultFilter(): FlowOfFundsOperationFilter {
-        return FlowOfFundsOperationFilter(requireContext())
+    override fun createDefaultFilter() = FlowOfFundsOperationFilter().apply {
+        applyPreferences(this@BarChartFragment.requireContext())
     }
 
     override fun createDefaultDisplay(): BarChartDisplay {
@@ -133,10 +134,10 @@ class BarChartFragment :
             .withEndDate(filter.endDate)
             .withStartValue(filter.startValue)
             .withEndValue(filter.endValue)
-            .withOwnerId(filter.getOwnerId())
-            .withCurrencyId(filter.getCurrencyId())
-            .withArticleId(filter.getArticleId())
-            .withAccountId(filter.getAccountId())
+            .withOwnerId(filter.takeOwnerId())
+            .withCurrencyId(filter.takeCurrencyId())
+            .withArticleId(filter.takeArticleId())
+            .withAccountId(filter.takeAccountId())
             .build()
     }
 

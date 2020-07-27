@@ -67,7 +67,7 @@ abstract class EntityFolderActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
     // -----------------------------------------------------------------------------------------
 
     override val isFirstFrame: Boolean
-        get() = filter.getParentId() == null
+        get() = filter.takeParentId() == null
 
     // -----------------------------------------------------------------------------------------
     // Menu and click methods
@@ -75,7 +75,7 @@ abstract class EntityFolderActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
 
     override fun onFolderClick(view: View, entity: ENTITY) {
         if (accessAllowed(entity)) {
-            filter.setParentId(entity.id)
+            filter.putParentId(entity.id)
             replaceFragment(true)
         } else {
             showAccessDeniedToast()

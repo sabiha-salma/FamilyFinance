@@ -39,7 +39,7 @@ abstract class EntityFolderFragment<
         ): Bundle {
             return Bundle().apply {
                 putParcelable(filterName, filter)
-                putInt(PARENT_ID_ARG, filter.getParentId().toEmptyId())
+                putInt(PARENT_ID_ARG, filter.takeParentId().toEmptyId())
             }
         }
     }

@@ -30,16 +30,14 @@ class AccountActivity :
         get() = RESULT_ACCOUNT_ID
 
     override val fragmentTag: String
-        get() = String.format("%s_%s", localClassName, filter.getParentId())
+        get() = String.format("%s_%s", localClassName, filter.takeParentId())
 
     override val classOfRegularEntity: Class<Account>
         get() = Account::class.java
 
-    override fun createDefaultFilter(): AccountFilter {
-        val filter = AccountFilter()
-        filter.isOnlyActive = extractBoolean(intent.extras, INPUT_ONLY_ACTIVE, false)
-        return filter
-    }
+    override fun createDefaultFilter(): AccountFilter = AccountFilter(
+        isOnlyActive = extractBoolean(intent.extras, INPUT_ONLY_ACTIVE, false)
+    )
 
     override fun createFragment(): AccountFragment {
         return AccountFragment.newInstance(filter)

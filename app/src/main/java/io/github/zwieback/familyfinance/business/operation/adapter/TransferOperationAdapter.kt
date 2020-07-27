@@ -28,9 +28,9 @@ class TransferOperationAdapter(
             .withEndDate(filter.endDate)
             .withStartValue(filter.startValue)
             .withEndValue(filter.endValue)
-            .withOwnerId(filter.getOwnerId())
-            .withCurrencyId(filter.getCurrencyId())
-            .withAccountId(filter.getAccountId())
+            .withOwnerId(filter.takeOwnerId())
+            .withCurrencyId(filter.takeCurrencyId())
+            .withAccountId(filter.takeAccountId())
             .withSortType(sortType)
             .build()
     }

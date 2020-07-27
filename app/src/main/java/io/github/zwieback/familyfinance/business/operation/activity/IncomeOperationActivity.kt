@@ -10,6 +10,7 @@ import io.github.zwieback.familyfinance.business.operation.fragment.IncomeOperat
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer
 import io.github.zwieback.familyfinance.core.model.Operation
 import io.github.zwieback.familyfinance.core.model.OperationView
+import io.github.zwieback.familyfinance.extension.operation.filter.applyPreferences
 
 class IncomeOperationActivity :
     OperationActivity<IncomeOperationFragment, IncomeOperationFilter>() {
@@ -27,8 +28,9 @@ class IncomeOperationActivity :
         operationHelper = IncomeOperationHelper(this, data)
     }
 
-    override fun createDefaultFilter() = IncomeOperationFilter(this).apply {
-        setArticleId(databasePrefs.incomesArticleId)
+    override fun createDefaultFilter() = IncomeOperationFilter().apply {
+        applyPreferences(this@IncomeOperationActivity)
+        putArticleId(databasePrefs.incomesArticleId)
     }
 
     override fun createFragment(): IncomeOperationFragment {

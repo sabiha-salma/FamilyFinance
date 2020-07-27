@@ -6,6 +6,7 @@ import io.github.zwieback.familyfinance.business.operation.dialog.IncomeOperatio
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter
 import io.github.zwieback.familyfinance.business.operation.query.IncomeOperationQueryBuilder
 import io.github.zwieback.familyfinance.core.model.OperationView
+import io.github.zwieback.familyfinance.extension.operation.filter.applyPreferences
 import io.requery.query.Result
 
 class PieChartOfIncomesFragment : PieChartFragment<IncomeOperationFilter>() {
@@ -16,8 +17,8 @@ class PieChartOfIncomesFragment : PieChartFragment<IncomeOperationFilter>() {
     override val dataSetLabel: Int
         get() = R.string.data_set_incomes
 
-    override fun createDefaultFilter(): IncomeOperationFilter {
-        return IncomeOperationFilter(requireContext())
+    override fun createDefaultFilter() = IncomeOperationFilter().apply {
+        applyPreferences(this@PieChartOfIncomesFragment.requireContext())
     }
 
     override fun buildOperations(): Result<OperationView> {
@@ -26,10 +27,10 @@ class PieChartOfIncomesFragment : PieChartFragment<IncomeOperationFilter>() {
             .withEndDate(filter.endDate)
             .withStartValue(filter.startValue)
             .withEndValue(filter.endValue)
-            .withOwnerId(filter.getOwnerId())
-            .withCurrencyId(filter.getCurrencyId())
-            .withArticleId(filter.getArticleId())
-            .withAccountId(filter.getAccountId())
+            .withOwnerId(filter.takeOwnerId())
+            .withCurrencyId(filter.takeCurrencyId())
+            .withArticleId(filter.takeArticleId())
+            .withAccountId(filter.takeAccountId())
             .build()
     }
 

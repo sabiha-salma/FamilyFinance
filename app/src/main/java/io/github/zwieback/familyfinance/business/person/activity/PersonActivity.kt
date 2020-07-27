@@ -30,7 +30,7 @@ class PersonActivity :
         get() = RESULT_PERSON_ID
 
     override val fragmentTag: String
-        get() = String.format("%s_%s", localClassName, filter.getParentId())
+        get() = String.format("%s_%s", localClassName, filter.takeParentId())
 
     override val classOfRegularEntity: Class<Person>
         get() = Person::class.java

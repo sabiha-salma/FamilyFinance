@@ -23,7 +23,7 @@ class IncomeArticleActivity : ArticleActivity<IncomeArticleFragment, IncomeArtic
 
     override fun createDefaultFilter(): IncomeArticleFilter {
         return IncomeArticleFilter().apply {
-            setParentId(initialParentId)
+            putParentId(initialParentId)
         }
     }
 

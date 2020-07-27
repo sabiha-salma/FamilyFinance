@@ -8,6 +8,7 @@ import io.github.zwieback.familyfinance.business.operation.dialog.IncomeOperatio
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter
 import io.github.zwieback.familyfinance.business.operation.query.IncomeOperationQueryBuilder
 import io.github.zwieback.familyfinance.core.model.OperationView
+import io.github.zwieback.familyfinance.extension.operation.filter.applyPreferences
 import io.requery.query.Result
 
 class HorizontalBarChartOfIncomesFragment : HorizontalBarChartFragment<IncomeOperationFilter>() {
@@ -23,8 +24,8 @@ class HorizontalBarChartOfIncomesFragment : HorizontalBarChartFragment<IncomeOpe
         @ColorRes
         get() = R.color.colorIncome
 
-    override fun createDefaultFilter(): IncomeOperationFilter {
-        return IncomeOperationFilter(requireContext())
+    override fun createDefaultFilter() = IncomeOperationFilter().apply {
+        applyPreferences(this@HorizontalBarChartOfIncomesFragment.requireContext())
     }
 
     override fun buildOperations(): Result<OperationView> {
@@ -33,10 +34,10 @@ class HorizontalBarChartOfIncomesFragment : HorizontalBarChartFragment<IncomeOpe
             .withEndDate(filter.endDate)
             .withStartValue(filter.startValue)
             .withEndValue(filter.endValue)
-            .withOwnerId(filter.getOwnerId())
-            .withCurrencyId(filter.getCurrencyId())
-            .withArticleId(filter.getArticleId())
-            .withAccountId(filter.getAccountId())
+            .withOwnerId(filter.takeOwnerId())
+            .withCurrencyId(filter.takeCurrencyId())
+            .withArticleId(filter.takeArticleId())
+            .withAccountId(filter.takeAccountId())
             .build()
     }
 

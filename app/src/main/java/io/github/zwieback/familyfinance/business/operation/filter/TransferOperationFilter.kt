@@ -1,31 +1,30 @@
 package io.github.zwieback.familyfinance.business.operation.filter
 
-import android.content.Context
-import android.os.Parcel
-import android.os.Parcelable
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
+import io.github.zwieback.familyfinance.extension.BigDecimalParceler
+import io.github.zwieback.familyfinance.extension.LocalDateParceler
+import io.github.zwieback.familyfinance.extension.endOfMonth
+import io.github.zwieback.familyfinance.extension.startOfMonth
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.TypeParceler
+import org.threeten.bp.LocalDate
+import java.math.BigDecimal
 
-class TransferOperationFilter : OperationFilter {
-
-    constructor(context: Context) : super(context)
-
-    constructor(filter: TransferOperationFilter) : super(filter)
-
-    private constructor(`in`: Parcel) : super(`in`)
+@Parcelize
+@TypeParceler<LocalDate, LocalDateParceler>
+@TypeParceler<BigDecimal?, BigDecimalParceler>
+data class TransferOperationFilter(
+    override var startDate: LocalDate = LocalDate.now().startOfMonth(),
+    override var endDate: LocalDate = LocalDate.now().endOfMonth(),
+    override var startValue: BigDecimal? = null,
+    override var endValue: BigDecimal? = null,
+    override var articleId: Int = EMPTY_ID,
+    override var accountId: Int = EMPTY_ID,
+    override var ownerId: Int = EMPTY_ID,
+    override var currencyId: Int = EMPTY_ID
+) : OperationFilter() {
 
     companion object {
         const val TRANSFER_OPERATION_FILTER = "transferOperationFilter"
-
-        @JvmField
-        var CREATOR: Parcelable.Creator<TransferOperationFilter> =
-            object : Parcelable.Creator<TransferOperationFilter> {
-
-                override fun createFromParcel(parcel: Parcel): TransferOperationFilter {
-                    return TransferOperationFilter(parcel)
-                }
-
-                override fun newArray(size: Int): Array<TransferOperationFilter?> {
-                    return arrayOfNulls(size)
-                }
-            }
     }
 }

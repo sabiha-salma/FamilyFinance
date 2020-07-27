@@ -33,7 +33,7 @@ abstract class OperationWithArticleFilterDialog<F, B, AA> :
         articleEdit.setOnClickListener { onArticleClick() }
         articleEdit.setOnClearTextListener { onArticleRemoved() }
 
-        loadArticle(filter.getArticleId())
+        loadArticle(filter.takeArticleId())
 
         super.bind(filter)
     }
@@ -44,6 +44,6 @@ abstract class OperationWithArticleFilterDialog<F, B, AA> :
     }
 
     private fun onArticleRemoved() {
-        filter.setArticleId(null)
+        filter.putArticleId(null)
     }
 }

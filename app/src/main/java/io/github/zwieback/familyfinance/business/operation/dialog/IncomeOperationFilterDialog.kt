@@ -62,7 +62,7 @@ class IncomeOperationFilterDialog :
         get() = binding.endValueLayout
 
     override fun createCopyOfFilter(filter: IncomeOperationFilter): IncomeOperationFilter {
-        return IncomeOperationFilter(filter)
+        return filter.copy()
     }
 
     override fun bind(filter: IncomeOperationFilter) {

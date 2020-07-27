@@ -47,7 +47,7 @@ class AccountAdapter(
     override fun performQuery(): Result<AccountView> {
         return AccountQueryBuilder.create(data)
             .withParentId(parentId)
-            .withOwnerId(filter.getOwnerId())
+            .withOwnerId(filter.takeOwnerId())
             .withOnlyActive(filter.isOnlyActive)
             .build()
     }

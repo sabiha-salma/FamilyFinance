@@ -91,7 +91,7 @@ class ExchangeRateFilterDialog :
     }
 
     override fun createCopyOfFilter(filter: ExchangeRateFilter): ExchangeRateFilter {
-        return ExchangeRateFilter(filter)
+        return filter.copy()
     }
 
     override fun bind(filter: ExchangeRateFilter) {
@@ -102,7 +102,7 @@ class ExchangeRateFilterDialog :
         startDateEdit.setOnClickListener { onStartDateClick() }
         endDateEdit.setOnClickListener { onEndDateClick() }
 
-        loadCurrency(filter.getCurrencyId())
+        loadCurrency(filter.takeCurrencyId())
 
         super.bind(filter)
     }
@@ -135,12 +135,12 @@ class ExchangeRateFilterDialog :
     }
 
     private fun onCurrencyRemoved() {
-        filter.setCurrencyId(null)
+        filter.putCurrencyId(null)
     }
 
     private fun onSuccessfulCurrencyFound(): Consumer<Currency> {
         return Consumer { foundCurrency ->
-            filter.setCurrencyId(foundCurrency.id)
+            filter.putCurrencyId(foundCurrency.id)
             currencyEdit.setText(foundCurrency.name)
         }
     }

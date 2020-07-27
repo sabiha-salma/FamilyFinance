@@ -113,8 +113,8 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
             getEmptyIntent()
         } else {
             getIntentToAdd(
-                null, filter.getAccountId(), null,
-                filter.getOwnerId(), filter.getCurrencyId(), null, null, null, null, null
+                null, filter.takeAccountId(), null,
+                filter.takeOwnerId(), filter.takeCurrencyId(), null, null, null, null, null
             )
         }
     }
