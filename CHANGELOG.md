@@ -14,8 +14,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Saving data in chart display dialogs.
-- Displaying data in the pie charts after screen rotating.
-- Displaying data on the screen when the user clicks the Back button in nested entities after screen rotating.
+- Displaying data in the pie charts after screen rotation.
+- Displaying data on the screen when the user clicks the Back button in nested entities (accounts, articles and persons) after screen rotation.
 
 ## [1.7.1] - 2020-07-22
 ### Fixed
