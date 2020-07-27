@@ -15,7 +15,7 @@ ext.versions = [
         support                  : '1.0.0',
         material                 : '1.0.0',
         appcompat                : '1.1.0',
-        constraintLayout         : '2.0.0-beta3',
+        constraintLayout         : '2.0.0-beta8',
         multidex                 : '2.0.1',
 
         requery                  : '1.6.1',
