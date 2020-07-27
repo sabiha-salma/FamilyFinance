@@ -3,6 +3,7 @@ package io.github.zwieback.familyfinance.business.chart.fragment
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.StringRes
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -50,6 +51,11 @@ abstract class PieChartFragment<F : OperationFilter> :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pieValueTextSize = resources.getDimension(R.dimen.pie_value_text_size)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        refreshData()
     }
 
     override fun createDefaultDisplay(): PieChartDisplay {
