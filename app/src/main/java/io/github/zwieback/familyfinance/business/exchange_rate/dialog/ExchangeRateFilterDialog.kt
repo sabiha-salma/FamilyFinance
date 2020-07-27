@@ -53,10 +53,10 @@ class ExchangeRateFilterDialog :
     private val currencyEdit: ClearableEditText
         get() = binding.currency
 
-    private val startDateEdit: EditText
+    private val startDateEdit: ClearableEditText
         get() = binding.startDate
 
-    private val endDateEdit: EditText
+    private val endDateEdit: ClearableEditText
         get() = binding.endDate
 
     private val startValueEdit: EditText
@@ -100,7 +100,9 @@ class ExchangeRateFilterDialog :
         currencyEdit.setOnClickListener { onCurrencyClick() }
         currencyEdit.setOnClearTextListener { onCurrencyRemoved() }
         startDateEdit.setOnClickListener { onStartDateClick() }
+        startDateEdit.setOnClearTextListener { onStartDateRemoved() }
         endDateEdit.setOnClickListener { onEndDateClick() }
+        endDateEdit.setOnClearTextListener { onEndDateRemoved() }
 
         loadCurrency(filter.takeCurrencyId())
 
@@ -136,6 +138,14 @@ class ExchangeRateFilterDialog :
 
     private fun onCurrencyRemoved() {
         filter.putCurrencyId(null)
+    }
+
+    private fun onStartDateRemoved() {
+        filter.startDate = null
+    }
+
+    private fun onEndDateRemoved() {
+        filter.endDate = null
     }
 
     private fun onSuccessfulCurrencyFound(): Consumer<Currency> {

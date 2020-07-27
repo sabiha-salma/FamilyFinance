@@ -55,7 +55,7 @@
                 app:layout_constraintTop_toBottomOf="@id/currency_layout"
                 app:validator="date">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <io.github.zwieback.familyfinance.widget.ClearableEditText
                     android:id="@+id/start_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                 app:layout_constraintTop_toTopOf="@id/start_date_layout"
                 app:validator="date">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <io.github.zwieback.familyfinance.widget.ClearableEditText
                     android:id="@+id/end_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
