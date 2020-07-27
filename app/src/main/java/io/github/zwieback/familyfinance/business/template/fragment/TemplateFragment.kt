@@ -17,8 +17,11 @@ class TemplateFragment :
             TemplateAdapter
             >() {
 
+    override val filterName: String
+        get() = TEMPLATE_FILTER
+
     override fun createEntityAdapter(): TemplateAdapter {
-        val filter = extractFilter(TEMPLATE_FILTER)
+        val filter = extractFilter()
         return TemplateAdapter(requireContext(), clickListener, data, filter)
     }
 

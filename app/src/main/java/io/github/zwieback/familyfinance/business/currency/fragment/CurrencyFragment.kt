@@ -17,8 +17,11 @@ class CurrencyFragment :
             CurrencyAdapter
             >() {
 
+    override val filterName: String
+        get() = CURRENCY_FILTER
+
     override fun createEntityAdapter(): CurrencyAdapter {
-        val filter = extractFilter(CURRENCY_FILTER)
+        val filter = extractFilter()
         return CurrencyAdapter(requireContext(), clickListener, data, filter)
     }
 

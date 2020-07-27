@@ -24,7 +24,8 @@ protected constructor(
     filter: FILTER
 ) : EntityAdapter<ENTITY, FILTER, BINDING, LISTENER>(type, context, clickListener, data, filter) {
 
-    protected val parentId: Int? = filter.takeParentId()
+    protected val parentId: Int?
+        get() = filter.takeParentId()
 
     @Suppress("UNCHECKED_CAST")
     override fun onClick(view: View) {

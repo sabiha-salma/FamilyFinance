@@ -6,8 +6,11 @@ import io.github.zwieback.familyfinance.business.article.filter.ExpenseArticleFi
 
 class ExpenseArticleFragment : ArticleFragment<ExpenseArticleAdapter>() {
 
+    override val filterName: String
+        get() = EXPENSE_ARTICLE_FILTER
+
     override fun createEntityAdapter(): ExpenseArticleAdapter {
-        val filter = extractFilter(EXPENSE_ARTICLE_FILTER)
+        val filter = extractFilter()
         return ExpenseArticleAdapter(requireContext(), clickListener, data, filter)
     }
 

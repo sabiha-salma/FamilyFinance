@@ -6,13 +6,15 @@ import io.github.zwieback.familyfinance.business.article.filter.IncomeArticleFil
 
 class IncomeArticleFragment : ArticleFragment<IncomeArticleAdapter>() {
 
+    override val filterName: String
+        get() = INCOME_ARTICLE_FILTER
+
     override fun createEntityAdapter(): IncomeArticleAdapter {
-        val filter = extractFilter(INCOME_ARTICLE_FILTER)
+        val filter = extractFilter()
         return IncomeArticleAdapter(requireContext(), clickListener, data, filter)
     }
 
     companion object {
-
         fun newInstance(filter: ArticleFilter) = IncomeArticleFragment().apply {
             arguments = createArguments(INCOME_ARTICLE_FILTER, filter)
         }

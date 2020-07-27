@@ -11,8 +11,11 @@ import io.github.zwieback.familyfinance.databinding.ItemSmsPatternBinding
 class SmsPatternFragment :
     EntityFragment<SmsPatternView, SmsPatternFilter, ItemSmsPatternBinding, OnSmsPatternClickListener, SmsPatternAdapter>() {
 
+    override val filterName: String
+        get() = SMS_PATTERN_FILTER
+
     override fun createEntityAdapter(): SmsPatternAdapter {
-        val filter = extractFilter(SMS_PATTERN_FILTER)
+        val filter = extractFilter()
         return SmsPatternAdapter(requireContext(), clickListener, data, filter)
     }
 

@@ -17,8 +17,11 @@ class AccountFragment :
             AccountAdapter
             >() {
 
+    override val filterName: String
+        get() = ACCOUNT_FILTER
+
     override fun createEntityAdapter(): AccountAdapter {
-        val filter = extractFilter(ACCOUNT_FILTER)
+        val filter = extractFilter()
         return AccountAdapter(requireContext(), clickListener, data, filter)
     }
 

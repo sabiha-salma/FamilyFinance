@@ -6,8 +6,11 @@ import io.github.zwieback.familyfinance.business.operation.filter.FlowOfFundsOpe
 
 class FlowOfFundsOperationFragment : OperationFragment<FlowOfFundsOperationFilter>() {
 
+    override val filterName: String
+        get() = FLOW_OF_FUNDS_OPERATION_FILTER
+
     override fun createEntityAdapter(): FlowOfFundsOperationAdapter {
-        val filter = extractFilter(FLOW_OF_FUNDS_OPERATION_FILTER)
+        val filter = extractFilter()
         return FlowOfFundsOperationAdapter(requireContext(), clickListener, data, filter)
     }
 

@@ -6,8 +6,11 @@ import io.github.zwieback.familyfinance.business.operation.filter.ExpenseOperati
 
 class ExpenseOperationFragment : OperationFragment<ExpenseOperationFilter>() {
 
+    override val filterName: String
+        get() = EXPENSE_OPERATION_FILTER
+
     override fun createEntityAdapter(): ExpenseOperationAdapter {
-        val filter = extractFilter(EXPENSE_OPERATION_FILTER)
+        val filter = extractFilter()
         return ExpenseOperationAdapter(requireContext(), clickListener, data, filter)
     }
 

@@ -6,8 +6,11 @@ import io.github.zwieback.familyfinance.business.operation.filter.TransferOperat
 
 class TransferOperationFragment : OperationFragment<TransferOperationFilter>() {
 
+    override val filterName: String
+        get() = TRANSFER_OPERATION_FILTER
+
     override fun createEntityAdapter(): TransferOperationAdapter {
-        val filter = extractFilter(TRANSFER_OPERATION_FILTER)
+        val filter = extractFilter()
         return TransferOperationAdapter(requireContext(), clickListener, data, filter)
     }
 

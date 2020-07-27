@@ -27,6 +27,17 @@ abstract class EntityFolderFragment<
             return id.toNullableId()
         }
 
+    /**
+     * Workaround for setting [parentId] when recreating activity and returning
+     * the user to the fragment back (with a different [parentId])
+     */
+    override fun onResume() {
+        val filter = extractFilter()
+        filter.parentId = parentId.toEmptyId()
+        adapter.applyFilter(filter)
+        super.onResume()
+    }
+
     companion object {
         private const val PARENT_ID_ARG = "parentId"
 

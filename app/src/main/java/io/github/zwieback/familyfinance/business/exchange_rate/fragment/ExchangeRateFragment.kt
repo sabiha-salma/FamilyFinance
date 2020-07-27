@@ -17,8 +17,11 @@ class ExchangeRateFragment :
             ExchangeRateAdapter
             >() {
 
+    override val filterName: String
+        get() = EXCHANGE_RATE_FILTER
+
     override fun createEntityAdapter(): ExchangeRateAdapter {
-        val filter = extractFilter(EXCHANGE_RATE_FILTER)
+        val filter = extractFilter()
         return ExchangeRateAdapter(requireContext(), clickListener, data, filter)
     }
 

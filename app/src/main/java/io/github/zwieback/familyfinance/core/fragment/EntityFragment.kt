@@ -49,6 +49,8 @@ abstract class EntityFragment<
         @IdRes
         get() = R.id.recycler_view
 
+    protected abstract val filterName: String
+
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + rootJob
 
@@ -107,7 +109,7 @@ abstract class EntityFragment<
         adapter.queryAsync()
     }
 
-    protected fun extractFilter(filterName: String): FILTER {
+    protected fun extractFilter(): FILTER {
         val savedFilter = requireArguments().getParcelable<FILTER>(filterName)
         return savedFilter ?: error("Filter wasn't saved early")
     }

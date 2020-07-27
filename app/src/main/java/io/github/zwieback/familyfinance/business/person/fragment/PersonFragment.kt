@@ -17,8 +17,11 @@ class PersonFragment :
             PersonAdapter
             >() {
 
+    override val filterName: String
+        get() = PERSON_FILTER
+
     override fun createEntityAdapter(): PersonAdapter {
-        val filter = extractFilter(PERSON_FILTER)
+        val filter = extractFilter()
         return PersonAdapter(requireContext(), clickListener, data, filter)
     }
 
