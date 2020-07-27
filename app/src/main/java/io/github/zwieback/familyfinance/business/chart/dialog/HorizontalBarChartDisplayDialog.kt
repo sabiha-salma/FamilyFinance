@@ -21,7 +21,7 @@ class HorizontalBarChartDisplayDialog :
         get() = R.layout.dialog_display_chart_bar_horizontal
 
     override fun createCopyOfDisplay(display: HorizontalBarChartDisplay): HorizontalBarChartDisplay {
-        return HorizontalBarChartDisplay(display)
+        return display.copy()
     }
 
     override fun bind(display: HorizontalBarChartDisplay) {

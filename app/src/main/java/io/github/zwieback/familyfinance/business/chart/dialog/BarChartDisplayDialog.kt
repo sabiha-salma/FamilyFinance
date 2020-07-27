@@ -19,7 +19,7 @@ class BarChartDisplayDialog : ChartDisplayDialog<BarChartDisplay, DialogDisplayC
         get() = R.layout.dialog_display_chart_bar
 
     override fun createCopyOfDisplay(display: BarChartDisplay): BarChartDisplay {
-        return BarChartDisplay(display)
+        return display.copy()
     }
 
     override fun bind(display: BarChartDisplay) {

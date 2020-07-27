@@ -22,7 +22,7 @@ class PieChartDisplayDialog : ChartDisplayDialog<PieChartDisplay, DialogDisplayC
         get() = R.layout.dialog_display_chart_pie
 
     override fun createCopyOfDisplay(display: PieChartDisplay): PieChartDisplay {
-        return PieChartDisplay(display)
+        return display.copy()
     }
 
     override fun bind(display: PieChartDisplay) {
