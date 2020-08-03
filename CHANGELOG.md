@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.7.3] - 2020-08-03
+### Added
+- Missed creation and last update dates to operations when adding operations immediately directly from notifications.
+
 ## [1.7.2] - 2020-07-27
 ### Added
 - Ability to clear dates in the exchange rate's filter.
