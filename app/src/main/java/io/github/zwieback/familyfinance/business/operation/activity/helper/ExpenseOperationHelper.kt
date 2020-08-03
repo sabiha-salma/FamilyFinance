@@ -30,6 +30,7 @@ import io.requery.reactivex.ReactiveEntityStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 import java.math.BigDecimal
 
 class ExpenseOperationHelper(context: Context, data: ReactiveEntityStore<Persistable>) :
@@ -213,6 +214,8 @@ class ExpenseOperationHelper(context: Context, data: ReactiveEntityStore<Persist
             data.findByKey(ExchangeRate::class.java, exchangeRateId),
             Function4 { account, article, owner, exchangeRate ->
                 Operation()
+                    .setCreateDate(LocalDateTime.now())
+                    .setLastChangeDate(LocalDateTime.now())
                     .setType(OperationType.EXPENSE_OPERATION)
                     .setAccount(account)
                     .setArticle(article)
