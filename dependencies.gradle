@@ -21,8 +21,8 @@ ext.versions = [
         multidex                 : '2.0.1',
 
         requery                  : '1.6.1',
-        sqliteAndroidX           : '2.0.1',
-        sqliteAndroid            : '3.29.0',
+        sqliteAndroidX           : '2.1.0',
+        sqliteAndroid            : '3.33.0',
 
         // The 2.x version will be supported with bugfixes and important
         // documentation updates until December 31, 2020.
