@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Dashboard -->
-    <dimen name="dashboard_button_height">66dp</dimen>
     <dimen name="dashboard_button_padding">16dp</dimen>
 
     <!-- Backup -->
