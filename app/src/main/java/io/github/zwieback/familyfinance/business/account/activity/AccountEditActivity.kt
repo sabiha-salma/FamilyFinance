@@ -26,7 +26,6 @@ import io.github.zwieback.familyfinance.core.model.type.AccountType
 import io.github.zwieback.familyfinance.databinding.ActivityEditAccountBinding
 import io.github.zwieback.familyfinance.extension.isNotEmptyId
 import io.github.zwieback.familyfinance.extension.parseAsBigDecimal
-import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDateTime
 import java.math.BigDecimal
 
@@ -130,29 +129,26 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
     private fun loadCurrency(currencyId: Int) {
         loadEntity(
             Currency::class.java,
-            currencyId,
-            Consumer { foundCurrency -> entity.setCurrency(foundCurrency) }
-        )
+            currencyId
+        ) { foundCurrency -> entity.setCurrency(foundCurrency) }
     }
 
     private fun loadOwner(ownerId: Int) {
         loadEntity(
             Person::class.java,
-            ownerId,
-            Consumer { foundOwner -> entity.setOwner(foundOwner) }
-        )
+            ownerId
+        ) { foundOwner -> entity.setOwner(foundOwner) }
     }
 
     private fun loadParent(parentId: Int) {
         if (parentId.isNotEmptyId()) {
             loadEntity(
                 Account::class.java,
-                parentId,
-                Consumer { foundAccount ->
-                    entity.setParent(foundAccount)
-                    binding.parentLayout.error = null
-                }
-            )
+                parentId
+            ) { foundAccount ->
+                entity.setParent(foundAccount)
+                binding.parentLayout.error = null
+            }
         }
     }
 

@@ -31,7 +31,7 @@ abstract class AbstractApplication : MultiDexApplication() {
         val configuration = databaseProvider.configuration
         destroyViews(configuration)
         createViews(configuration)
-        ReactiveSupport.toReactiveStore(EntityDataStore<Persistable>(configuration))
+        ReactiveSupport.toReactiveStore(EntityDataStore(configuration))
     }
 
     override fun onCreate() {

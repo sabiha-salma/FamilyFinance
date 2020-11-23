@@ -18,7 +18,6 @@ import io.github.zwieback.familyfinance.core.model.ExchangeRate
 import io.github.zwieback.familyfinance.databinding.ActivityEditExchangeRateBinding
 import io.github.zwieback.familyfinance.extension.*
 import io.github.zwieback.familyfinance.util.DialogUtils.showDatePickerDialog
-import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 
@@ -95,9 +94,8 @@ class ExchangeRateEditActivity :
     private fun loadCurrency(currencyId: Int) {
         loadEntity(
             Currency::class.java,
-            currencyId,
-            Consumer { foundCurrency -> entity.setCurrency(foundCurrency) }
-        )
+            currencyId
+        ) { foundCurrency -> entity.setCurrency(foundCurrency) }
     }
 
     override fun createEntity() {

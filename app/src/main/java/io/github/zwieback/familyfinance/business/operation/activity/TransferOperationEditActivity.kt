@@ -208,18 +208,16 @@ class TransferOperationEditActivity :
     override fun loadEntity(expenseOperationId: Int) {
         loadEntity(
             Operation::class.java,
-            expenseOperationId,
-            Consumer { onSuccessfulExpenseOperationFound(it) }
-        )
+            expenseOperationId
+        ) { onSuccessfulExpenseOperationFound(it) }
     }
 
     private fun onSuccessfulExpenseOperationFound(expenseOperation: Operation) {
         bind(expenseOperation)
         loadEntity(
             Operation::class.java,
-            expenseOperation.linkedTransferOperation?.id ?: error("No linked income operation"),
-            Consumer { bindIncomeOperation(it) }
-        )
+            expenseOperation.linkedTransferOperation?.id ?: error("No linked income operation")
+        ) { bindIncomeOperation(it) }
     }
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")

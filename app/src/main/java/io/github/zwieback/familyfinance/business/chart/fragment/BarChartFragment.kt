@@ -174,8 +174,8 @@ class BarChartFragment :
             setValueTextSize(barValueTextSize)
             setValueFormatter(LargeValueFormatter())
         }
-        val minX = groupedOperations.keys.min() ?: error("groupedOperations is empty")
-        val maxX = groupedOperations.keys.max() ?: error("groupedOperations is empty")
+        val minX = groupedOperations.keys.minOrNull() ?: error("groupedOperations is empty")
+        val maxX = groupedOperations.keys.maxOrNull() ?: error("groupedOperations is empty")
 
         chart.data = barData
         chart.barData.barWidth = BAR_WIDTH

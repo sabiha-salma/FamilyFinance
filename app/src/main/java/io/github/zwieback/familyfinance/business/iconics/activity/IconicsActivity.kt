@@ -25,9 +25,8 @@ import io.github.zwieback.familyfinance.constant.UiConstants
 import io.github.zwieback.familyfinance.core.activity.ActivityWrapper
 import io.github.zwieback.familyfinance.core.drawer.DrawerListener
 import io.reactivex.android.schedulers.AndroidSchedulers
-import java.util.Locale
+import java.util.*
 import java.util.concurrent.TimeUnit
-import kotlin.Comparator
 import kotlin.collections.ArrayList
 import kotlin.math.max
 import kotlin.random.Random
@@ -46,9 +45,9 @@ class IconicsActivity : ActivityWrapper(), OnIconSelectListener {
 
     private val registeredSortedFonts: List<ITypeface>
         get() = Iconics.getRegisteredFonts(this)
-            .sortedWith(Comparator { typeface1, typeface2 ->
+            .sortedWith { typeface1, typeface2 ->
                 typeface1.fontName.compareTo(typeface2.fontName)
-            })
+            }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

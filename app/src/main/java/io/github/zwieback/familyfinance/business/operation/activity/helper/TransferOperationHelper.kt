@@ -25,7 +25,6 @@ import io.reactivex.Maybe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
-import io.reactivex.functions.Function4
 import io.reactivex.schedulers.Schedulers
 import io.requery.Persistable
 import io.requery.reactivex.ReactiveEntityStore
@@ -225,12 +224,12 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
         val value = intent.getBigDecimalExtra(INPUT_EXPENSE_VALUE)
         val description = intent.getStringExtra(INPUT_EXPENSE_DESCRIPTION)
         val url = intent.getStringExtra(INPUT_EXPENSE_URL)
-        return Maybe.zip<Account, Article, Person, ExchangeRate, Operation>(
+        return Maybe.zip(
             data.findByKey(Account::class.java, expenseAccountId),
             data.findByKey(Article::class.java, transferArticleId),
             data.findByKey(Person::class.java, ownerId),
             data.findByKey(ExchangeRate::class.java, exchangeRateId),
-            Function4 { expenseAccount, article, owner, exchangeRate ->
+            { expenseAccount, article, owner, exchangeRate ->
                 Operation()
                     .setCreateDate(LocalDateTime.now())
                     .setLastChangeDate(LocalDateTime.now())

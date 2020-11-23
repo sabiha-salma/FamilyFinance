@@ -23,7 +23,6 @@ import io.github.zwieback.familyfinance.core.listener.EntityClickListener
 import io.github.zwieback.familyfinance.core.listener.EntityFilterListener
 import io.github.zwieback.familyfinance.core.model.IBaseEntity
 import io.github.zwieback.familyfinance.extension.toNullableId
-import io.reactivex.functions.Consumer
 
 abstract class EntityActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
     DataActivityWrapper(),
@@ -287,7 +286,7 @@ abstract class EntityActivity<ENTITY, REGULAR_ENTITY, FILTER, FRAGMENT> :
         checkReadOnly()
         val regularEntity = findRegularEntity(entity)
         val destroyer = createDestroyer(entity)
-        destroyer.destroy(regularEntity, Consumer { refresh() })
+        destroyer.destroy(regularEntity) { refresh() }
     }
 
     protected fun checkReadOnly() {

@@ -113,7 +113,7 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
     protected abstract fun createEntity()
 
     protected open fun loadEntity(entityId: Int) {
-        loadEntity(entityClass, entityId, Consumer { this.bind(it) })
+        loadEntity(entityClass, entityId) { this.bind(it) }
     }
 
     protected fun <T : IBaseEntity> loadEntity(

@@ -18,7 +18,6 @@ import io.github.zwieback.familyfinance.databinding.ActivityEditArticleBinding
 import io.github.zwieback.familyfinance.extension.isNotEmptyId
 import io.github.zwieback.familyfinance.extension.parseAsBigDecimal
 import io.github.zwieback.familyfinance.extension.transliterate
-import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDateTime
 
 abstract class ArticleEditActivity :
@@ -84,10 +83,10 @@ abstract class ArticleEditActivity :
 
     private fun loadParent(parentId: Int) {
         if (parentId.isNotEmptyId()) {
-            loadEntity(Article::class.java, parentId, Consumer { foundArticle ->
+            loadEntity(Article::class.java, parentId) { foundArticle ->
                 entity.setParent(foundArticle)
                 binding.parentLayout.error = null
-            })
+            }
         }
     }
 
