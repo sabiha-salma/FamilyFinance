@@ -45,7 +45,7 @@ ext.versions = [
         rxkPrefs                 : '2.0.3',
         preferenceCompat         : '1.1.0',
         filepicker               : '4.2.1',
-        permissionsDispatcher    : '4.7.0',
+        permissionsDispatcher    : '4.8.0',
         mpAndroidChart           : 'v3.1.0',
 
         espresso                 : '3.2.0',
