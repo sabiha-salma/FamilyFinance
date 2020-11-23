@@ -67,7 +67,7 @@ dependencies {
     implementation libraries.kotlinCoroutinesAndroid
     // support libs
     implementation libraries.appcompat
-    implementation libraries.cardview
+    implementation libraries.cardView
     implementation libraries.legacySupport
     implementation libraries.multidex
     implementation libraries.recyclerView

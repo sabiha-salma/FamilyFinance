@@ -13,9 +13,11 @@ ext.versions = [
         androidGradlePlugin      : '4.1.0',
 
         support                  : '1.0.0',
-        material                 : '1.0.0',
-        appcompat                : '1.1.0',
-        constraintLayout         : '2.0.0-beta8',
+        cardView                 : '1.0.0',
+        recyclerView             : '1.1.0',
+        material                 : '1.2.1',
+        appcompat                : '1.2.0',
+        constraintLayout         : '2.0.4',
         multidex                 : '2.0.1',
 
         requery                  : '1.6.1',
@@ -64,10 +66,10 @@ ext.libraries = [
 
         // support libs
         appcompat                     : "androidx.appcompat:appcompat:$versions.appcompat",
-        cardview                      : "androidx.cardview:cardview:$versions.support",
+        cardView                      : "androidx.cardview:cardview:$versions.cardView",
         legacySupport                 : "androidx.legacy:legacy-support-v4:$versions.support",
         multidex                      : "androidx.multidex:multidex:$versions.multidex",
-        recyclerView                  : "androidx.recyclerview:recyclerview:$versions.support",
+        recyclerView                  : "androidx.recyclerview:recyclerview:$versions.recyclerView",
         constraintLayout              : "androidx.constraintlayout:constraintlayout:$versions.constraintLayout",
         material                      : "com.google.android.material:material:$versions.material",
 
