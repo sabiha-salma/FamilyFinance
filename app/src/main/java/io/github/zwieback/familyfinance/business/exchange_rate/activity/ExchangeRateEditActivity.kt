@@ -80,7 +80,7 @@ class ExchangeRateEditActivity :
      */
     private fun determineDate(): LocalDate {
         return if (isCorrectDate) {
-            binding.date.text?.toString().toLocalDate() ?: error("Date is not correct")
+            binding.date.text?.toString().toLocalDateOrNull() ?: error("Date is not correct")
         } else {
             entity.date
         }
@@ -128,7 +128,7 @@ class ExchangeRateEditActivity :
     override fun updateEntityProperties(exchangeRate: ExchangeRate) {
         exchangeRate.setLastChangeDate(LocalDateTime.now())
         exchangeRate.setValue(binding.value.text?.toString()?.parseAsBigDecimal())
-        exchangeRate.setDate(binding.date.text?.toString().toLocalDate())
+        exchangeRate.setDate(binding.date.text?.toString().toLocalDateOrNull())
     }
 
     companion object {

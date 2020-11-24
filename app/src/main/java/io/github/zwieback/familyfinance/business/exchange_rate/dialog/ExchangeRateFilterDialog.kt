@@ -176,8 +176,8 @@ class ExchangeRateFilterDialog :
      * Don't check for `null` because the check was completed in [noneErrorFound].
      */
     override fun updateFilterProperties() {
-        filter.startDate = startDateEdit.text?.toString().toLocalDate()
-        filter.endDate = endDateEdit.text?.toString().toLocalDate()
+        filter.startDate = startDateEdit.text?.toString().toLocalDateOrNull()
+        filter.endDate = endDateEdit.text?.toString().toLocalDateOrNull()
         filter.startValue = startValueEdit.text?.toString()?.parseAsBigDecimal()
         filter.endValue = endValueEdit.text?.toString()?.parseAsBigDecimal()
     }

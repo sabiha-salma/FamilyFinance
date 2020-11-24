@@ -11,13 +11,13 @@ import java.util.*
 
 fun String?.isLocalDate(): Boolean {
     return try {
-        this.toLocalDate() != null
+        this.toLocalDateOrNull() != null
     } catch (e: DateTimeParseException) {
         false
     }
 }
 
-fun String?.toLocalDate(): LocalDate? {
+fun String?.toLocalDateOrNull(): LocalDate? {
     return if (!this.isNullOrEmpty()) {
         LocalDate.parse(this)
     } else {

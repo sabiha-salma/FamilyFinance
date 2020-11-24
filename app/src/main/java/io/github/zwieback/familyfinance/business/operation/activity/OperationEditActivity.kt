@@ -90,7 +90,7 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
      */
     private fun determineDate(): LocalDate {
         return if (isCorrectDate) {
-            dateEdit.text?.toString().toLocalDate() ?: error("Date is not correct")
+            dateEdit.text?.toString().toLocalDateOrNull() ?: error("Date is not correct")
         } else {
             entity.date
         }
@@ -186,7 +186,7 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun updateEntityProperties(operation: Operation) {
         operation.setLastChangeDate(LocalDateTime.now())
-        operation.setDate(dateEdit.text?.toString().toLocalDate())
+        operation.setDate(dateEdit.text?.toString().toLocalDateOrNull())
         operation.setValue(valueEdit.text?.toString()?.parseAsBigDecimal())
         operation.setDescription(descriptionEdit.text?.toString())
         operation.setUrl(urlEdit.text?.toString())

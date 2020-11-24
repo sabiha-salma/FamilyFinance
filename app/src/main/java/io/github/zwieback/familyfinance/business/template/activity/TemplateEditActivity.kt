@@ -124,7 +124,7 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
      */
     private fun determineDate(): LocalDate {
         return if (isCorrectDate) {
-            binding.date.text?.toString().toLocalDate() ?: error("Date is not correct")
+            binding.date.text?.toString().toLocalDateOrNull() ?: error("Date is not correct")
         } else {
             entity.date ?: LocalDate.now()
         }
@@ -308,7 +308,7 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
     override fun updateEntityProperties(template: Template) {
         template.setLastChangeDate(LocalDateTime.now())
         template.setName(binding.name.text?.toString())
-        template.setDate(binding.date.text?.toString().toLocalDate())
+        template.setDate(binding.date.text?.toString().toLocalDateOrNull())
         template.setValue(binding.value.text?.toString()?.parseAsBigDecimal())
         template.setDescription(binding.description.text?.toString())
         template.setUrl(binding.url.text?.toString())
