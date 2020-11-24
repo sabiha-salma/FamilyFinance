@@ -309,7 +309,7 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
         template.setLastChangeDate(LocalDateTime.now())
         template.setName(binding.name.text?.toString())
         template.setDate(binding.date.text?.toString().toLocalDateOrNull())
-        template.setValue(binding.value.text?.toString()?.parseAsBigDecimal())
+        template.setValue(binding.value.text?.toString()?.toBigDecimalOrNull())
         template.setDescription(binding.description.text?.toString())
         template.setUrl(binding.url.text?.toString())
     }

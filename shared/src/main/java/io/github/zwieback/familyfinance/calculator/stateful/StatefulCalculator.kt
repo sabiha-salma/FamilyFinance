@@ -83,8 +83,8 @@ class StatefulCalculator(
     }
 
     fun updateCalculator() {
-        calculator.setLeftOperand(leftOperand.parseAsBigDecimal())
-        calculator.setRightOperand(rightOperand.parseAsBigDecimal())
+        calculator.setLeftOperand(leftOperand.toBigDecimalOrNull())
+        calculator.setRightOperand(rightOperand.toBigDecimalOrNull())
         calculator.setOperator(operator)
     }
 

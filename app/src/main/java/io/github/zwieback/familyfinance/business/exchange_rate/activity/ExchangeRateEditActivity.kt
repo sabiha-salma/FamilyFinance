@@ -127,7 +127,7 @@ class ExchangeRateEditActivity :
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun updateEntityProperties(exchangeRate: ExchangeRate) {
         exchangeRate.setLastChangeDate(LocalDateTime.now())
-        exchangeRate.setValue(binding.value.text?.toString()?.parseAsBigDecimal())
+        exchangeRate.setValue(binding.value.text?.toString()?.toBigDecimalOrNull())
         exchangeRate.setDate(binding.date.text?.toString().toLocalDateOrNull())
     }
 

@@ -25,7 +25,7 @@ import io.github.zwieback.familyfinance.core.model.Person
 import io.github.zwieback.familyfinance.core.model.type.AccountType
 import io.github.zwieback.familyfinance.databinding.ActivityEditAccountBinding
 import io.github.zwieback.familyfinance.extension.isNotEmptyId
-import io.github.zwieback.familyfinance.extension.parseAsBigDecimal
+import io.github.zwieback.familyfinance.extension.toBigDecimalOrNull
 import org.threeten.bp.LocalDateTime
 import java.math.BigDecimal
 
@@ -210,7 +210,7 @@ class AccountEditActivity : EntityFolderEditActivity<Account, ActivityEditAccoun
             account.setOrderCode(orderCode.toInt())
         }
         if (!account.isFolder) {
-            account.setInitialBalance(binding.initialBalance.text?.toString()?.parseAsBigDecimal())
+            account.setInitialBalance(binding.initialBalance.text?.toString()?.toBigDecimalOrNull())
             account.setType(AccountTypeHelper.getAccountType(binding.accountType))
             account.setNumber(binding.number.text?.toString())
             account.setPaymentSystem(binding.paymentSystem.text?.toString())

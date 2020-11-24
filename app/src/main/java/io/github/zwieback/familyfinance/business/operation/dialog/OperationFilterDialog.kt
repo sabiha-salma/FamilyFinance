@@ -243,7 +243,7 @@ abstract class OperationFilterDialog<F, B> :
             ?: error("Are you check the noneErrorFound() method?")
         filter.endDate = endDateEdit.text?.toString().toLocalDateOrNull()
             ?: error("Are you check the noneErrorFound() method?")
-        filter.startValue = startValueEdit.text?.toString()?.parseAsBigDecimal()
-        filter.endValue = endValueEdit.text?.toString()?.parseAsBigDecimal()
+        filter.startValue = startValueEdit.text?.toString()?.toBigDecimalOrNull()
+        filter.endValue = endValueEdit.text?.toString()?.toBigDecimalOrNull()
     }
 }

@@ -14,5 +14,5 @@ fun Intent.putBigDecimalExtra(name: String, value: BigDecimal?) {
 
 fun Intent.getBigDecimalExtra(name: String): BigDecimal? {
     val value = this.getStringExtra(name)
-    return value?.parseAsBigDecimal()
+    return value?.toBigDecimalOrNull()
 }

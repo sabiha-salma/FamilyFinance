@@ -187,7 +187,7 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
     override fun updateEntityProperties(operation: Operation) {
         operation.setLastChangeDate(LocalDateTime.now())
         operation.setDate(dateEdit.text?.toString().toLocalDateOrNull())
-        operation.setValue(valueEdit.text?.toString()?.parseAsBigDecimal())
+        operation.setValue(valueEdit.text?.toString()?.toBigDecimalOrNull())
         operation.setDescription(descriptionEdit.text?.toString())
         operation.setUrl(urlEdit.text?.toString())
     }

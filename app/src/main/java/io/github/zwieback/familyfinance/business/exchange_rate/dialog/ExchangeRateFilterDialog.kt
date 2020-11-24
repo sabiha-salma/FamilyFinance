@@ -178,8 +178,8 @@ class ExchangeRateFilterDialog :
     override fun updateFilterProperties() {
         filter.startDate = startDateEdit.text?.toString().toLocalDateOrNull()
         filter.endDate = endDateEdit.text?.toString().toLocalDateOrNull()
-        filter.startValue = startValueEdit.text?.toString()?.parseAsBigDecimal()
-        filter.endValue = endValueEdit.text?.toString()?.parseAsBigDecimal()
+        filter.startValue = startValueEdit.text?.toString()?.toBigDecimalOrNull()
+        filter.endValue = endValueEdit.text?.toString()?.toBigDecimalOrNull()
     }
 
     companion object {

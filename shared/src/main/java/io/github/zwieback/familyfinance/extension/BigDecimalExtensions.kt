@@ -10,13 +10,13 @@ import java.text.ParseException
 
 fun String.isBigDecimal(): Boolean {
     return try {
-        this.parseAsBigDecimal() != null
+        this.toBigDecimalOrNull() != null
     } catch (e: NumberFormatException) {
         false
     }
 }
 
-fun String.parseAsBigDecimal(): BigDecimal? {
+fun String.toBigDecimalOrNull(): BigDecimal? {
     try {
         return if (this.isEmpty()) {
             null
@@ -28,19 +28,19 @@ fun String.parseAsBigDecimal(): BigDecimal? {
     }
 }
 
-fun String.bankNumberToBigDecimal(): BigDecimal? {
+fun String.bankNumberToBigDecimalOrNull(): BigDecimal? {
     return try {
-        this.bankNumberWithDotToBigDecimal()
+        this.bankNumberWithDotToBigDecimalOrNull()
     } catch (e: NumberFormatException) {
         try {
-            this.bankNumberWithCommaToBigDecimal()
+            this.bankNumberWithCommaToBigDecimalOrNull()
         } catch (e: NumberFormatException) {
             null
         }
     }
 }
 
-private fun String.bankNumberWithDotToBigDecimal(): BigDecimal? {
+private fun String.bankNumberWithDotToBigDecimalOrNull(): BigDecimal? {
     try {
         return if (this.isEmpty()) {
             null
@@ -54,7 +54,7 @@ private fun String.bankNumberWithDotToBigDecimal(): BigDecimal? {
     }
 }
 
-private fun String.bankNumberWithCommaToBigDecimal(): BigDecimal? {
+private fun String.bankNumberWithCommaToBigDecimalOrNull(): BigDecimal? {
     try {
         return if (this.isEmpty()) {
             null
