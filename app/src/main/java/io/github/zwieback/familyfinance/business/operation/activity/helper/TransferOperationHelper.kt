@@ -9,17 +9,20 @@ import io.github.zwieback.familyfinance.business.operation.activity.TransferOper
 import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationEditActivity.Companion.INPUT_EXPENSE_DESCRIPTION
 import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationEditActivity.Companion.INPUT_EXPENSE_EXCHANGE_RATE_ID
 import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationEditActivity.Companion.INPUT_EXPENSE_OWNER_ID
+import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationEditActivity.Companion.INPUT_EXPENSE_TO_WHOM_ID
 import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationEditActivity.Companion.INPUT_EXPENSE_URL
 import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationEditActivity.Companion.INPUT_EXPENSE_VALUE
 import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationEditActivity.Companion.INPUT_INCOME_ACCOUNT_ID
 import io.github.zwieback.familyfinance.business.operation.activity.TransferOperationEditActivity.Companion.INPUT_TRANSFER_OPERATION_ID
 import io.github.zwieback.familyfinance.business.operation.filter.TransferOperationFilter
 import io.github.zwieback.familyfinance.business.operation.lifecycle.destroyer.TransferOperationForceDestroyer
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer
 import io.github.zwieback.familyfinance.core.model.*
 import io.github.zwieback.familyfinance.core.model.type.OperationType
 import io.github.zwieback.familyfinance.extension.getBigDecimalExtra
 import io.github.zwieback.familyfinance.extension.getLocalDateExtra
+import io.github.zwieback.familyfinance.extension.isEmptyId
 import io.github.zwieback.familyfinance.extension.putBigDecimalExtra
 import io.reactivex.Maybe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -46,6 +49,7 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
         accountId: Int?,
         transferAccountId: Int?,
         ownerId: Int?,
+        toWhomId: Int?,
         currencyId: Int?,
         exchangeRateId: Int?,
         date: LocalDate?,
@@ -58,7 +62,7 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
             intent,
             articleId,
             accountId, transferAccountId,
-            ownerId,
+            ownerId, toWhomId,
             currencyId, exchangeRateId,
             date, value,
             description, url
@@ -71,6 +75,7 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
         accountId: Int?,
         transferAccountId: Int?,
         ownerId: Int?,
+        toWhomId: Int?,
         currencyId: Int?,
         exchangeRateId: Int?,
         date: LocalDate?,
@@ -86,6 +91,9 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
         }
         ownerId?.let {
             preparedIntent.putExtra(INPUT_EXPENSE_OWNER_ID, ownerId)
+        }
+        toWhomId?.let {
+            preparedIntent.putExtra(INPUT_EXPENSE_TO_WHOM_ID, toWhomId)
         }
         currencyId?.let {
             preparedIntent.putExtra(INPUT_EXPENSE_CURRENCY_ID, currencyId)
@@ -114,7 +122,10 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
         } else {
             getIntentToAdd(
                 null, filter.takeAccountId(), null,
-                filter.takeOwnerId(), filter.takeCurrencyId(), null, null, null, null, null
+                filter.takeOwnerId(), filter.takeToWhomId(),
+                filter.takeCurrencyId(), null,
+                null, null,
+                null, null
             )
         }
     }
@@ -136,6 +147,7 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
             expenseOperation.accountId,
             incomeOperation.accountId,
             expenseOperation.ownerId,
+            expenseOperation.toWhomId,
             expenseOperation.currencyId,
             expenseOperation.exchangeRateId,
             expenseOperation.date,
@@ -154,6 +166,7 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
         accountId: Int?,
         transferAccountId: Int?,
         ownerId: Int?,
+        toWhomId: Int?,
         currencyId: Int?,
         exchangeRateId: Int?,
         date: LocalDate?,
@@ -174,6 +187,7 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
         accountId: Int?,
         transferAccountId: Int?,
         ownerId: Int?,
+        toWhomId: Int?,
         currencyId: Int?,
         exchangeRateId: Int?,
         date: LocalDate?,
@@ -186,7 +200,7 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
             intent,
             articleId,
             accountId, transferAccountId,
-            ownerId,
+            ownerId, toWhomId,
             currencyId, exchangeRateId,
             date, value,
             description, url
@@ -216,34 +230,61 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
         val transferArticleId = runBlocking(Dispatchers.IO) {
             databasePrefs.transferArticleId
         }
-        val expenseAccountId = intent.getIntExtra(INPUT_EXPENSE_ACCOUNT_ID, 0)
-        val incomeAccountId = intent.getIntExtra(INPUT_INCOME_ACCOUNT_ID, 0)
-        val ownerId = intent.getIntExtra(INPUT_EXPENSE_OWNER_ID, 0)
-        val exchangeRateId = intent.getIntExtra(INPUT_EXPENSE_EXCHANGE_RATE_ID, 0)
+        val expenseAccountId = intent.getIntExtra(INPUT_EXPENSE_ACCOUNT_ID, EMPTY_ID)
+        val incomeAccountId = intent.getIntExtra(INPUT_INCOME_ACCOUNT_ID, EMPTY_ID)
+        val ownerId = intent.getIntExtra(INPUT_EXPENSE_OWNER_ID, EMPTY_ID)
+        val toWhomId = intent.getIntExtra(INPUT_EXPENSE_TO_WHOM_ID, EMPTY_ID)
+        val exchangeRateId = intent.getIntExtra(INPUT_EXPENSE_EXCHANGE_RATE_ID, EMPTY_ID)
         val date = intent.getLocalDateExtra(INPUT_EXPENSE_DATE)
         val value = intent.getBigDecimalExtra(INPUT_EXPENSE_VALUE)
         val description = intent.getStringExtra(INPUT_EXPENSE_DESCRIPTION)
         val url = intent.getStringExtra(INPUT_EXPENSE_URL)
-        return Maybe.zip(
-            data.findByKey(Account::class.java, expenseAccountId),
-            data.findByKey(Article::class.java, transferArticleId),
-            data.findByKey(Person::class.java, ownerId),
-            data.findByKey(ExchangeRate::class.java, exchangeRateId),
-            { expenseAccount, article, owner, exchangeRate ->
-                Operation()
-                    .setCreateDate(LocalDateTime.now())
-                    .setLastChangeDate(LocalDateTime.now())
-                    .setType(OperationType.TRANSFER_EXPENSE_OPERATION)
-                    .setAccount(expenseAccount)
-                    .setArticle(article)
-                    .setOwner(owner)
-                    .setExchangeRate(exchangeRate)
-                    .setDate(date)
-                    .setValue(value)
-                    .setDescription(description)
-                    .setUrl(url)
-            }
-        )
+
+        return if (toWhomId.isEmptyId()) {
+            Maybe.zip(
+                data.findByKey(Account::class.java, expenseAccountId),
+                data.findByKey(Article::class.java, transferArticleId),
+                data.findByKey(Person::class.java, ownerId),
+                data.findByKey(ExchangeRate::class.java, exchangeRateId),
+                { expenseAccount, article, owner, exchangeRate ->
+                    Operation()
+                        .setCreateDate(LocalDateTime.now())
+                        .setLastChangeDate(LocalDateTime.now())
+                        .setType(OperationType.TRANSFER_EXPENSE_OPERATION)
+                        .setAccount(expenseAccount)
+                        .setArticle(article)
+                        .setOwner(owner)
+                        .setExchangeRate(exchangeRate)
+                        .setDate(date)
+                        .setValue(value)
+                        .setDescription(description)
+                        .setUrl(url)
+                }
+            )
+        } else {
+            Maybe.zip(
+                data.findByKey(Account::class.java, expenseAccountId),
+                data.findByKey(Article::class.java, transferArticleId),
+                data.findByKey(Person::class.java, ownerId),
+                data.findByKey(Person::class.java, toWhomId),
+                data.findByKey(ExchangeRate::class.java, exchangeRateId),
+                { expenseAccount, article, owner, toWhom, exchangeRate ->
+                    Operation()
+                        .setCreateDate(LocalDateTime.now())
+                        .setLastChangeDate(LocalDateTime.now())
+                        .setType(OperationType.TRANSFER_EXPENSE_OPERATION)
+                        .setAccount(expenseAccount)
+                        .setArticle(article)
+                        .setOwner(owner)
+                        .setToWhom(toWhom)
+                        .setExchangeRate(exchangeRate)
+                        .setDate(date)
+                        .setValue(value)
+                        .setDescription(description)
+                        .setUrl(url)
+                }
+            )
+        }
             .flatMapSingle { transferExpenseOperation ->
                 data.insert(transferExpenseOperation)
                     .flatMap {
@@ -258,6 +299,7 @@ class TransferOperationHelper(context: Context, data: ReactiveEntityStore<Persis
                                         .setLinkedTransferOperation(transferExpenseOperation)
                                         .setArticle(transferExpenseOperation.article)
                                         .setOwner(transferExpenseOperation.owner)
+                                        .setToWhom(transferExpenseOperation.toWhom)
                                         .setExchangeRate(transferExpenseOperation.exchangeRate)
                                         .setDate(date)
                                         .setValue(value)

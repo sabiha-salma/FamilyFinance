@@ -31,6 +31,7 @@
         <activity android:name=".business.exchange_rate.activity.ExchangeRateEditActivity"/>
         <activity android:name=".business.person.activity.PersonActivity"/>
         <activity android:name=".business.person.activity.PersonEditActivity"/>
+        <activity android:name=".business.person.activity.ToWhomActivity"/>
         <activity android:name=".business.account.activity.AccountActivity"/>
         <activity android:name=".business.account.activity.AccountEditActivity"/>
         <activity android:name=".business.article.activity.IncomeArticleActivity"/>

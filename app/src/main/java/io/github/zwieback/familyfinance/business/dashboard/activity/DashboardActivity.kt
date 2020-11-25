@@ -258,6 +258,7 @@ class DashboardActivity : DataActivityWrapper() {
         const val RESULT_CURRENCY_ID = "resultCurrencyId"
         const val RESULT_EXCHANGE_RATE_ID = "resultExchangeRateId"
         const val RESULT_PERSON_ID = "resultPersonId"
+        const val RESULT_TO_WHOM_ID = "resultToWhomId"
         const val RESULT_ACCOUNT_ID = "resultAccountId"
         const val RESULT_ARTICLE_ID = "resultArticleId"
         const val RESULT_OPERATION_ID = "resultOperationId"
@@ -270,6 +271,7 @@ class DashboardActivity : DataActivityWrapper() {
         const val EXCHANGE_RATE_EDIT_CODE = 202
         const val PERSON_CODE = 301
         const val PERSON_EDIT_CODE = 302
+        const val TO_WHOM_CODE = 311
         const val ACCOUNT_CODE = 401
         const val INCOME_ACCOUNT_CODE = 402
         const val EXPENSE_ACCOUNT_CODE = 403

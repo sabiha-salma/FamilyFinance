@@ -15,9 +15,12 @@ import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardAct
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_CURRENCY_ID
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_EXCHANGE_RATE_ID
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_PERSON_ID
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_TO_WHOM_ID
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.TO_WHOM_CODE
 import io.github.zwieback.familyfinance.business.exchange_rate.activity.ExchangeRateActivity
 import io.github.zwieback.familyfinance.business.exchange_rate.helper.ExchangeRateFinder
 import io.github.zwieback.familyfinance.business.person.activity.PersonActivity
+import io.github.zwieback.familyfinance.business.person.activity.ToWhomActivity
 import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.activity.EntityActivity.Companion.INPUT_READ_ONLY
 import io.github.zwieback.familyfinance.core.activity.EntityEditActivity
@@ -47,6 +50,8 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
 
     protected abstract val ownerEdit: ClearableEditText
 
+    protected abstract val toWhomEdit: ClearableEditText
+
     protected abstract val currencyEdit: ClearableEditText
 
     protected abstract val exchangeRateEdit: ClearableEditText
@@ -68,6 +73,10 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
             PERSON_CODE -> resultIntent?.let {
                 val ownerId = extractOutputId(resultIntent, RESULT_PERSON_ID)
                 loadOwner(ownerId)
+            }
+            TO_WHOM_CODE -> resultIntent?.let {
+                val toWhomId = extractOutputId(resultIntent, RESULT_TO_WHOM_ID)
+                loadToWhom(toWhomId)
             }
             CURRENCY_CODE -> resultIntent?.let {
                 val currencyId = extractOutputId(resultIntent, RESULT_CURRENCY_ID)
@@ -106,6 +115,12 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
         startActivityForResult(intent, PERSON_CODE)
     }
 
+    protected fun onToWhomClick() {
+        val intent = Intent(this, ToWhomActivity::class.java)
+            .putExtra(INPUT_READ_ONLY, false)
+        startActivityForResult(intent, TO_WHOM_CODE)
+    }
+
     protected fun onCurrencyClick() {
         val intent = Intent(this, CurrencyActivity::class.java)
             .putExtra(INPUT_READ_ONLY, false)
@@ -141,6 +156,10 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
         return Consumer { foundOwner -> entity.setOwner(foundOwner) }
     }
 
+    private fun onSuccessfulToWhomFound(): Consumer<Person> {
+        return Consumer { foundPerson -> entity.setToWhom(foundPerson) }
+    }
+
     private fun onSuccessfulCurrencyFound(): Consumer<Currency> {
         return Consumer { foundCurrency ->
             val exchangeRate = findLastExchangeRate(foundCurrency.id)
@@ -154,6 +173,10 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
 
     protected fun loadOwner(ownerId: Int) {
         loadEntity(Person::class.java, ownerId, onSuccessfulOwnerFound())
+    }
+
+    protected fun loadToWhom(toWhomId: Int) {
+        loadEntity(Person::class.java, toWhomId, onSuccessfulToWhomFound())
     }
 
     protected fun loadCurrency(currencyId: Int) {
@@ -179,6 +202,7 @@ abstract class OperationEditActivity<B : ViewDataBinding> :
     @CallSuper
     override fun setupBindings() {
         ownerEdit.setOnClearTextListener { entity.setOwner(null) }
+        toWhomEdit.setOnClearTextListener { entity.setToWhom(null) }
         currencyEdit.setOnClearTextListener { entity.setExchangeRate(null) }
         exchangeRateEdit.setOnClearTextListener { entity.setExchangeRate(null) }
     }

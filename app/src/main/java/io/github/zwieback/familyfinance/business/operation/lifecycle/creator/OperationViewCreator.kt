@@ -24,6 +24,8 @@ class OperationViewCreator(connection: Connection) : EntityViewCreator(connectio
                 "       ap.name                         AS article_parent_name," +
                 "       pe.id                           AS owner_id," +
                 "       pe.name                         AS owner_name," +
+                "       tw.id                           AS to_whom_id," +
+                "       tw.name                         AS to_whom_name," +
                 "       er.id                           AS exchange_rate_id," +
                 "       er._value                       AS exchange_rate_value," +
                 "       cu.id                           AS currency_id," +
@@ -38,6 +40,7 @@ class OperationViewCreator(connection: Connection) : EntityViewCreator(connectio
                 "       INNER JOIN article ar ON ar.id = op.article_id" +
                 "        LEFT JOIN article ap ON ap.id = ar.parent_id" +
                 "       INNER JOIN person pe ON pe.id = op.owner_id" +
+                "        LEFT JOIN person tw ON tw.id = op.to_whom_id" +
                 "       INNER JOIN exchange_rate er ON er.id = op.exchange_rate_id" +
                 "       INNER JOIN currency cu ON cu.id = er.currency_id"
 }

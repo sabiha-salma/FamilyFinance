@@ -16,7 +16,7 @@ import io.github.zwieback.familyfinance.core.lifecycle.destroyer.EntityDestroyer
 import io.github.zwieback.familyfinance.core.model.Person
 import io.github.zwieback.familyfinance.core.model.PersonView
 
-class PersonActivity :
+open class PersonActivity :
     EntityFolderActivity<PersonView, Person, PersonFilter, PersonFragment>(),
     OnPersonClickListener {
 

@@ -164,6 +164,8 @@
     <string name="hint_currency_disabled">Валюта &disabled;</string>
     <string name="hint_owner">Владелец</string>
     <string name="hint_owner_disabled">Владелец &disabled;</string>
+    <string name="hint_to_whom">Кому</string>
+    <string name="hint_to_whom_disabled">Кому &disabled;</string>
     <string name="hint_value">Значение</string>
     <string name="hint_account">Счет</string>
     <string name="hint_account_type">Тип</string>
@@ -348,6 +350,7 @@
     <string name="income_account_is_not_set_error">Счет доходов не выбран</string>
     <string name="transfer_account_is_not_set_error">Счет перевода не выбран</string>
     <string name="owner_is_not_set_error">Владелец не выбран</string>
+    <string name="to_whom_is_not_set_error">Кому не выбрано</string>
     <string name="currency_is_not_set_error">Валюта не выбрана</string>
     <string name="exchange_rate_is_not_set_error">Курс обмена не выбран</string>
     <string name="template_is_not_set_error">Шаблон не выбран</string>

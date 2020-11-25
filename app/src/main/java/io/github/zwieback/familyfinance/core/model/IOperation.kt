@@ -41,6 +41,12 @@ interface IOperation : IBaseEntity {
     val owner: IPerson
 
     @get:Bindable
+    @get:Nullable
+    @get:ManyToOne(cascade = [CascadeAction.NONE])
+    @get:Column(name = "to_whom_id")
+    val toWhom: IPerson?
+
+    @get:Bindable
     @get:ManyToOne(cascade = [CascadeAction.NONE])
     @get:Column(name = "exchange_rate_id", nullable = false)
     val exchangeRate: IExchangeRate

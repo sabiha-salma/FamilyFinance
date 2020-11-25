@@ -27,6 +27,7 @@ import io.github.zwieback.familyfinance.core.model.IBaseEntity
 import io.github.zwieback.familyfinance.extension.getBigDecimalExtra
 import io.github.zwieback.familyfinance.extension.getLocalDateExtra
 import io.github.zwieback.familyfinance.extension.isEmptyId
+import io.github.zwieback.familyfinance.extension.isNotEmptyId
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.internal.functions.Functions
@@ -121,7 +122,9 @@ abstract class EntityEditActivity<ENTITY, BINDING> : DataActivityWrapper()
         entityId: Int,
         onSuccess: Consumer<T>
     ) {
-        super.loadEntity(entityClass, entityId, onSuccess, Functions.ON_ERROR_MISSING)
+        if (entityId.isNotEmptyId()) {
+            super.loadEntity(entityClass, entityId, onSuccess, Functions.ON_ERROR_MISSING)
+        }
     }
 
     /**

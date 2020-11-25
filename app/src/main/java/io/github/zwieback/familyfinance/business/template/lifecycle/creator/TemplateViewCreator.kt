@@ -25,6 +25,8 @@ class TemplateViewCreator(connection: Connection) : EntityViewCreator(connection
                 "       ap.name        AS article_parent_name," +
                 "       pe.id          AS owner_id," +
                 "       pe.name        AS owner_name," +
+                "       tw.id          AS to_whom_id," +
+                "       tw.name        AS to_whom_name," +
                 "       er.id          AS exchange_rate_id," +
                 "       er._value      AS exchange_rate_value," +
                 "       cu.id          AS currency_id," +
@@ -40,6 +42,7 @@ class TemplateViewCreator(connection: Connection) : EntityViewCreator(connection
                 "       LEFT JOIN article ar ON ar.id = te.article_id" +
                 "       LEFT JOIN article ap ON ap.id = ar.parent_id" +
                 "       LEFT JOIN person  pe ON pe.id = te.owner_id" +
+                "       LEFT JOIN person  tw ON tw.id = te.to_whom_id" +
                 "       LEFT JOIN exchange_rate er ON er.id = te.exchange_rate_id" +
                 "       LEFT JOIN currency cu ON cu.id = er.currency_id"
 }

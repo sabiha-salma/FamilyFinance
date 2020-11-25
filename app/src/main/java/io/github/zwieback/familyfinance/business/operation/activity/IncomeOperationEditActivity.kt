@@ -12,6 +12,7 @@ import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardAct
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_ACCOUNT_ID
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_ARTICLE_ID
 import io.github.zwieback.familyfinance.business.operation.service.provider.IncomeOperationProvider
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.activity.EntityActivity
 import io.github.zwieback.familyfinance.core.activity.EntityFolderActivity
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider
@@ -20,8 +21,8 @@ import io.github.zwieback.familyfinance.core.model.Article
 import io.github.zwieback.familyfinance.core.model.Operation
 import io.github.zwieback.familyfinance.core.model.type.OperationType
 import io.github.zwieback.familyfinance.databinding.ActivityEditIncomeOperationBinding
-import io.github.zwieback.familyfinance.extension.toStringOrEmpty
 import io.github.zwieback.familyfinance.extension.isEmptyId
+import io.github.zwieback.familyfinance.extension.toStringOrEmpty
 import io.github.zwieback.familyfinance.widget.ClearableEditText
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
@@ -61,6 +62,9 @@ class IncomeOperationEditActivity : OperationEditActivity<ActivityEditIncomeOper
 
     override val ownerEdit: ClearableEditText
         get() = binding.owner
+
+    override val toWhomEdit: ClearableEditText
+        get() = binding.toWhom
 
     override val currencyEdit: ClearableEditText
         get() = binding.currency
@@ -162,6 +166,10 @@ class IncomeOperationEditActivity : OperationEditActivity<ActivityEditIncomeOper
         return extractInputId(INPUT_INCOME_OWNER_ID, databasePrefs.personId)
     }
 
+    private fun extractIncomeToWhomId(): Int {
+        return extractInputId(INPUT_INCOME_TO_WHOM_ID, EMPTY_ID)
+    }
+
     private fun extractIncomeCurrencyId(): Int {
         return extractInputId(INPUT_INCOME_CURRENCY_ID, databasePrefs.currencyId)
     }
@@ -192,6 +200,7 @@ class IncomeOperationEditActivity : OperationEditActivity<ActivityEditIncomeOper
         loadAccount(extractIncomeAccountId())
         loadArticle(extractIncomeArticleId())
         loadOwner(extractIncomeOwnerId())
+        loadToWhom(extractIncomeToWhomId())
         val exchangeRateId = extractIncomeExchangeRateId()
         if (exchangeRateId.isEmptyId()) {
             loadCurrency(extractIncomeCurrencyId())
@@ -226,6 +235,7 @@ class IncomeOperationEditActivity : OperationEditActivity<ActivityEditIncomeOper
         binding.account.setOnClickListener { onAccountClick() }
         binding.account.setOnClearTextListener { entity.setAccount(null) }
         binding.owner.setOnClickListener { onOwnerClick() }
+        binding.toWhom.setOnClickListener { onToWhomClick() }
         binding.date.setOnClickListener { onDateClick() }
         binding.currency.setOnClickListener { onCurrencyClick() }
         binding.exchangeRate.setOnClickListener { onExchangeRateClick() }
@@ -237,6 +247,7 @@ class IncomeOperationEditActivity : OperationEditActivity<ActivityEditIncomeOper
         const val INPUT_INCOME_ACCOUNT_ID = "incomeAccountId"
         const val INPUT_INCOME_ARTICLE_ID = "incomeArticleId"
         const val INPUT_INCOME_OWNER_ID = "incomeOwnerId"
+        const val INPUT_INCOME_TO_WHOM_ID = "incomeToWhomId"
         const val INPUT_INCOME_CURRENCY_ID = "incomeCurrencyId"
         const val INPUT_INCOME_EXCHANGE_RATE_ID = "incomeExchangeRateId"
         const val INPUT_INCOME_VALUE = "incomeValue"

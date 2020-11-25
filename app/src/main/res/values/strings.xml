@@ -164,6 +164,8 @@
     <string name="hint_currency_disabled">Currency &disabled;</string>
     <string name="hint_owner">Owner</string>
     <string name="hint_owner_disabled">Owner &disabled;</string>
+    <string name="hint_to_whom">To Whom</string>
+    <string name="hint_to_whom_disabled">To Whom &disabled;</string>
     <string name="hint_value">Value</string>
     <string name="hint_account">Account</string>
     <string name="hint_account_type">Type</string>
@@ -348,6 +350,7 @@
     <string name="income_account_is_not_set_error">Income account is not set</string>
     <string name="transfer_account_is_not_set_error">Transfer account is not set</string>
     <string name="owner_is_not_set_error">Owner is not set</string>
+    <string name="to_whom_is_not_set_error">To whom is not set</string>
     <string name="currency_is_not_set_error">Currency is not set</string>
     <string name="exchange_rate_is_not_set_error">Exchange rate is not set</string>
     <string name="template_is_not_set_error">Template is not set</string>

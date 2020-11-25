@@ -90,6 +90,7 @@ class TemplateActivity :
                 template.accountId,
                 template.transferAccountId,
                 template.ownerId,
+                template.toWhomId,
                 template.currencyId,
                 template.exchangeRateId,
                 template.date,

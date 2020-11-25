@@ -131,6 +131,37 @@
                     app:constraint_referenced_ids="expense_account_layout,income_account_layout"
                     app:layout_constraintTop_toBottomOf="@id/expense_account_layout" />
 
+                <Space
+                    android:id="@+id/space_layout"
+                    android:layout_width="@dimen/zero_weight"
+                    android:layout_height="@dimen/zero_weight"
+                    app:layout_constraintEnd_toStartOf="@+id/to_whom_layout"
+                    app:layout_constraintStart_toStartOf="@id/expense_account_layout"
+                    app:layout_constraintTop_toBottomOf="@id/accounts_barrier" />
+
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/to_whom_layout"
+                    android:layout_width="@dimen/zero_weight"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_to_whom"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/to_whom_is_not_set_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
+                    app:layout_constraintEnd_toEndOf="@id/income_account_layout"
+                    app:layout_constraintStart_toEndOf="@id/space_layout"
+                    app:layout_constraintTop_toTopOf="@id/space_layout"
+                    app:validator="not_empty">
+
+                    <io.github.zwieback.familyfinance.widget.ClearableEditText
+                        android:id="@+id/to_whom"
+                        style="@style/AppTheme.EditText.Clearable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{expenseOperation.toWhom.name}"
+                        app:readOnly="@{true}" />
+
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
+
                 <com.johnpetitto.validator.ValidatingTextInputLayout
                     android:id="@+id/value_layout"
                     android:layout_width="@dimen/zero_weight"
@@ -141,7 +172,7 @@
                     app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                     app:layout_constraintEnd_toStartOf="@+id/date_layout"
                     app:layout_constraintStart_toStartOf="@id/expense_account_layout"
-                    app:layout_constraintTop_toBottomOf="@id/accounts_barrier"
+                    app:layout_constraintTop_toBottomOf="@id/to_whom_layout"
                     app:validateAfterTextChanged="true"
                     app:validator="big_decimal">
 

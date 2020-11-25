@@ -81,6 +81,6 @@ abstract class AbstractApplication : MultiDexApplication() {
     }
 
     companion object {
-        const val DB_VERSION = 9
+        const val DB_VERSION = 10
     }
 }

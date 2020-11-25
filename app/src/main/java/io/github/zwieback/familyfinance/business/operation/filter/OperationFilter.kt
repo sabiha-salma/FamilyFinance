@@ -15,6 +15,7 @@ abstract class OperationFilter : EntityFilter() {
     abstract var articleId: Int
     abstract var accountId: Int
     abstract var ownerId: Int
+    abstract var toWhomId: Int
     abstract var currencyId: Int
 
     fun takeArticleId(): Int? {
@@ -39,6 +40,14 @@ abstract class OperationFilter : EntityFilter() {
 
     fun putOwnerId(ownerId: Int?) {
         this.ownerId = ownerId.toEmptyId()
+    }
+
+    fun takeToWhomId(): Int? {
+        return toWhomId.toNullableId()
+    }
+
+    fun putToWhomId(toWhomId: Int?) {
+        this.toWhomId = toWhomId.toEmptyId()
     }
 
     fun takeCurrencyId(): Int? {

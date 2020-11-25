@@ -109,8 +109,10 @@ class SmsNotificationBuilder private constructor() {
         val operationHelper = templateQualifier.determineHelper(template)
         val notificationIntent = operationHelper.getIntentToAdd(
             template.articleId, template.accountId, template.transferAccountId,
-            template.ownerId, template.currencyId, template.exchangeRateId,
-            operationDate, operationValue, template.description, template.url
+            template.ownerId, template.toWhomId,
+            template.currencyId, template.exchangeRateId,
+            operationDate, operationValue,
+            template.description, template.url
         )
         return TaskStackBuilder.create(context)
             .addParentStack(DashboardActivity::class.java)
@@ -126,8 +128,10 @@ class SmsNotificationBuilder private constructor() {
         val operationHelper = templateQualifier.determineHelper(template)
         return operationHelper.validToAddImmediately(
             template.articleId, template.accountId, template.transferAccountId,
-            template.ownerId, template.currencyId, template.exchangeRateId,
-            operationDate, operationValue, template.description, template.url
+            template.ownerId, template.toWhomId,
+            template.currencyId, template.exchangeRateId,
+            operationDate, operationValue,
+            template.description, template.url
         )
     }
 
@@ -139,8 +143,10 @@ class SmsNotificationBuilder private constructor() {
         val operationHelper = templateQualifier.determineHelper(template)
         val addImmediatelyIntent = operationHelper.getIntentToAddImmediately(
             template.articleId, template.accountId, template.transferAccountId,
-            template.ownerId, template.currencyId, template.exchangeRateId,
-            operationDate, operationValue, template.description, template.url
+            template.ownerId, template.toWhomId,
+            template.currencyId, template.exchangeRateId,
+            operationDate, operationValue,
+            template.description, template.url
         )
         return PendingIntent.getService(
             context,

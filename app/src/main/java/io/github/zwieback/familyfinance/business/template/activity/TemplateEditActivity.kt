@@ -22,9 +22,12 @@ import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardAct
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_CURRENCY_ID
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_EXCHANGE_RATE_ID
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_PERSON_ID
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_TO_WHOM_ID
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.TO_WHOM_CODE
 import io.github.zwieback.familyfinance.business.exchange_rate.activity.ExchangeRateActivity
 import io.github.zwieback.familyfinance.business.exchange_rate.helper.ExchangeRateFinder
 import io.github.zwieback.familyfinance.business.person.activity.PersonActivity
+import io.github.zwieback.familyfinance.business.person.activity.ToWhomActivity
 import io.github.zwieback.familyfinance.business.template.adapter.TemplateProvider
 import io.github.zwieback.familyfinance.business.template.exception.UnsupportedTemplateTypeException
 import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
@@ -103,6 +106,10 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
                 val ownerId = extractOutputId(resultIntent, RESULT_PERSON_ID)
                 loadOwner(ownerId)
             }
+            TO_WHOM_CODE -> resultIntent?.let {
+                val toWhomId = extractOutputId(resultIntent, RESULT_TO_WHOM_ID)
+                loadToWhom(toWhomId)
+            }
             CURRENCY_CODE -> resultIntent?.let {
                 val currencyId = extractOutputId(resultIntent, RESULT_CURRENCY_ID)
                 loadCurrency(currencyId)
@@ -137,7 +144,7 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
 
     private fun onArticleClick() {
         val intent = Intent(this, determineArticleActivityClass())
-        intent.putExtra(EntityActivity.INPUT_READ_ONLY, false)
+            .putExtra(EntityActivity.INPUT_READ_ONLY, false)
         startActivityForResult(intent, ARTICLE_CODE)
     }
 
@@ -164,6 +171,12 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
     private fun onOwnerClick() {
         val intent = Intent(this, PersonActivity::class.java)
         startActivityForResult(intent, PERSON_CODE)
+    }
+
+    private fun onToWhomClick() {
+        val intent = Intent(this, ToWhomActivity::class.java)
+            .putExtra(EntityActivity.INPUT_READ_ONLY, false)
+        startActivityForResult(intent, TO_WHOM_CODE)
     }
 
     private fun onCurrencyClick() {
@@ -220,6 +233,10 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
         return Consumer { foundOwner -> entity.setOwner(foundOwner) }
     }
 
+    private fun onSuccessfulToWhomFound(): Consumer<Person> {
+        return Consumer { foundPerson -> entity.setToWhom(foundPerson) }
+    }
+
     private fun onSuccessfulCurrencyFound(): Consumer<Currency> {
         return Consumer { foundCurrency ->
             val exchangeRate = findLastExchangeRate(foundCurrency.id)
@@ -245,6 +262,10 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
 
     private fun loadOwner(ownerId: Int) {
         loadEntity(Person::class.java, ownerId, onSuccessfulOwnerFound())
+    }
+
+    private fun loadToWhom(toWhomId: Int) {
+        loadEntity(Person::class.java, toWhomId, onSuccessfulToWhomFound())
     }
 
     private fun loadCurrency(currencyId: Int) {
@@ -288,6 +309,8 @@ class TemplateEditActivity : EntityEditActivity<Template, ActivityEditTemplateBi
         binding.transferAccount.setOnClearTextListener { entity.setTransferAccount(null) }
         binding.owner.setOnClickListener { onOwnerClick() }
         binding.owner.setOnClearTextListener { entity.setOwner(null) }
+        binding.toWhom.setOnClickListener { onToWhomClick() }
+        binding.toWhom.setOnClearTextListener { entity.setToWhom(null) }
         binding.currency.setOnClickListener { onCurrencyClick() }
         binding.currency.setOnClearTextListener { entity.setExchangeRate(null) }
         binding.exchangeRate.setOnClickListener { onExchangeRateClick() }

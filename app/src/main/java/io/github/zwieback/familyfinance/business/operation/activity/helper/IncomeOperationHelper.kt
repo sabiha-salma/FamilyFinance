@@ -11,13 +11,16 @@ import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperat
 import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperationEditActivity.Companion.INPUT_INCOME_EXCHANGE_RATE_ID
 import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperationEditActivity.Companion.INPUT_INCOME_OPERATION_ID
 import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperationEditActivity.Companion.INPUT_INCOME_OWNER_ID
+import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperationEditActivity.Companion.INPUT_INCOME_TO_WHOM_ID
 import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperationEditActivity.Companion.INPUT_INCOME_URL
 import io.github.zwieback.familyfinance.business.operation.activity.IncomeOperationEditActivity.Companion.INPUT_INCOME_VALUE
 import io.github.zwieback.familyfinance.business.operation.filter.IncomeOperationFilter
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.model.*
 import io.github.zwieback.familyfinance.core.model.type.OperationType
 import io.github.zwieback.familyfinance.extension.getBigDecimalExtra
 import io.github.zwieback.familyfinance.extension.getLocalDateExtra
+import io.github.zwieback.familyfinance.extension.isEmptyId
 import io.github.zwieback.familyfinance.extension.putBigDecimalExtra
 import io.reactivex.Maybe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -44,6 +47,7 @@ class IncomeOperationHelper(context: Context, data: ReactiveEntityStore<Persista
         accountId: Int?,
         transferAccountId: Int?,
         ownerId: Int?,
+        toWhomId: Int?,
         currencyId: Int?,
         exchangeRateId: Int?,
         date: LocalDate?,
@@ -56,7 +60,7 @@ class IncomeOperationHelper(context: Context, data: ReactiveEntityStore<Persista
             intent,
             articleId,
             accountId, transferAccountId,
-            ownerId,
+            ownerId, toWhomId,
             currencyId, exchangeRateId,
             date, value,
             description, url
@@ -69,6 +73,7 @@ class IncomeOperationHelper(context: Context, data: ReactiveEntityStore<Persista
         accountId: Int?,
         transferAccountId: Int?,
         ownerId: Int?,
+        toWhomId: Int?,
         currencyId: Int?,
         exchangeRateId: Int?,
         date: LocalDate?,
@@ -87,6 +92,9 @@ class IncomeOperationHelper(context: Context, data: ReactiveEntityStore<Persista
         }
         ownerId?.let {
             preparedIntent.putExtra(INPUT_INCOME_OWNER_ID, ownerId)
+        }
+        toWhomId?.let {
+            preparedIntent.putExtra(INPUT_INCOME_TO_WHOM_ID, toWhomId)
         }
         currencyId?.let {
             preparedIntent.putExtra(INPUT_INCOME_CURRENCY_ID, currencyId)
@@ -115,7 +123,10 @@ class IncomeOperationHelper(context: Context, data: ReactiveEntityStore<Persista
         } else {
             getIntentToAdd(
                 filter.takeArticleId(), filter.takeAccountId(), null,
-                filter.takeOwnerId(), filter.takeCurrencyId(), null, null, null, null, null
+                filter.takeOwnerId(), filter.takeToWhomId(),
+                filter.takeCurrencyId(), null,
+                null, null,
+                null, null
             )
         }
     }
@@ -131,6 +142,7 @@ class IncomeOperationHelper(context: Context, data: ReactiveEntityStore<Persista
             operation.accountId,
             null,
             operation.ownerId,
+            operation.toWhomId,
             operation.currencyId,
             operation.exchangeRateId,
             operation.date,
@@ -149,6 +161,7 @@ class IncomeOperationHelper(context: Context, data: ReactiveEntityStore<Persista
         accountId: Int?,
         transferAccountId: Int?,
         ownerId: Int?,
+        toWhomId: Int?,
         currencyId: Int?,
         exchangeRateId: Int?,
         date: LocalDate?,
@@ -169,6 +182,7 @@ class IncomeOperationHelper(context: Context, data: ReactiveEntityStore<Persista
         accountId: Int?,
         transferAccountId: Int?,
         ownerId: Int?,
+        toWhomId: Int?,
         currencyId: Int?,
         exchangeRateId: Int?,
         date: LocalDate?,
@@ -181,7 +195,7 @@ class IncomeOperationHelper(context: Context, data: ReactiveEntityStore<Persista
             intent,
             articleId,
             accountId, transferAccountId,
-            ownerId,
+            ownerId, toWhomId,
             currencyId, exchangeRateId,
             date, value,
             description, url
@@ -197,35 +211,62 @@ class IncomeOperationHelper(context: Context, data: ReactiveEntityStore<Persista
         intent: Intent,
         onSuccess: Consumer<Operation>
     ): Disposable {
-        val accountId = intent.getIntExtra(INPUT_INCOME_ACCOUNT_ID, 0)
-        val articleId = intent.getIntExtra(INPUT_INCOME_ARTICLE_ID, 0)
-        val ownerId = intent.getIntExtra(INPUT_INCOME_OWNER_ID, 0)
-        val exchangeRateId = intent.getIntExtra(INPUT_INCOME_EXCHANGE_RATE_ID, 0)
+        val accountId = intent.getIntExtra(INPUT_INCOME_ACCOUNT_ID, EMPTY_ID)
+        val articleId = intent.getIntExtra(INPUT_INCOME_ARTICLE_ID, EMPTY_ID)
+        val ownerId = intent.getIntExtra(INPUT_INCOME_OWNER_ID, EMPTY_ID)
+        val toWhomId = intent.getIntExtra(INPUT_INCOME_TO_WHOM_ID, EMPTY_ID)
+        val exchangeRateId = intent.getIntExtra(INPUT_INCOME_EXCHANGE_RATE_ID, EMPTY_ID)
         val date = intent.getLocalDateExtra(INPUT_INCOME_DATE)
         val value = intent.getBigDecimalExtra(INPUT_INCOME_VALUE)
         val description = intent.getStringExtra(INPUT_INCOME_DESCRIPTION)
         val url = intent.getStringExtra(INPUT_INCOME_URL)
-        return Maybe.zip(
-            data.findByKey(Account::class.java, accountId),
-            data.findByKey(Article::class.java, articleId),
-            data.findByKey(Person::class.java, ownerId),
-            data.findByKey(ExchangeRate::class.java, exchangeRateId),
-            { account, article, owner, exchangeRate ->
-                Operation()
-                    .setCreateDate(LocalDateTime.now())
-                    .setLastChangeDate(LocalDateTime.now())
-                    .setType(OperationType.INCOME_OPERATION)
-                    .setAccount(account)
-                    .setArticle(article)
-                    .setOwner(owner)
-                    .setExchangeRate(exchangeRate)
-                    .setDate(date)
-                    .setValue(value)
-                    .setDescription(description)
-                    .setUrl(url)
-            }
-        )
-            .flatMapSingle { data.insert(it) }
+
+        return if (toWhomId.isEmptyId()) {
+            Maybe.zip(
+                data.findByKey(Account::class.java, accountId),
+                data.findByKey(Article::class.java, articleId),
+                data.findByKey(Person::class.java, ownerId),
+                data.findByKey(ExchangeRate::class.java, exchangeRateId),
+                { account, article, owner, exchangeRate ->
+                    Operation()
+                        .setCreateDate(LocalDateTime.now())
+                        .setLastChangeDate(LocalDateTime.now())
+                        .setType(OperationType.INCOME_OPERATION)
+                        .setAccount(account)
+                        .setArticle(article)
+                        .setOwner(owner)
+                        .setExchangeRate(exchangeRate)
+                        .setDate(date)
+                        .setValue(value)
+                        .setDescription(description)
+                        .setUrl(url)
+                }
+            )
+        } else {
+            Maybe.zip(
+                data.findByKey(Account::class.java, accountId),
+                data.findByKey(Article::class.java, articleId),
+                data.findByKey(Person::class.java, ownerId),
+                data.findByKey(Person::class.java, toWhomId),
+                data.findByKey(ExchangeRate::class.java, exchangeRateId),
+                { account, article, owner, toWhom, exchangeRate ->
+                    Operation()
+                        .setCreateDate(LocalDateTime.now())
+                        .setLastChangeDate(LocalDateTime.now())
+                        .setType(OperationType.INCOME_OPERATION)
+                        .setAccount(account)
+                        .setArticle(article)
+                        .setOwner(owner)
+                        .setToWhom(toWhom)
+                        .setExchangeRate(exchangeRate)
+                        .setDate(date)
+                        .setValue(value)
+                        .setDescription(description)
+                        .setUrl(url)
+                }
+            )
+        }
+            .flatMapSingle { operation -> data.insert(operation) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(onSuccess)

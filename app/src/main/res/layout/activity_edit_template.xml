@@ -173,6 +173,14 @@
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/account_and_owner_barrier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="account_layout,owner_layout"
+                    app:layout_constraintTop_toBottomOf="@id/account_layout" />
+
                 <com.johnpetitto.validator.ValidatingTextInputLayout
                     android:id="@+id/transfer_account_layout"
                     android:layout_width="@dimen/zero_weight"
@@ -181,9 +189,9 @@
                     app:errorEnabled="true"
                     app:errorLabel="@string/transfer_account_is_not_set_error"
                     app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                    app:layout_constraintEnd_toStartOf="@+id/space_layout"
+                    app:layout_constraintEnd_toStartOf="@+id/to_whom_layout"
                     app:layout_constraintStart_toStartOf="@id/account_layout"
-                    app:layout_constraintTop_toBottomOf="@id/account_layout"
+                    app:layout_constraintTop_toBottomOf="@id/account_and_owner_barrier"
                     app:validator="not_empty">
 
                     <io.github.zwieback.familyfinance.widget.ClearableEditText
@@ -196,14 +204,36 @@
 
                 </com.johnpetitto.validator.ValidatingTextInputLayout>
 
-                <Space
-                    android:id="@+id/space_layout"
+                <com.johnpetitto.validator.ValidatingTextInputLayout
+                    android:id="@+id/to_whom_layout"
                     android:layout_width="@dimen/zero_weight"
-                    android:layout_height="@dimen/zero_weight"
-                    app:layout_constraintBottom_toBottomOf="@id/transfer_account_layout"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_to_whom"
+                    app:errorEnabled="true"
+                    app:errorLabel="@string/to_whom_is_not_set_error"
+                    app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                     app:layout_constraintEnd_toEndOf="@id/article_category_layout"
                     app:layout_constraintStart_toEndOf="@id/transfer_account_layout"
-                    app:layout_constraintTop_toTopOf="@id/transfer_account_layout" />
+                    app:layout_constraintTop_toTopOf="@id/transfer_account_layout"
+                    app:validator="not_empty">
+
+                    <io.github.zwieback.familyfinance.widget.ClearableEditText
+                        android:id="@+id/to_whom"
+                        style="@style/AppTheme.EditText.Clearable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{template.toWhom.name}"
+                        app:readOnly="@{true}" />
+
+                </com.johnpetitto.validator.ValidatingTextInputLayout>
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/transfer_account_and_to_whom_barrier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="transfer_account_layout,to_whom_layout"
+                    app:layout_constraintTop_toBottomOf="@id/transfer_account_layout" />
 
                 <com.johnpetitto.validator.ValidatingTextInputLayout
                     android:id="@+id/value_layout"
@@ -215,7 +245,7 @@
                     app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                     app:layout_constraintEnd_toStartOf="@+id/date_layout"
                     app:layout_constraintStart_toStartOf="@id/transfer_account_layout"
-                    app:layout_constraintTop_toBottomOf="@id/transfer_account_layout"
+                    app:layout_constraintTop_toBottomOf="@id/transfer_account_and_to_whom_barrier"
                     app:validator="big_decimal">
 
                     <io.github.zwieback.familyfinance.widget.DecimalNumberTextEdit
@@ -234,7 +264,7 @@
                     app:errorEnabled="true"
                     app:errorLabel="@string/date_error"
                     app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
-                    app:layout_constraintEnd_toEndOf="@id/space_layout"
+                    app:layout_constraintEnd_toEndOf="@id/to_whom_layout"
                     app:layout_constraintStart_toEndOf="@id/value_layout"
                     app:layout_constraintTop_toTopOf="@id/value_layout"
                     app:validator="date">

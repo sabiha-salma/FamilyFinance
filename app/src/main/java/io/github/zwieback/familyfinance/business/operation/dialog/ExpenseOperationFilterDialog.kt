@@ -34,6 +34,9 @@ class ExpenseOperationFilterDialog :
     override val ownerEdit: ClearableEditText
         get() = binding.owner
 
+    override val toWhomEdit: ClearableEditText
+        get() = binding.toWhom
+
     override val currencyEdit: ClearableEditText
         get() = binding.currency
 

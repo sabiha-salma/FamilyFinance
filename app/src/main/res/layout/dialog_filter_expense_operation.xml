@@ -80,7 +80,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_account"
                 app:errorEnabled="true"
-                app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                 app:layout_constraintEnd_toStartOf="@+id/owner_layout"
                 app:layout_constraintStart_toStartOf="@id/article_layout"
                 app:layout_constraintTop_toBottomOf="@id/article_and_currency_barrier">
@@ -121,6 +120,33 @@
                 app:constraint_referenced_ids="account_layout,owner_layout"
                 app:layout_constraintTop_toBottomOf="@id/account_layout" />
 
+            <Space
+                android:id="@+id/space_layout"
+                android:layout_width="@dimen/zero_weight"
+                android:layout_height="@dimen/zero_weight"
+                app:layout_constraintEnd_toStartOf="@+id/to_whom_layout"
+                app:layout_constraintStart_toStartOf="@id/account_layout"
+                app:layout_constraintTop_toBottomOf="@id/account_and_owner_barrier" />
+
+            <com.johnpetitto.validator.ValidatingTextInputLayout
+                android:id="@+id/to_whom_layout"
+                android:layout_width="@dimen/zero_weight"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_to_whom"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="@id/owner_layout"
+                app:layout_constraintStart_toEndOf="@id/space_layout"
+                app:layout_constraintTop_toTopOf="@id/space_layout">
+
+                <io.github.zwieback.familyfinance.widget.ClearableEditText
+                    android:id="@+id/to_whom"
+                    style="@style/AppTheme.EditText.Clearable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:readOnly="@{true}" />
+
+            </com.johnpetitto.validator.ValidatingTextInputLayout>
+
             <com.johnpetitto.validator.ValidatingTextInputLayout
                 android:id="@+id/start_date_layout"
                 android:layout_width="@dimen/zero_weight"
@@ -131,7 +157,7 @@
                 app:errorTextAppearance="@style/AppTheme.ErrorTextAppearance"
                 app:layout_constraintEnd_toStartOf="@+id/end_date_layout"
                 app:layout_constraintStart_toStartOf="@id/account_layout"
-                app:layout_constraintTop_toBottomOf="@id/account_and_owner_barrier"
+                app:layout_constraintTop_toBottomOf="@id/to_whom_layout"
                 app:validateAfterTextChanged="true"
                 app:validator="date">
 

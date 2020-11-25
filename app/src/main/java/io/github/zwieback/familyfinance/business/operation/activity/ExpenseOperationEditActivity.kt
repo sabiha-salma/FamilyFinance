@@ -12,6 +12,7 @@ import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardAct
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_ACCOUNT_ID
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_ARTICLE_ID
 import io.github.zwieback.familyfinance.business.operation.service.provider.ExpenseOperationProvider
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.activity.EntityActivity
 import io.github.zwieback.familyfinance.core.activity.EntityFolderActivity
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider
@@ -20,8 +21,8 @@ import io.github.zwieback.familyfinance.core.model.Article
 import io.github.zwieback.familyfinance.core.model.Operation
 import io.github.zwieback.familyfinance.core.model.type.OperationType
 import io.github.zwieback.familyfinance.databinding.ActivityEditExpenseOperationBinding
-import io.github.zwieback.familyfinance.extension.toStringOrEmpty
 import io.github.zwieback.familyfinance.extension.isEmptyId
+import io.github.zwieback.familyfinance.extension.toStringOrEmpty
 import io.github.zwieback.familyfinance.widget.ClearableEditText
 import io.reactivex.functions.Consumer
 import org.threeten.bp.LocalDate
@@ -61,6 +62,9 @@ class ExpenseOperationEditActivity : OperationEditActivity<ActivityEditExpenseOp
 
     override val ownerEdit: ClearableEditText
         get() = binding.owner
+
+    override val toWhomEdit: ClearableEditText
+        get() = binding.toWhom
 
     override val currencyEdit: ClearableEditText
         get() = binding.currency
@@ -117,7 +121,7 @@ class ExpenseOperationEditActivity : OperationEditActivity<ActivityEditExpenseOp
     @Suppress("UNNECESSARY_SAFE_CALL")
     private fun onArticleCategoryClick() {
         val intent = Intent(this, ExpenseArticleActivity::class.java)
-        intent.putExtra(EntityActivity.INPUT_READ_ONLY, false)
+            .putExtra(EntityActivity.INPUT_READ_ONLY, false)
         entity.article?.parent?.id?.let { articleParentId ->
             intent.putExtra(EntityFolderActivity.INPUT_PARENT_FOLDER_ID, articleParentId)
         }
@@ -162,6 +166,10 @@ class ExpenseOperationEditActivity : OperationEditActivity<ActivityEditExpenseOp
         return extractInputId(INPUT_EXPENSE_OWNER_ID, databasePrefs.personId)
     }
 
+    private fun extractExpenseToWhomId(): Int {
+        return extractInputId(INPUT_EXPENSE_TO_WHOM_ID, EMPTY_ID)
+    }
+
     private fun extractExpenseCurrencyId(): Int {
         return extractInputId(INPUT_EXPENSE_CURRENCY_ID, databasePrefs.currencyId)
     }
@@ -191,6 +199,7 @@ class ExpenseOperationEditActivity : OperationEditActivity<ActivityEditExpenseOp
         loadAccount(extractExpenseAccountId())
         loadArticle(extractExpenseArticleId())
         loadOwner(extractExpenseOwnerId())
+        loadToWhom(extractExpenseToWhomId())
         val exchangeRateId = extractExpenseExchangeRateId()
         if (exchangeRateId.isEmptyId()) {
             loadCurrency(extractExpenseCurrencyId())
@@ -225,6 +234,7 @@ class ExpenseOperationEditActivity : OperationEditActivity<ActivityEditExpenseOp
         binding.account.setOnClickListener { onAccountClick() }
         binding.account.setOnClearTextListener { entity.setAccount(null) }
         binding.owner.setOnClickListener { onOwnerClick() }
+        binding.toWhom.setOnClickListener { onToWhomClick() }
         binding.date.setOnClickListener { onDateClick() }
         binding.currency.setOnClickListener { onCurrencyClick() }
         binding.exchangeRate.setOnClickListener { onExchangeRateClick() }
@@ -236,6 +246,7 @@ class ExpenseOperationEditActivity : OperationEditActivity<ActivityEditExpenseOp
         const val INPUT_EXPENSE_ACCOUNT_ID = "expenseAccountId"
         const val INPUT_EXPENSE_ARTICLE_ID = "expenseArticleId"
         const val INPUT_EXPENSE_OWNER_ID = "expenseOwnerId"
+        const val INPUT_EXPENSE_TO_WHOM_ID = "expenseToWhomId"
         const val INPUT_EXPENSE_CURRENCY_ID = "expenseCurrencyId"
         const val INPUT_EXPENSE_EXCHANGE_RATE_ID = "expenseExchangeRateId"
         const val INPUT_EXPENSE_VALUE = "expenseValue"

@@ -10,6 +10,7 @@ import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardAct
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.INCOME_ACCOUNT_CODE
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_ACCOUNT_ID
 import io.github.zwieback.familyfinance.business.operation.service.provider.TransferOperationProvider
+import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
 import io.github.zwieback.familyfinance.core.adapter.EntityProvider
 import io.github.zwieback.familyfinance.core.model.Account
 import io.github.zwieback.familyfinance.core.model.Article
@@ -62,6 +63,9 @@ class TransferOperationEditActivity :
 
     override val ownerEdit: ClearableEditText
         get() = binding.owner
+
+    override val toWhomEdit: ClearableEditText
+        get() = binding.toWhom
 
     override val currencyEdit: ClearableEditText
         get() = binding.currency
@@ -150,6 +154,10 @@ class TransferOperationEditActivity :
         return extractInputId(INPUT_EXPENSE_OWNER_ID, databasePrefs.personId)
     }
 
+    private fun extractExpenseToWhomId(): Int {
+        return extractInputId(INPUT_EXPENSE_TO_WHOM_ID, EMPTY_ID)
+    }
+
     private fun extractExpenseCurrencyId(): Int {
         return extractInputId(INPUT_EXPENSE_CURRENCY_ID, databasePrefs.currencyId)
     }
@@ -181,6 +189,7 @@ class TransferOperationEditActivity :
         loadExpenseAccount(extractExpenseAccountId())
         loadIncomeAccount(extractIncomeAccountId())
         loadOwner(extractExpenseOwnerId())
+        loadToWhom(extractExpenseToWhomId())
         val exchangeRateId = extractExpenseExchangeRateId()
         if (exchangeRateId.isEmptyId()) {
             loadCurrency(extractExpenseCurrencyId())
@@ -237,6 +246,7 @@ class TransferOperationEditActivity :
     override fun setupBindings() {
         binding.icon.setOnClickListener { onSelectIconClick() }
         binding.owner.setOnClickListener { onOwnerClick() }
+        binding.toWhom.setOnClickListener { onToWhomClick() }
         binding.expenseAccount.setOnClickListener { onExpenseAccountClick() }
         binding.expenseAccount.setOnClearTextListener { entity.setAccount(null) }
         binding.date.setOnClickListener { onDateClick() }
@@ -255,6 +265,7 @@ class TransferOperationEditActivity :
         incomeOperation.setLastChangeDate(LocalDateTime.now())
         incomeOperation.setArticle(operation.article)
         incomeOperation.setOwner(operation.owner)
+        incomeOperation.setToWhom(operation.toWhom)
         incomeOperation.setExchangeRate(operation.exchangeRate)
         incomeOperation.setDate(operation.date)
         incomeOperation.setValue(operation.value)
@@ -285,6 +296,7 @@ class TransferOperationEditActivity :
         const val INPUT_EXPENSE_ACCOUNT_ID = "expenseAccountId"
         const val INPUT_INCOME_ACCOUNT_ID = "incomeAccountId"
         const val INPUT_EXPENSE_OWNER_ID = "expenseOwnerId"
+        const val INPUT_EXPENSE_TO_WHOM_ID = "expenseToWhomId"
         const val INPUT_EXPENSE_CURRENCY_ID = "expenseCurrencyId"
         const val INPUT_EXPENSE_EXCHANGE_RATE_ID = "expenseExchangeRateId"
         const val INPUT_EXPENSE_VALUE = "expenseValue"

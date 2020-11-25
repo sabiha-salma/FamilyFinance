@@ -60,6 +60,15 @@ interface ITemplateView : IBaseEntity {
     val ownerName: String?
 
     @get:Nullable
+    @get:Column(name = "to_whom_id")
+    val toWhomId: Int?
+
+    @get:Bindable
+    @get:Nullable
+    @get:Column(name = "to_whom_name", length = PersonRestriction.NAME_MAX_LENGTH)
+    val toWhomName: String?
+
+    @get:Nullable
     @get:Column(name = "exchange_rate_id")
     val exchangeRateId: Int?
 

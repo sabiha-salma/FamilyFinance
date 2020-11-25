@@ -21,6 +21,7 @@ data class ExpenseOperationFilter(
     override var articleId: Int = EMPTY_ID,
     override var accountId: Int = EMPTY_ID,
     override var ownerId: Int = EMPTY_ID,
+    override var toWhomId: Int = EMPTY_ID,
     override var currencyId: Int = EMPTY_ID
 ) : OperationFilter() {
 

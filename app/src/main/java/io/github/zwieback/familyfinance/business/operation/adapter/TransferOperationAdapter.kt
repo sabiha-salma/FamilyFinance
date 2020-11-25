@@ -29,6 +29,7 @@ class TransferOperationAdapter(
             .withStartValue(filter.startValue)
             .withEndValue(filter.endValue)
             .withOwnerId(filter.takeOwnerId())
+            .withToWhomId(filter.takeToWhomId())
             .withCurrencyId(filter.takeCurrencyId())
             .withAccountId(filter.takeAccountId())
             .withSortType(sortType)

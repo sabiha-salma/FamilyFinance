@@ -14,8 +14,11 @@ import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardAct
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_ACCOUNT_ID
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_CURRENCY_ID
 import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_PERSON_ID
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.RESULT_TO_WHOM_ID
+import io.github.zwieback.familyfinance.business.dashboard.activity.DashboardActivity.Companion.TO_WHOM_CODE
 import io.github.zwieback.familyfinance.business.operation.filter.OperationFilter
 import io.github.zwieback.familyfinance.business.person.activity.PersonActivity
+import io.github.zwieback.familyfinance.business.person.activity.ToWhomActivity
 import io.github.zwieback.familyfinance.core.dialog.EntityFilterDialog
 import io.github.zwieback.familyfinance.core.model.Account
 import io.github.zwieback.familyfinance.core.model.Article
@@ -53,6 +56,8 @@ abstract class OperationFilterDialog<F, B> :
 
     protected abstract val ownerEdit: ClearableEditText
 
+    protected abstract val toWhomEdit: ClearableEditText
+
     protected abstract val currencyEdit: ClearableEditText
 
     protected abstract val startDateEdit: EditText
@@ -85,6 +90,10 @@ abstract class OperationFilterDialog<F, B> :
                 val ownerId = extractId(resultIntent, RESULT_PERSON_ID)
                 loadOwner(ownerId)
             }
+            TO_WHOM_CODE -> resultIntent?.let {
+                val toWhomId = extractId(resultIntent, RESULT_TO_WHOM_ID)
+                loadToWhom(toWhomId)
+            }
             CURRENCY_CODE -> resultIntent?.let {
                 val currencyId = extractId(resultIntent, RESULT_CURRENCY_ID)
                 loadCurrency(currencyId)
@@ -97,6 +106,8 @@ abstract class OperationFilterDialog<F, B> :
         accountEdit.setOnClearTextListener { onAccountRemoved() }
         ownerEdit.setOnClickListener { onOwnerClick() }
         ownerEdit.setOnClearTextListener { onOwnerRemoved() }
+        toWhomEdit.setOnClickListener { onToWhomClick() }
+        toWhomEdit.setOnClearTextListener { onToWhomRemoved() }
         currencyEdit.setOnClickListener { onCurrencyClick() }
         currencyEdit.setOnClearTextListener { onCurrencyRemoved() }
         startDateEdit.setOnClickListener { onStartDateClick() }
@@ -104,6 +115,7 @@ abstract class OperationFilterDialog<F, B> :
 
         loadAccount(filter.takeAccountId())
         loadOwner(filter.takeOwnerId())
+        loadToWhom(filter.takeToWhomId())
         loadCurrency(filter.takeCurrencyId())
         loadStartDate(filter.startDate)
         loadEndDate(filter.endDate)
@@ -121,6 +133,11 @@ abstract class OperationFilterDialog<F, B> :
     private fun onOwnerClick() {
         val intent = Intent(context, PersonActivity::class.java)
         startActivityForResult(intent, PERSON_CODE)
+    }
+
+    private fun onToWhomClick() {
+        val intent = Intent(context, ToWhomActivity::class.java)
+        startActivityForResult(intent, TO_WHOM_CODE)
     }
 
     private fun onCurrencyClick() {
@@ -160,6 +177,10 @@ abstract class OperationFilterDialog<F, B> :
         filter.putOwnerId(null)
     }
 
+    private fun onToWhomRemoved() {
+        filter.putToWhomId(null)
+    }
+
     private fun onCurrencyRemoved() {
         filter.putCurrencyId(null)
     }
@@ -185,6 +206,13 @@ abstract class OperationFilterDialog<F, B> :
         }
     }
 
+    private fun onSuccessfulToWhomFound(): Consumer<Person> {
+        return Consumer { foundPerson ->
+            filter.putToWhomId(foundPerson.id)
+            toWhomEdit.setText(foundPerson.name)
+        }
+    }
+
     private fun onSuccessfulCurrencyFound(): Consumer<Currency> {
         return Consumer { foundCurrency ->
             filter.putCurrencyId(foundCurrency.id)
@@ -207,6 +235,12 @@ abstract class OperationFilterDialog<F, B> :
     private fun loadOwner(ownerId: Int?) {
         ownerId?.let {
             loadEntity(Person::class.java, ownerId, onSuccessfulOwnerFound())
+        }
+    }
+
+    private fun loadToWhom(toWhomId: Int?) {
+        toWhomId?.let {
+            loadEntity(Person::class.java, toWhomId, onSuccessfulToWhomFound())
         }
     }
 
