@@ -6,7 +6,7 @@ ext.versions = [
 
         // replace with the latest (stable) version:
         // https://github.com/JetBrains/kotlin/releases/latest
-        kotlin                   : '1.4.10',
+        kotlin                   : '1.4.20',
         // https://github.com/Kotlin/kotlinx.coroutines/releases/latest
         kotlinCoroutines         : '1.4.1',
 
