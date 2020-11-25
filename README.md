@@ -49,7 +49,7 @@ Checklist for creating issues:
 - [MaterialDrawer](https://github.com/mikepenz/MaterialDrawer)
 - [ThreeTenABP](https://github.com/JakeWharton/ThreeTenABP)
 - [ACRA](https://github.com/ACRA/acra)
-- [Android-Support-Preference-V7-Fix](https://github.com/Gericop/Android-Support-Preference-V7-Fix/)
+- [AndroidX Preference eXtended](https://github.com/takisoft/preferencex-android/)
 - [RxkPrefs](https://github.com/afollestad/rxkprefs)
 - [NoNonsense-FilePicker](https://github.com/spacecowboy/NoNonsense-FilePicker/)
 - [PermissionsDispatcher](https://github.com/permissions-dispatcher/PermissionsDispatcher)
