@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2020-11-25
+### Added
+- The "To Whom" field to the template and operation entities, and to the operation filters.
+
 ## [1.7.3] - 2020-08-03
 ### Added
 - Missed creation and last update dates to operations when adding operations immediately directly from notifications.
