@@ -4,7 +4,7 @@
 package io.github.zwieback.familyfinance.extension
 
 import android.os.Parcel
-import kotlinx.android.parcel.Parceler
+import kotlinx.parcelize.Parceler
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
 import java.math.BigInteger

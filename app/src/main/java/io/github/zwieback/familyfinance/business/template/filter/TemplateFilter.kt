@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.business.template.filter
 
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class TemplateFilter : EntityFilter() {

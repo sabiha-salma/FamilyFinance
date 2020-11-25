@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.business.sms_pattern.filter
 
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class SmsPatternFilter : EntityFilter() {

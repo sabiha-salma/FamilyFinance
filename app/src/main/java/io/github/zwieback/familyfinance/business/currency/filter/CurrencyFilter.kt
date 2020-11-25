@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.business.currency.filter
 
 import io.github.zwieback.familyfinance.core.filter.EntityFilter
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class CurrencyFilter : EntityFilter() {

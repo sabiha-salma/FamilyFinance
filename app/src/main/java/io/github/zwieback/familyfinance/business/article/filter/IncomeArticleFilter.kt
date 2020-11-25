@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.business.article.filter
 
 import io.github.zwieback.familyfinance.constant.IdConstants.EMPTY_ID
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class IncomeArticleFilter(

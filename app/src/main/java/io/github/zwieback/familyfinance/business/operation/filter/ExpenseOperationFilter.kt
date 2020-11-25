@@ -5,8 +5,8 @@ import io.github.zwieback.familyfinance.extension.BigDecimalParceler
 import io.github.zwieback.familyfinance.extension.LocalDateParceler
 import io.github.zwieback.familyfinance.extension.endOfMonth
 import io.github.zwieback.familyfinance.extension.startOfMonth
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.TypeParceler
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.TypeParceler
 import org.threeten.bp.LocalDate
 import java.math.BigDecimal
 

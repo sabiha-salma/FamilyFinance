@@ -2,7 +2,7 @@ package io.github.zwieback.familyfinance.business.chart.display
 
 import io.github.zwieback.familyfinance.business.chart.display.type.PieChartGroupByType
 import io.github.zwieback.familyfinance.business.chart.display.type.PieChartGroupingType
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class PieChartDisplay(

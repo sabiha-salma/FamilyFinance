@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-kapt'
 //wrap with try and catch so the build is working even if the signing stuff is missing
 try {
@@ -49,10 +49,6 @@ android {
     buildFeatures {
         dataBinding = true
     }
-}
-
-androidExtensions {
-    features = ["parcelize"]
 }
 
 // Libraries declared in dependencies.gradle in the root of the project

@@ -1,7 +1,7 @@
 package io.github.zwieback.familyfinance.business.chart.display
 
 import io.github.zwieback.familyfinance.business.chart.display.type.BarChartGroupType
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class BarChartDisplay(
