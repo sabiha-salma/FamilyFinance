@@ -10,7 +10,7 @@ ext.versions = [
         // https://github.com/Kotlin/kotlinx.coroutines/releases/latest
         kotlinCoroutines         : '1.4.1',
 
-        androidGradlePlugin      : '4.1.0',
+        androidGradlePlugin      : '4.1.1',
 
         support                  : '1.0.0',
         cardView                 : '1.0.0',
