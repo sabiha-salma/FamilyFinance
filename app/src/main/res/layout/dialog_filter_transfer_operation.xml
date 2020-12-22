@@ -121,10 +121,12 @@
                 app:constraint_referenced_ids="account_layout,owner_layout"
                 app:layout_constraintTop_toBottomOf="@id/account_layout" />
 
-            <Space
-                android:id="@+id/space_layout"
+            <CheckBox
+                android:id="@+id/to_whom_is_null_check_box"
                 android:layout_width="@dimen/zero_weight"
-                android:layout_height="@dimen/zero_weight"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_to_whom_is_null"
+                app:layout_constraintBottom_toBottomOf="@+id/to_whom_layout"
                 app:layout_constraintEnd_toStartOf="@+id/to_whom_layout"
                 app:layout_constraintStart_toStartOf="@id/account_layout"
                 app:layout_constraintTop_toBottomOf="@id/account_and_owner_barrier" />
@@ -136,8 +138,8 @@
                 android:hint="@string/hint_to_whom"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="@id/owner_layout"
-                app:layout_constraintStart_toEndOf="@id/space_layout"
-                app:layout_constraintTop_toTopOf="@id/space_layout">
+                app:layout_constraintStart_toEndOf="@id/to_whom_is_null_check_box"
+                app:layout_constraintTop_toTopOf="@id/account_and_owner_barrier">
 
                 <io.github.zwieback.familyfinance.widget.ClearableEditText
                     android:id="@+id/to_whom"

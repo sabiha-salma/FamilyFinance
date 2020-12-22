@@ -29,6 +29,7 @@ class FlowOfFundsOperationAdapter(
             .withStartValue(filter.startValue)
             .withEndValue(filter.endValue)
             .withOwnerId(filter.takeOwnerId())
+            .withToWhomIsNull(filter.toWhomIsNull)
             .withToWhomId(filter.takeToWhomId())
             .withCurrencyId(filter.takeCurrencyId())
             .withArticleId(filter.takeArticleId())

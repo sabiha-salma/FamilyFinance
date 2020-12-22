@@ -1,5 +1,6 @@
 package io.github.zwieback.familyfinance.business.operation.dialog
 
+import android.widget.CheckBox
 import android.widget.EditText
 import androidx.annotation.StringRes
 import com.johnpetitto.validator.ValidatingTextInputLayout
@@ -33,6 +34,9 @@ class IncomeOperationFilterDialog :
 
     override val ownerEdit: ClearableEditText
         get() = binding.owner
+
+    override val toWhomIsNullCheckBox: CheckBox
+        get() = binding.toWhomIsNullCheckBox
 
     override val toWhomEdit: ClearableEditText
         get() = binding.toWhom

@@ -164,6 +164,7 @@
     <string name="hint_currency_disabled">Currency &disabled;</string>
     <string name="hint_owner">Owner</string>
     <string name="hint_owner_disabled">Owner &disabled;</string>
+    <string name="hint_to_whom_is_null">\'To Whom\' is empty</string>
     <string name="hint_to_whom">To Whom</string>
     <string name="hint_to_whom_disabled">To Whom &disabled;</string>
     <string name="hint_value">Value</string>

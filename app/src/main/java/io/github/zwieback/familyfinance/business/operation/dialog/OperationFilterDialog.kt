@@ -3,6 +3,7 @@ package io.github.zwieback.familyfinance.business.operation.dialog
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.widget.CheckBox
 import android.widget.EditText
 import androidx.databinding.ViewDataBinding
 import com.johnpetitto.validator.ValidatingTextInputLayout
@@ -56,6 +57,8 @@ abstract class OperationFilterDialog<F, B> :
 
     protected abstract val ownerEdit: ClearableEditText
 
+    protected abstract val toWhomIsNullCheckBox: CheckBox
+
     protected abstract val toWhomEdit: ClearableEditText
 
     protected abstract val currencyEdit: ClearableEditText
@@ -106,6 +109,9 @@ abstract class OperationFilterDialog<F, B> :
         accountEdit.setOnClearTextListener { onAccountRemoved() }
         ownerEdit.setOnClickListener { onOwnerClick() }
         ownerEdit.setOnClearTextListener { onOwnerRemoved() }
+        toWhomIsNullCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            onToWhomIsNullCheckedChange(isChecked)
+        }
         toWhomEdit.setOnClickListener { onToWhomClick() }
         toWhomEdit.setOnClearTextListener { onToWhomRemoved() }
         currencyEdit.setOnClickListener { onCurrencyClick() }
@@ -115,6 +121,7 @@ abstract class OperationFilterDialog<F, B> :
 
         loadAccount(filter.takeAccountId())
         loadOwner(filter.takeOwnerId())
+        loadToWhomIsNull(filter.toWhomIsNull)
         loadToWhom(filter.takeToWhomId())
         loadCurrency(filter.takeCurrencyId())
         loadStartDate(filter.startDate)
@@ -133,6 +140,11 @@ abstract class OperationFilterDialog<F, B> :
     private fun onOwnerClick() {
         val intent = Intent(context, PersonActivity::class.java)
         startActivityForResult(intent, PERSON_CODE)
+    }
+
+    private fun onToWhomIsNullCheckedChange(isChecked: Boolean) {
+        filter.toWhomIsNull = isChecked
+        toWhomEdit.isEnabled = !isChecked
     }
 
     private fun onToWhomClick() {
@@ -236,6 +248,11 @@ abstract class OperationFilterDialog<F, B> :
         ownerId?.let {
             loadEntity(Person::class.java, ownerId, onSuccessfulOwnerFound())
         }
+    }
+
+    private fun loadToWhomIsNull(toWhomIsNull: Boolean) {
+        toWhomIsNullCheckBox.isChecked = toWhomIsNull
+        toWhomEdit.isEnabled = !toWhomIsNull
     }
 
     private fun loadToWhom(toWhomId: Int?) {

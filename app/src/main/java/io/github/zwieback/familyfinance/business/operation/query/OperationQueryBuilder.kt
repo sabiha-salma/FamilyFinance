@@ -34,6 +34,7 @@ abstract class OperationQueryBuilder<T : OperationQueryBuilder<T>>(
     private var articleId: Int? = null
     private var accountId: Int? = null
     private var ownerId: Int? = null
+    private var toWhomIsNull: Boolean = false
     private var toWhomId: Int? = null
     private var currencyId: Int? = null
     private var sortType: OperationSortType = OperationSortType.DEFAULT
@@ -82,6 +83,11 @@ abstract class OperationQueryBuilder<T : OperationQueryBuilder<T>>(
     }
 
     @Suppress("UNCHECKED_CAST")
+    fun withToWhomIsNull(toWhomIsNull: Boolean): T {
+        return apply { this.toWhomIsNull = toWhomIsNull } as T
+    }
+
+    @Suppress("UNCHECKED_CAST")
     fun withToWhomId(toWhomId: Int?): T {
         return apply { this.toWhomId = toWhomId } as T
     }
@@ -123,8 +129,12 @@ abstract class OperationQueryBuilder<T : OperationQueryBuilder<T>>(
         ownerId?.let { ownerId ->
             result = result.and(OperationView.OWNER_ID.eq(ownerId))
         }
-        toWhomId?.let { toWhomId ->
-            result = result.and(OperationView.TO_WHOM_ID.eq(toWhomId))
+        if (toWhomIsNull) {
+            result = result.and(OperationView.TO_WHOM_ID.isNull)
+        } else {
+            toWhomId?.let { toWhomId ->
+                result = result.and(OperationView.TO_WHOM_ID.eq(toWhomId))
+            }
         }
         currencyId?.let { currencyId ->
             result = result.and(OperationView.CURRENCY_ID.eq(currencyId))

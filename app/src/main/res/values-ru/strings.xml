@@ -164,6 +164,7 @@
     <string name="hint_currency_disabled">Валюта &disabled;</string>
     <string name="hint_owner">Владелец</string>
     <string name="hint_owner_disabled">Владелец &disabled;</string>
+    <string name="hint_to_whom_is_null">\'Кому\' пусто</string>
     <string name="hint_to_whom">Кому</string>
     <string name="hint_to_whom_disabled">Кому &disabled;</string>
     <string name="hint_value">Значение</string>

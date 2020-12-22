@@ -15,6 +15,7 @@ abstract class OperationFilter : EntityFilter() {
     abstract var articleId: Int
     abstract var accountId: Int
     abstract var ownerId: Int
+    abstract var toWhomIsNull: Boolean
     abstract var toWhomId: Int
     abstract var currencyId: Int
 
