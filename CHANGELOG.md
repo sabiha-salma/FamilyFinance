@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.8.1] - 2020-12-22
+### Added
+- The "To Whom is empty" checkbox (left from the "To Whom" field) to the operation filters.
+  The behavior of the filter becomes the following:
+  * If "To Whom is empty" checkbox is enabled then the result list will
+    include those operations in which the "to whom" field was not filled in.
+  * If the "To Whom is empty" checkbox is disabled, but the "To Whom"
+    field is specified, then the result list will include those operations
+    in which the "To Whom" field was filled with the same value.
+  * Else all operations will be included in the result list.
+
 ## [1.8.0] - 2020-11-25
 ### Added
 - The "To Whom" field to the template and operation entities, and to the operation filters.
